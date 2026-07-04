@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TODOチェックリスト | SNS戦略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニューを開く">☰</button>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <div class="brand-title">SNS戦略ガイド</div>
+    <div class="brand-sub">個人開発×X発信 完全ガイド</div>
+  </a>
+  <nav>
+    <div class="nav-group-label">ガイド</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="roadmap.html"><span class="nav-ico">🗺️</span>ロードマップ</a>
+    <a class="nav-link" href="todo.html"><span class="nav-ico">✅</span>TODOチェックリスト</a>
+    <a class="nav-link" href="playbook.html"><span class="nav-ico">📝</span>発信プレイブック</a>
+    <a class="nav-link" href="accounts.html"><span class="nav-ico">👥</span>参考アカウント</a>
+    <a class="nav-link" href="design.html"><span class="nav-ico">🎨</span>デザインガイド</a>
+  </nav>
+  <div class="sidebar-foot">作成: 2026-06-11<br>調査レポート11本に基づく</div>
+</aside>
+<main class="content">
+  <header class="page-header">
+    <div class="page-eyebrow">実行チェックリスト</div>
+    <h1>TODO — 今日から始めるチェックリスト</h1>
+    <p class="lead"><a href="roadmap.html">ロードマップ</a>のPhase 0〜1を実行用に分解したもの。<strong>上から順にやれば迷わない</strong>。チェックを入れると進捗が自動で記録されます。</p>
+  </header>
+
+  <div class="card" id="progress">
+    <h3>全体進捗 <span data-total-progress>0%</span></h3>
+    <div class="progress-track"><div class="progress-fill" data-total-fill></div></div>
+    <p class="footnote">チェック状態はこのブラウザに自動保存されます。<button class="pill" data-reset-checks>すべてリセット</button></p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#today">今日やる(所要 約1〜2時間)</a></li>
+      <li><a href="#week">今週やる</a></li>
+      <li><a href="#month1">今月やる(1ヶ月目)</a></li>
+      <li><a href="#month23">2〜3ヶ月目(検証フェーズに入る)</a></li>
+      <li><a href="#daily-minimum">毎日の最低ライン(これだけは死守)</a></li>
+      <li><a href="#weekly-review">週次レビュー(日曜15分)</a></li>
+    </ol>
+  </div>
+
+  <div class="callout callout-info">
+    <div class="callout-title">📎 あわせて使うページ</div>
+    <p>参考アカウントの一覧は<a href="accounts.html">参考アカウント</a>、投稿の型(Teach/Show/Prove)は<a href="playbook.html">発信プレイブック</a>、全体の流れは<a href="roadmap.html">ロードマップ</a>を参照してください。</p>
+  </div>
+
+  <div class="checklist-group" id="today">
+    <div class="checklist-head"><h2>今日やる(所要 約1〜2時間)</h2><span class="checklist-count"></span></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <ul class="checklist">
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-1"><span class="check-text"><strong>Xアカウントの方向性を1行で書く</strong>: 「誰のために、何を発信する人か」<small>(例: 「個人開発したいエンジニアのために、AI×アプリ開発の過程・学び・数字を全公開する人」)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-2"><span class="check-text"><strong>名前を変更</strong>: 「名前｜肩書き」形式<small>(例: 「○○○｜Web屋がAIで個人開発」)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-3"><span class="check-text"><strong>bioを書く</strong>: ①何者か ②フォローする価値 ③進行形の挑戦<small>(「○月リリース目標アプリの裏側を全公開中」)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-4"><span class="check-text"><strong>参考アカウントをフォロー</strong>: 参考アカウントページから<mark>20件以上</mark>。中堅10〜20件をXのリストに登録</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-5"><span class="check-text"><strong>ネタ帳を作る</strong>: スマホメモ or Notionに「ネタ帳」を作成<small>(1行メモを放り込むだけの場所)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-today-6"><span class="check-text"><strong>初投稿(自己紹介+挑戦宣言)を下書き</strong>: 何者か/何を作るか/何を発信するか/なぜやるか</span></label></li>
+    </ul>
+  </div>
+
+  <div class="checklist-group" id="week">
+    <div class="checklist-head"><h2>今週やる</h2><span class="checklist-count"></span></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <ul class="checklist">
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-1"><span class="check-text"><strong>X PremiumにWebブラウザから加入</strong><small>(アプリ内課金は割高)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-2"><span class="check-text"><strong>Canva無料アカウント作成</strong> → アイコン(<strong>400×400</strong>)とヘッダー(<strong>1500×500</strong>)を作成。配色2〜3色・フォント1〜2種に固定</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-3"><span class="check-text"><strong>自己紹介ポストを投稿し固定</strong></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-4"><span class="check-text"><strong>毎日のルーチン開始</strong>: 朝リプライ10件(15分)/昼リプ返+ネタメモ(10分)/夜は開発→終了直後に進捗1ポスト(10分)</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-5"><span class="check-text"><strong>投稿ログ用スプレッドシート作成</strong><small>(列: 日時/型/テーマ/インプ/ER/ブックマーク/リプ数/プロフクリック/メモ)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-6"><span class="check-text"><strong>公開ラインを文書化</strong>: 数字・過程は<mark>$10K MRRまで全公開</mark>/核となる実装アイデアは出しすぎない/ハンドルネーム運用</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-7"><span class="check-text"><strong>就業規則(副業規定)を確認</strong></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-8"><span class="check-text"><strong>チャレンジ企画を決める</strong> → 企画開始を宣言する投稿<small>(例: 「100日でAIアプリ○本」「30日で月1万円アプリ」)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-week-9"><span class="check-text"><strong>Threadsアカウント開設</strong><small>(Xの転載先。1日5分)</small></span></label></li>
+    </ul>
+  </div>
+
+  <div class="checklist-group" id="month1">
+    <div class="checklist-head"><h2>今月やる(1ヶ月目)</h2><span class="checklist-count"></span></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <ul class="checklist">
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-1"><span class="check-text"><strong>45分ルーチンを21日連続で回す</strong><small>(内容の質は問わない。ゼロの日を作らない。疲れた日はリプ返5件だけでOK)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-2"><span class="check-text"><strong>投稿はTeach/Show/Proveをローテーション</strong>: 1日1本+リプライ10〜30件<small>(発信プレイブックの型を使う)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-3"><span class="check-text"><strong>分析型ポストを週3〜5本</strong><small>(海外indie事例の日本語解説/AIツールを自分で動かした検証)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-4"><span class="check-text"><strong>日曜バッチ90分を習慣化</strong>: 数値レビュー15分→ネタ帳整理→ストック投稿5〜7本作成→X公式Web版で予約</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-5"><span class="check-text"><strong>Solomaker(solomaker.dev)に登録</strong></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-6"><span class="check-text"><strong>入江慎吾『自分のサービスで生きていく〈個人開発の教科書〉』を読む</strong></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-7"><span class="check-text"><strong>Zennに1本目の記事</strong><small>(学び・失敗談。末尾に「開発過程はXで発信中」)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month1-8"><span class="check-text"><strong>30日目: 週次振り返りスレッドを開始</strong><small>(やったこと+数字+学び+来週の目標)</small></span></label></li>
+    </ul>
+  </div>
+
+  <div class="checklist-group" id="month23">
+    <div class="checklist-head"><h2>2〜3ヶ月目(検証フェーズに入る)</h2><span class="checklist-count"></span></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <ul class="checklist">
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-1"><span class="check-text"><strong>アプリ候補の検証シートを作る</strong>: 合格ラインを<mark>テスト前に書面で決める</mark><small>(例: 8週間でウェイトリスト100人/LP CVR10%/前金3件)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-2"><span class="check-text"><strong>検証サイクルを回す</strong>: 課題提起ポスト→モック画像+「欲しい人いる?」→投票で機能優先順位→Mom Test式インタビュー5〜10人</span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-3"><span class="check-text"><strong>PWA/Webデモを1〜2週間で公開</strong><small>(現有スキルで作れる最小の動くもの)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-4"><span class="check-text"><strong>60日目: ウェイトリストLP公開</strong> → 固定ポスト差し替え<small>(Vercel/Cloudflare Pages無料枠+Tally/LaunchList)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-5"><span class="check-text"><strong>一般消費者向けアプリ案なら</strong>: LP+広告1〜2万円でCVR計測<small>(Xの反応で判断しない)</small></span></label></li>
+      <li class="check-item"><label><input type="checkbox" data-id="td-month23-6"><span class="check-text"><strong>月次レビュー開始</strong>: 勝ちパターン3個の言語化、<strong>ER2%</strong>チェック、検証結果→実装優先度への反映</span></label></li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <h2 id="daily-minimum">毎日の最低ライン(これだけは死守)</h2>
+  <div class="callout callout-danger">
+    <div class="callout-title">🚨 これだけは死守</div>
+    <ul>
+      <li>✅ <strong>リプ返5件</strong>(どんなに疲れていても)</li>
+      <li>✅ <strong>週3ポスト以上</strong></li>
+      <li>✅ <strong>ネタ帳に1行</strong></li>
+      <li>❌ <strong>投稿後48時間は数字を見ない</strong></li>
+      <li>❌ <strong>SNS合計45分を超えたら閉じる</strong></li>
+    </ul>
+  </div>
+
+  <h2 id="weekly-review">週次レビュー(日曜15分)</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-title">今週のトップ3/ワースト3投稿を抽出</div>
+      <p>基準はER・ブックマーク・プロフクリック。</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-title">伸びた共通点を1〜2個言語化</div>
+      <p>なぜ伸びたのかを自分の言葉で書き出す。</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-title">来週「増やすこと」「やめること」を各1つだけ決める</div>
+      <p>欲張らず1つずつに絞る。</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-title">開発:SNSの時間比率を確認</div>
+      <p><strong>1:1</strong>を切ったら翌週SNS縮小。</p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>SNS戦略ガイド — 個人開発×X発信(2026-06-11作成)</span>
+    <span><a href="index.html">ホーム</a></span>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

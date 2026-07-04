@@ -1,0 +1,294 @@
+/* ============================================================
+   SNS戦略ガイド 共通スタイル
+   ============================================================ */
+:root {
+  --bg: #f4f6fb;
+  --surface: #ffffff;
+  --ink: #1f2937;
+  --ink-soft: #4b5563;
+  --ink-faint: #9ca3af;
+  --line: #e5e7eb;
+  --accent: #4f46e5;
+  --accent-soft: #eef2ff;
+  --accent-2: #0ea5e9;
+  --green: #059669;
+  --green-soft: #ecfdf5;
+  --amber: #d97706;
+  --amber-soft: #fffbeb;
+  --rose: #e11d48;
+  --rose-soft: #fff1f2;
+  --sidebar-bg: #111827;
+  --sidebar-ink: #d1d5db;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(17, 24, 39, .06), 0 6px 24px -8px rgba(17, 24, 39, .10);
+  --p0: #6b7280; --p1: #0ea5e9; --p2: #8b5cf6; --p3: #d97706; --p4: #e11d48; --p5: #059669;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- レイアウト ---------- */
+.layout { display: flex; min-height: 100vh; }
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 48px clamp(20px, 5vw, 64px) 96px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ---------- サイドバー ---------- */
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-ink);
+  padding: 28px 18px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.brand { display: block; color: #fff; text-decoration: none; padding: 4px 10px 18px; border-bottom: 1px solid rgba(255,255,255,.12); margin-bottom: 16px; }
+.brand .brand-title { font-weight: 900; font-size: 17px; letter-spacing: .02em; }
+.brand .brand-sub { font-size: 11.5px; color: #9ca3af; margin-top: 2px; }
+.nav-group-label { font-size: 11px; letter-spacing: .12em; color: #6b7280; padding: 14px 10px 6px; text-transform: uppercase; }
+.nav-link {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--sidebar-ink); text-decoration: none;
+  padding: 9px 10px; border-radius: 9px; font-size: 14px; font-weight: 500;
+  transition: background .15s, color .15s;
+}
+.nav-link:hover { background: rgba(255,255,255,.07); color: #fff; }
+.nav-link.active { background: var(--accent); color: #fff; font-weight: 700; }
+.nav-link .nav-ico { width: 20px; text-align: center; flex-shrink: 0; }
+.sidebar-foot { margin-top: 22px; padding: 12px 10px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 11.5px; color: #6b7280; }
+
+.nav-toggle {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 60;
+  width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); box-shadow: var(--shadow); font-size: 19px; cursor: pointer; color: var(--ink);
+}
+
+/* ---------- 見出し・本文 ---------- */
+.page-header { margin-bottom: 34px; }
+.page-eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; letter-spacing: .08em; }
+h1 { font-size: clamp(26px, 3.4vw, 34px); font-weight: 900; line-height: 1.35; margin: 6px 0 10px; }
+.lead { color: var(--ink-soft); font-size: 16px; max-width: 760px; }
+h2 {
+  font-size: 21px; font-weight: 800; margin: 52px 0 18px;
+  padding-left: 14px; border-left: 5px solid var(--accent); line-height: 1.4;
+}
+h2:first-of-type { margin-top: 8px; }
+h3 { font-size: 16.5px; font-weight: 700; margin: 28px 0 10px; }
+p { margin: 0 0 14px; }
+a { color: var(--accent); }
+strong { font-weight: 700; }
+mark { background: linear-gradient(transparent 62%, #fde68a 62%); padding: 0 1px; }
+ul, ol { padding-left: 1.4em; margin: 0 0 14px; }
+li { margin-bottom: 5px; }
+.kbd { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .86em; background: #eef0f4; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; }
+
+/* ---------- カード ---------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); }
+.card-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin: 18px 0; }
+.card h3 { margin-top: 0; }
+.card .card-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--accent-soft); color: var(--accent);
+  font-weight: 900; font-size: 16px; margin-bottom: 10px;
+}
+.card.link-card { text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; display: block; }
+.card.link-card:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(17,24,39,.07), 0 16px 36px -10px rgba(17,24,39,.16); }
+.card.link-card .go { color: var(--accent); font-weight: 700; font-size: 13.5px; }
+
+/* ---------- 統計・数字 ---------- */
+.stat-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 18px 0; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+.stat .stat-value { font-size: 24px; font-weight: 900; color: var(--accent); line-height: 1.3; }
+.stat .stat-label { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+
+/* ---------- テーブル ---------- */
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin: 18px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+thead th { background: #f9fafb; text-align: left; font-weight: 700; padding: 12px 16px; border-bottom: 2px solid var(--line); white-space: nowrap; }
+tbody td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafbff; }
+
+/* ---------- バッジ・ピル ---------- */
+.badge { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
+.badge-indigo { background: var(--accent-soft); color: var(--accent); }
+.badge-green { background: var(--green-soft); color: var(--green); }
+.badge-amber { background: var(--amber-soft); color: var(--amber); }
+.badge-rose { background: var(--rose-soft); color: var(--rose); }
+.badge-gray { background: #f3f4f6; color: var(--ink-soft); }
+
+.pill-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.pill {
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink-soft);
+  border-radius: 999px; padding: 7px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ---------- コールアウト ---------- */
+.callout { border-radius: var(--radius); padding: 16px 20px; margin: 18px 0; border: 1px solid; font-size: 14.5px; }
+.callout .callout-title { font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.callout-info { background: var(--accent-soft); border-color: #c7d2fe; }
+.callout-info .callout-title { color: var(--accent); }
+.callout-warn { background: var(--amber-soft); border-color: #fde68a; }
+.callout-warn .callout-title { color: var(--amber); }
+.callout-danger { background: var(--rose-soft); border-color: #fecdd3; }
+.callout-danger .callout-title { color: var(--rose); }
+.callout-success { background: var(--green-soft); border-color: #a7f3d0; }
+.callout-success .callout-title { color: var(--green); }
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+/* ---------- タイムライン(ロードマップ) ---------- */
+.timeline { position: relative; margin: 26px 0; }
+.timeline::before { content: ""; position: absolute; left: 25px; top: 8px; bottom: 8px; width: 3px; background: var(--line); border-radius: 2px; }
+.phase { position: relative; padding-left: 74px; margin-bottom: 42px; }
+.phase-marker {
+  position: absolute; left: 0; top: 0;
+  width: 52px; height: 52px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 900; font-size: 15px;
+  background: var(--phase-color, var(--accent));
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--phase-color, var(--accent)) 50%, transparent);
+  z-index: 1;
+}
+.phase-head { margin-bottom: 10px; }
+.phase-head .phase-period { font-size: 12.5px; font-weight: 700; color: var(--phase-color, var(--accent)); letter-spacing: .04em; }
+.phase-head h2, .phase-head .phase-title { font-size: 20px; font-weight: 800; margin: 2px 0 4px; border: none; padding: 0; }
+.phase-head .phase-goal { font-size: 14px; color: var(--ink-soft); }
+.phase .card { margin-bottom: 14px; }
+
+/* ---------- チェックリスト ---------- */
+.checklist-group { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin: 20px 0; overflow: hidden; }
+.checklist-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 22px 12px; }
+.checklist-head h2, .checklist-head h3 { margin: 0; border: none; padding: 0; font-size: 17px; }
+.checklist-count { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+.progress-track { height: 7px; background: #eef0f4; margin: 0 22px 8px; border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; transition: width .3s ease; }
+.checklist { list-style: none; margin: 0; padding: 8px 10px 14px; }
+.check-item { margin: 0; }
+.check-item label {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 9px 12px; border-radius: 10px; cursor: pointer; transition: background .12s;
+}
+.check-item label:hover { background: #f6f7fb; }
+.check-item input[type="checkbox"] {
+  appearance: none; flex-shrink: 0; width: 21px; height: 21px; margin-top: 3px;
+  border: 2px solid #c3c9d4; border-radius: 7px; cursor: pointer; position: relative;
+  transition: all .15s; background: #fff;
+}
+.check-item input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+.check-item input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 5.5px; top: 1.5px;
+  width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg);
+}
+.check-item input[type="checkbox"]:checked + .check-text { color: var(--ink-faint); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.check-text { font-size: 14.5px; }
+.check-text small { display: block; color: var(--ink-faint); font-size: 12.5px; }
+
+/* ---------- テンプレート(コピー機能) ---------- */
+.tpl { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin: 18px 0; overflow: hidden; }
+.tpl-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 18px; border-bottom: 1px solid var(--line); background: #fafbfc; }
+.tpl-title { font-weight: 800; font-size: 14.5px; }
+.tpl-meta { font-size: 12px; color: var(--ink-soft); margin-left: 8px; font-weight: 500; }
+.copy-btn {
+  border: 1.5px solid var(--line); background: #fff; color: var(--ink-soft);
+  border-radius: 8px; padding: 5px 13px; font-size: 12.5px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: all .15s; white-space: nowrap;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.copy-btn.copied { background: var(--green-soft); border-color: var(--green); color: var(--green); }
+.tpl pre {
+  margin: 0; padding: 16px 20px; font-size: 13.5px; line-height: 1.8;
+  font-family: "Noto Sans JP", sans-serif; white-space: pre-wrap; word-break: break-word; color: var(--ink);
+}
+pre.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; background: #0f172a; color: #e2e8f0; border-radius: 12px; padding: 16px 20px; font-size: 13px; overflow-x: auto; line-height: 1.7; }
+
+/* ---------- アコーディオン ---------- */
+.acc-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin: 12px 0; overflow: hidden; }
+.acc-head {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 15px 20px; background: none; border: none; cursor: pointer; text-align: left;
+  font-family: inherit; font-size: 15px; font-weight: 700; color: var(--ink);
+}
+.acc-head:hover { background: #fafbff; }
+.acc-head::after { content: "+"; font-size: 20px; color: var(--ink-faint); font-weight: 400; transition: transform .2s; }
+.acc-item.open .acc-head::after { transform: rotate(45deg); }
+.acc-body { display: none; padding: 2px 22px 18px; border-top: 1px solid var(--line); }
+.acc-item.open .acc-body { display: block; }
+
+/* ---------- アカウントカード ---------- */
+.account-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); margin: 18px 0; }
+.account-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); }
+.account-card.star { border: 2px solid var(--accent); }
+.account-card .acct-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.account-card .acct-name { font-weight: 800; font-size: 15.5px; }
+.account-card .acct-handle { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+.account-card .acct-followers { font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+.account-card .acct-what { font-size: 13.5px; color: var(--ink-soft); margin: 6px 0; }
+.account-card .acct-learn { font-size: 13.5px; background: var(--accent-soft); border-radius: 10px; padding: 9px 13px; margin-top: 10px; }
+.account-card .acct-learn::before { content: "真似るポイント"; display: block; font-size: 11px; font-weight: 800; color: var(--accent); letter-spacing: .05em; margin-bottom: 2px; }
+.account-card[hidden] { display: none; }
+
+/* ---------- フロー(ステップ) ---------- */
+.flow { counter-reset: step; margin: 18px 0; }
+.flow .flow-step { position: relative; padding: 0 0 18px 52px; counter-increment: step; }
+.flow .flow-step::before {
+  content: counter(step); position: absolute; left: 0; top: 0;
+  width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px;
+}
+.flow .flow-step:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 38px; bottom: 2px; width: 2px; background: var(--line); }
+.flow .flow-step .flow-title { font-weight: 700; margin-bottom: 2px; }
+.flow .flow-step p { font-size: 14px; color: var(--ink-soft); margin-bottom: 0; }
+
+/* ---------- その他 ---------- */
+.toc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 22px; margin: 18px 0; font-size: 14px; }
+.toc .toc-title { font-weight: 800; font-size: 13px; color: var(--ink-soft); letter-spacing: .06em; margin-bottom: 6px; }
+.toc ol { margin: 0; padding-left: 1.3em; }
+.divider { border: none; border-top: 1px solid var(--line); margin: 44px 0; }
+.footnote { font-size: 12.5px; color: var(--ink-faint); }
+.page-footer { margin-top: 70px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.page-footer a { color: var(--ink-soft); }
+.btn-top { position: fixed; right: 22px; bottom: 22px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); cursor: pointer; font-size: 17px; color: var(--ink-soft); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; }
+.btn-top.show { opacity: 1; pointer-events: auto; }
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 880px) {
+  .layout { display: block; }
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; z-index: 55; height: 100vh;
+    transform: translateX(-100%); transition: transform .25s ease; width: 270px;
+    box-shadow: 0 0 40px rgba(0,0,0,.25);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .nav-toggle { display: block; }
+  .content { padding: 76px 18px 80px; }
+  .scrim { position: fixed; inset: 0; background: rgba(15,23,42,.45); z-index: 54; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .scrim.show { opacity: 1; pointer-events: auto; }
+}
+@media print {
+  .sidebar, .nav-toggle, .btn-top, .copy-btn { display: none !important; }
+  .content { padding: 0; max-width: none; }
+  body { background: #fff; }
+  .card, .table-wrap, .checklist-group, .tpl, .acc-item, .account-card, .stat { box-shadow: none; }
+  .acc-body { display: block !important; }
+}

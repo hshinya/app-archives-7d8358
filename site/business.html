@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外ビジネスアプリ調査 | アプリ開発リサーチ</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="biz">
+<button class="nav-toggle" type="button" aria-label="メニュー">☰</button>
+<div class="layout">
+
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand-title">アプリ開発リサーチ</span>
+      <div class="brand-sub">調査・アイデア資料集</div>
+    </a>
+    <div class="nav-group-label">レポート</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="wafu.html"><span class="nav-ico">🌸</span>和風・季節アプリ</a>
+    <a class="nav-link active" href="business.html"><span class="nav-ico">💼</span>海外ビジネスアプリ</a>
+    <div class="nav-group-label">このページ</div>
+    <a class="nav-link" href="#sec-dives"><span class="nav-ico">🇯🇵</span>日本版設計 6案</a>
+    <a class="nav-link" href="#sec-services"><span class="nav-ico">🌍</span>サービス 145件</a>
+    <a class="nav-link" href="#sec-research"><span class="nav-ico">📈</span>分野別トレンド</a>
+    <div class="sidebar-foot">2026年6月11日 作成</div>
+  </aside>
+
+  <main class="content">
+    <div class="page-header">
+      <div class="page-eyebrow">REPORT 02 — OVERSEAS BUSINESS APPS</div>
+      <h1>海外ビジネスアプリ調査</h1>
+      <p class="lead">海外で人気・急成長中だが日本ではまだ知られていないビジネス系アプリ/SaaSを、9カテゴリ+2つの横断スカウト(急成長ランキング・非英語圏)で145件調査。日本展開に有望な6件は「日本版プロダクト」として、商習慣への適応・MVP・価格・顧客獲得・開発計画まで設計しています。</p>
+      <div class="toc-row">
+        <a href="#sec-dives">🇯🇵 日本版プロダクト設計</a>
+        <a href="#sec-services">🌍 サービスカタログ</a>
+        <a href="#sec-research">📈 分野別トレンドと空白</a>
+      </div>
+    </div>
+
+    <div class="stat-grid" id="stats"></div>
+
+    <h2 id="sec-dives">日本版プロダクト詳細設計 <span class="h2-count">6案</span> <button class="chip" type="button" data-expand-all="#dives" style="margin-left:10px">すべて展開</button></h2>
+    <p class="muted">「日本市場のギャップ / 需要の移植可能性 / 個人開発の実現性 / 収益化 / タイミング」で145件から選定。クリックで商習慣適応・価格・GTM・開発計画まで開きます。</p>
+    <div id="dives"></div>
+
+    <h2 id="sec-services">サービスカタログ <span class="h2-count">全145件</span></h2>
+    <div class="filterbar">
+      <div class="filter-row" id="cat-chips"></div>
+      <div class="filter-row">
+        <input class="search-input" id="svc-search" type="search" placeholder="キーワード検索(例: AI、フリーランス、請求)">
+        <select class="select-input" id="feas-select">
+          <option value="all">実現性: すべて</option>
+          <option value="4">実現性 4以上(個人で現実的)</option>
+          <option value="3">実現性 3以上</option>
+          <option value="5">実現性 5のみ</option>
+        </select>
+        <select class="select-input" id="svc-sort">
+          <option value="default">並び順: 標準(レポート順)</option>
+          <option value="recommend:desc">おすすめ度が高い順</option>
+          <option value="demand:desc">需要度が高い順</option>
+          <option value="gap:desc">参入余地が大きい順</option>
+          <option value="revenue:desc">収益性が高い順</option>
+          <option value="soloDevFeasibility:desc">実現性が高い順</option>
+        </select>
+        <span class="result-count" id="svc-count"></span>
+      </div>
+    </div>
+    <div class="x-list" id="svc-list"></div>
+
+    <h2 id="sec-research">分野別トレンドと日本市場の空白 <button class="chip" type="button" data-expand-all="#research" style="margin-left:10px">すべて展開</button></h2>
+    <p class="muted">各分野の「日本市場の空白として有望な切り口」が緑色のボックスです。避けるべきレッドオーシャンも明記しています。</p>
+    <div id="research"></div>
+  </main>
+</div>
+<script src="assets/biz-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

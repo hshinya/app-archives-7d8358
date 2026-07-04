@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>デザインガイド | SNS戦略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニューを開く">☰</button>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <div class="brand-title">SNS戦略ガイド</div>
+    <div class="brand-sub">個人開発×X発信 完全ガイド</div>
+  </a>
+  <nav>
+    <div class="nav-group-label">ガイド</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="roadmap.html"><span class="nav-ico">🗺️</span>ロードマップ</a>
+    <a class="nav-link" href="todo.html"><span class="nav-ico">✅</span>TODOチェックリスト</a>
+    <a class="nav-link" href="playbook.html"><span class="nav-ico">📝</span>発信プレイブック</a>
+    <a class="nav-link" href="accounts.html"><span class="nav-ico">👥</span>参考アカウント</a>
+    <a class="nav-link" href="design.html"><span class="nav-ico">🎨</span>デザインガイド</a>
+  </nav>
+  <div class="sidebar-foot">作成: 2026-06-11<br>調査レポート11本に基づく</div>
+</aside>
+<main class="content">
+  <header class="page-header">
+    <div class="page-eyebrow">DESIGN GUIDE</div>
+    <h1>デザイン・画像作成ガイド</h1>
+    <p class="lead">デザイン未経験エンジニアのための、最小工数で「伝わるビジュアル」を作る実践ガイド。ツール選定・サイズ早見表・用途別ワークフローをこの1ページに集約。</p>
+  </header>
+
+  <p class="footnote">詳細・出典は <span class="kbd">research/07_design-and-images.md</span> を参照。サイズ等の数値はApple公式ページ等の一次情報で確認済み(2026年6月時点)。</p>
+
+  <nav class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#conclusion">結論(まずこれだけ)</a></li>
+      <li><a href="#tools">ツールの使い分け</a></li>
+      <li><a href="#sizes">サイズ早見表</a></li>
+      <li><a href="#workflows">用途別ワークフロー</a></li>
+      <li><a href="#resources">学習リソース(最小限)</a></li>
+    </ol>
+  </nav>
+
+  <section id="conclusion">
+    <h2>0. 結論(まずこれだけ)</h2>
+    <div class="callout callout-success">
+      <div class="callout-title">✅ デザイン未経験でも、この3点だけ押さえればOK</div>
+      <ul>
+        <li><strong>最初の3ヶ月はCanva無料プラン一本で十分</strong>。FigmaはアプリUIモックを作る段階で追加</li>
+        <li><strong>SNSの主力ビジュアルは「作り込んだ画像」ではなく「生スクショ+デモGIF」</strong>。エディタ・ターミナル・Before/Afterのスクショはデザインスキルゼロで今日から出せて、テキストのみの<mark>約3倍の反応</mark>を取れる</li>
+        <li>デザイン学習は『ノンデザイナーズ・デザインブック』の<strong>4原則(近接・整列・反復・対比)の章だけ</strong>読む。あとはテンプレを崩さず使う</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2>1. ツールの使い分け</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>用途</th><th>ツール</th><th>費用</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SNS画像・ヘッダー・OGP・図解仕上げ</td>
+            <td><strong>Canva</strong>(テンプレ25万点以上、無料で商用利用可)</td>
+            <td><span class="badge badge-green">無料</span></td>
+          </tr>
+          <tr>
+            <td>アプリUIモック・プロトタイプ</td>
+            <td>Figma</td>
+            <td><span class="badge badge-green">無料枠</span></td>
+          </tr>
+          <tr>
+            <td>コードのきれいなスクショ</td>
+            <td>Carbon / ray.so</td>
+            <td><span class="badge badge-green">無料</span></td>
+          </tr>
+          <tr>
+            <td>技術図解の叩き台</td>
+            <td>Napkin AI(テキスト→図解自動生成。Free週500クレジット・透かし付き)</td>
+            <td><span class="badge badge-amber">無料〜月$9</span></td>
+          </tr>
+          <tr>
+            <td>手書き風アーキテクチャ図</td>
+            <td>Excalidraw</td>
+            <td><span class="badge badge-green">無料</span></td>
+          </tr>
+          <tr>
+            <td>画面録画(Mac)</td>
+            <td><span class="kbd">Cmd+Shift+5</span>(標準)/ iOSシミュレータは <span class="kbd">xcrun simctl io booted recordVideo</span></td>
+            <td><span class="badge badge-green">無料</span></td>
+          </tr>
+          <tr>
+            <td>本格デモ動画(ズーム・カーソル強調)</td>
+            <td>Screen Studio(年払い月$9、Mac専用、iPhone実機USB録画対応)</td>
+            <td><span class="badge badge-gray">反応が出てから</span></td>
+          </tr>
+          <tr>
+            <td>リール/Shorts編集(テロップ)</td>
+            <td>CapCut</td>
+            <td><span class="badge badge-green">無料</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">⚠️ Canvaの注意</div>
+      <p>素材・テンプレの<strong>無加工販売</strong>、素材単体の<strong>再配布</strong>、Canva素材を含むロゴの<strong>商標登録</strong>はNG。</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">⚠️ AI画像生成の使い分け(2026年時点)</div>
+      <ul>
+        <li><strong>アイコン叩き台</strong> = Recraft(SVG出力可)</li>
+        <li><strong>文字入り</strong> = Ideogram v3(ただし日本語は不安定 → 文字はCanvaで載せる)</li>
+        <li><strong>法的安全最重視</strong> = Adobe Firefly(商用利用補償付き)</li>
+      </ul>
+      <p>無料プランは「商用不可」「生成物全公開」など条件差が大きいので<strong>使用直前に必ず規約確認</strong>。</p>
+    </div>
+  </section>
+
+  <section id="sizes">
+    <h2>2. サイズ早見表</h2>
+    <div class="card-grid">
+      <div class="card" id="size-x">
+        <h3>𝕏 X(Twitter)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>用途</th><th>サイズ</th></tr></thead>
+            <tbody>
+              <tr><td>投稿画像(基本)</td><td><strong>1600×900</strong> または <strong>1200×675</strong>(16:9)、PNG・5MB以下</td></tr>
+              <tr><td>投稿画像(縦長・フィード占有大)</td><td><strong>1080×1350</strong>(4:5)</td></tr>
+              <tr><td>アイコン</td><td><strong>400×400</strong></td></tr>
+              <tr><td>ヘッダー</td><td><strong>1500×500</strong></td></tr>
+              <tr><td>投稿画像の枚数</td><td><strong>2〜4枚</strong>+altテキスト推奨</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="size-ogp">
+        <h3>🔗 OGP(ブログ・LP用)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td>サイズ</td><td><strong>1200×630の1枚</strong>でX/Facebook/LinkedInほぼ全対応</td></tr>
+              <tr><td>セーフゾーン</td><td>重要な文字は中央 <strong>630×630</strong> のセーフゾーン内に</td></tr>
+              <tr><td>メタタグ</td><td><span class="kbd">og:image</span> + <span class="kbd">twitter:card=summary_large_image</span> を設定</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" id="size-appstore">
+        <h3>🍎 App Store(iOS)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>サイズ</th></tr></thead>
+            <tbody>
+              <tr><td>スクリーンショット</td><td><strong>6.9インチクラスが必須</strong>。受理サイズは <strong>1260×2736</strong> / <strong>1290×2796</strong> / <strong>1320×2868</strong> の3種</td></tr>
+              <tr><td>最少工数の作り方</td><td><strong>最大の1320×2868で1セット作り、自動縮小に任せる</strong></td></tr>
+              <tr><td>アプリアイコン</td><td><strong>1024×1024</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="footnote"><mark>1pxのズレで却下される</mark>ので注意。</p>
+      </div>
+
+      <div class="card" id="size-googleplay">
+        <h3>🤖 Google Play</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>サイズ</th></tr></thead>
+            <tbody>
+              <tr><td>スクリーンショット</td><td>最低 <strong>2枚〜8枚</strong>(16:9 または 9:16)</td></tr>
+              <tr><td>フィーチャーグラフィック</td><td><strong>1024×500 が必須</strong>(忘れがち)</td></tr>
+              <tr><td>アイコン</td><td><strong>512×512</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflows">
+    <h2>3. 用途別ワークフロー</h2>
+
+    <div class="acc-item open">
+      <button class="acc-head"><span>📱 日々のSNS投稿 <span class="badge badge-green">所要1〜5分</span></span></button>
+      <div class="acc-body">
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">そのままスクショ</div>
+            <p>エディタ/ターミナル/アプリ画面をそのままスクショ。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">動きがあるものは画面録画→GIF化</div>
+            <p>10〜60秒、ネイティブアップロード。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">加工はしない</div>
+            <p>Build in Public文化では<strong>生スクショが正解</strong>。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-head"><span>📊 図解ポスト <span class="badge badge-indigo">所要15〜30分・週1目安</span></span></button>
+      <div class="acc-body">
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">テキストで構成を書く</div>
+            <p><strong>1図解=1メッセージ</strong>、要素は<strong>5〜7個以内</strong>。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">Napkin AIで叩き台生成</div>
+            <p>テキストから図解を自動生成して土台にする。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">Canvaで仕上げ</div>
+            <p>配色<strong>2〜3色</strong>・フォント<strong>1〜2種</strong>の自分ルールを守る。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">スマホで読める文字サイズか確認</div>
+            <p>投稿前に必ずモバイル表示でチェック。</p>
+          </div>
+        </div>
+        <p>図解は<strong>保存・リポストされやすい</strong>(ブックマーク率を記録して効果測定)。</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-head"><span>🎬 デモ動画 <span class="badge badge-indigo">リリース告知・検証用</span></span></button>
+      <div class="acc-body">
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">型を守る</div>
+            <p><strong>3秒で課題 → 10〜20秒デモ → CTA</strong>。<strong>30秒以内</strong>・字幕付き・縦型。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">冒頭3秒で機能を見せる</div>
+            <p>Tony Dinh式: 新機能ごとに短いスクリーン録画を投稿。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">同じ素材を横展開</div>
+            <p>X → リール → Shorts → TikTok に転用。<strong>ウォーターマーク付き動画は他プラットフォームで降格</strong>されるため必ず元素材から書き出す。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-head"><span>🏪 ストア素材 <span class="badge badge-amber">リリース4週間前</span></span></button>
+      <div class="acc-body">
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">テンプレに画面ハメ+コピー載せ</div>
+            <p>AppMockUp Studio / Screenshots Pro / AppLaunchpad(無料)を使う。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">スクショ1〜3枚目で価値を伝え切る</div>
+            <p>検索結果に表示されるのは<strong>1〜3枚目</strong>。A/Bテストで<mark>中央値+11.8%のCVR改善</mark>。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">アイコンはAI生成→Canvaで調整</div>
+            <p>叩き台はRecraft/Ideogramで生成 → Canvaで調整(<strong>商標登録予定があるならAI生成・Canva素材のみは避ける</strong>)。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-head"><span>📸 Instagramカルーセル <span class="badge badge-gray">Phase 3以降・週2〜3</span></span></button>
+      <div class="acc-body">
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">Xの反応が良かった投稿を翻訳</div>
+            <p><strong>8〜10枚構成</strong>(フック → 展開 → まとめ → CTA)に組み直す。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">テンプレ or 自動変換</div>
+            <p>Canvaテンプレ or Contentdrips/PostNitroで自動変換(1セッション<strong>10〜20分</strong>)。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">保存・DMシェアを誘発する設計</div>
+            <p>1枚目フック、最終枚CTA、ハッシュタグ<strong>3〜5個</strong>。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resources">
+    <h2>4. 学習リソース(最小限)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>リソース</th><th>読む範囲</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>『ノンデザイナーズ・デザインブック』</td>
+            <td><strong>4原則(近接・整列・反復・対比)の章のみ</strong></td>
+          </tr>
+          <tr>
+            <td>『なるほどデザイン』</td>
+            <td>余裕があれば</td>
+          </tr>
+          <tr>
+            <td>catnose氏のリリース告知ポスト</td>
+            <td>スクショ+デモGIFの「最小で美しい」見本として観察</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title">💡 運用ルール</div>
+      <p>配色は<strong>2〜3色</strong>、フォントは<strong>Noto Sans JP等1〜2種に固定</strong>。テンプレを「選ぶ」のはセンス不要、テンプレを「いじる」のがセンス必要 — <mark>だからいじらない</mark>。</p>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <span>SNS戦略ガイド — 個人開発×X発信(2026-06-11作成)</span>
+    <span><a href="index.html">ホーム</a></span>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

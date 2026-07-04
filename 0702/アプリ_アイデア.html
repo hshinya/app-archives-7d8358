@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>日常を少し豊かにするアプリ｜調査図鑑 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9;
+  --card:#FFFDF6;
+  --ink:#23282C;
+  --ink-soft:#5B6168;
+  --line:#DFD8C6;
+  --ai:#2E5C7F;      /* 藍 = 不便解消 */
+  --ume:#B7566B;     /* 梅 = 小さな喜び */
+  --matcha:#6B7F52;  /* 抹茶 = 両方 */
+  --karashi:#B98A22; /* 辛子 = 強調 */
+  --shu:#B33A3A;     /* 朱 */
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--washi);
+  background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink);
+  line-height:1.75;
+  font-size:15px;
+  padding-bottom:64px;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+/* ---------- hero ---------- */
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--ai)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+.legend{display:flex;gap:14px;margin-top:16px;font-size:12px;color:var(--ink-soft);align-items:center;flex-wrap:wrap}
+.legend .li{display:flex;align-items:center;gap:6px}
+
+/* ---------- seal (朱印風バッジ) ---------- */
+.seal{
+  width:26px;height:26px;min-width:26px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--serif);font-size:13px;font-weight:600;
+  transform:rotate(-7deg);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4), inset 2px 3px 6px rgba(0,0,0,.18);
+}
+.seal.s-ben{background:var(--ai)}
+.seal.s-yoro{background:var(--ume)}
+.seal.s-ryo{background:var(--matcha)}
+.seal.sm{width:20px;height:20px;min-width:20px;font-size:10.5px}
+
+/* ---------- nav ---------- */
+nav.tabs{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,242,233,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{
+  border:1px solid transparent;background:none;
+  font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);
+  padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer;
+}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+
+/* ---------- sections ---------- */
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{
+  writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;
+  letter-spacing:.32em;color:var(--shu);
+  border-right:1px solid var(--line);padding-right:8px;min-height:64px;
+}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+
+/* ---------- data cards (market) ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:22px;color:var(--ai);font-variant-numeric:tabular-nums;line-height:1.2}
+.dcard .num.warn{color:var(--shu)}
+.dcard .num.gold{color:var(--karashi)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--karashi);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--karashi)}
+
+/* ---------- filters ---------- */
+.filters{margin:16px 0 4px}
+.f-label{font-size:11px;letter-spacing:.2em;color:var(--ink-soft);margin:10px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer;font-family:var(--sans);
+}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--washi)}
+.searchbox{margin-top:12px}
+.searchbox input{
+  width:100%;border:1px solid var(--line);background:var(--card);
+  border-radius:10px;padding:10px 13px;font-size:14px;font-family:var(--sans);color:var(--ink);
+}
+.searchbox input:focus{outline:2px solid var(--ai);outline-offset:1px}
+.count{font-size:12px;color:var(--ink-soft);margin:12px 2px 8px}
+
+/* ---------- app cards ---------- */
+.cards{display:flex;flex-direction:column;gap:10px}
+.acard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.acard .top{display:flex;align-items:center;gap:9px}
+.acard .top h3{font-family:var(--serif);font-size:15.5px;font-weight:600;letter-spacing:.02em;flex:1;line-height:1.4}
+.acard .origin{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.acard .cat{display:inline-block;margin-top:7px;font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:1px 7px}
+.acard .row{display:flex;gap:8px;margin-top:7px;font-size:12.5px;line-height:1.6}
+.acard .row .k{color:var(--ink-soft);white-space:nowrap;font-size:11px;letter-spacing:.1em;padding-top:2px;min-width:34px}
+.acard .row .v{flex:1}
+.acard .row.learn .v{border-left:2px solid var(--karashi);padding-left:8px;color:var(--ink)}
+
+/* ---------- pattern cards ---------- */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+
+/* ---------- idea cards ---------- */
+.icard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.icard .top{display:flex;align-items:baseline;gap:8px}
+.icard .no{font-family:var(--serif);color:var(--shu);font-size:11px;letter-spacing:.1em;white-space:nowrap}
+.icard h3{font-family:var(--serif);font-size:15.5px;font-weight:600;flex:1;line-height:1.45}
+.icard .diff{font-size:11px;color:var(--karashi);letter-spacing:.1em;white-space:nowrap}
+.icard .desc{font-size:13px;margin-top:7px}
+.icard .meta{margin-top:8px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-soft)}
+.icard .meta .m{display:flex;gap:7px}
+.icard .meta .mk{min-width:38px;font-size:10.5px;letter-spacing:.12em;padding-top:1px;white-space:nowrap}
+.icard .meta .plus{color:var(--ink);border-left:2px solid var(--ume);padding-left:8px}
+
+/* ---------- money / next ---------- */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--ai);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif)}
+.check{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:12px}
+.check h3{font-family:var(--serif);font-size:15.5px}
+.check li{font-size:13px;padding:8px 0;border-top:1px dashed var(--line);list-style:none;display:flex;gap:9px}
+.check li:first-of-type{border-top:none;margin-top:6px}
+.check .q{color:var(--ai);font-family:var(--serif);white-space:nowrap}
+
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+
+@media(min-width:640px){
+  body{font-size:15.5px}
+  .hero h1{font-size:32px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+  .grid2{grid-template-columns:repeat(3,1fr)}
+  .ideas-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+}
+@media(prefers-reduced-motion:no-preference){
+  section.page.on{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 2026.07 調査</div>
+  <h1>日常を少し豊かにするアプリ<span class="thin">世界のヒット事例と、そこから生まれた着想の記録</span></h1>
+  <p class="lede">「日常の不便を解消する」「日常に小さな喜びを与える」の2軸で、日・米・欧・アジアのアプリを横断調査。数値は各社公表・報道・Sensor Tower / AppMagic / Adapty / RevenueCat 等の推定を含む。</p>
+  <div class="stats">
+    <div class="stat"><b id="stat-apps">–</b><span>調査アプリ</span></div>
+    <div class="stat"><b id="stat-ideas">–</b><span>アイデア</span></div>
+    <div class="stat"><b>12</b><span>成功の型</span></div>
+  </div>
+  <div class="legend">
+    <span class="li"><span class="seal sm s-ben">便</span>不便解消</span>
+    <span class="li"><span class="seal sm s-yoro">喜</span>小さな喜び</span>
+    <span class="li"><span class="seal sm s-ryo">両</span>両方</span>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="セクション切替">
+  <div class="row">
+    <button data-t="sec-market" class="on">市場の現実</button>
+    <button data-t="sec-apps">アプリ図鑑</button>
+    <button data-t="sec-patterns">成功の型</button>
+    <button data-t="sec-ideas">アイデア帳</button>
+    <button data-t="sec-money">マネタイズ</button>
+    <button data-t="sec-next">次の一手</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ 市場 ============ -->
+<section id="sec-market" class="page on">
+  <div class="sec-head">
+    <div class="tate">現実を知る</div>
+    <div>
+      <h2>市場の現実 — 厳しさと、勝ち筋</h2>
+      <p>個人・小規模開発の前提となる数字。悲観するためではなく、戦い方を決めるために。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num warn">$492</div><div class="lbl">サブスクアプリの<b>月収中央値</b>。59.3%は累計$1,000未満（Adapty調べ）</div></div>
+    <div class="dcard"><div class="num warn">94.5%</div><div class="lbl">収益の94.5%を<b>上位10%</b>のアプリが独占。凡庸な参入は埋もれる</div></div>
+    <div class="dcard"><div class="num gold">40倍</div><div class="lbl">価格・導線の<b>実験を回すアプリ</b>は、しないアプリの40倍稼ぐ</div></div>
+    <div class="dcard"><div class="num">58.1%</div><div class="lbl"><b>ユーティリティ（実用）</b>の初回更新率。全カテゴリ首位＝「不便解消」は解約されにくい</div></div>
+    <div class="dcard"><div class="num">$68.90</div><div class="lbl">実用系トライアル経由ユーザーの<b>12ヶ月LTV</b>。全カテゴリ最高</div></div>
+    <div class="dcard"><div class="num">55.5%</div><div class="lbl">アプリ収益に占める<b>週課金</b>の割合（2023年43.3%から急増）</div></div>
+    <div class="dcard"><div class="num">2倍</div><div class="lbl"><b>北米ユーザーのLTV</b>は世界平均の約2倍。英語圏を狙う合理性</div></div>
+    <div class="dcard"><div class="num">+29〜39%</div><div class="lbl"><b>欧州のアプリ価格</b>は北米より高い。欧州年額は2年で+70.5%の例も</div></div>
+    <div class="dcard"><div class="num">77%</div><div class="lbl">新規サブスクアプリの77%が<b>iOS発</b>。AI開発ツール普及で加速中</div></div>
+    <div class="dcard"><div class="num">6.7個</div><div class="lbl">米国消費者が抱える平均サブスク数。<b>「サブスク疲れ」</b>が顕在化</div></div>
+    <div class="dcard"><div class="num gold">+15〜25%</div><div class="lbl">サブスクに<b>買い切りを併設</b>したときの総コンバージョン向上幅</div></div>
+    <div class="dcard"><div class="num">69%</div><div class="lbl">サブスク収益の69%は<b>2020年以前リリース</b>のアプリ。古参は強い＝正面衝突を避ける</div></div>
+  </div>
+
+  <div class="callout"><b>読み解き。</b>母数で見れば大半は稼げない。しかし「①実用（解約されにくい）を土台に、②感情のご褒美を乗せ、③英語圏に最初から出し、④価格実験を回し続ける」——この4条件を満たす小さなアプリだけが、中央値の外側に出る。以降の図鑑・型・アイデア帳はすべてこの4条件に沿って整理した。</div>
+
+  <p class="note-src">出典：Adapty「State of In-App Subscriptions 2026」（16,000アプリ・$3B分析）／RevenueCat「State of Subscription Apps 2026」（115,000アプリ・$16B分析）／Sensor Tower・AppMagic推定／各社公表値・報道。数値は2025〜2026年時点の推定を含む。</p>
+</section>
+
+<!-- ============ 図鑑 ============ -->
+<section id="sec-apps" class="page">
+  <div class="sec-head">
+    <div class="tate">先人に学ぶ</div>
+    <div>
+      <h2>成功アプリ図鑑</h2>
+      <p>朱印＝軸（便・喜・両）。「学び」欄は真似すべき本質。数値は推定・公称を含む。</p>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="f-label">軸で絞る</div>
+    <div class="chips" id="f-axis"></div>
+    <div class="f-label">分野で絞る</div>
+    <div class="chips" id="f-cat"></div>
+    <div class="searchbox"><input id="f-q" type="search" placeholder="名前・キーワードで検索（例：ウィジェット、日本、買い切り）" aria-label="アプリ検索"></div>
+  </div>
+  <div class="count" id="apps-count"></div>
+  <div class="cards" id="apps-list"></div>
+</section>
+
+<!-- ============ 型 ============ -->
+<section id="sec-patterns" class="page">
+  <div class="sec-head">
+    <div class="tate">型を盗む</div>
+    <div>
+      <h2>成功の型 — 12ヶ条</h2>
+      <p>85例を横断して繰り返し現れたパターン。アイデアはこの型に載せて考える。</p>
+    </div>
+  </div>
+  <div id="patterns-list"></div>
+</section>
+
+<!-- ============ アイデア帳 ============ -->
+<section id="sec-ideas" class="page">
+  <div class="sec-head">
+    <div class="tate">種を蒔く</div>
+    <div>
+      <h2>アイデア帳</h2>
+      <p>調査から着想した53案。参考＝下敷きにする実例、＋α＝差別化の一手。難易度：★=週末規模 ★★=1〜2ヶ月 ★★★=腰を据える。</p>
+    </div>
+  </div>
+  <div class="filters">
+    <div class="f-label">分野で絞る</div>
+    <div class="chips" id="fi-cat"></div>
+    <div class="f-label">難易度で絞る</div>
+    <div class="chips" id="fi-diff"></div>
+  </div>
+  <div class="count" id="ideas-count"></div>
+  <div class="ideas-grid cards" id="ideas-list"></div>
+</section>
+
+<!-- ============ マネタイズ ============ -->
+<section id="sec-money" class="page">
+  <div class="sec-head">
+    <div class="tate">銭を設計</div>
+    <div>
+      <h2>マネタイズの手引き</h2>
+      <p>「後で考える」は最頻出の死因。初日から収益モデルを決める。</p>
+    </div>
+  </div>
+  <div id="money-list"></div>
+</section>
+
+<!-- ============ 次の一手 ============ -->
+<section id="sec-next" class="page">
+  <div class="sec-head">
+    <div class="tate">歩を進める</div>
+    <div>
+      <h2>次の一手</h2>
+      <p>調査を行動に変えるための、採点表と進め方。</p>
+    </div>
+  </div>
+
+  <div class="check">
+    <h3>アイデア採点表 — 6つの問い（各◯△✕）</h3>
+    <ul style="list-style:none">
+    <li><span class="q">一</span>自分が<b>毎日</b>使いたいか？（Locketは1人のために作られた）</li>
+    <li><span class="q">二</span>提供価値を<b>一文</b>で言えるか？（実用系は「1機能を確実に」が正解）</li>
+    <li><span class="q">三</span><b>ホーム画面（ウィジェット）</b>に住めるか？（開かせるアプリは負ける）</li>
+    <li><span class="q">四</span><b>口コミが構造</b>に入っているか？（相手が要る／見せたくなる／スキャンして話したくなる）</li>
+    <li><span class="q">五</span><b>英語のまま</b>で価値が通じるか？（文化の翻訳が必要なら＋αで設計）</li>
+    <li><span class="q">六</span><b>お金を払う理由</b>を初日から言えるか？（誰が・何に・いくら）</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>進め方（3週間モデル）</h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span><b>選ぶ：</b>アイデア帳から◯が5つ以上の案を3〜5個ピックアップ。迷ったら「実用×かわいい」の交点を優先。</li>
+      <li><span class="dot">弐</span><b>掘る：</b>各案の競合アプリのレビュー（特に★2〜3）を読み、不満点＝＋αの種を採掘。この深掘りはClaudeに依頼できる。</li>
+      <li><span class="dot">参</span><b>作る：</b>1案を選び、1週間で動くプロトタイプ（まず単一HTML→次にFlutter等でストア版）。課金導線はダミーでも初日から置く。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>Claudeへの依頼例（コピペ用）</h3>
+    <ul class="plain">
+      <li><span class="dot">・</span>「アイデア#21『歩く枯山水』の競合を5つ挙げて、レビューの不満点を分析して」</li>
+      <li><span class="dot">・</span>「#36のAndroidスクリーンタイム市場について、技術的に可能な範囲を調査して」</li>
+      <li><span class="dot">・</span>「#8『洗濯タグ翻訳』のMVP仕様書を書いて。画像認識の実装方法も」</li>
+      <li><span class="dot">・</span>「この図鑑の◯◯系だけ、もっと深く調査して事例を追加して」</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  調査日：2026年7月2日 ／ 作成：Claude<br>
+  数値はSensor Tower・AppMagic・Adapty・RevenueCat等の推定、各社公表値、報道に基づく参考値です。<br>
+  投資・事業判断は必ず一次情報の確認を。
+</footer>
+
+<script>
+/* ================= DATA : APPS ================= */
+const APPS=[
+{n:"Locket Widget",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"累計8,000万DL／推定年商$13.5M・黒字。直近も月80万DL・月$30万規模（Sensor Tower推定）",m:"無料＋サブスク（Gold）",note:"恋人1人のために作った写真ウィジェットが世界的ヒット。友達上限20人・いいね無し＝親密さに全振り。「1人の問題を深く解く」の教科書。"},
+{n:"noteit（noteit widget）",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"累計1,250万DL超。TikTok発で12日間に120万DLの爆発も",m:"サブスク（週$6.99）",note:"手描きの落書きが相手のホーム画面に届く。高額週課金への不満レビュー多数＝価格設計の反面教師でもある。"},
+{n:"Widgetable",o:"🇨🇳",c:"つながり・ウィジェット",a:"喜",s:"ピーク時 日次純収益$22K（≒月$66万）。収益の大半はiOS",m:"サブスク",note:"カップル・親友でペットを共同育成するウィジェット。「2人で世話する」が課金と継続の両輪。"},
+{n:"Widgetsmith",o:"🇺🇸",c:"つながり・ウィジェット",a:"両",s:"iOS14解禁直後の2020年に月$3M",m:"フリーミアム",note:"OSの新機能（ウィジェット）に最速で乗った者が総取りした典型。プラットフォームの波を監視する価値。"},
+{n:"BeReal",o:"🇫🇷",c:"つながり・ウィジェット",a:"喜",s:"一時世界的バイラル→2024年にVoodooが約€5億で買収（報道）",m:"広告等（買収後）",note:"「盛れない写真を1日1回」という制約自体が価値。ただし熱狂の維持に苦戦＝バイラル型の宿命も示した。"},
+{n:"LiveIn / Howbout 等",o:"🌍",c:"つながり・ウィジェット",a:"喜",s:"Locket追随の写真・予定共有ウィジェット群。Gen Zで定着",m:"サブスク",note:"ウィジェット社交は一発屋でなくジャンル化した。まだ「写真・落書き・予定」以外の空きスロットがある。"},
+{n:"Co-Star",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"占星術アプリの米国代表格。毎朝の一行がSNSで拡散",m:"IAP＋サブスク",note:"毎朝1行の辛口占いをウィジェット配信。「短い言葉を毎日届ける」だけで習慣になる証明。"},
+{n:"1 Second Everyday",o:"🇺🇸",c:"記録・思い出",a:"喜",s:"毎日1秒の動画で人生をダイジェスト化。長寿の定番",m:"サブスク",note:"記録のハードルを「1秒」まで下げた。続けられる最小単位を探す発想。"},
+{n:"TimeTree",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"登録7,000万人・半数以上が海外。米独台英韓が上位。月100万人ペースで増加",m:"広告＋プレミアム（月300円）",note:"「共有前提のカレンダー」で唯一無二の位置。初日から日英韓で同時リリース、Appleのフィーチャーが海外成長の起点。日本発グローバルの最重要参考例。"},
+{n:"FamilyAlbum みてね",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"利用者2,000万人超（公表）。海外比率が約半分まで成長",m:"フリーミアム＋写真プリント等の物販",note:"家族限定の写真共有。祖父母という「お金を出す第三者」を設計に組み込んだ点が秀逸。"},
+{n:"Finch",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"月商$90万〜100万規模・月50万DL（推定）",m:"サブスク",note:"「自分の世話をすると小鳥が育つ」。人は自分のためには頑張れないが、何かのためなら頑張れる——喜び系の最重要発明。"},
+{n:"Daylio",o:"🇸🇰",c:"癒し・セルフケア",a:"両",s:"Android累計1,900万DL・月商$10万規模（推定）",m:"フリーミアム（年$35.99）",note:"「書かない日記」。絵文字タップだけで完了、データは端末内保存。摩擦の除去とプライバシーが武器。"},
+{n:"Day One",o:"🇺🇸",c:"記録・思い出",a:"喜",s:"ジャーナルの老舗定番（Automattic傘下）",m:"サブスク",note:"日記アプリの完成形だが高機能ゆえ重い。「軽い日記」の余地は常に残る。"},
+{n:"Me+ Daily Routine",o:"🌍",c:"習慣・時間",a:"便",s:"月商$70万規模（推定）",m:"サブスク",note:"ルーティン管理という地味な領域でも、UIの気持ちよさで大きく稼げる証明。"},
+{n:"Stoic",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"哲学×ジャーナルの個人開発発ヒット",m:"サブスク",note:"「ストア哲学」という世界観の借用でジャーナルを差別化。世界観×実用の好例。"},
+{n:"How We Feel",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"イェール大共同の非営利・完全無料",m:"寄付",note:"感情の語彙を増やすことに特化。無料の善意モデルは収益化困難だが、UXの参考として一級。"},
+{n:"Gratitude Plus",o:"🌍",c:"癒し・セルフケア",a:"喜",s:"感謝日記＋仲間内サークルで2026年トレンド入り",m:"サブスク",note:"感謝×小さなコミュニティ。「家族や同僚と励まし合う輪」を作る方向は日本的相性も良い。"},
+{n:"Habit Rabbit",o:"🌍",c:"習慣・時間",a:"喜",s:"「どうぶつの森×習慣トラッカー」として人気",m:"IAP",note:"タスク達成でウサギの部屋が充実。かわいさは機能を超える差別化になる。"},
+{n:"Fabulous",o:"🇫🇷",c:"習慣・時間",a:"便",s:"行動科学ベースの習慣コーチ。多数の受賞歴を持つ大型アプリ",m:"サブスク",note:"デューク大の行動経済学ラボ発。「科学の裏付け」がプレミア価格の根拠になる。"},
+{n:"Calm",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"瞑想アプリの雄。評価額$20億超（報道・2019年時点）",m:"サブスク（年$69.99）",note:"「眠りの物語」など感情価値に高額課金が成立する市場を開拓。ただし今から正面参入は不可。"},
+{n:"Headspace",o:"🇬🇧",c:"癒し・セルフケア",a:"喜",s:"瞑想大手の一角。B2B展開も",m:"サブスク＋法人",note:"キャラクター的な優しいイラストがブランドの核。トーン&マナーの参考。"},
+{n:"Balance",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"「初年度無料」の大胆施策で急成長",m:"サブスク",note:"後発が先行大手（Calm/Headspace）を崩すには、価格の常識破壊が武器になる例。"},
+{n:"Endel",o:"🇩🇪",c:"音・環境",a:"喜",s:"AI生成のパーソナル環境音。Apple Watch連携等で受賞多数",m:"サブスク",note:"「音を自動生成し続ける」技術で睡眠・集中に最適化。音×AIは日本の音風景でも狙える。"},
+{n:"Tide（潮汐）",o:"🇨🇳",c:"音・環境",a:"喜",s:"自然音×集中×睡眠。東アジアで根強い人気",m:"フリーミアム",note:"美しい写真＋自然音＋ポモドーロの複合。禅・自然の世界観は東アジア発が説得力を持つ。"},
+{n:"Streaks",o:"🇦🇺",c:"習慣・時間",a:"便",s:"Apple Design Award受賞。買い切りで長寿",m:"買い切り",note:"サブスク全盛で「買い切り・Apple純正級の作り込み」が逆に差別化に。個人開発の王道。"},
+{n:"Habitify",o:"🇻🇳",c:"習慣・時間",a:"便",s:"クロスプラットフォーム習慣管理の定番",m:"サブスク",note:"Web/モバイル横断のニーズは根強い。アジア発でも英語圏で戦える証明。"},
+{n:"HabitKit",o:"🇩🇪",c:"習慣・時間",a:"便",s:"個人開発。2024年初に関連アプリ合算で月$33K到達",m:"買い切り＋サブスク併用",note:"GitHubの草グリッドを習慣可視化に転用しただけで大ヒット。既存UIの文脈転用は個人開発の必勝パターン。"},
+{n:"Habitica",o:"🇺🇸",c:"習慣・時間",a:"両",s:"人生をRPG化する古参。コミュニティが強固",m:"サブスク＋IAP",note:"ゲーミフィケーションの元祖格。ただし複雑化しており「軽いRPG化」の余地は残る。"},
+{n:"Forest",o:"🇹🇼",c:"スクリーンタイム",a:"両",s:"有料ランキング常連の長寿アプリ。実際の植樹にも連動",m:"買い切り＋IAP",note:"スマホを触らない時間で木が育つ。「やめさせる」を「育てる」に反転した金字塔。"},
+{n:"Structured",o:"🇩🇪",c:"習慣・時間",a:"便",s:"1日をタイムライン表示する計画アプリ。個人開発発で急成長",m:"サブスク",note:"ADHD層など「時間の見える化」に切実な層を掴んだ。切実なニッチ＞広く浅く。"},
+{n:"Routinery",o:"🇰🇷",c:"習慣・時間",a:"便",s:"ルーティンタイマーの韓国発ヒット",m:"サブスク",note:"「次に何をするか」を音声とタイマーで流す。朝の実行支援に特化した潔さ。"},
+{n:"Alarmy",o:"🇰🇷",c:"習慣・時間",a:"便",s:"累計DL数千万規模（公称）。目覚ましカテゴリ収益上位の常連",m:"サブスク",note:"「起きるまで止まらない」ミッション式目覚まし。1つの不便（二度寝）への極端な特化が世界で通用。"},
+{n:"Opal",o:"🇫🇷",c:"スクリーンタイム",a:"便",s:"iOS発の代表格。月$9.99／年$99.99の強気価格。Android版は後発",m:"サブスク",note:"強制力の強いDeep Focusと美しい統計で高価格を正当化。後発のAndroid展開が遅れた期間＝市場の空白だった。"},
+{n:"one sec",o:"🇩🇪",c:"スクリーンタイム",a:"便",s:"個人開発発。SNSを開く前に深呼吸を挟む",m:"サブスク",note:"「禁止」ではなく「10秒の間」を置くだけ。行動科学×最小介入の美しい設計。"},
+{n:"ScreenZen",o:"🇺🇸",c:"スクリーンタイム",a:"便",s:"完全無料で有料級の機能。推奨リスト常連",m:"無料（善意）",note:"無料の存在は競合の脅威。この隣で課金するなら「強制力」か「世界観」の上乗せが必須と教えてくれる。"},
+{n:"Jomo",o:"🇫🇷",c:"スクリーンタイム",a:"便",s:"「取り残される喜び（JOMO）」を掲げ成長",m:"サブスク",note:"機能でなく思想（FOMOの逆張り）でブランド化。ネーミングの力。"},
+{n:"Brick",o:"🇺🇸",c:"スクリーンタイム",a:"便",s:"物理NFCタグ＋アプリのハイブリッドで人気",m:"ハードウェア販売",note:"「物理的にタッチしないと解除できない」。アプリの限界（自分で解除できてしまう）をモノで超えた発想。"},
+{n:"Yuka",o:"🇫🇷",c:"スキャン・識別",a:"便",s:"8,000万ユーザー・売上$7Mで黒字。広告費ゼロ、口コミのみで成長。米国が最大市場",m:"任意価格の年額サブ（$10〜20）＋広告なし",note:"商品バーコードをスキャン→健康影響を採点。「企業から一切お金を取らない独立性」が信頼と口コミの源泉。"},
+{n:"PictureThis",o:"🇨🇳",c:"スキャン・識別",a:"両",s:"月70万DL・月商$500万規模（Sensor Tower推定）",m:"サブスク（年$29.99）",note:"植物を撮ると即識別＋世話ガイド。識別×サブスクの収益王。散歩が採集に変わる「喜び」も同時提供。"},
+{n:"PlantNet",o:"🇫🇷",c:"スキャン・識別",a:"便",s:"学術プロジェクト発・無料。精度評価で常に上位",m:"寄付",note:"無料で高精度な公共財。商用でこの隣に立つには「世話・記録・世界観」の付加が必要。"},
+{n:"Planta",o:"🇸🇪",c:"スキャン・識別",a:"便",s:"世話スケジュール特化で識別系と共存",m:"サブスク",note:"識別はそこそこに「枯らさせない」に特化。同じ植物でも切り口で棲み分けられる。"},
+{n:"Greg",o:"🇺🇸",c:"スキャン・識別",a:"便",s:"水やり予測＋コミュニティで差別化",m:"フリーミアム",note:"植物ごとの適応型リマインドという1点突破。"},
+{n:"iNaturalist / Seek",o:"🇺🇸",c:"スキャン・識別",a:"両",s:"自然観察の世界的コミュニティ。無料",m:"非営利",note:"識別を「市民科学への参加」に昇華。目的の意味づけがエンゲージメントを生む。"},
+{n:"Merlin Bird ID",o:"🇺🇸",c:"スキャン・識別",a:"喜",s:"コーネル大学。鳴き声のリアルタイム識別が話題で無料",m:"寄付",note:"「朝の過ごし方が変わった」というレビュー多数。不便解消と喜びが融合すると生活習慣そのものに入り込む。"},
+{n:"Rock Identifier / Picture Insect 等",o:"🇨🇳",c:"スキャン・識別",a:"便",s:"PictureThis系列の識別アプリ群（石・虫・魚…）",m:"サブスク",note:"「識別×サブスク」を対象替えで量産する工場モデル。個人でも1ニッチなら模倣可能。"},
+{n:"Vivino",o:"🇩🇰",c:"スキャン・識別",a:"便",s:"ワインラベルをスキャンして評価・記録。ユーザー数千万規模（公称）",m:"EC連動・手数料",note:"スキャン→評価→そのまま購入。識別の出口を商取引に繋げた収益設計。"},
+{n:"Untappd",o:"🇺🇸",c:"スキャン・識別",a:"喜",s:"ビール記録SNSの世界標準",m:"フリーミアム＋店舗向けB2B",note:"「飲んだ記録」がコレクション欲と社交を同時に満たす。記録＝収集の設計。"},
+{n:"Photomath",o:"🇭🇷",c:"スキャン・識別",a:"便",s:"数式を撮ると解法を表示。Googleが買収（2023年完了）",m:"サブスク→買収",note:"カメラで不便を解く系の金字塔。クロアチア発でも世界を取れる。"},
+{n:"Shazam",o:"🇬🇧",c:"スキャン・識別",a:"便",s:"音楽識別の元祖。Appleが約$4億で買収（報道）",m:"買収",note:"「今流れてる曲は何？」という一瞬の不便に特化して国民的インフラに。"},
+{n:"Cal AI",o:"🇺🇸",c:"スキャン・識別",a:"便",s:"食事を撮るとカロリー推定。10代創業で月$100万規模と報道",m:"サブスク",note:"AI×カメラの2024-25年型ヒット。TikTokでの見せ方まで含めた設計が今風。"},
+{n:"Flighty",o:"🇺🇸",c:"生活の道具",a:"便",s:"フライト追跡。Apple Design Award 2023受賞",m:"サブスク（高価格）",note:"航空好きの熱量に全振りした高級専門店モデル。狭く深く高くの見本。"},
+{n:"Parcel",o:"🌍",c:"生活の道具",a:"便",s:"荷物追跡の一元化で定番の個人開発系",m:"サブスク（低額）",note:"通販時代の普遍的な小さい不便。地味だが解約理由がない。"},
+{n:"Splitwise",o:"🇺🇸",c:"生活の道具",a:"便",s:"割り勘・立替管理の世界標準",m:"フリーミアム",note:"「お金の気まずさ」という感情の不便を解いた。機能はシンプルでも参入障壁はネットワーク。"},
+{n:"Tricount",o:"🇧🇪",c:"生活の道具",a:"便",s:"旅行割り勘の欧州定番→ネット銀行bunqが買収",m:"フリーミアム→買収",note:"「旅行」という利用文脈に絞った割り勘。文脈特化は後発の定石。"},
+{n:"Paprika",o:"🇺🇸",c:"生活の道具",a:"便",s:"レシピ保存・買い物リストの長寿定番",m:"買い切り",note:"買い切り一本で10年以上生存。「一生モノの台所道具」という立ち位置。"},
+{n:"Bring!",o:"🇨🇭",c:"生活の道具",a:"便",s:"買い物リスト共有の欧州定番",m:"無料＋メーカー広告B2B",note:"ユーザーは無料、食品メーカーから収益。二面市場の教科書。"},
+{n:"Tody / Sweepy",o:"🇩🇰",c:"生活の道具",a:"便",s:"掃除スケジュール管理の代表格",m:"買い切り／サブスク",note:"「どこをいつ掃除したか」の見える化。家事の見えない不便はまだ鉱脈が残る。"},
+{n:"Rocket Money",o:"🇺🇸",c:"生活の道具",a:"便",s:"サブスク解約支援から大手化（旧Truebill）",m:"サブスク＋節約成功報酬",note:"「節約できた額の一部をもらう」成功報酬モデル。ユーザーと利害が一致する課金は強い。"},
+{n:"CARROT Weather",o:"🇺🇸",c:"生活の道具",a:"喜",s:"月商$20万規模（推定）。毒舌AIキャラの天気アプリ",m:"サブスク3段階",note:"データは同じでも「性格」で差別化できる証明。天気×キャラは日本でも空いている。"},
+{n:"Sleep Cycle",o:"🇸🇪",c:"歩く・眠る×遊び",a:"便",s:"月20万DL・月商$90万規模（推定）",m:"サブスク",note:"睡眠計測の老舗。センサー系は精度の信頼がブランドになる。"},
+{n:"AllTrails",o:"🇺🇸",c:"生活の道具",a:"両",s:"2023年 iPhone App of the Year",m:"サブスク",note:"ハイキング情報の決定版。AIを「道の状態予測」など文脈に埋め込む実装が2026年の模範。"},
+{n:"Too Good To Go",o:"🇩🇰",c:"生活の道具",a:"便",s:"フードロス削減マーケット。登録1億人超（公称）",m:"手数料",note:"「お得」と「社会貢献」を同時に満たす。罪悪感の解消はグローバル共通の需要。"},
+{n:"TABETE",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"日本版フードレスキューの先駆",m:"手数料",note:"海外モデルの日本ローカライズ例。逆方向（日本の仕組みを海外へ）も同様に成立するはず。"},
+{n:"Strava",o:"🇺🇸",c:"歩く・眠る×遊び",a:"両",s:"運動SNSの世界標準",m:"サブスク",note:"記録を「社交と称賛」に変換。運動の喜び側を握った。"},
+{n:"Pokémon GO",o:"🇺🇸",c:"歩く・眠る×遊び",a:"喜",s:"位置情報ゲームの金字塔。今も上位常連",m:"IAP",note:"「外に出る理由」を作った歴史的発明。IPの力が大きく個人は直接模倣不可、構造だけ盗む。"},
+{n:"Pikmin Bloom",o:"🇯🇵",c:"歩く・眠る×遊び",a:"喜",s:"累計$1億突破・2025年は$34.8M（AppMagic推定）で毎年成長",m:"IAP＋イベントパス",note:"「歩くと花が咲く」受動的で優しい設計が、派手さなしに右肩上がり。大人向け歩数×癒しの余地を示す。"},
+{n:"Pokémon Sleep",o:"🇯🇵",c:"歩く・眠る×遊び",a:"喜",s:"リリース約1ヶ月で全世界1,000万DL・2025年収益$39.5M",m:"IAP＋月額",note:"睡眠という「何もしない時間」をゲーム化。計測は置くだけ＝操作ゼロの設計が普及の鍵。"},
+{n:"Sweatcoin",o:"🇬🇧",c:"歩く・眠る×遊び",a:"便",s:"歩数をポイント化。ユーザー1億規模（公称）",m:"広告・提携",note:"歩く→報酬の直結。ただし報酬原資の設計が難しく、広告依存になりがち。"},
+{n:"WeWard",o:"🇫🇷",c:"歩く・眠る×遊び",a:"便",s:"欧州発の歩数ポイ活大手。数千万DL（公称）",m:"広告・提携・送客",note:"自治体・小売との提携で「街への送客」を収益化。ポイ活は各国ローカル文脈が強い。"},
+{n:"トリマ",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"移動でマイルが貯まる国内ポイ活定番。公称1,000万DL超",m:"広告",note:"日本のポイ活文化に最適化。広告モデルは大量DLが前提＝個人開発とは相性が悪い点も学び。"},
+{n:"SmartNews",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"米国展開でユニコーン化した日本発ニュースアプリ（報道）",m:"広告",note:"日本発でも米国市場で正面から戦えた稀有な例。現地チーム・現地最適化が必須だった。"},
+{n:"Cookpad",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"レシピ投稿の草分け。多言語で世界展開",m:"サブスク",note:"UGC（投稿）型は言語圏ごとの立ち上げが重い。個人はUGCより「道具」型が現実的。"},
+{n:"Simeji",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"きせかえキーボードの定番（Baidu傘下）",m:"フリーミアム",note:"実用ツール（キーボード）に「かわいさ」を乗せて若年層を獲得。装飾課金は喜び系の基本収益。"},
+{n:"mikan",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"英単語アプリの国内定番",m:"サブスク",note:"「1単語1秒」のテンポ設計。学習系は日本→海外の言語逆転（日本語学習アプリ）も狙える。"},
+{n:"Peing 質問箱",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"6時間で開発→3週間で日次800万PV→事業譲渡",m:"広告→譲渡",note:"既存SNSに寄生する軽量サービスの爆発力。ただしAPI依存はプラットフォームリスクと表裏一体。"},
+{n:"Skeb",o:"🇯🇵",c:"日本発・世界へ",a:"両",s:"クリエイターへの有償依頼サービス。10億円で買収",m:"手数料",note:"個人開発発で10億円イグジット。「コミュニティの当事者であること」を成功の極意と創業者が明言。"},
+{n:"AtoZ Dictionary",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"日本の個人開発。無宣伝で米国中心に5,000DL超",m:"投げ銭→IAP予定",note:"「英語でリリースしただけで米国から伸びた」という等身大の実証。あなたの初手の現実的モデル。"},
+{n:"Paired",o:"🇬🇧",c:"家族・パートナー",a:"喜",s:"カップル向けの代表格。専門家監修の毎日1問",m:"サブスク（$12.49/月〜）",note:"「2人で答えると開示される」仕掛けが相互招待＝成長装置を兼ねる。"},
+{n:"Between",o:"🇰🇷",c:"家族・パートナー",a:"喜",s:"カップル専用メッセンジャーのアジア定番",m:"フリーミアム",note:"2人だけの空間という切り口はアジア発が先行。日本の細やかさで再発明の余地。"},
+{n:"OurCouple / Cozy系",o:"🌍",c:"家族・パートナー",a:"喜",s:"パステル・紙質感・共同ペットの「cozy」需要が2026年に顕在化",m:"フリーミアム",note:"「cozyなカップルアプリ」という検索需要自体が存在。世界観への需要は明文化されている。"},
+{n:"Honeydue",o:"🇺🇸",c:"家族・パートナー",a:"便",s:"カップル家計の米国定番",m:"無料＋金融連携",note:"「お金の話の気まずさ」を絵文字とUIで和らげた。感情の不便に切り込む家計簿。"},
+{n:"Cozi",o:"🇺🇸",c:"家族・パートナー",a:"便",s:"家族オーガナイザーの米国定番",m:"広告＋サブスク",note:"買い物・献立・予定を家族で一元化。「家庭のOS」ポジションは各国ローカルの隙間が残る。"},
+{n:"Timefall",o:"🌍",c:"記録・思い出",a:"喜",s:"未来の自分に手紙を書き、ランダムな日に届く個人開発アプリ",m:"買い切り／IAP",note:"「通知が来るのが楽しみになる」設計。開封の儀＝サプライズを機能に埋め込む発想。"},
+{n:"Duolingo",o:"🇺🇸",c:"生活の道具",a:"両",s:"有料会員1,000万人超（2025年Q1・公表）",m:"サブスク＋広告",note:"ストリークとキャラの圧で学習を習慣化。「継続の仕組み」は全ジャンル共通で盗める。"},
+{n:"Buy Me a Coffee / Ko-fi",o:"🌍",c:"生活の道具",a:"喜",s:"個人開発の投げ銭インフラとして定着",m:"手数料",note:"収益化の最小構成。ストア審査前のWeb版で「払う人がいるか」を検証できる。"}
+];
+
+/* ================= DATA : IDEAS ================= */
+const IDEAS=[
+{t:"七十二候ウィジェット",c:"ウィジェット",df:1,d:"日本の72の小さな季節（七十二候）を、毎日1枚の絵と一言でホーム画面に届ける。二十四節気・旬の食べ物・季語つき。",r:"Co-Star（毎朝一行）／今日の一枚系",p:"海外では「Japan's 72 micro-seasons」として既に紹介文化がある。英・仏・独語対応で「日本の時間感覚」を輸出する。",m:"買い切り＋テーマ課金"},
+{t:"家族の空",c:"ウィジェット",df:2,d:"離れて暮らす家族・友人の街の「いまの空」（天気・現地時間・日没まで）をウィジェットで見守る。",r:"Locket × 天気アプリ",p:"「向こうは初雪だって」など会話のきっかけ通知。写真より軽く、監視感ゼロのつながり。",m:"サブスク（低額）"},
+{t:"月と潮",c:"ウィジェット",df:1,d:"月齢・月の出入り・潮汐を美しい一枚絵で。釣り人・写真家・ただ月が好きな人へ。",r:"天文系アプリ",p:"満月前夜に「今夜は月がきれい」通知。実用（釣り・撮影）と情緒の両取り。",m:"買い切り"},
+{t:"あと何回",c:"ウィジェット",df:1,d:"「親とあと何回会えるか」「桜をあと何回見られるか」——大切なことの残り回数を可視化するカウンター。",r:"memento mori系・寿命時計",p:"共有画像の自動生成でSNSバイラルを設計。重くなりすぎない優しい文面が鍵。",m:"無料＋買い切り"},
+{t:"ひとこと絵文字ポスト",c:"ウィジェット",df:2,d:"絵文字1個だけを送り合う最軽量のLocket。既読・返信プレッシャーゼロの安否＆気分共有。",r:"Locket／noteit",p:"ウィジェット長押しで即送信。文字を打てない高齢の親、忙しい夫婦に。",m:"サブスク（低額）"},
+{t:"今日の一枚（浮世絵・名画）",c:"ウィジェット",df:1,d:"パブリックドメインの浮世絵・日本画・世界の名画を毎朝1枚、3行の解説つきで。",r:"DailyArt",p:"浮世絵・日本美術特化で差別化。美術館の開館情報や関連グッズへの導線も。",m:"サブスク"},
+{t:"記念日タイムマシン",c:"ウィジェット",df:2,d:"大切な日までのカウントダウンと、過去の同じ日の写真をランダム表示するウィジェット。",r:"カウントダウン系＋Photos振り返り",p:"写真解析は端末内処理でプライバシー訴求。「1年前の今日の2人」が朝届く。",m:"フリーミアム"},
+{t:"洗濯タグ翻訳",c:"スキャン",df:2,d:"洗濯表示タグを撮ると「洗濯機OK？乾燥機は？」を即答。国際規格対応で全世界共通の不便を解く。",r:"Photomath型のカメラ即答",p:"衣類ごとの「うちの洗い方」保存と、家族共有。ケア用品のアフィリエイトも自然。",m:"買い切り＋サブスク"},
+{t:"ゴミ分別スキャン",c:"スキャン",df:3,d:"商品や物を撮ると、住んでいる自治体・国のルールで捨て方を即答。",r:"Yuka型スキャンUX",p:"日本の自治体データ整備＋欧州の複雑なリサイクル規則で日欧同時に刺す。自治体B2Bも視野。",m:"フリーミアム＋B2B"},
+{t:"冷蔵庫レスキュー",c:"スキャン",df:3,d:"余り食材を撮る→今夜作れるレシピ提案＋消費期限の自動管理。",r:"Too Good To Goの精神×レシピ",p:"「あと3日」通知と、月間の食品ロス削減額の見える化。節約額がそのまま課金の根拠になる。",m:"サブスク"},
+{t:"学校プリントOCR",c:"スキャン",df:3,d:"学校・園のお知らせを撮ると、予定と持ち物を自動抽出してカレンダー登録＆家族共有。",r:"TimeTree補完／文書OCR",p:"多言語家庭（在外日本人・移民家庭）向け翻訳を内蔵。世界中の親の共通課題。",m:"サブスク"},
+{t:"説明書いらず",c:"スキャン",df:3,d:"家電を撮ると型番を判別し、設定手順・エラー対処・保証期限管理まで。",r:"マニュアルDB系",p:"「引っ越し・買い替え時に一括登録」の儀式化。メーカー横断の中立ポジション。",m:"サブスク"},
+{t:"単価どっち？",c:"スキャン",df:1,d:"値札を2つ撮るとグラム単価で安い方を即判定。海外旅行の通貨換算モードつき。",r:"電卓の文脈特化",p:"判定結果を「今月の節約額」として積み上げ表示。地味な瞬間に効く超小型ツール。",m:"買い切り"},
+{t:"おくすりシート・スキャン",c:"スキャン",df:3,d:"処方薬の袋やシートを撮ると服薬スケジュールを自動生成し、飲み忘れを通知。",r:"服薬管理系の入力簡略化",p:"離れた親の服薬状況を家族が見守れる共有機能。※医療関連の表現・規制の確認は必須。",m:"サブスク"},
+{t:"盆栽・多肉ドクター",c:"スキャン",df:2,d:"PictureThisの超ニッチ特化版。盆栽・多肉・苔に絞った識別と養生ガイド。",r:"PictureThis／Planta",p:"和の園芸文化を英語圏の愛好家へ。「Bonsai」は既に強い検索需要を持つ英単語。",m:"サブスク"},
+{t:"貯金盆栽",c:"育成×実用",df:2,d:"「使わなかったお金」を記録すると盆栽が育つ。我慢を育成に変換する家計アプリ。",r:"Finch × 家計簿",p:"コンビニ我慢＝松に水やり、のような対応づけ。月末に盆栽の成長絵をシェアできる。",m:"サブスク"},
+{t:"そうじペット（座敷わらし）",c:"育成×実用",df:2,d:"掃除タスクを終えると家に住む座敷わらしが喜び、家が画面の中でも整っていく。",r:"Tody × Finch",p:"Before/After写真を撮ると褒めてくれる演出。「家事の孤独」に効く。",m:"サブスク"},
+{t:"水やり金魚",c:"育成×実用",df:2,d:"水を飲むと金魚鉢がにぎやかになる水分補給アプリ。和金・メダカ・苔テラリウムの世界観。",r:"Plant Nanny",p:"夏の熱中症シーズンに広報が乗りやすい。オフィスの同僚と鉢を並べる機能。",m:"フリーミアム"},
+{t:"積読の精霊",c:"育成×実用",df:2,d:"読書した分数で本の精霊が育つ。積んだ本は「あなたを待っている」姿で可視化。",r:"Forest の読書版",p:"読了すると精霊がその本の一言感想をくれる（AI）。読書メーターとの発想差は「感情」。",m:"サブスク"},
+{t:"姿勢ねこ",c:"育成×実用",df:2,d:"スマホを顔の高さで持つと猫がご機嫌になる。端末の角度センサーだけで姿勢を優しく矯正。",r:"one sec の応用",p:"ストレートネック対策という明確な健康便益。うつむくと猫が心配そうにする。",m:"サブスク"},
+{t:"歩く枯山水",c:"育成×実用",df:3,d:"歩数で庭に砂紋・石・苔・鯉が増えていく「大人の歩数計」。静かで美しいPikmin Bloom。",r:"Pikmin Bloom",p:"ゲームらしさを排した禅ブランドで、ポケモン層でなくCalm層を狙う。テーマ（京都の庭・侘び寂び）課金。",m:"サブスク＋テーマIAP"},
+{t:"ねむり雲",c:"育成×実用",df:3,d:"睡眠の質で朝の空の絵が変わる。置くだけ計測・操作ゼロの非IP版Pokémon Sleep。",r:"Pokémon Sleep",p:"記録も操作も不要、「朝の空を見るのが楽しみ」だけで続く設計。週間の空アルバム。",m:"サブスク"},
+{t:"まごビュー",c:"家族・パートナー",df:2,d:"孫の写真を「祖父母向け超シンプルUI」で届ける。大きな文字・ワンタップ・古い端末対応。",r:"FamilyAlbum みてね の補完",p:"デジタルフォトフレーム連携と月1の写真プリント郵送。払うのは子世帯、喜ぶのは祖父母。",m:"物販＋サブスク"},
+{t:"きょうの一問（親子版）",c:"家族・パートナー",df:2,d:"「親が元気なうちに聞きたい100問」を毎週1問ずつ届け、答えを残していく。",r:"Paired の親子版",p:"回答を音声でも残せる→家族の口伝アーカイブに。将来は自分史本の印刷へ。",m:"サブスク＋印刷物販"},
+{t:"遠距離ごはん",c:"家族・パートナー",df:1,d:"離れた2人が「同じ時間にごはんを食べる」約束だけを支援する。時差の自動計算つき。",r:"Between の一点特化",p:"ビデオ通話なし＝負担ゼロ設計。食べたものの写真を1枚だけ交換。",m:"フリーミアム"},
+{t:"ふたりの声ポスト",c:"家族・パートナー",df:2,d:"1日1通だけボイスメモを交換し、ウィジェットから再生。文字より感情が伝わる。",r:"Locket の音声版",p:"通勤中に聞ける60秒制限。声は消えずに「声のアルバム」に貯まる。",m:"サブスク"},
+{t:"ついで買いレーダー",c:"家族・パートナー",df:3,d:"家族の共有買い物リスト＋「駅前を通ったら牛乳」のジオフェンス通知。",r:"Bring! ＋位置情報",p:"位置の常時共有はせず「すれ違い」だけ検知するプライバシー設計を売りにする。",m:"サブスク"},
+{t:"献立ルーレット家族会議",c:"家族・パートナー",df:2,d:"「今夜どうする？」を家族全員のスマホで投票。履歴から自動提案、「先週も食べた」検知つき。",r:"献立系＋投票UI",p:"決定の疲れ（decision fatigue）という世界共通の不便。買い物リストへ直結。",m:"フリーミアム"},
+{t:"けんか翻訳機",c:"家族・パートナー",df:2,d:"言いにくいことを入力すると、AIが相手を傷つけない表現に変換して届けてくれる。",r:"Paired × AI",p:"夫婦・親子・同僚のテンプレ切替。「送る前に一呼吸」の設計はone secの思想。",m:"サブスク"},
+{t:"日本の音アンビエント",c:"季節・情緒・音",df:2,d:"風鈴・蝉時雨・雨戸・囲炉裏・ししおどし——日本の音風景をミックスできる環境音アプリ。",r:"Endel／Tide",p:"季節連動で音が自動で移ろう（夏=蝉、冬=雪の静けさ）。海外の日本好き・アニメ好きに直撃。",m:"サブスク"},
+{t:"夕焼けアラート",c:"季節・情緒・音",df:3,d:"気象データから「今日の夕焼けの美しさ」を予報し、見頃の30分前に通知。",r:"CARROT Weather の情緒版",p:"撮った夕焼けを共有する1日1回だけのフィード。BeRealの「同時性」を空に応用。",m:"フリーミアム"},
+{t:"季節の便り",c:"季節・情緒・音",df:3,d:"世界中のユーザーが投稿した「今日の季節の写真」が、1日3枚だけ届く静かなSNS。",r:"BeReal × 歳時記",p:"いいね数なし・コメントなし。北欧の白夜、京都の紅葉が同じ受信箱に届く国際設計。",m:"サブスク"},
+{t:"桜・紅葉パーソナル前線",c:"季節・情緒・音",df:3,d:"自分の街のピンポイント見頃予測＋近所の桜・紅葉スポット地図。",r:"開花予想サイトのアプリ最適化",p:"ワシントンDC・パリなど海外の桜名所も網羅し、英語圏の花見需要を取る。",m:"広告＋サブスク"},
+{t:"帰り道の5分",c:"季節・情緒・音",df:2,d:"帰宅時間に合わせて5分だけの癒し音声と「今日の労い」を届ける。",r:"瞑想アプリの文脈特化",p:"位置情報でなく時刻トリガーでプライバシー安全。曜日で変わる声・音。",m:"サブスク"},
+{t:"香りの日記",c:"季節・情緒・音",df:2,d:"記録できない「匂い」を、言葉とタグで残す日記。金木犀、雨上がり、実家の匂い。",r:"Untappd の香り版",p:"香水・アロマ愛好家のニッチSNSへ育てる。秋の金木犀時期にバズが設計できる。",m:"フリーミアム"},
+{t:"Android特化フォーカス",c:"デジタルウェルビーイング",df:3,d:"Androidの深い権限を活かした「本当に破れない」集中モード。iOS発の強豪が薄い市場。",r:"Opal／AppBlock",p:"あなたの既往調査（Androidはシステム介入可・審査は厳格）と直結。審査対策込みで設計する。",m:"サブスク"},
+{t:"スクロール→ストレッチ",c:"デジタルウェルビーイング",df:2,d:"SNSを開こうとすると10秒のストレッチ動画が先に流れる。「禁止」でなく「置き換え」。",r:"one sec",p:"肩こり・眼精疲労という身体の便益に接続。完了すると開ける、が運動にもなる。",m:"サブスク"},
+{t:"おやすみ儀式",c:"デジタルウェルビーイング",df:2,d:"就寝30分前に他アプリを閉じ、焚き火の画面と3行日記だけになる「眠りの前室」。",r:"Opal × Daylio",p:"朝に「昨夜の自分」からのメッセージが届く。寝る前スマホという世界最大級の悪習慣に。",m:"サブスク"},
+{t:"通知の郵便屋さん",c:"デジタルウェルビーイング",df:3,d:"通知を朝・昼・晩の3回の「配達時間」にまとめて届ける。",r:"通知管理系",p:"配達音と封筒UIで「通知＝楽しみ」に反転。技術的にはAndroid先行が現実的。",m:"サブスク"},
+{t:"家族でノースマホ対戦",c:"デジタルウェルビーイング",df:2,d:"夕食の1時間、家族全員がスマホを置けたかを対戦形式で記録。",r:"Forest のマルチ版",p:"全員成功で共同ペットが育つ。子どもに強制でなく「親も一緒」の対等設計。",m:"フリーミアム"},
+{t:"未来ポスト（音声版）",c:"記録・思い出",df:2,d:"未来の自分や子どもへ音声の手紙を残し、指定日に届く。",r:"Timefall",p:"「20歳の誕生日に届く」など長期預かりが感動を最大化。年賀状文化の再発明。",m:"買い切り＋保管サブスク"},
+{t:"1年前の今日",c:"記録・思い出",df:2,d:"3行日記を書くと、毎朝「1年前の自分」から1通届く日記アプリ。",r:"Daylio ＋ 振り返り",p:"AIが「去年より歩いてる」など優しい気づきを一言添える。続けるほど価値が増す複利設計。",m:"サブスク"},
+{t:"はじめて図鑑",c:"記録・思い出",df:2,d:"子どもの「初めて歩いた・初めて言った言葉」をコレクション図鑑として集める。",r:"育児記録の再定義",p:"数値の成長曲線でなく「物語」として残す。祖父母への共有＝みてね層と併用される設計。",m:"フリーミアム"},
+{t:"旅の切符アルバム",c:"記録・思い出",df:2,d:"チケット・搭乗券を撮ると、旅程が自動で「旅のしおり」になる。",r:"Flighty × アルバム",p:"手書き風しおりのPDF書き出し。日本の「旅のしおり」文化をUXごと輸出する。",m:"買い切り"},
+{t:"よかったこと交換便",c:"記録・思い出",df:3,d:"匿名で「今日のよかったこと」を1つ書くと、世界の誰かの1つが届く。",r:"感謝日記 × ボトルメール",p:"自動翻訳で日米欧を最初から接続。ネガティブ投稿のAIフィルタが信頼の要。",m:"サブスク"},
+{t:"ストック番人",c:"暮らしの不便",df:1,d:"トイレットペーパー・洗剤など日用品の残量をワンタップ記録し、切れる前に通知。",r:"Bring! の手前の課題",p:"「残り2ロール」を家族に自動共有。買い物リストへワンタップ転送。",m:"フリーミアム"},
+{t:"保証書ボックス",c:"暮らしの不便",df:2,d:"レシート・保証書を撮って保存、保証期限が切れる前に通知。",r:"Parcel の精神",p:"「この書類、捨てていい？」判定をAIで。引っ越し・大掃除シーズンに需要が波来する。",m:"サブスク"},
+{t:"病院メモ",c:"暮らしの不便",df:2,d:"受診前に聞きたいことをリスト化し、診察内容を記録、家族と共有。",r:"メモの文脈特化",p:"「先生に聞き忘れた」の撲滅。高齢の親の付き添い・遠隔見守り需要に直結。",m:"サブスク"},
+{t:"傘・上着・花粉ワンタップ",c:"暮らしの不便",df:1,d:"開いた瞬間に「傘？上着？花粉？」の3アイコンだけ答える超ミニ天気。",r:"CARROT Weather の逆張り（無口）",p:"ウィジェット完結で起動すら不要。多情報化する天気アプリへの引き算の一撃。",m:"買い切り"},
+{t:"服の履歴書",c:"暮らしの不便",df:2,d:"服・靴の「最後に着た日」を記録し、1年着ていない服を教えてくれる断捨離支援。",r:"クローゼット管理系",p:"フリマアプリ出品への導線でアフィリエイト収益。「今日の服」写真が自然と着こなしログになる。",m:"フリーミアム＋送客"},
+{t:"サブスク棚卸し（日本語圏）",c:"暮らしの不便",df:3,d:"Rocket Moneyが弱い日本語圏で、サブスク一覧化・解約支援を提供。",r:"Rocket Money",p:"キャリア決済・App Store課金の見える化という日本特有の複雑さを解く。",m:"サブスク"},
+{t:"実家のおはようボタン",c:"暮らしの不便",df:2,d:"親が1日1回ボタンを押すだけの安否確認。押されなければ子に通知。",r:"見守り系の最小構成",p:"カメラなし・監視感ゼロの設計思想を前面に。ボタンを押すと孫の写真が1枚見られる等の「押す理由」。",m:"サブスク"},
+{t:"引き算の目覚まし",c:"暮らしの不便",df:2,d:"起きてすぐの脳に優しい「今日の予定3つと天気だけ」を読み上げる目覚まし。",r:"Alarmy の逆張り",p:"Alarmyが「強制」なら、こちらは「起きたくなる朝」。TimeTree連携で予定読み上げ。",m:"サブスク"}
+];
+
+/* ================= DATA : PATTERNS ================= */
+const PATTERNS=[
+{t:"一人の問題から始める",b:"Locketは彼女1人のための贈り物、Yukaは創業者が子どもの食品表示に迷った経験から。<b>市場調査より先に、切実な1人</b>を深く解くと、同じ悩みの100万人に届く。"},
+{t:"1機能を、確実に",b:"実用アプリは初回更新率58.1%で全カテゴリ首位。バズらないが黙って依存され、毎月払われる。<b>「何でもできる」は「何にも選ばれない」</b>。"},
+{t:"感情のご褒美を仕込む",b:"Finchはタスク完了→鳥が小さな帽子を見つける。予測不能な小さなサプライズがドーパミンを生む。<b>機能的な瞬間を、贈り物に変える</b>。"},
+{t:"ホーム画面に住む",b:"開かないと使えないアプリは開かれない。Locket・noteit・Widgetableはウィジェットが本体。<b>ロック解除のたびに目に入る場所</b>を取りに行く。"},
+{t:"口コミを構造に埋め込む",b:"Yukaは「使った人が10〜20人に話す」、Locket・Pairedは相手がいないと使えない＝招待が必須。<b>宣伝費ゼロで伸びる形</b>を最初から設計する。"},
+{t:"かわいさは世界共通言語",b:"Finchの小鳥、Widgetableのペット、Habit Rabbitのウサギ。cozy（居心地よさ）は検索需要として明文化された。<b>日本的な世界観はここで武器になる</b>。"},
+{t:"最初から英語で出す",b:"TimeTreeは初日から日英韓同時、個人開発のAtoZ Dictionaryも英語版だけで米国から伸びた。北米LTVは世界の約2倍。<b>日本語は「あとから」でいい</b>。"},
+{t:"スキャン（かざす）は最強のUX",b:"Yuka・PictureThis・Photomath・Shazam——「撮る／かざすだけ」は説明不要で、その場で話題になり、口コミと直結する。"},
+{t:"性格・世界観で差別化する",b:"CARROT Weatherは同じ天気データを毒舌キャラで包んで月$20万規模。データが同じなら<b>「誰が言うか」で差がつく</b>。"},
+{t:"受動でも進む設計",b:"Pikmin Bloomは歩くだけ、Pokémon Sleepは置くだけで毎年成長。<b>頑張らせないアプリは解約されない</b>。"},
+{t:"独立性・プライバシーは信頼になる",b:"Yukaは企業から一切お金を取らず、Daylioはデータを端末内に置く。<b>「売らない・見ない」宣言</b>そのものが選ばれる理由になる。"},
+{t:"買い切りの再評価",b:"買い切り比率は6.4%→10.3%へ増加、サブスク併設で総CVR+15〜25%。Streaks・Paprikaは買い切りで長寿。<b>サブスク疲れの受け皿</b>を用意する。"}
+];
+
+/* ================= DATA : MONEY ================= */
+const MONEY=[
+{t:"サブスクリプション",tag:"本命",b:"実用（毎週使う）なら第一候補。<b>週課金が収益の55.5%</b>を占める時代だが、noteitの週$6.99への不満レビューが示す通り、体感価値と釣り合わない週額は炎上する。目安の中央値：<b>週$7.48／月$12.99／年$38.42</b>。トライアルは実用系でLTVを最大化（$68.90）。"},
+{t:"買い切り＋サブスク併設",tag:"推奨",b:"買い切りを並べるだけで総コンバージョン<b>+15〜25%</b>。「一生モノの道具」（Paprika・Streaks型）はむしろ買い切りが誠実で、レビュー評価も安定する。"},
+{t:"装飾・テーマ課金（IAP）",tag:"喜び系",b:"Simejiのきせかえ、Widgetableのペット用品、歩く枯山水ならテーマ庭園。<b>機能は無料・愛着に課金</b>は喜び系の王道。"},
+{t:"広告",tag:"非推奨",b:"大量DLが前提（トリマ型）で、個人開発の規模では単価が出ない。癒し系との相性も最悪。<b>使うなら「広告非表示課金」への導線</b>としてのみ。"},
+{t:"物販・手数料",tag:"応用",b:"みてね（写真プリント）、Vivino（ワイン購入）、Too Good To Go（取引手数料）。<b>アプリの外の消費に接続</b>できると単価が跳ねる。まごビュー・未来ポストなど印刷/郵送系と好相性。"},
+{t:"地域価格戦略",tag:"重要",b:"欧州は北米比+29〜39%高く売れる。<b>国別価格の出し分け（App Storeの自動均衡に任せない）</b>だけで収益が変わる。まず英語で米国、価格は欧州で強気に。"},
+{t:"実験を止めない",tag:"鉄則",b:"価格・トライアル日数・プラン数の実験を回すアプリは<b>40倍稼ぐ</b>。RevenueCat/Adapty等の課金基盤を初日から入れ、A/Bできる状態でリリースする。"},
+{t:"審査・規約の下調べ",tag:"守り",b:"スクリーンタイム系・ヘルスケア系・見守り系は、iOSのAPI制限やGoogle Playのポリシー審査が厳しい領域。<b>作る前に「そのAPIで審査が通った前例」を確認</b>する（あなたのタッチエフェクト調査と同じ手順）。"}
+];
+
+/* ================= RENDER ================= */
+const $=(s)=>document.querySelector(s);
+const axisClass={"便":"s-ben","喜":"s-yoro","両":"s-ryo"};
+const esc=(s)=>s; // 信頼できる内部データのみ
+
+/* --- tabs --- */
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+
+/* --- apps --- */
+const appCats=["すべて",...new Set(APPS.map(a=>a.c))];
+const axisList=["すべて","便","喜","両"];
+let fAxis="すべて",fCat="すべて",fQ="";
+
+function chipRow(el,items,cur,cb,labelFn){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const c=document.createElement("button");
+    c.className="chip"+(it===cur?" on":"");
+    c.textContent=labelFn?labelFn(it):it;
+    c.addEventListener("click",()=>cb(it));
+    el.appendChild(c);
+  });
+}
+const axisLabel=(a)=>({"すべて":"すべて","便":"便：不便解消","喜":"喜：小さな喜び","両":"両：両方"})[a];
+
+function renderApps(){
+  chipRow($("#f-axis"),axisList,fAxis,(v)=>{fAxis=v;renderApps();},axisLabel);
+  chipRow($("#f-cat"),appCats,fCat,(v)=>{fCat=v;renderApps();});
+  const q=fQ.trim().toLowerCase();
+  const list=APPS.filter(a=>
+    (fAxis==="すべて"||a.a===fAxis)&&
+    (fCat==="すべて"||a.c===fCat)&&
+    (q===""||(a.n+a.c+a.s+a.m+a.note+a.o).toLowerCase().includes(q))
+  );
+  $("#apps-count").textContent=list.length+" 件 ／ 全 "+APPS.length+" 件";
+  $("#apps-list").innerHTML=list.map(a=>`
+    <article class="acard">
+      <div class="top">
+        <span class="seal ${axisClass[a.a]}">${a.a}</span>
+        <h3>${esc(a.n)}</h3>
+        <span class="origin">${a.o}</span>
+      </div>
+      <span class="cat">${esc(a.c)}</span>
+      <div class="row"><span class="k">規模</span><span class="v">${esc(a.s)}</span></div>
+      <div class="row"><span class="k">収益</span><span class="v">${esc(a.m)}</span></div>
+      <div class="row learn"><span class="k">学び</span><span class="v">${esc(a.note)}</span></div>
+    </article>`).join("");
+}
+$("#f-q").addEventListener("input",(e)=>{fQ=e.target.value;renderApps();});
+
+/* --- patterns --- */
+$("#patterns-list").innerHTML=PATTERNS.map((p,i)=>`
+  <article class="pcard">
+    <div class="no">其の${String(i+1).padStart(2,"0")}</div>
+    <h3>${p.t}</h3>
+    <p>${p.b}</p>
+  </article>`).join("");
+
+/* --- ideas --- */
+const ideaCats=["すべて",...new Set(IDEAS.map(i=>i.c))];
+const diffList=["すべて",1,2,3];
+let iCat="すべて",iDiff="すべて";
+const stars=(n)=>"★".repeat(n)+"☆".repeat(3-n);
+
+function renderIdeas(){
+  chipRow($("#fi-cat"),ideaCats,iCat,(v)=>{iCat=v;renderIdeas();});
+  chipRow($("#fi-diff"),diffList,iDiff,(v)=>{iDiff=v;renderIdeas();},(d)=>d==="すべて"?"すべて":stars(d));
+  const list=IDEAS.map((x,idx)=>({...x,no:idx+1})).filter(x=>
+    (iCat==="すべて"||x.c===iCat)&&(iDiff==="すべて"||x.df===iDiff)
+  );
+  $("#ideas-count").textContent=list.length+" 案 ／ 全 "+IDEAS.length+" 案";
+  $("#ideas-list").innerHTML=list.map(x=>`
+    <article class="icard">
+      <div class="top">
+        <span class="no">#${String(x.no).padStart(2,"0")}</span>
+        <h3>${esc(x.t)}</h3>
+        <span class="diff">${stars(x.df)}</span>
+      </div>
+      <p class="desc">${esc(x.d)}</p>
+      <div class="meta">
+        <div class="m"><span class="mk">参考</span><span>${esc(x.r)}</span></div>
+        <div class="m"><span class="mk">＋α</span><span class="plus">${esc(x.p)}</span></div>
+        <div class="m"><span class="mk">収益</span><span>${esc(x.m)}</span></div>
+      </div>
+    </article>`).join("");
+}
+
+/* --- money --- */
+$("#money-list").innerHTML=MONEY.map(m=>`
+  <article class="mcard">
+    <h3>${m.t}<span class="tag">${m.tag}</span></h3>
+    <p>${m.b}</p>
+  </article>`).join("");
+
+/* --- init --- */
+$("#stat-apps").textContent=APPS.length;
+$("#stat-ideas").textContent=IDEAS.length;
+renderApps();
+renderIdeas();
+</script>
+</body>
+</html>

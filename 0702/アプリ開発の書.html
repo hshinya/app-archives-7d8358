@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>アプリ開発の書｜別冊一 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9; --card:#FFFDF6; --ink:#23282C; --ink-soft:#5B6168; --line:#DFD8C6;
+  --ai:#2E5C7F; --ume:#B7566B; --matcha:#6B7F52; --karashi:#B98A22; --shu:#B33A3A;
+  --vol:var(--ai);
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--washi);background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);background-size:5px 5px;color:var(--ink);line-height:1.75;font-size:15px;padding-bottom:64px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--vol)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+nav.tabs{position:sticky;top:0;z-index:50;background:rgba(245,242,233,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{border:1px solid transparent;background:none;font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:var(--shu);border-right:1px solid var(--line);padding-right:8px;min-height:64px}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--vol);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard h3 .tag.u{background:var(--ume)} .mcard h3 .tag.m{background:var(--matcha)} .mcard h3 .tag.k{background:var(--karashi)} .mcard h3 .tag.s{background:var(--shu)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif);white-space:nowrap}
+ul.plain li b{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:21px;color:var(--vol);font-variant-numeric:tabular-nums;line-height:1.25}
+.dcard .num.warn{color:var(--shu)} .dcard .num.gold{color:var(--karashi)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--vol);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--vol)}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16.5px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+.rowline{display:flex;gap:8px;font-size:12.5px;padding:7px 0;border-top:1px dashed var(--line)}
+.rowline:first-of-type{border-top:none}
+.rowline .k{min-width:88px;color:var(--ink-soft);font-size:11px;letter-spacing:.08em;padding-top:2px}
+.rowline .v{flex:1}
+.rowline .v b{color:var(--ink)}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-top:10px;display:flex;gap:12px;align-items:flex-start}
+.tier .t-badge{min-width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--washi);letter-spacing:.02em;text-align:center;line-height:1.2}
+.tier .t-body{flex:1}
+.tier h4{font-family:var(--serif);font-size:14.5px}
+.tier p{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.tier p b{color:var(--ink)}
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+@media(min-width:640px){body{font-size:15.5px}.hero h1{font-size:32px}.grid2{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:no-preference){section.page.on{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 別冊一・開発編 ／ 2026.07</div>
+  <h1>アプリ開発の書<span class="thin">1機能を、世界水準で、ひとりで作るための手引き</span></h1>
+  <p class="lede">個人開発で日英2言語のアプリを設計・実装・審査通過させるまでの実務。技術選定から審査対策、週次の進め方まで。マネタイズ・SNSの詳細はそれぞれ別冊二・三へ。</p>
+  <div class="stats">
+    <div class="stat"><b>6</b><span>章</span></div>
+    <div class="stat"><b>2</b><span>初日対応言語</span></div>
+    <div class="stat"><b>&lt;1%</b><span>クラッシュ率基準</span></div>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="章切替">
+  <div class="row">
+    <button data-t="d1" class="on">開発方針</button>
+    <button data-t="d2">技術選定</button>
+    <button data-t="d3">設計と実装</button>
+    <button data-t="d4">品質と審査</button>
+    <button data-t="d5">進め方</button>
+    <button data-t="d6">道具箱</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 開発方針 -->
+<section id="d1" class="page on">
+  <div class="sec-head"><div class="tate">腕を定める</div><div><h2>開発方針 — 五ヶ条</h2><p>個人開発は資源が有限。何を作らないかが、何を作るかと同じくらい重要。</p></div></div>
+
+  <div class="pcard"><div class="no">第一条</div><h3>1機能を、確実に</h3>
+  <p>実用アプリの初回更新率58.1%は「黙って依存される」ことの証明。<b>提供価値が一文で言えない機能は作らない</b>。設定画面を増やす前に、初回体験を磨く。競合との差は機能数ではなく「その1機能の完成度と気持ちよさ」で付く。</p></div>
+
+  <div class="pcard"><div class="no">第二条</div><h3>オンボーディングと課金も「本体」</h3>
+  <p>トライアル開始の82%は初日に起きる。つまり<b>初起動→オンボ→ペイウォールの数分間がアプリの本丸</b>。コア機能と同じ熱量で設計・実装し、課金SDKは最初のビルドから入れる。「機能ができてから課金を足す」は最頻出の失敗。</p></div>
+
+  <div class="pcard"><div class="no">第三条</div><h3>i18n（国際化）は初日に仕込む</h3>
+  <p>UIの翻訳は後でいいが、<b>文字列の外部化・日付や通貨のロケール処理・レイアウトの余白設計は初日から</b>。ハードコードした文字列を後から数百箇所掘り出す作業は、新機能1つ分の工数を食う。英語を正、日本語を同梱で出発する。</p></div>
+
+  <div class="pcard"><div class="no">第四条</div><h3>小さく出して、毎週磨く</h3>
+  <p>「大きく作って沈黙」は燃え尽きと方向違いの二重リスク。<b>2〜6週間でMVP→隔週リリース</b>のリズムを作る。ストアの段階的公開機能を使えば、リリースの怖さも小さくできる。</p></div>
+
+  <div class="pcard"><div class="no">第五条</div><h3>AIを相棒にする</h3>
+  <p>個人開発の最大の制約は時間。<b>雛形生成・リファクタ・テスト作成・翻訳の下訳・ストア文案はAI（Claude Code等）に任せ、判断と体験の磨き込みに人間の時間を使う</b>。すでに使っている開発フローをそのまま太くしていけばよい。</p></div>
+
+  <div class="callout"><b>この書の使い方。</b>技術選定（第二章）→設計と実装（第三章）で骨格を決め、品質と審査（第四章）をリリース前チェックリストとして使い、進め方（第五章）で週次リズムに落とす。迷ったら五ヶ条に戻る。</div>
+</section>
+
+<!-- 技術選定 -->
+<section id="d2" class="page">
+  <div class="sec-head"><div class="tate">得物を選ぶ</div><div><h2>技術選定 — 2026年の答え</h2><p>性能差はほぼ消えた。選定基準は「チーム（＝自分）と製品」に移った。</p></div></div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">46%</div><div class="lbl">クロスプラットフォーム開発者における<b>Flutter</b>のシェア（React Nativeは35〜38%）</div></div>
+    <div class="dcard"><div class="num">ほぼ解消</div><div class="lbl">性能差。RNは<b>New Architecture</b>が既定に、Flutterは<b>Impeller</b>既定でジャンク解消</div></div>
+    <div class="dcard"><div class="num">30〜60%</div><div class="lbl">ネイティブ2本立てと比べた<b>クロスプラットフォームのコスト削減幅</b></div></div>
+  </div>
+
+  <div class="tier"><div class="t-badge" style="background:var(--ai)">Flutter</div><div class="t-body"><h4>既定の推奨 — 両OS同時・かわいさ勝負・長期保守</h4><p><b>UIの一貫性・アニメーション・保守性で優位</b>。Dartの学習後はUI作業の生産性が高いという報告も。育成・ウィジェット風の「かわいい」表現、日英同時リリース、1人で両OSという本件の条件に最も合う。弱点：ホーム画面ウィジェット等のOS深部はネイティブ実装が別途必要。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--matcha)">React Native</div><div class="t-body"><h4>Web資産がある人の近道</h4><p>JS/React経験者なら数日で生産的に。<b>npm資産・Web共有・OTA更新</b>が強い。New Architectureで性能懸念は過去のもの。JSに慣れているならこちらでも全く問題ない。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--ink)">ネイティブ<br>Swift / Kotlin</div><div class="t-body"><h4>iOS特化・OS新機能を深く使うなら</h4><p>ウィジェット・Live Activity・ロック画面など<b>Appleの新機能を発売日に使う</b>アプリはSwiftUIが最短。Widgetsmithが波に乗れたのはネイティブの速さゆえ。両OS展開の工数は倍になる点だけ覚悟。</p></div></div>
+
+  <div class="mcard"><h3>判断フロー（本件向け）<span class="tag">結論</span></h3>
+  <ul class="plain">
+    <li><span class="dot">問一</span>ホーム画面ウィジェットが主役？ → <b>Yes：Flutter＋ウィジェット部だけネイティブ</b>（iOS: WidgetKit／Android: Glance）。ウィジェット「だけ」のアプリならSwiftUI特化も検討。</li>
+    <li><span class="dot">問二</span>Web版も見据える？ → Yes寄りなら<b>React Native</b>（またはFlutter Web）。</li>
+    <li><span class="dot">問三</span>迷ったら → <b>Flutter</b>。両OS・i18n・表現力・情報量のバランスが個人開発の既定解。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>周辺スタックの既定<span class="tag">構成</span></h3>
+  <div class="rowline"><span class="k">データ</span><span class="v">まず<b>端末内保存</b>（SQLite/Isar等）。クラウド同期は課金機能として後付け（Daylio型。プライバシー訴求にもなる）</span></div>
+  <div class="rowline"><span class="k">バックエンド</span><span class="v">必要になってから<b>Firebase</b> か <b>Supabase</b>。「サーバーレスで済む設計」を先に考える</span></div>
+  <div class="rowline"><span class="k">課金</span><span class="v"><b>RevenueCat</b> または <b>Adapty</b>（ペイウォールA/B・無料枠・初日導入）</span></div>
+  <div class="rowline"><span class="k">分析</span><span class="v">ストアコンソール＋<b>Firebase Analytics</b>（オンボ完了・ペイウォール表示・トライアル開始の3イベントから）</span></div>
+  <div class="rowline"><span class="k">クラッシュ</span><span class="v"><b>Crashlytics</b>（クラッシュ率&lt;1%の監視）</span></div>
+  <div class="rowline"><span class="k">通知</span><span class="v">ローカル通知を基本に。プッシュ基盤は必要時にFCM</span></div>
+  </div>
+
+  <p class="note-src">シェア・性能の記述は2026年時点の各種調査（Statista予測・Stack Overflow調査・各技術ブログのベンチマーク報）に基づく。フレームワーク論争に時間を使うより、選んで作り始めることが個人開発では常に正しい。</p>
+</section>
+
+<!-- 設計と実装 -->
+<section id="d3" class="page">
+  <div class="sec-head"><div class="tate">骨組を刻む</div><div><h2>設計と実装の要点</h2><p>後戻りが高くつく箇所だけ、先に正しくやる。</p></div></div>
+
+  <div class="mcard"><h3>i18n実装チェックリスト<span class="tag">初日</span></h3>
+  <ul class="plain">
+    <li><span class="dot">☐</span><b>文字列は全て外部ファイルへ</b>（Flutter: arb／iOS: String Catalog／Android: strings.xml）。UIコードに日本語・英語を直書きしない。</li>
+    <li><span class="dot">☐</span><b>複数形・序数</b>はICU書式で（"1 day" / "2 days" を if文で書かない）。</li>
+    <li><span class="dot">☐</span><b>日付・時刻・通貨・数値</b>はロケールAPIに任せる（1,000 / 1.000 問題）。</li>
+    <li><span class="dot">☐</span><b>独語・仏語は英語の1.3倍伸びる</b>前提でボタン・見出しに余白。折返しテスト用に長文ダミーロケールで確認。</li>
+    <li><span class="dot">☐</span>画像内に文字を焼き込まない（スクショ素材も同様）。</li>
+    <li><span class="dot">☐</span>RTL（アラビア語等）は対象外でよいが、レイアウトはstart/end指定で書く癖を。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>オンボーディング実装の要点<span class="tag">本体</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span>構成は<b>約束→質問2〜4→構築演出→プラン提示→ペイウォール</b>（詳細は別冊二）。実装はPageView＋状態1つで足りる。凝った作りより差し替えやすさ。</li>
+    <li><span class="dot">・</span><b>質問の回答をペイウォール文言に反映</b>できる設計に（「◯◯のためのプラン」）。回答→文言のマッピングを設定ファイル化。</li>
+    <li><span class="dot">・</span>計測イベントを画面ごとに仕込む（onboarding_step_1…paywall_view）。<b>どこで離脱したか</b>が改善のすべて。</li>
+    <li><span class="dot">・</span>スキップ導線は付けるが目立たせない。閉じた人フラグを保存し、後日の時限オファーに使う。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>ホーム画面ウィジェット<span class="tag m">差別化</span></h3>
+  <ul class="plain">
+    <li><span class="dot">iOS</span><b>WidgetKit</b>（SwiftUI）。タイムライン方式で<b>更新頻度に上限</b>がある（分単位の自由更新は不可）。「毎朝1回更新」型の設計が省電力かつ審査も安全。</li>
+    <li><span class="dot">Android</span><b>Glance</b>（Compose）または RemoteViews。iOSより自由度が高い分、端末差の検証を。</li>
+    <li><span class="dot">共通</span>Flutter本体とは<b>ネイティブ連携（App Group / SharedPreferences経由）</b>でデータ受け渡し。ウィジェットが主役のアプリは、この連携を最初の週に動かして技術リスクを潰す。</li>
+    <li><span class="dot">設計</span>ウィジェットは「開かせない」ための存在。<b>タップ0回で価値が完結</b>する情報設計に。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>通知・権限の作法<span class="tag u">信頼</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span>通知許可は<b>価値を見せた後に文脈で</b>求める（初回起動の即ダイアログは拒否率最悪）。プレ許可画面→OS本ダイアログの二段構え。</li>
+    <li><span class="dot">・</span>通知は「ユーザーが得する情報」だけ。リテンション目的の空砲は解約とオフ設定の近道。</li>
+    <li><span class="dot">・</span>位置情報・ヘルスケア等の機微権限は<b>本当に必要か三度問う</b>。権限が少ないほど審査は速く、信頼は厚い。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>性能・品質の数値基準<span class="tag">合格線</span></h3>
+  <div class="rowline"><span class="k">起動</span><span class="v">コールドスタート<b>2秒以内</b>（初回体験の第一印象）</span></div>
+  <div class="rowline"><span class="k">クラッシュ</span><span class="v">クラッシュフリー率<b>99%以上</b>（Playの品質基準・おすすめ掲載の足切りに直結）</span></div>
+  <div class="rowline"><span class="k">サイズ</span><span class="v">初回DL 50MB以下を目安（新興国・回線弱者への配慮）</span></div>
+  <div class="rowline"><span class="k">操作</span><span class="v">主要動線はタップ3回以内。60fpsを落とすリストは作らない</span></div>
+  <div class="rowline"><span class="k">オフライン</span><span class="v">機内モードで主要機能が動く（端末内保存の恩恵）</span></div>
+  </div>
+</section>
+
+<!-- 品質と審査 -->
+<section id="d4" class="page">
+  <div class="sec-head"><div class="tate">関を越える</div><div><h2>品質と審査 — リジェクトの九割は定番</h2><p>審査は運ではない。落ちる理由は毎年ほぼ同じ。</p></div></div>
+
+  <div class="mcard"><h3>テスト戦略（個人開発の現実解）<span class="tag">品質</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>クリティカルパスだけ自動化</b>：起動→オンボ→課金画面表示→コア機能1周。全画面のテストは書かない。</li>
+    <li><span class="dot">弐</span>リリース前の<b>手動スモーク表</b>（10項目・両OS・日英両言語・小さい画面）を固定化。</li>
+    <li><span class="dot">参</span><b>TestFlight／Play内部テストで10〜30人</b>（日英混成）。オンボ完了率とD1を必ず計測。</li>
+    <li><span class="dot">四</span>課金は<b>サンドボックスで購入・復元・解約</b>まで通す。復元ボタン欠落は定番リジェクト。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>App Store 頻出リジェクトと対策<span class="tag s">iOS</span></h3>
+  <ul class="plain">
+    <li><span class="dot">2.1</span><b>完成度</b>：クラッシュ・プレースホルダ文言・リンク切れ。審査用デモ情報（ログイン不要でも動作手順メモ）を添える。</li>
+    <li><span class="dot">3.1</span><b>課金</b>：デジタル機能の外部決済誘導はNG。<b>サブスク画面に価格・期間・自動更新・解約方法・復元ボタン・利用規約とプライバシーポリシーのリンク</b>を明記（欠落が最多）。</li>
+    <li><span class="dot">4.3</span><b>スパム/類似</b>：テンプレ量産と見なされない独自性を。既存アプリの軽微な差し替えは危険。</li>
+    <li><span class="dot">5.1</span><b>プライバシー</b>：権限の利用目的文（Info.plist）を具体的に。「アプリの機能向上のため」は落ちる。データ収集の申告（App Privacy）と実装を一致させる。</li>
+    <li><span class="dot">2.3</span><b>メタデータ</b>：スクショに他社商標・実機外UI・キーワード詰め込みタイトルはNG。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>Google Play の勘所<span class="tag m">Android</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span><b>データセーフティフォーム</b>と実際の収集の不一致が主要な違反事由。SDKが勝手に集めるデータ（広告ID等）も申告対象。</li>
+    <li><span class="dot">・</span>位置情報・使用状況アクセス（UsageStats）・アクセシビリティ等の<b>機微権限は宣言と用途動画の提出</b>が要る場合がある。スクリーンタイム系はここが本丸（過去の調査どおり審査厳格）。</li>
+    <li><span class="dot">・</span>新規個人アカウントは<b>クローズドテスト要件</b>（一定人数×日数）を先に満たす必要あり。日程に織り込む。</li>
+    <li><span class="dot">・</span>ポリシーは頻繁に改定される。<b>リリース前週に最新版を確認</b>する習慣を。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>実装前の「前例確認」<span class="tag">鉄則</span></h3>
+  <p>機微なAPI（スクリーンタイム・ヘルス・バックグラウンド位置・通知の常駐など）を使う機能は、<b>「そのAPIで審査を通過した同種アプリ」を実装前に確認</b>する。ストアで現物を探す→レビュー欄・開発者名→リリースノートで挙動を確認。前例ゼロの領域は、技術的に可能でも審査で死ぬ（iOSの全画面タッチエフェクトの件と同じ構図）。</p></div>
+
+  <div class="mcard"><h3>リジェクトされたら<span class="tag">対応</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span>感情より読解：<b>引用されたガイドライン番号</b>の原文を読む。</li>
+    <li><span class="dot">弐</span>再現手順の動画＋修正内容を添えて返信 or 再提出。<b>審査員は次回別人</b>前提で、誤解の余地を潰す説明を。</li>
+    <li><span class="dot">参</span>解釈に自信があれば<b>Resolution Centerで反論</b>も有効（通ることは珍しくない）。</li>
+    <li><span class="dot">四</span>3回落ちたら仕様側を変える判断を。審査と戦う時間は開発に使う。</li>
+  </ul></div>
+</section>
+
+<!-- 進め方 -->
+<section id="d5" class="page">
+  <div class="sec-head"><div class="tate">日々を刻む</div><div><h2>開発の進め方 — 6週間MVPモデル</h2><p>行程表（第二巻）の宿場一を週次に分解した実務版。</p></div></div>
+
+  <div class="mcard"><h3>週次分解（2〜6週・可変）<span class="tag">工程</span></h3>
+  <div class="rowline"><span class="k">第1週</span><span class="v"><b>骨組み</b>：プロジェクト作成・i18n設定・課金SDK・分析・クラッシュ計測。画面は空でも「土台が全部つながった状態」に。ウィジェット主役ならネイティブ連携の疎通もここで</span></div>
+  <div class="rowline"><span class="k">第2〜3週</span><span class="v"><b>コア機能</b>：1機能を動く→気持ちいいまで。毎日ビルドを自分のスマホに入れて生活で使う</span></div>
+  <div class="rowline"><span class="k">第4週</span><span class="v"><b>オンボ＋ペイウォール</b>：5段構成・計測イベント・サンドボックス課金テスト</span></div>
+  <div class="rowline"><span class="k">第5週</span><span class="v"><b>日英仕上げ</b>：文言校正（AI下訳→自分で英語見直し）・空状態/エラー文・アイコン・スクショ素材撮り</span></div>
+  <div class="rowline"><span class="k">第6週</span><span class="v"><b>配布</b>：TestFlight/内部テスト・スモーク表消化・ストア下書き（別冊のASO手順）・審査提出</span></div>
+  </div>
+
+  <div class="mcard"><h3>スコープ管理 — 「やらないことリスト」を先に<span class="tag k">規律</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span>MVPに入れない定番：アカウント登録（端末内で始める）／ソーシャル機能／テーマ切替／iPad最適化／設定の細分化。</li>
+    <li><span class="dot">・</span>機能要望は<b>「3人から同じ声が来たら検討」</b>。1人の声で作らない。</li>
+    <li><span class="dot">・</span>毎週金曜に「今週削ったもの」を記録（SNSのネタにもなる）。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>リリース運用<span class="tag">リズム</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span><b>隔週リリース</b>を基本に（審査日数のバッファ込み）。バージョンは semver でなくてよい、日付でも可。</li>
+    <li><span class="dot">・</span><b>段階公開</b>を使う：iOS Phased Release／Play 段階的な公開（5%→20%→100%）。クラッシュ率を見て進める。</li>
+    <li><span class="dot">・</span>リリースノートは物語で書く（「◯◯という声に応えて…」）。SNS転載素材を兼ねる。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>AI活用の実際（Claude Code等）<span class="tag">加速</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span><b>雛形と定型</b>：画面スケルトン・モデル・リポジトリ層・課金SDKの配線。仕様を文章で渡してたたき台を作らせ、体験の調整だけ手で。</li>
+    <li><span class="dot">・</span><b>i18n流し込み</b>：文言表（日英）からarb/strings生成、追加言語の下訳もここで。</li>
+    <li><span class="dot">・</span><b>テストとレビュー</b>：クリティカルパスのテスト生成・「このコードの落とし穴は？」レビュー。</li>
+    <li><span class="dot">・</span><b>ストア周り</b>：説明文・キーワード案・審査への返信文の下書き。</li>
+    <li><span class="dot">・</span>任せない領域：<b>体験の最終判断・価格・削る決断</b>。ここが作者の署名になる。</li>
+  </ul></div>
+</section>
+
+<!-- 道具箱 -->
+<section id="d6" class="page">
+  <div class="sec-head"><div class="tate">腰の道具</div><div><h2>道具箱と費用</h2><p>最小構成で始め、収益が道具を買う順番で。</p></div></div>
+
+  <div class="mcard"><h3>開発スタック一覧<span class="tag">装備</span></h3>
+  <div class="rowline"><span class="k">言語/FW</span><span class="v">Flutter（既定）／React Native（Web資産持ち）／SwiftUI（iOS特化）</span></div>
+  <div class="rowline"><span class="k">IDE/AI</span><span class="v">VS Code or Android Studio ＋ <b>Claude Code</b>（実装・翻訳・文案）</span></div>
+  <div class="rowline"><span class="k">DB</span><span class="v">Isar / SQLite（端末内）→ 同期が要る時に Firebase / Supabase</span></div>
+  <div class="rowline"><span class="k">課金</span><span class="v">RevenueCat / Adapty（無料枠から）</span></div>
+  <div class="rowline"><span class="k">計測</span><span class="v">Firebase Analytics ＋ Crashlytics ＋ 各ストアコンソール</span></div>
+  <div class="rowline"><span class="k">デザイン</span><span class="v">Figma（アイコン・スクショ・OGP）／SF Symbols・Material Symbols</span></div>
+  <div class="rowline"><span class="k">CI/CD</span><span class="v">最初は手動でよい。慣れたら Codemagic / GitHub Actions＋Fastlane</span></div>
+  </div>
+
+  <div class="mcard"><h3>費用の目安<span class="tag k">予算</span></h3>
+  <div class="rowline"><span class="k">必須</span><span class="v">Apple Developer <b>$99/年</b>・Google Play <b>$25（買切）</b>・ドメイン 数千円/年</span></div>
+  <div class="rowline"><span class="k">ほぼ無料</span><span class="v">課金SDK・分析・クラッシュ計測は無料枠で開始可能</span></div>
+  <div class="rowline"><span class="k">任意</span><span class="v">アイコン外注 0〜3万円・実機（中古Android 1台あると検証が楽）</span></div>
+  </div>
+
+  <div class="callout"><b>次の一冊。</b>オンボーディングの中身・価格・実験の回し方は<b>別冊二「マネタイズの書」</b>へ。作ったものを世に知らせる手順は<b>別冊三「SNS運用の書」</b>へ。</div>
+</section>
+
+</div>
+
+<footer>調査日：2026年7月2日 ／ 作成：Claude ／ 別冊一・開発編<br>技術シェア・性能の記述は各種調査（Statista予測・Stack Overflow・技術ブログのベンチマーク報）に基づく参考情報です。審査基準は変更されるため、提出前に最新のガイドラインをご確認ください。</footer>
+
+<script>
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+</script>
+</body>
+</html>

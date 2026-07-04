@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>日常を少し豊かにするアプリ｜調査図鑑 改訂版 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9;
+  --card:#FFFDF6;
+  --ink:#23282C;
+  --ink-soft:#5B6168;
+  --line:#DFD8C6;
+  --ai:#2E5C7F;      /* 藍 = 不便解消 */
+  --ume:#B7566B;     /* 梅 = 小さな喜び */
+  --matcha:#6B7F52;  /* 抹茶 = 両方 */
+  --karashi:#B98A22; /* 辛子 = 強調 */
+  --shu:#B33A3A;     /* 朱 */
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--washi);
+  background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink);
+  line-height:1.75;
+  font-size:15px;
+  padding-bottom:64px;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+/* ---------- hero ---------- */
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--ai)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+.legend{display:flex;gap:14px;margin-top:16px;font-size:12px;color:var(--ink-soft);align-items:center;flex-wrap:wrap}
+.legend .li{display:flex;align-items:center;gap:6px}
+
+/* ---------- seal (朱印風バッジ) ---------- */
+.seal{
+  width:26px;height:26px;min-width:26px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--serif);font-size:13px;font-weight:600;
+  transform:rotate(-7deg);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4), inset 2px 3px 6px rgba(0,0,0,.18);
+}
+.seal.s-ben{background:var(--ai)}
+.seal.s-yoro{background:var(--ume)}
+.seal.s-ryo{background:var(--matcha)}
+.seal.sm{width:20px;height:20px;min-width:20px;font-size:10.5px}
+
+/* ---------- nav ---------- */
+nav.tabs{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,242,233,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{
+  border:1px solid transparent;background:none;
+  font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);
+  padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer;
+}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+
+/* ---------- sections ---------- */
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{
+  writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;
+  letter-spacing:.32em;color:var(--shu);
+  border-right:1px solid var(--line);padding-right:8px;min-height:64px;
+}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+
+/* ---------- data cards (market) ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:22px;color:var(--ai);font-variant-numeric:tabular-nums;line-height:1.2}
+.dcard .num.warn{color:var(--shu)}
+.dcard .num.gold{color:var(--karashi)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--karashi);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--karashi)}
+
+/* ---------- filters ---------- */
+.filters{margin:16px 0 4px}
+.f-label{font-size:11px;letter-spacing:.2em;color:var(--ink-soft);margin:10px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer;font-family:var(--sans);
+}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--washi)}
+.searchbox{margin-top:12px}
+.searchbox input{
+  width:100%;border:1px solid var(--line);background:var(--card);
+  border-radius:10px;padding:10px 13px;font-size:14px;font-family:var(--sans);color:var(--ink);
+}
+.searchbox input:focus{outline:2px solid var(--ai);outline-offset:1px}
+.count{font-size:12px;color:var(--ink-soft);margin:12px 2px 8px}
+
+/* ---------- app cards ---------- */
+.cards{display:flex;flex-direction:column;gap:10px}
+.acard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.acard .top{display:flex;align-items:center;gap:9px}
+.acard .top h3{font-family:var(--serif);font-size:15.5px;font-weight:600;letter-spacing:.02em;flex:1;line-height:1.4}
+.acard .origin{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.acard .cat{display:inline-block;margin-top:7px;font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft);border:1px solid var(--line);border-radius:4px;padding:1px 7px}
+.acard .row{display:flex;gap:8px;margin-top:7px;font-size:12.5px;line-height:1.6}
+.acard .row .k{color:var(--ink-soft);white-space:nowrap;font-size:11px;letter-spacing:.1em;padding-top:2px;min-width:34px}
+.acard .row .v{flex:1}
+.acard .row.learn .v{border-left:2px solid var(--karashi);padding-left:8px;color:var(--ink)}
+
+/* ---------- pattern cards ---------- */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+
+/* ---------- idea cards ---------- */
+.icard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.icard .top{display:flex;align-items:baseline;gap:8px}
+.icard .no{font-family:var(--serif);color:var(--shu);font-size:11px;letter-spacing:.1em;white-space:nowrap}
+.icard h3{font-family:var(--serif);font-size:15.5px;font-weight:600;flex:1;line-height:1.45}
+.icard .diff{font-size:11px;color:var(--karashi);letter-spacing:.1em;white-space:nowrap}
+.icard .desc{font-size:13px;margin-top:7px}
+.icard .meta{margin-top:8px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-soft)}
+.icard .meta .m{display:flex;gap:7px}
+.icard .meta .mk{min-width:38px;font-size:10.5px;letter-spacing:.12em;padding-top:1px;white-space:nowrap}
+.icard .meta .plus{color:var(--ink);border-left:2px solid var(--ume);padding-left:8px}
+
+/* ---------- money / next ---------- */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--ai);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif)}
+.check{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:12px}
+.check h3{font-family:var(--serif);font-size:15.5px}
+.check li{font-size:13px;padding:8px 0;border-top:1px dashed var(--line);list-style:none;display:flex;gap:9px}
+.check li:first-of-type{border-top:none;margin-top:6px}
+.check .q{color:var(--ai);font-family:var(--serif);white-space:nowrap}
+
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+
+@media(min-width:640px){
+  body{font-size:15.5px}
+  .hero h1{font-size:32px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+  .grid2{grid-template-columns:repeat(3,1fr)}
+  .ideas-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+}
+@media(prefers-reduced-motion:no-preference){
+  section.page.on{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+.src{min-width:19px;height:19px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:11px;color:#fff}
+.src.sc-base{background:var(--ink)} .src.sc-wafu{background:var(--ume)} .src.sc-biz{background:var(--ai)}
+.ib{display:inline-block;font-size:9.5px;letter-spacing:.06em;border-radius:3px;padding:0 5px;margin-left:6px;vertical-align:2px;color:#fff;font-family:var(--sans);font-weight:400;white-space:nowrap}
+.ib-top{background:var(--shu)} .ib-v{background:var(--matcha)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 2026.07 調査 ／ 改訂版・統合</div>
+  <h1>日常を少し豊かにするアプリ<span class="thin">世界のヒット事例と、そこから生まれた着想の記録</span></h1>
+  <p class="lede">「日常の不便を解消する」「日常に小さな喜びを与える」の2軸で、日・米・欧・アジアのアプリを横断調査し、別チャットの2調査（和風・季節77案／海外ビジネスSaaS145件）を統合した改訂版。数値は各社公表・報道・Sensor Tower / AppMagic / Adapty / RevenueCat 等の推定を含む。</p>
+  <div class="stats">
+    <div class="stat"><b id="stat-apps">–</b><span>調査アプリ</span></div>
+    <div class="stat"><b id="stat-ideas">–</b><span>アイデア</span></div>
+    <div class="stat"><b>12</b><span>成功の型</span></div>
+  </div>
+  <div class="legend">
+    <span class="li"><span class="seal sm s-ben">便</span>不便解消</span>
+    <span class="li"><span class="seal sm s-yoro">喜</span>小さな喜び</span>
+    <span class="li"><span class="seal sm s-ryo">両</span>両方</span>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="セクション切替">
+  <div class="row">
+    <button data-t="sec-market" class="on">市場の現実</button>
+    <button data-t="sec-apps">アプリ図鑑</button>
+    <button data-t="sec-patterns">成功の型</button>
+    <button data-t="sec-ideas">アイデア帳</button>
+    <button data-t="sec-money">マネタイズ</button>
+    <button data-t="sec-next">次の一手</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ 市場 ============ -->
+<section id="sec-market" class="page on">
+  <div class="sec-head">
+    <div class="tate">現実を知る</div>
+    <div>
+      <h2>市場の現実 — 厳しさと、勝ち筋</h2>
+      <p>個人・小規模開発の前提となる数字。悲観するためではなく、戦い方を決めるために。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num warn">$492</div><div class="lbl">サブスクアプリの<b>月収中央値</b>。59.3%は累計$1,000未満（Adapty調べ）</div></div>
+    <div class="dcard"><div class="num warn">94.5%</div><div class="lbl">収益の94.5%を<b>上位10%</b>のアプリが独占。凡庸な参入は埋もれる</div></div>
+    <div class="dcard"><div class="num gold">40倍</div><div class="lbl">価格・導線の<b>実験を回すアプリ</b>は、しないアプリの40倍稼ぐ</div></div>
+    <div class="dcard"><div class="num">58.1%</div><div class="lbl"><b>ユーティリティ（実用）</b>の初回更新率。全カテゴリ首位＝「不便解消」は解約されにくい</div></div>
+    <div class="dcard"><div class="num">$68.90</div><div class="lbl">実用系トライアル経由ユーザーの<b>12ヶ月LTV</b>。全カテゴリ最高</div></div>
+    <div class="dcard"><div class="num">55.5%</div><div class="lbl">アプリ収益に占める<b>週課金</b>の割合（2023年43.3%から急増）</div></div>
+    <div class="dcard"><div class="num">2倍</div><div class="lbl"><b>北米ユーザーのLTV</b>は世界平均の約2倍。英語圏を狙う合理性</div></div>
+    <div class="dcard"><div class="num">+29〜39%</div><div class="lbl"><b>欧州のアプリ価格</b>は北米より高い。欧州年額は2年で+70.5%の例も</div></div>
+    <div class="dcard"><div class="num">77%</div><div class="lbl">新規サブスクアプリの77%が<b>iOS発</b>。AI開発ツール普及で加速中</div></div>
+    <div class="dcard"><div class="num">6.7個</div><div class="lbl">米国消費者が抱える平均サブスク数。<b>「サブスク疲れ」</b>が顕在化</div></div>
+    <div class="dcard"><div class="num gold">+15〜25%</div><div class="lbl">サブスクに<b>買い切りを併設</b>したときの総コンバージョン向上幅</div></div>
+    <div class="dcard"><div class="num">69%</div><div class="lbl">サブスク収益の69%は<b>2020年以前リリース</b>のアプリ。古参は強い＝正面衝突を避ける</div></div>
+  </div>
+
+  <div class="callout"><b>読み解き。</b>母数で見れば大半は稼げない。しかし「①実用（解約されにくい）を土台に、②感情のご褒美を乗せ、③英語圏に最初から出し、④価格実験を回し続ける」——この4条件を満たす小さなアプリだけが、中央値の外側に出る。以降の図鑑・型・アイデア帳はすべてこの4条件に沿って整理した。</div>
+
+  <p class="note-src">出典：Adapty「State of In-App Subscriptions 2026」（16,000アプリ・$3B分析）／RevenueCat「State of Subscription Apps 2026」（115,000アプリ・$16B分析）／Sensor Tower・AppMagic推定／各社公表値・報道。数値は2025〜2026年時点の推定を含む。</p>
+</section>
+
+<!-- ============ 図鑑 ============ -->
+<section id="sec-apps" class="page">
+  <div class="sec-head">
+    <div class="tate">先人に学ぶ</div>
+    <div>
+      <h2>成功アプリ図鑑</h2>
+      <p>朱印＝軸（便・喜・両）。「学び」欄は真似すべき本質。数値は推定・公称を含む。別チャット調査由来の分野（空・季節・天体／カメラ・アート／癒しゲーム／ビジネスSaaS）を追加収録。</p>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="f-label">軸で絞る</div>
+    <div class="chips" id="f-axis"></div>
+    <div class="f-label">分野で絞る</div>
+    <div class="chips" id="f-cat"></div>
+    <div class="searchbox"><input id="f-q" type="search" placeholder="名前・キーワードで検索（例：ウィジェット、日本、買い切り）" aria-label="アプリ検索"></div>
+  </div>
+  <div class="count" id="apps-count"></div>
+  <div class="cards" id="apps-list"></div>
+</section>
+
+<!-- ============ 型 ============ -->
+<section id="sec-patterns" class="page">
+  <div class="sec-head">
+    <div class="tate">型を盗む</div>
+    <div>
+      <h2>成功の型 — 12ヶ条</h2>
+      <p>112例を横断して繰り返し現れたパターン。アイデアはこの型に載せて考える。</p>
+    </div>
+  </div>
+  <div id="patterns-list"></div>
+</section>
+
+<!-- ============ アイデア帳 ============ -->
+<section id="sec-ideas" class="page">
+  <div class="sec-head">
+    <div class="tate">種を蒔く</div>
+    <div>
+      <h2>アイデア帳</h2>
+      <p>初回調査53案＋和風・季節77案＋ビジネス日本版6案＝全136案。<b>六選</b>＝各調査のトップ6、<b>相互一致</b>＝独立した2調査が同じ鉱脈に到達した案。難易度は★3段階(和風の1〜5は ★1=1／★2=2〜3／★3=4〜5 に正規化)。＋α＝差別化の一手。</p>
+    </div>
+  </div>
+  <div class="filters">
+    <div class="f-label">出典で絞る</div>
+    <div class="chips" id="fi-src"></div>
+    <div class="f-label">分野で絞る</div>
+    <div class="chips" id="fi-cat"></div>
+    <div class="f-label">難易度で絞る</div>
+    <div class="chips" id="fi-diff"></div>
+  </div>
+  <div class="count" id="ideas-count"></div>
+  <div class="ideas-grid cards" id="ideas-list"></div>
+</section>
+
+<!-- ============ マネタイズ ============ -->
+<section id="sec-money" class="page">
+  <div class="sec-head">
+    <div class="tate">銭を設計</div>
+    <div>
+      <h2>マネタイズの手引き</h2>
+      <p>「後で考える」は最頻出の死因。初日から収益モデルを決める。</p>
+    </div>
+  </div>
+  <div id="money-list"></div>
+</section>
+
+<!-- ============ 次の一手 ============ -->
+<section id="sec-next" class="page">
+  <div class="sec-head">
+    <div class="tate">歩を進める</div>
+    <div>
+      <h2>次の一手</h2>
+      <p>調査を行動に変えるための、採点表と進め方。</p>
+    </div>
+  </div>
+
+  <div class="check">
+    <h3>アイデア採点表 — 6つの問い（各◯△✕）</h3>
+    <ul style="list-style:none">
+    <li><span class="q">一</span>自分が<b>毎日</b>使いたいか？（Locketは1人のために作られた）</li>
+    <li><span class="q">二</span>提供価値を<b>一文</b>で言えるか？（実用系は「1機能を確実に」が正解）</li>
+    <li><span class="q">三</span><b>ホーム画面（ウィジェット）</b>に住めるか？（開かせるアプリは負ける）</li>
+    <li><span class="q">四</span><b>口コミが構造</b>に入っているか？（相手が要る／見せたくなる／スキャンして話したくなる）</li>
+    <li><span class="q">五</span><b>英語のまま</b>で価値が通じるか？（文化の翻訳が必要なら＋αで設計）</li>
+    <li><span class="q">六</span><b>お金を払う理由</b>を初日から言えるか？（誰が・何に・いくら）</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>進め方（3週間モデル）</h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span><b>選ぶ：</b>アイデア帳から◯が5つ以上の案を3〜5個ピックアップ。迷ったら「実用×かわいい」の交点を優先。</li>
+      <li><span class="dot">弐</span><b>掘る：</b>各案の競合アプリのレビュー（特に★2〜3）を読み、不満点＝＋αの種を採掘。この深掘りはClaudeに依頼できる。</li>
+      <li><span class="dot">参</span><b>作る：</b>1案を選び、1週間で動くプロトタイプ（まず単一HTML→次にFlutter等でストア版）。課金導線はダミーでも初日から置く。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>Claudeへの依頼例（コピペ用）</h3>
+    <ul class="plain">
+      <li><span class="dot">・</span>「アイデア#21『歩く枯山水』の競合を5つ挙げて、レビューの不満点を分析して」</li>
+      <li><span class="dot">・</span>「#36のAndroidスクリーンタイム市場について、技術的に可能な範囲を調査して」</li>
+      <li><span class="dot">・</span>「#8『洗濯タグ翻訳』のMVP仕様書を書いて。画像認識の実装方法も」</li>
+      <li><span class="dot">・</span>「この図鑑の◯◯系だけ、もっと深く調査して事例を追加して」</li>
+    </ul>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  調査日：2026年7月2日 ／ 作成：Claude<br>
+  数値はSensor Tower・AppMagic・Adapty・RevenueCat等の推定、各社公表値、報道に基づく参考値です。<br>
+  統合出典：「和風・季節テーマ スマホアプリ アイデア集」（77案）／「海外ビジネス系アプリ調査」（145サービス）— いずれも2026年6月11日・別チャット作成。<br>
+  投資・事業判断は必ず一次情報の確認を。
+</footer>
+
+<script>
+/* ================= DATA : APPS ================= */
+const APPS=[
+{n:"Locket Widget",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"累計8,000万DL／推定年商$13.5M・黒字。直近も月80万DL・月$30万規模（Sensor Tower推定）",m:"無料＋サブスク（Gold）",note:"恋人1人のために作った写真ウィジェットが世界的ヒット。友達上限20人・いいね無し＝親密さに全振り。「1人の問題を深く解く」の教科書。"},
+{n:"noteit（noteit widget）",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"累計1,250万DL超。TikTok発で12日間に120万DLの爆発も",m:"サブスク（週$6.99）",note:"手描きの落書きが相手のホーム画面に届く。高額週課金への不満レビュー多数＝価格設計の反面教師でもある。"},
+{n:"Widgetable",o:"🇨🇳",c:"つながり・ウィジェット",a:"喜",s:"ピーク時 日次純収益$22K（≒月$66万）。収益の大半はiOS",m:"サブスク",note:"カップル・親友でペットを共同育成するウィジェット。「2人で世話する」が課金と継続の両輪。"},
+{n:"Widgetsmith",o:"🇺🇸",c:"つながり・ウィジェット",a:"両",s:"iOS14解禁直後の2020年に月$3M",m:"フリーミアム",note:"OSの新機能（ウィジェット）に最速で乗った者が総取りした典型。プラットフォームの波を監視する価値。"},
+{n:"BeReal",o:"🇫🇷",c:"つながり・ウィジェット",a:"喜",s:"一時世界的バイラル→2024年にVoodooが約€5億で買収（報道）",m:"広告等（買収後）",note:"「盛れない写真を1日1回」という制約自体が価値。ただし熱狂の維持に苦戦＝バイラル型の宿命も示した。"},
+{n:"LiveIn / Howbout 等",o:"🌍",c:"つながり・ウィジェット",a:"喜",s:"Locket追随の写真・予定共有ウィジェット群。Gen Zで定着",m:"サブスク",note:"ウィジェット社交は一発屋でなくジャンル化した。まだ「写真・落書き・予定」以外の空きスロットがある。"},
+{n:"Co-Star",o:"🇺🇸",c:"つながり・ウィジェット",a:"喜",s:"占星術アプリの米国代表格。毎朝の一行がSNSで拡散",m:"IAP＋サブスク",note:"毎朝1行の辛口占いをウィジェット配信。「短い言葉を毎日届ける」だけで習慣になる証明。"},
+{n:"1 Second Everyday",o:"🇺🇸",c:"記録・思い出",a:"喜",s:"毎日1秒の動画で人生をダイジェスト化。長寿の定番",m:"サブスク",note:"記録のハードルを「1秒」まで下げた。続けられる最小単位を探す発想。"},
+{n:"TimeTree",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"登録7,000万人・半数以上が海外。米独台英韓が上位。月100万人ペースで増加",m:"広告＋プレミアム（月300円）",note:"「共有前提のカレンダー」で唯一無二の位置。初日から日英韓で同時リリース、Appleのフィーチャーが海外成長の起点。日本発グローバルの最重要参考例。"},
+{n:"FamilyAlbum みてね",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"利用者2,000万人超（公表）。海外比率が約半分まで成長",m:"フリーミアム＋写真プリント等の物販",note:"家族限定の写真共有。祖父母という「お金を出す第三者」を設計に組み込んだ点が秀逸。"},
+{n:"Finch",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"月商$90万〜100万規模・月50万DL（推定）",m:"サブスク",note:"「自分の世話をすると小鳥が育つ」。人は自分のためには頑張れないが、何かのためなら頑張れる——喜び系の最重要発明。"},
+{n:"Daylio",o:"🇸🇰",c:"癒し・セルフケア",a:"両",s:"Android累計1,900万DL・月商$10万規模（推定）",m:"フリーミアム（年$35.99）",note:"「書かない日記」。絵文字タップだけで完了、データは端末内保存。摩擦の除去とプライバシーが武器。"},
+{n:"Day One",o:"🇺🇸",c:"記録・思い出",a:"喜",s:"ジャーナルの老舗定番（Automattic傘下）",m:"サブスク",note:"日記アプリの完成形だが高機能ゆえ重い。「軽い日記」の余地は常に残る。"},
+{n:"Me+ Daily Routine",o:"🌍",c:"習慣・時間",a:"便",s:"月商$70万規模（推定）",m:"サブスク",note:"ルーティン管理という地味な領域でも、UIの気持ちよさで大きく稼げる証明。"},
+{n:"Stoic",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"哲学×ジャーナルの個人開発発ヒット",m:"サブスク",note:"「ストア哲学」という世界観の借用でジャーナルを差別化。世界観×実用の好例。"},
+{n:"How We Feel",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"イェール大共同の非営利・完全無料",m:"寄付",note:"感情の語彙を増やすことに特化。無料の善意モデルは収益化困難だが、UXの参考として一級。"},
+{n:"Gratitude Plus",o:"🌍",c:"癒し・セルフケア",a:"喜",s:"感謝日記＋仲間内サークルで2026年トレンド入り",m:"サブスク",note:"感謝×小さなコミュニティ。「家族や同僚と励まし合う輪」を作る方向は日本的相性も良い。"},
+{n:"Habit Rabbit",o:"🌍",c:"習慣・時間",a:"喜",s:"「どうぶつの森×習慣トラッカー」として人気",m:"IAP",note:"タスク達成でウサギの部屋が充実。かわいさは機能を超える差別化になる。"},
+{n:"Fabulous",o:"🇫🇷",c:"習慣・時間",a:"便",s:"行動科学ベースの習慣コーチ。多数の受賞歴を持つ大型アプリ",m:"サブスク",note:"デューク大の行動経済学ラボ発。「科学の裏付け」がプレミア価格の根拠になる。"},
+{n:"Calm",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"瞑想アプリの雄。評価額$20億超（報道・2019年時点）",m:"サブスク（年$69.99）",note:"「眠りの物語」など感情価値に高額課金が成立する市場を開拓。ただし今から正面参入は不可。"},
+{n:"Headspace",o:"🇬🇧",c:"癒し・セルフケア",a:"喜",s:"瞑想大手の一角。B2B展開も",m:"サブスク＋法人",note:"キャラクター的な優しいイラストがブランドの核。トーン&マナーの参考。"},
+{n:"Balance",o:"🇺🇸",c:"癒し・セルフケア",a:"喜",s:"「初年度無料」の大胆施策で急成長",m:"サブスク",note:"後発が先行大手（Calm/Headspace）を崩すには、価格の常識破壊が武器になる例。"},
+{n:"Endel",o:"🇩🇪",c:"音・環境",a:"喜",s:"AI生成のパーソナル環境音。Apple Watch連携等で受賞多数",m:"サブスク",note:"「音を自動生成し続ける」技術で睡眠・集中に最適化。音×AIは日本の音風景でも狙える。"},
+{n:"Tide（潮汐）",o:"🇨🇳",c:"音・環境",a:"喜",s:"自然音×集中×睡眠。東アジアで根強い人気",m:"フリーミアム",note:"美しい写真＋自然音＋ポモドーロの複合。禅・自然の世界観は東アジア発が説得力を持つ。"},
+{n:"Streaks",o:"🇦🇺",c:"習慣・時間",a:"便",s:"Apple Design Award受賞。買い切りで長寿",m:"買い切り",note:"サブスク全盛で「買い切り・Apple純正級の作り込み」が逆に差別化に。個人開発の王道。"},
+{n:"Habitify",o:"🇻🇳",c:"習慣・時間",a:"便",s:"クロスプラットフォーム習慣管理の定番",m:"サブスク",note:"Web/モバイル横断のニーズは根強い。アジア発でも英語圏で戦える証明。"},
+{n:"HabitKit",o:"🇩🇪",c:"習慣・時間",a:"便",s:"個人開発。2024年初に関連アプリ合算で月$33K到達",m:"買い切り＋サブスク併用",note:"GitHubの草グリッドを習慣可視化に転用しただけで大ヒット。既存UIの文脈転用は個人開発の必勝パターン。"},
+{n:"Habitica",o:"🇺🇸",c:"習慣・時間",a:"両",s:"人生をRPG化する古参。コミュニティが強固",m:"サブスク＋IAP",note:"ゲーミフィケーションの元祖格。ただし複雑化しており「軽いRPG化」の余地は残る。"},
+{n:"Forest",o:"🇹🇼",c:"スクリーンタイム",a:"両",s:"有料ランキング常連の長寿アプリ。実際の植樹にも連動",m:"買い切り＋IAP",note:"スマホを触らない時間で木が育つ。「やめさせる」を「育てる」に反転した金字塔。"},
+{n:"Structured",o:"🇩🇪",c:"習慣・時間",a:"便",s:"1日をタイムライン表示する計画アプリ。個人開発発で急成長",m:"サブスク",note:"ADHD層など「時間の見える化」に切実な層を掴んだ。切実なニッチ＞広く浅く。"},
+{n:"Routinery",o:"🇰🇷",c:"習慣・時間",a:"便",s:"ルーティンタイマーの韓国発ヒット",m:"サブスク",note:"「次に何をするか」を音声とタイマーで流す。朝の実行支援に特化した潔さ。"},
+{n:"Alarmy",o:"🇰🇷",c:"習慣・時間",a:"便",s:"累計DL数千万規模（公称）。目覚ましカテゴリ収益上位の常連",m:"サブスク",note:"「起きるまで止まらない」ミッション式目覚まし。1つの不便（二度寝）への極端な特化が世界で通用。"},
+{n:"Opal",o:"🇫🇷",c:"スクリーンタイム",a:"便",s:"iOS発の代表格。月$9.99／年$99.99の強気価格。Android版は後発",m:"サブスク",note:"強制力の強いDeep Focusと美しい統計で高価格を正当化。後発のAndroid展開が遅れた期間＝市場の空白だった。"},
+{n:"one sec",o:"🇩🇪",c:"スクリーンタイム",a:"便",s:"個人開発発。SNSを開く前に深呼吸を挟む",m:"サブスク",note:"「禁止」ではなく「10秒の間」を置くだけ。行動科学×最小介入の美しい設計。"},
+{n:"ScreenZen",o:"🇺🇸",c:"スクリーンタイム",a:"便",s:"完全無料で有料級の機能。推奨リスト常連",m:"無料（善意）",note:"無料の存在は競合の脅威。この隣で課金するなら「強制力」か「世界観」の上乗せが必須と教えてくれる。"},
+{n:"Jomo",o:"🇫🇷",c:"スクリーンタイム",a:"便",s:"「取り残される喜び（JOMO）」を掲げ成長",m:"サブスク",note:"機能でなく思想（FOMOの逆張り）でブランド化。ネーミングの力。"},
+{n:"Brick",o:"🇺🇸",c:"スクリーンタイム",a:"便",s:"物理NFCタグ＋アプリのハイブリッドで人気",m:"ハードウェア販売",note:"「物理的にタッチしないと解除できない」。アプリの限界（自分で解除できてしまう）をモノで超えた発想。"},
+{n:"Yuka",o:"🇫🇷",c:"スキャン・識別",a:"便",s:"8,000万ユーザー・売上$7Mで黒字。広告費ゼロ、口コミのみで成長。米国が最大市場",m:"任意価格の年額サブ（$10〜20）＋広告なし",note:"商品バーコードをスキャン→健康影響を採点。「企業から一切お金を取らない独立性」が信頼と口コミの源泉。"},
+{n:"PictureThis",o:"🇨🇳",c:"スキャン・識別",a:"両",s:"月70万DL・月商$500万規模（Sensor Tower推定）",m:"サブスク（年$29.99）",note:"植物を撮ると即識別＋世話ガイド。識別×サブスクの収益王。散歩が採集に変わる「喜び」も同時提供。"},
+{n:"PlantNet",o:"🇫🇷",c:"スキャン・識別",a:"便",s:"学術プロジェクト発・無料。精度評価で常に上位",m:"寄付",note:"無料で高精度な公共財。商用でこの隣に立つには「世話・記録・世界観」の付加が必要。"},
+{n:"Planta",o:"🇸🇪",c:"スキャン・識別",a:"便",s:"世話スケジュール特化で識別系と共存",m:"サブスク",note:"識別はそこそこに「枯らさせない」に特化。同じ植物でも切り口で棲み分けられる。"},
+{n:"Greg",o:"🇺🇸",c:"スキャン・識別",a:"便",s:"水やり予測＋コミュニティで差別化",m:"フリーミアム",note:"植物ごとの適応型リマインドという1点突破。"},
+{n:"iNaturalist / Seek",o:"🇺🇸",c:"スキャン・識別",a:"両",s:"自然観察の世界的コミュニティ。無料",m:"非営利",note:"識別を「市民科学への参加」に昇華。目的の意味づけがエンゲージメントを生む。"},
+{n:"Merlin Bird ID",o:"🇺🇸",c:"スキャン・識別",a:"喜",s:"コーネル大学。鳴き声のリアルタイム識別が話題で無料",m:"寄付",note:"「朝の過ごし方が変わった」というレビュー多数。不便解消と喜びが融合すると生活習慣そのものに入り込む。"},
+{n:"Rock Identifier / Picture Insect 等",o:"🇨🇳",c:"スキャン・識別",a:"便",s:"PictureThis系列の識別アプリ群（石・虫・魚…）",m:"サブスク",note:"「識別×サブスク」を対象替えで量産する工場モデル。個人でも1ニッチなら模倣可能。"},
+{n:"Vivino",o:"🇩🇰",c:"スキャン・識別",a:"便",s:"ワインラベルをスキャンして評価・記録。ユーザー数千万規模（公称）",m:"EC連動・手数料",note:"スキャン→評価→そのまま購入。識別の出口を商取引に繋げた収益設計。"},
+{n:"Untappd",o:"🇺🇸",c:"スキャン・識別",a:"喜",s:"ビール記録SNSの世界標準",m:"フリーミアム＋店舗向けB2B",note:"「飲んだ記録」がコレクション欲と社交を同時に満たす。記録＝収集の設計。"},
+{n:"Photomath",o:"🇭🇷",c:"スキャン・識別",a:"便",s:"数式を撮ると解法を表示。Googleが買収（2023年完了）",m:"サブスク→買収",note:"カメラで不便を解く系の金字塔。クロアチア発でも世界を取れる。"},
+{n:"Shazam",o:"🇬🇧",c:"スキャン・識別",a:"便",s:"音楽識別の元祖。Appleが約$4億で買収（報道）",m:"買収",note:"「今流れてる曲は何？」という一瞬の不便に特化して国民的インフラに。"},
+{n:"Cal AI",o:"🇺🇸",c:"スキャン・識別",a:"便",s:"食事を撮るとカロリー推定。10代創業で月$100万規模と報道",m:"サブスク",note:"AI×カメラの2024-25年型ヒット。TikTokでの見せ方まで含めた設計が今風。"},
+{n:"Flighty",o:"🇺🇸",c:"生活の道具",a:"便",s:"フライト追跡。Apple Design Award 2023受賞",m:"サブスク（高価格）",note:"航空好きの熱量に全振りした高級専門店モデル。狭く深く高くの見本。"},
+{n:"Parcel",o:"🌍",c:"生活の道具",a:"便",s:"荷物追跡の一元化で定番の個人開発系",m:"サブスク（低額）",note:"通販時代の普遍的な小さい不便。地味だが解約理由がない。"},
+{n:"Splitwise",o:"🇺🇸",c:"生活の道具",a:"便",s:"割り勘・立替管理の世界標準",m:"フリーミアム",note:"「お金の気まずさ」という感情の不便を解いた。機能はシンプルでも参入障壁はネットワーク。"},
+{n:"Tricount",o:"🇧🇪",c:"生活の道具",a:"便",s:"旅行割り勘の欧州定番→ネット銀行bunqが買収",m:"フリーミアム→買収",note:"「旅行」という利用文脈に絞った割り勘。文脈特化は後発の定石。"},
+{n:"Paprika",o:"🇺🇸",c:"生活の道具",a:"便",s:"レシピ保存・買い物リストの長寿定番",m:"買い切り",note:"買い切り一本で10年以上生存。「一生モノの台所道具」という立ち位置。"},
+{n:"Bring!",o:"🇨🇭",c:"生活の道具",a:"便",s:"買い物リスト共有の欧州定番",m:"無料＋メーカー広告B2B",note:"ユーザーは無料、食品メーカーから収益。二面市場の教科書。"},
+{n:"Tody / Sweepy",o:"🇩🇰",c:"生活の道具",a:"便",s:"掃除スケジュール管理の代表格",m:"買い切り／サブスク",note:"「どこをいつ掃除したか」の見える化。家事の見えない不便はまだ鉱脈が残る。"},
+{n:"Rocket Money",o:"🇺🇸",c:"生活の道具",a:"便",s:"サブスク解約支援から大手化（旧Truebill）",m:"サブスク＋節約成功報酬",note:"「節約できた額の一部をもらう」成功報酬モデル。ユーザーと利害が一致する課金は強い。"},
+{n:"CARROT Weather",o:"🇺🇸",c:"生活の道具",a:"喜",s:"月商$20万規模（推定）。毒舌AIキャラの天気アプリ",m:"サブスク3段階",note:"データは同じでも「性格」で差別化できる証明。天気×キャラは日本でも空いている。"},
+{n:"Sleep Cycle",o:"🇸🇪",c:"歩く・眠る×遊び",a:"便",s:"月20万DL・月商$90万規模（推定）",m:"サブスク",note:"睡眠計測の老舗。センサー系は精度の信頼がブランドになる。"},
+{n:"AllTrails",o:"🇺🇸",c:"生活の道具",a:"両",s:"2023年 iPhone App of the Year",m:"サブスク",note:"ハイキング情報の決定版。AIを「道の状態予測」など文脈に埋め込む実装が2026年の模範。"},
+{n:"Too Good To Go",o:"🇩🇰",c:"生活の道具",a:"便",s:"フードロス削減マーケット。登録1億人超（公称）",m:"手数料",note:"「お得」と「社会貢献」を同時に満たす。罪悪感の解消はグローバル共通の需要。"},
+{n:"TABETE",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"日本版フードレスキューの先駆",m:"手数料",note:"海外モデルの日本ローカライズ例。逆方向（日本の仕組みを海外へ）も同様に成立するはず。"},
+{n:"Strava",o:"🇺🇸",c:"歩く・眠る×遊び",a:"両",s:"運動SNSの世界標準",m:"サブスク",note:"記録を「社交と称賛」に変換。運動の喜び側を握った。"},
+{n:"Pokémon GO",o:"🇺🇸",c:"歩く・眠る×遊び",a:"喜",s:"位置情報ゲームの金字塔。今も上位常連",m:"IAP",note:"「外に出る理由」を作った歴史的発明。IPの力が大きく個人は直接模倣不可、構造だけ盗む。"},
+{n:"Pikmin Bloom",o:"🇯🇵",c:"歩く・眠る×遊び",a:"喜",s:"累計$1億突破・2025年は$34.8M（AppMagic推定）で毎年成長",m:"IAP＋イベントパス",note:"「歩くと花が咲く」受動的で優しい設計が、派手さなしに右肩上がり。大人向け歩数×癒しの余地を示す。"},
+{n:"Pokémon Sleep",o:"🇯🇵",c:"歩く・眠る×遊び",a:"喜",s:"リリース約1ヶ月で全世界1,000万DL・2025年収益$39.5M",m:"IAP＋月額",note:"睡眠という「何もしない時間」をゲーム化。計測は置くだけ＝操作ゼロの設計が普及の鍵。"},
+{n:"Sweatcoin",o:"🇬🇧",c:"歩く・眠る×遊び",a:"便",s:"歩数をポイント化。ユーザー1億規模（公称）",m:"広告・提携",note:"歩く→報酬の直結。ただし報酬原資の設計が難しく、広告依存になりがち。"},
+{n:"WeWard",o:"🇫🇷",c:"歩く・眠る×遊び",a:"便",s:"欧州発の歩数ポイ活大手。数千万DL（公称）",m:"広告・提携・送客",note:"自治体・小売との提携で「街への送客」を収益化。ポイ活は各国ローカル文脈が強い。"},
+{n:"トリマ",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"移動でマイルが貯まる国内ポイ活定番。公称1,000万DL超",m:"広告",note:"日本のポイ活文化に最適化。広告モデルは大量DLが前提＝個人開発とは相性が悪い点も学び。"},
+{n:"SmartNews",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"米国展開でユニコーン化した日本発ニュースアプリ（報道）",m:"広告",note:"日本発でも米国市場で正面から戦えた稀有な例。現地チーム・現地最適化が必須だった。"},
+{n:"Cookpad",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"レシピ投稿の草分け。多言語で世界展開",m:"サブスク",note:"UGC（投稿）型は言語圏ごとの立ち上げが重い。個人はUGCより「道具」型が現実的。"},
+{n:"Simeji",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"きせかえキーボードの定番（Baidu傘下）",m:"フリーミアム",note:"実用ツール（キーボード）に「かわいさ」を乗せて若年層を獲得。装飾課金は喜び系の基本収益。"},
+{n:"mikan",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"英単語アプリの国内定番",m:"サブスク",note:"「1単語1秒」のテンポ設計。学習系は日本→海外の言語逆転（日本語学習アプリ）も狙える。"},
+{n:"Peing 質問箱",o:"🇯🇵",c:"日本発・世界へ",a:"喜",s:"6時間で開発→3週間で日次800万PV→事業譲渡",m:"広告→譲渡",note:"既存SNSに寄生する軽量サービスの爆発力。ただしAPI依存はプラットフォームリスクと表裏一体。"},
+{n:"Skeb",o:"🇯🇵",c:"日本発・世界へ",a:"両",s:"クリエイターへの有償依頼サービス。10億円で買収",m:"手数料",note:"個人開発発で10億円イグジット。「コミュニティの当事者であること」を成功の極意と創業者が明言。"},
+{n:"AtoZ Dictionary",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"日本の個人開発。無宣伝で米国中心に5,000DL超",m:"投げ銭→IAP予定",note:"「英語でリリースしただけで米国から伸びた」という等身大の実証。あなたの初手の現実的モデル。"},
+{n:"Paired",o:"🇬🇧",c:"家族・パートナー",a:"喜",s:"カップル向けの代表格。専門家監修の毎日1問",m:"サブスク（$12.49/月〜）",note:"「2人で答えると開示される」仕掛けが相互招待＝成長装置を兼ねる。"},
+{n:"Between",o:"🇰🇷",c:"家族・パートナー",a:"喜",s:"カップル専用メッセンジャーのアジア定番",m:"フリーミアム",note:"2人だけの空間という切り口はアジア発が先行。日本の細やかさで再発明の余地。"},
+{n:"OurCouple / Cozy系",o:"🌍",c:"家族・パートナー",a:"喜",s:"パステル・紙質感・共同ペットの「cozy」需要が2026年に顕在化",m:"フリーミアム",note:"「cozyなカップルアプリ」という検索需要自体が存在。世界観への需要は明文化されている。"},
+{n:"Honeydue",o:"🇺🇸",c:"家族・パートナー",a:"便",s:"カップル家計の米国定番",m:"無料＋金融連携",note:"「お金の話の気まずさ」を絵文字とUIで和らげた。感情の不便に切り込む家計簿。"},
+{n:"Cozi",o:"🇺🇸",c:"家族・パートナー",a:"便",s:"家族オーガナイザーの米国定番",m:"広告＋サブスク",note:"買い物・献立・予定を家族で一元化。「家庭のOS」ポジションは各国ローカルの隙間が残る。"},
+{n:"Timefall",o:"🌍",c:"記録・思い出",a:"喜",s:"未来の自分に手紙を書き、ランダムな日に届く個人開発アプリ",m:"買い切り／IAP",note:"「通知が来るのが楽しみになる」設計。開封の儀＝サプライズを機能に埋め込む発想。"},
+{n:"Duolingo",o:"🇺🇸",c:"生活の道具",a:"両",s:"有料会員1,000万人超（2025年Q1・公表）",m:"サブスク＋広告",note:"ストリークとキャラの圧で学習を習慣化。「継続の仕組み」は全ジャンル共通で盗める。"},
+{n:"Buy Me a Coffee / Ko-fi",o:"🌍",c:"生活の道具",a:"喜",s:"個人開発の投げ銭インフラとして定着",m:"手数料",note:"収益化の最小構成。ストア審査前のWeb版で「払う人がいるか」を検証できる。"},
+{n:"くらしのこよみ / 72 Seasons",o:"🇯🇵",c:"空・季節・天体",a:"喜",s:"「世界初の暦アプリ」として和の暦ジャンルの代表格に。英語版72 Seasonsも展開後、サービス終了",m:"コンテンツ課金(終了)",note:"七十二候を巻物仕立てで届けた先駆け。ただし天気予報のない「読む暦」にとどまり、終了した今「暦×予報×美しさ」は空いたままの鉱脈(=空暦案の根拠)。"},
+{n:"Madobe - Japanese Seasons Widget",o:"🇯🇵",c:"空・季節・天体",a:"喜",s:"2025年登場・日本の個人開発。英語圏ストアで月額$1.99のサブスク展開中",m:"サブスク($1.99/月)",note:"七十二候×毎日のミニチュア情景アート×ウィジェット。第一巻#1の構想がすでに小さく動いている実例=ニッチ未成熟の証拠。参入するなら差別化設計が必須。"},
+{n:"Sakura Navi",o:"🇯🇵",c:"日本発・世界へ",a:"便",s:"23地域のApp Store有料旅行カテゴリ世界1位・11カ国で旅行(有料)1位(2026年1月)",m:"買い切り(有料アプリ)",note:"「日本の季節美を予報する」だけで海外有料1位が取れる実証。桜で証明済み・紅葉版が空白(=錦秋案)という後追いの定石が見える。"},
+{n:"Alpenglow",o:"🌍",c:"空・季節・天体",a:"両",s:"風景写真家の定番。iPhone/Watch/Android等ほぼ全プラットフォーム展開・日本語非対応",m:"サブスク/買い切り併用",note:"「光の質を予報する」カテゴリを確立したが日本未対応のまま。夕焼けアラート/茜さす系アイデアの空白を直接証明する存在。"},
+{n:"Star Walk 2",o:"🇺🇸",c:"空・季節・天体",a:"喜",s:"利用者1,000万人超・Apple Design Award受賞",m:"買い切り+IAP",note:"星空×美麗ビジュアルの世界標準。月の和名・旧暦・和の星名を載せた「和風星空」は不在のまま。"},
+{n:"Moonly",o:"🇺🇸",c:"空・季節・天体",a:"喜",s:"累計600万DL超・直近30日で約33万DL(欧米で急成長)",m:"サブスク",note:"月相×瞑想・習慣のセルフケアで市場を確立。十五夜・月待ち・旧暦など日本の月文化版は空白(=月待ち案の根拠)。"},
+{n:"醒図(Xingtu)",o:"🇨🇳",c:"カメラ・アート",a:"喜",s:"中国の若者のSNS投稿の標準ツールと言われる普及度(ByteDance系)。日本未上陸",m:"基本無料+IAP",note:"「自国の伝統美×最新の加工技術」の勝ちパターンを実証。和風版Xingtu=うつしゑ構想の直接の下敷き。"},
+{n:"Dazz - フィルムカメラ",o:"🇨🇳",c:"カメラ・アート",a:"喜",s:"日本のApp Storeで評価4.8・10〜20代に大流行",m:"無料+買い切りIAP",note:"撮るだけで完成する「エモさ」が課金になる証明。夕暮れ・雨・雪など季節の情景撮影との相性はそのまま和風カメラの追い風。"},
+{n:"ねこあつめ",o:"🇯🇵",c:"癒しゲーム",a:"喜",s:"累計1,900万DL超。開発はわずか2人チーム(ヒットポイント)",m:"無料+IAP(にぼし)",note:"「急かされない・眺めるだけ」の低ストレス設計が放置ジャンルを開拓。和の日常風景が核で、七十二候の庭案の原型。"},
+{n:"旅かえる",o:"🇯🇵",c:"癒しゲーム",a:"喜",s:"累計約3,700万DLとの報道。iOS約1,000万DL時点で中国95%・中国無料1位を2週連続",m:"無料+IAP(中国版はアリババ運営)",note:"中国語版がないまま中国で大ヒット。「待つ」「眺める」日本的な間の美学は、翻訳なしでも越境する実証。"},
+{n:"SLOWLY",o:"🇭🇰",c:"つながり・ウィジェット",a:"喜",s:"登録500万人超・Google Play Awards受賞・30以上の地域で「今日のApp」",m:"フリーミアム(切手IAP)",note:"手紙が数日かけて届く文通SNS。「遅さ」を価値に変えた設計は、季節の便り/風の文など和の文通系アイデアの直接参考。"},
+{n:"Fyxer AI",o:"🇬🇧",c:"ビジネスSaaS",a:"便",s:"ARRが2025年初の$1Mから8カ月で$17M超へと「史上最速級」の成長(Madrona)。2025年9月にシリーズB $30Mを調達(投資家にMarc Benioff、20VC等)。2026年末までにARR $100Mを予告。",m:"サブスク(Starter $30/月)",note:"日本のビジネスメールは敬語・定型句・宛名作法が独特で、汎用LLMの下書きでは不十分。「日本語ビジネスメールの作法を完璧に押さえたAIメール秘書」は明確な空白で、Gmail/Outlook APIとLLMで個人開発でも構築可能。Fyxerの急成長は需要の強さの証明。"},
+{n:"Granola",o:"🇬🇧",c:"ビジネスSaaS",a:"便",s:"2026年3月にIndex Ventures主導でシリーズC $125Mを調達し評価額$1.5B(TechCrunch/Bloomberg報道)。直前四半期の売上成長率+250%。",m:"SaaSサブスク",note:"議事録AI市場自体は日本でレッドオーシャンだが、既存国産勢は「全文文字起こし+要約」型。Granola型の『自分が書いた走り書きをAIが補完する』個人用ノートUXは空白。日本語の商習慣(議事録の体裁、社内共有文化)に最適化すれば差別化可能。"},
+{n:"Chatbase",o:"🇨🇦",c:"ビジネスSaaS",a:"便",s:"外部資金ゼロで2025年12月にARR $8M、2026年に$10M到達。顧客1万社以上、月次成長率8%、継続率92%、チーム18人(うち11人がエンジニア)。個人のサイドプロジェクトから成長した代表例。",m:"SaaS月額(無料枠+従量)",note:"個人開発で最も再現性が高いモデル。日本語ネイティブの敬語応答品質、国産EC/CMS(STORES、BASE、カラーミー等)へのワンクリック設置、LINE公式アカウント連携で差別化できる。競合は多いため特定業種(クリニック、ECなど)特化が現実的。"},
+{n:"Instantly.ai",o:"🇪🇪",c:"ビジネスSaaS",a:"便",s:"外部調達ゼロで創業2年でARR $20M、2026年時点で推定$40M・有料顧客約24,500社(Latka/Starter Story調べ)。アフィリエイト(生涯40%還元)とFacebookグループ6万人のコミュニティで成長。",m:"SaaS月額(ブートストラップ)",note:"特定電子メール法準拠(送信者表示・オプトアウト・営業禁止文言検知)をプロダクトに組み込んだ「コンプライアンス内蔵の新規開拓メール基盤」は空白。フォーム営業より開封率の高い代表メール+担当者メールへの丁寧な少量送信に振ると日本の商習慣に合う。"},
+{n:"Senja",o:"🇪🇺",c:"ビジネスSaaS",a:"便",s:"2人チームのブートストラップで、インディーハッカー界隈の定番ツールに成長(公開ブログでMRR推移を発信)。Testimonial.to(月60ドル)に対し月19〜29ドルの価格破壊で「乗り換え先」の地位を確立。",m:"SaaS月額(低価格・PLG)",note:"日本のLP制作で「お客様の声」は必須要素なのに、収集→許諾→掲載を自動化する低価格ツールが国内にない。技術的にはフォーム+動画アップロード+埋め込みウィジェットで、個人開発に最適な規模。コーチ・スクール・制作会社・採用(社員の声)など横展開も容易。最有力の個人開発候補。"},
+{n:"Tally",o:"🇧🇪",c:"ビジネスSaaS",a:"便",s:"完全ブートストラップ・約10人で$4M ARR(2025年、前年$1.9Mから倍増)。2025年はChatGPTが流入チャネル1位になるなどAI経由の獲得が急伸。インディーSaaSの代表的成功例。",m:"フリーミアム(Pro月額)",note:"国産フォームは枠数・回答数の制限が厳しいものが多く、Tally型の「無料無制限+有料は高度機能」モデルとAIによるフォーム自動生成を組み合わせれば差別化可能。技術スタックは個人開発に向くが、無料モデルゆえ収益化まで体力が必要な点に注意。"},
+{n:"Screen Studio",o:"🇵🇱",c:"ビジネスSaaS",a:"便",s:"Product Hunt 2025年間ランキング1位(スコア1,849)。個人開発から始まり9ヶ月で8,000顧客を獲得、現在も3人チームで運営される買い切り/サブスク型の成功例。",m:"買い切り/サブスク",note:"日本のSaaS・アプリ企業のマーケ動画、マニュアル動画市場向けに「録るだけでプロ品質」の体験を持ち込める。Electron/ネイティブの動画処理という開発難度は高めだが、3人チームで成立した実例があり、Windows対応や日本語字幕自動生成を加えれば差別化できる。"},
+{n:"Wispr Flow",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"累計$81Mを調達、2025年11月に評価額$700M、2026年には約$2Bでの調達交渉が報道。ARR $10M超でユーザー・ARRともに月次+40%成長、ダウンロード250万、Fortune 500の270社で利用。",m:"サブスク",note:"音声入力は日本語の敬語変換・口語→ビジネス文体変換でこそ価値が出る領域で、「話すだけで失礼のないビジネス日本語になる」体験は完全な空白。Whisper系API+OSレベルの入力統合で個人開発でも核機能を実装可能。月次40%成長は分野自体の追い風の証明。"},
+{n:"Tradify",o:"🇳🇿",c:"ビジネスSaaS",a:"便",s:"世界で数万の職人事業者が利用し、NZで最も広く使われる職人向けアプリとされる。豪州・NZ・英国でServiceM8、Fergus、simPROと並ぶ定番で、GST(消費税)対応など地域密着で成長。",m:"SaaS月額(職人向け)",note:"Jobberよりも機能が絞られており個人開発の参考に最適。日本の一人親方(建設業だけで約50万人)向けに、見積・請書・請求・入金管理+インボイス対応をスマホ完結にする余地が大きい。ServiceM8(豪)の従量課金モデルも参考になる。"},
+{n:"MoeGo",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"2024年3月にBase10とMars Petcare系Digitalis主導で2,400万ドルのシリーズA調達。顧客4,500事業者超、創業以来100%超のYoY成長を継続。",m:"店舗月額+決済手数料",note:"日本のペット美容市場は大きく(トリミングサロンは全国2万軒規模)、多くが紙カルテ運用。狂犬病・混合ワクチン証明書の管理、LINEリマインダー、ペットホテル併設対応など日本特有の要件を押さえれば個人開発でも十分狙える有望ニッチ。"},
+{n:"Featurebase",o:"🇪🇪",c:"ビジネスSaaS",a:"便",s:"Product Huntで高評価を獲得し、Lovable・Polymarket・Beehiivなど急成長スタートアップ数千チームが採用。ユーザー数無制限の寛大な無料プランと低価格でCanny($79→$359/月の急な価格ジャンプ)から乗り…",m:"SaaS月額",note:"「機能要望ボード+ロードマップ公開+リリースノート」は国産が事実上ゼロの明確な空白。技術的にも掲示板+投票+通知でスコープが小さく、個人開発に最適。日本のSaaS企業のVoC文化(顧客の声を製品に反映)の高まりに乗れる。フリーミアム+セルフサーブで営業不要。"},
+{n:"Moxie",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"App Store/Google Playで高評価レビュー多数。Dubsado(35ドル〜)より大幅に安い12〜40ドルの価格設定と「数時間でセットアップ完了」を武器に、米国のフリーランス系メディア・YouTubeで急速に推奨が増えている注…",m:"SaaS月額(低価格帯)",note:"小チームでも作れる範囲の機能構成・低価格PLGモデルのお手本。日本のフリーランス・副業層(確定申告に悩む層)に「営業から請求まで全部入りで月1,000円台」という訴求はそのまま通用しそう。モバイルファーストで作ると国産会計ソフトとの差別化になる。"},
+{n:"HoneyBook",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"ARR1.4億ドル(2025年3月、TechCrunch報道)、評価額24億ドル。10万以上の小規模事業者が利用し、累計50億ドル超の取引がプラットフォーム上で成約。",m:"SaaS月額+決済",note:"日本のフリーランスは数百万人規模で増加中。2024年11月施行のフリーランス新法で取引条件の明示(書面化)が義務化され、契約書+請求の統合ツールに強い追い風。Web完結・セルフサーブで個人開発と相性が良く、特に有望。"},
+{n:"Beehiiv",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"2025年6月にARR3,000万ドル(前年末1,980万ドルから急成長)。累計調達約8,270万ドル、評価額2.25億ドル。売上の約33%(約1,000万ドル)が広告ネットワーク・Boosts由来で、SaaS+メディア収益のハイブリッドモ…",m:"SaaS月額+広告網",note:"日本のニュースレター市場は未成熟だが、X頼みの集客に疲れた発信者の「自分のリストを持ちたい」需要は確実に増加中。手数料率課金(theLetter型)ではなく月額SaaS+広告マッチングの組み合わせは国内空白。"},
+{n:"Skool",o:"🇺🇸",c:"ビジネスSaaS",a:"便",s:"Alex Hormoziが「人生最大の投資」として出資(報道では1〜2億ドル規模)。2025年9月時点で17.4万以上のコミュニティ運営者、ユーザーは推定1,500万人超。ホストへの支払額が月62%成長との報道。",m:"月額$99/コミュニティ",note:"日本のオンラインサロン市場は確立済みなのに、個人が即日・低額で開設できる自走型SaaSがない。Stripe連携+掲示板+動画講座+ポイント制ゲーミフィケーションという構成は少人数でも実装可能。"},
+{n:"Hnry",o:"🇬🇧",c:"ビジネスSaaS",a:"便",s:"NZ最大の個人事業主向け会計サービス。2023年シリーズBで2,450万豪ドル、直近シリーズCで約3,000万ドルを調達し累計調達は約1億ドル。豪州での市場シェアは2020年比7倍、英国は豪NZ合算より6倍速いペースで成長中。",m:"手数料型(収入連動)",note:"インボイス制度・電帳法で日本のフリーランスの事務負荷は増大しており、「税金を完全に任せる」体験は強い差別化になる。ただし税務代理・税務書類作成は税理士の独占業務のため、税理士法人との提携か、まずは「売上から税金分を自動で別口座に隔離+納税額シミュレーション」のアプリとしてスモール…"}
+];
+
+/* ================= DATA : IDEAS ================= */
+const IDEAS=[
+{t:"七十二候ウィジェット",c:"ウィジェット",df:1,d:"日本の72の小さな季節（七十二候）を、毎日1枚の絵と一言でホーム画面に届ける。二十四節気・旬の食べ物・季語つき。",r:"Co-Star（毎朝一行）／今日の一枚系",p:"海外では「Japan's 72 micro-seasons」として既に紹介文化がある。英・仏・独語対応で「日本の時間感覚」を輸出する。",m:"買い切り＋テーマ課金",v:1},
+{t:"家族の空",c:"ウィジェット",df:2,d:"離れて暮らす家族・友人の街の「いまの空」（天気・現地時間・日没まで）をウィジェットで見守る。",r:"Locket × 天気アプリ",p:"「向こうは初雪だって」など会話のきっかけ通知。写真より軽く、監視感ゼロのつながり。",m:"サブスク（低額）"},
+{t:"月と潮",c:"ウィジェット",df:1,d:"月齢・月の出入り・潮汐を美しい一枚絵で。釣り人・写真家・ただ月が好きな人へ。",r:"天文系アプリ",p:"満月前夜に「今夜は月がきれい」通知。実用（釣り・撮影）と情緒の両取り。",m:"買い切り",v:1},
+{t:"あと何回",c:"ウィジェット",df:1,d:"「親とあと何回会えるか」「桜をあと何回見られるか」——大切なことの残り回数を可視化するカウンター。",r:"memento mori系・寿命時計",p:"共有画像の自動生成でSNSバイラルを設計。重くなりすぎない優しい文面が鍵。",m:"無料＋買い切り"},
+{t:"ひとこと絵文字ポスト",c:"ウィジェット",df:2,d:"絵文字1個だけを送り合う最軽量のLocket。既読・返信プレッシャーゼロの安否＆気分共有。",r:"Locket／noteit",p:"ウィジェット長押しで即送信。文字を打てない高齢の親、忙しい夫婦に。",m:"サブスク（低額）"},
+{t:"今日の一枚（浮世絵・名画）",c:"ウィジェット",df:1,d:"パブリックドメインの浮世絵・日本画・世界の名画を毎朝1枚、3行の解説つきで。",r:"DailyArt",p:"浮世絵・日本美術特化で差別化。美術館の開館情報や関連グッズへの導線も。",m:"サブスク"},
+{t:"記念日タイムマシン",c:"ウィジェット",df:2,d:"大切な日までのカウントダウンと、過去の同じ日の写真をランダム表示するウィジェット。",r:"カウントダウン系＋Photos振り返り",p:"写真解析は端末内処理でプライバシー訴求。「1年前の今日の2人」が朝届く。",m:"フリーミアム"},
+{t:"洗濯タグ翻訳",c:"スキャン",df:2,d:"洗濯表示タグを撮ると「洗濯機OK？乾燥機は？」を即答。国際規格対応で全世界共通の不便を解く。",r:"Photomath型のカメラ即答",p:"衣類ごとの「うちの洗い方」保存と、家族共有。ケア用品のアフィリエイトも自然。",m:"買い切り＋サブスク"},
+{t:"ゴミ分別スキャン",c:"スキャン",df:3,d:"商品や物を撮ると、住んでいる自治体・国のルールで捨て方を即答。",r:"Yuka型スキャンUX",p:"日本の自治体データ整備＋欧州の複雑なリサイクル規則で日欧同時に刺す。自治体B2Bも視野。",m:"フリーミアム＋B2B"},
+{t:"冷蔵庫レスキュー",c:"スキャン",df:3,d:"余り食材を撮る→今夜作れるレシピ提案＋消費期限の自動管理。",r:"Too Good To Goの精神×レシピ",p:"「あと3日」通知と、月間の食品ロス削減額の見える化。節約額がそのまま課金の根拠になる。",m:"サブスク"},
+{t:"学校プリントOCR",c:"スキャン",df:3,d:"学校・園のお知らせを撮ると、予定と持ち物を自動抽出してカレンダー登録＆家族共有。",r:"TimeTree補完／文書OCR",p:"多言語家庭（在外日本人・移民家庭）向け翻訳を内蔵。世界中の親の共通課題。",m:"サブスク"},
+{t:"説明書いらず",c:"スキャン",df:3,d:"家電を撮ると型番を判別し、設定手順・エラー対処・保証期限管理まで。",r:"マニュアルDB系",p:"「引っ越し・買い替え時に一括登録」の儀式化。メーカー横断の中立ポジション。",m:"サブスク"},
+{t:"単価どっち？",c:"スキャン",df:1,d:"値札を2つ撮るとグラム単価で安い方を即判定。海外旅行の通貨換算モードつき。",r:"電卓の文脈特化",p:"判定結果を「今月の節約額」として積み上げ表示。地味な瞬間に効く超小型ツール。",m:"買い切り"},
+{t:"おくすりシート・スキャン",c:"スキャン",df:3,d:"処方薬の袋やシートを撮ると服薬スケジュールを自動生成し、飲み忘れを通知。",r:"服薬管理系の入力簡略化",p:"離れた親の服薬状況を家族が見守れる共有機能。※医療関連の表現・規制の確認は必須。",m:"サブスク"},
+{t:"盆栽・多肉ドクター",c:"スキャン",df:2,d:"PictureThisの超ニッチ特化版。盆栽・多肉・苔に絞った識別と養生ガイド。",r:"PictureThis／Planta",p:"和の園芸文化を英語圏の愛好家へ。「Bonsai」は既に強い検索需要を持つ英単語。",m:"サブスク"},
+{t:"貯金盆栽",c:"育成×実用",df:2,d:"「使わなかったお金」を記録すると盆栽が育つ。我慢を育成に変換する家計アプリ。",r:"Finch × 家計簿",p:"コンビニ我慢＝松に水やり、のような対応づけ。月末に盆栽の成長絵をシェアできる。",m:"サブスク"},
+{t:"そうじペット（座敷わらし）",c:"育成×実用",df:2,d:"掃除タスクを終えると家に住む座敷わらしが喜び、家が画面の中でも整っていく。",r:"Tody × Finch",p:"Before/After写真を撮ると褒めてくれる演出。「家事の孤独」に効く。",m:"サブスク"},
+{t:"水やり金魚",c:"育成×実用",df:2,d:"水を飲むと金魚鉢がにぎやかになる水分補給アプリ。和金・メダカ・苔テラリウムの世界観。",r:"Plant Nanny",p:"夏の熱中症シーズンに広報が乗りやすい。オフィスの同僚と鉢を並べる機能。",m:"フリーミアム"},
+{t:"積読の精霊",c:"育成×実用",df:2,d:"読書した分数で本の精霊が育つ。積んだ本は「あなたを待っている」姿で可視化。",r:"Forest の読書版",p:"読了すると精霊がその本の一言感想をくれる（AI）。読書メーターとの発想差は「感情」。",m:"サブスク"},
+{t:"姿勢ねこ",c:"育成×実用",df:2,d:"スマホを顔の高さで持つと猫がご機嫌になる。端末の角度センサーだけで姿勢を優しく矯正。",r:"one sec の応用",p:"ストレートネック対策という明確な健康便益。うつむくと猫が心配そうにする。",m:"サブスク"},
+{t:"歩く枯山水",c:"育成×実用",df:3,d:"歩数で庭に砂紋・石・苔・鯉が増えていく「大人の歩数計」。静かで美しいPikmin Bloom。",r:"Pikmin Bloom",p:"ゲームらしさを排した禅ブランドで、ポケモン層でなくCalm層を狙う。テーマ（京都の庭・侘び寂び）課金。",m:"サブスク＋テーマIAP"},
+{t:"ねむり雲",c:"育成×実用",df:3,d:"睡眠の質で朝の空の絵が変わる。置くだけ計測・操作ゼロの非IP版Pokémon Sleep。",r:"Pokémon Sleep",p:"記録も操作も不要、「朝の空を見るのが楽しみ」だけで続く設計。週間の空アルバム。",m:"サブスク"},
+{t:"まごビュー",c:"家族・パートナー",df:2,d:"孫の写真を「祖父母向け超シンプルUI」で届ける。大きな文字・ワンタップ・古い端末対応。",r:"FamilyAlbum みてね の補完",p:"デジタルフォトフレーム連携と月1の写真プリント郵送。払うのは子世帯、喜ぶのは祖父母。",m:"物販＋サブスク"},
+{t:"きょうの一問（親子版）",c:"家族・パートナー",df:2,d:"「親が元気なうちに聞きたい100問」を毎週1問ずつ届け、答えを残していく。",r:"Paired の親子版",p:"回答を音声でも残せる→家族の口伝アーカイブに。将来は自分史本の印刷へ。",m:"サブスク＋印刷物販"},
+{t:"遠距離ごはん",c:"家族・パートナー",df:1,d:"離れた2人が「同じ時間にごはんを食べる」約束だけを支援する。時差の自動計算つき。",r:"Between の一点特化",p:"ビデオ通話なし＝負担ゼロ設計。食べたものの写真を1枚だけ交換。",m:"フリーミアム"},
+{t:"ふたりの声ポスト",c:"家族・パートナー",df:2,d:"1日1通だけボイスメモを交換し、ウィジェットから再生。文字より感情が伝わる。",r:"Locket の音声版",p:"通勤中に聞ける60秒制限。声は消えずに「声のアルバム」に貯まる。",m:"サブスク"},
+{t:"ついで買いレーダー",c:"家族・パートナー",df:3,d:"家族の共有買い物リスト＋「駅前を通ったら牛乳」のジオフェンス通知。",r:"Bring! ＋位置情報",p:"位置の常時共有はせず「すれ違い」だけ検知するプライバシー設計を売りにする。",m:"サブスク"},
+{t:"献立ルーレット家族会議",c:"家族・パートナー",df:2,d:"「今夜どうする？」を家族全員のスマホで投票。履歴から自動提案、「先週も食べた」検知つき。",r:"献立系＋投票UI",p:"決定の疲れ（decision fatigue）という世界共通の不便。買い物リストへ直結。",m:"フリーミアム"},
+{t:"けんか翻訳機",c:"家族・パートナー",df:2,d:"言いにくいことを入力すると、AIが相手を傷つけない表現に変換して届けてくれる。",r:"Paired × AI",p:"夫婦・親子・同僚のテンプレ切替。「送る前に一呼吸」の設計はone secの思想。",m:"サブスク"},
+{t:"日本の音アンビエント",c:"季節・情緒・音",df:2,d:"風鈴・蝉時雨・雨戸・囲炉裏・ししおどし——日本の音風景をミックスできる環境音アプリ。",r:"Endel／Tide",p:"季節連動で音が自動で移ろう（夏=蝉、冬=雪の静けさ）。海外の日本好き・アニメ好きに直撃。",m:"サブスク",v:1},
+{t:"夕焼けアラート",c:"季節・情緒・音",df:3,d:"気象データから「今日の夕焼けの美しさ」を予報し、見頃の30分前に通知。",r:"CARROT Weather の情緒版",p:"撮った夕焼けを共有する1日1回だけのフィード。BeRealの「同時性」を空に応用。",m:"フリーミアム",v:1},
+{t:"季節の便り",c:"季節・情緒・音",df:3,d:"世界中のユーザーが投稿した「今日の季節の写真」が、1日3枚だけ届く静かなSNS。",r:"BeReal × 歳時記",p:"いいね数なし・コメントなし。北欧の白夜、京都の紅葉が同じ受信箱に届く国際設計。",m:"サブスク"},
+{t:"桜・紅葉パーソナル前線",c:"季節・情緒・音",df:3,d:"自分の街のピンポイント見頃予測＋近所の桜・紅葉スポット地図。",r:"開花予想サイトのアプリ最適化",p:"ワシントンDC・パリなど海外の桜名所も網羅し、英語圏の花見需要を取る。",m:"広告＋サブスク",v:1},
+{t:"帰り道の5分",c:"季節・情緒・音",df:2,d:"帰宅時間に合わせて5分だけの癒し音声と「今日の労い」を届ける。",r:"瞑想アプリの文脈特化",p:"位置情報でなく時刻トリガーでプライバシー安全。曜日で変わる声・音。",m:"サブスク"},
+{t:"香りの日記",c:"季節・情緒・音",df:2,d:"記録できない「匂い」を、言葉とタグで残す日記。金木犀、雨上がり、実家の匂い。",r:"Untappd の香り版",p:"香水・アロマ愛好家のニッチSNSへ育てる。秋の金木犀時期にバズが設計できる。",m:"フリーミアム"},
+{t:"Android特化フォーカス",c:"デジタルウェルビーイング",df:3,d:"Androidの深い権限を活かした「本当に破れない」集中モード。iOS発の強豪が薄い市場。",r:"Opal／AppBlock",p:"あなたの既往調査（Androidはシステム介入可・審査は厳格）と直結。審査対策込みで設計する。",m:"サブスク"},
+{t:"スクロール→ストレッチ",c:"デジタルウェルビーイング",df:2,d:"SNSを開こうとすると10秒のストレッチ動画が先に流れる。「禁止」でなく「置き換え」。",r:"one sec",p:"肩こり・眼精疲労という身体の便益に接続。完了すると開ける、が運動にもなる。",m:"サブスク"},
+{t:"おやすみ儀式",c:"デジタルウェルビーイング",df:2,d:"就寝30分前に他アプリを閉じ、焚き火の画面と3行日記だけになる「眠りの前室」。",r:"Opal × Daylio",p:"朝に「昨夜の自分」からのメッセージが届く。寝る前スマホという世界最大級の悪習慣に。",m:"サブスク"},
+{t:"通知の郵便屋さん",c:"デジタルウェルビーイング",df:3,d:"通知を朝・昼・晩の3回の「配達時間」にまとめて届ける。",r:"通知管理系",p:"配達音と封筒UIで「通知＝楽しみ」に反転。技術的にはAndroid先行が現実的。",m:"サブスク"},
+{t:"家族でノースマホ対戦",c:"デジタルウェルビーイング",df:2,d:"夕食の1時間、家族全員がスマホを置けたかを対戦形式で記録。",r:"Forest のマルチ版",p:"全員成功で共同ペットが育つ。子どもに強制でなく「親も一緒」の対等設計。",m:"フリーミアム"},
+{t:"未来ポスト（音声版）",c:"記録・思い出",df:2,d:"未来の自分や子どもへ音声の手紙を残し、指定日に届く。",r:"Timefall",p:"「20歳の誕生日に届く」など長期預かりが感動を最大化。年賀状文化の再発明。",m:"買い切り＋保管サブスク"},
+{t:"1年前の今日",c:"記録・思い出",df:2,d:"3行日記を書くと、毎朝「1年前の自分」から1通届く日記アプリ。",r:"Daylio ＋ 振り返り",p:"AIが「去年より歩いてる」など優しい気づきを一言添える。続けるほど価値が増す複利設計。",m:"サブスク"},
+{t:"はじめて図鑑",c:"記録・思い出",df:2,d:"子どもの「初めて歩いた・初めて言った言葉」をコレクション図鑑として集める。",r:"育児記録の再定義",p:"数値の成長曲線でなく「物語」として残す。祖父母への共有＝みてね層と併用される設計。",m:"フリーミアム"},
+{t:"旅の切符アルバム",c:"記録・思い出",df:2,d:"チケット・搭乗券を撮ると、旅程が自動で「旅のしおり」になる。",r:"Flighty × アルバム",p:"手書き風しおりのPDF書き出し。日本の「旅のしおり」文化をUXごと輸出する。",m:"買い切り"},
+{t:"よかったこと交換便",c:"記録・思い出",df:3,d:"匿名で「今日のよかったこと」を1つ書くと、世界の誰かの1つが届く。",r:"感謝日記 × ボトルメール",p:"自動翻訳で日米欧を最初から接続。ネガティブ投稿のAIフィルタが信頼の要。",m:"サブスク"},
+{t:"ストック番人",c:"暮らしの不便",df:1,d:"トイレットペーパー・洗剤など日用品の残量をワンタップ記録し、切れる前に通知。",r:"Bring! の手前の課題",p:"「残り2ロール」を家族に自動共有。買い物リストへワンタップ転送。",m:"フリーミアム"},
+{t:"保証書ボックス",c:"暮らしの不便",df:2,d:"レシート・保証書を撮って保存、保証期限が切れる前に通知。",r:"Parcel の精神",p:"「この書類、捨てていい？」判定をAIで。引っ越し・大掃除シーズンに需要が波来する。",m:"サブスク"},
+{t:"病院メモ",c:"暮らしの不便",df:2,d:"受診前に聞きたいことをリスト化し、診察内容を記録、家族と共有。",r:"メモの文脈特化",p:"「先生に聞き忘れた」の撲滅。高齢の親の付き添い・遠隔見守り需要に直結。",m:"サブスク"},
+{t:"傘・上着・花粉ワンタップ",c:"暮らしの不便",df:1,d:"開いた瞬間に「傘？上着？花粉？」の3アイコンだけ答える超ミニ天気。",r:"CARROT Weather の逆張り（無口）",p:"ウィジェット完結で起動すら不要。多情報化する天気アプリへの引き算の一撃。",m:"買い切り"},
+{t:"服の履歴書",c:"暮らしの不便",df:2,d:"服・靴の「最後に着た日」を記録し、1年着ていない服を教えてくれる断捨離支援。",r:"クローゼット管理系",p:"フリマアプリ出品への導線でアフィリエイト収益。「今日の服」写真が自然と着こなしログになる。",m:"フリーミアム＋送客"},
+{t:"サブスク棚卸し（日本語圏）",c:"暮らしの不便",df:3,d:"Rocket Moneyが弱い日本語圏で、サブスク一覧化・解約支援を提供。",r:"Rocket Money",p:"キャリア決済・App Store課金の見える化という日本特有の複雑さを解く。",m:"サブスク"},
+{t:"実家のおはようボタン",c:"暮らしの不便",df:2,d:"親が1日1回ボタンを押すだけの安否確認。押されなければ子に通知。",r:"見守り系の最小構成",p:"カメラなし・監視感ゼロの設計思想を前面に。ボタンを押すと孫の写真が1枚見られる等の「押す理由」。",m:"サブスク"},
+{t:"引き算の目覚まし",c:"暮らしの不便",df:2,d:"起きてすぐの脳に優しい「今日の予定3つと天気だけ」を読み上げる目覚まし。",r:"Alarmy の逆張り",p:"Alarmyが「強制」なら、こちらは「起きたくなる朝」。TimeTree連携で予定読み上げ。",m:"サブスク"},
+{t:"空暦(そらごよみ)",c:"空・天体",df:2,d:"七十二候・二十四節気と実用天気予報を一つに溶け合わせた『眺めて美しい天気アプリ』。今日の候(例: 蟄虫啓戸)に合わせた淡彩の空の絵の上に、現在地の天気・気温・降水確率が静かに浮かぶ。くらしのこよみの情緒とそら案内の実用性を初めて統合する。",p:"くらしのこよみは『読む暦』で天気予報がなく、ウェザーニュース等の大手は季節情報が実用記事どまり。『暦×予報×美しいビジュアル』の三位一体は市場調査で確認された最大の空白で、毎日開く実用動機(天気)と情緒(暦)を両立させる点が独自。",m:"基本無料+月額300円サブスク(全候のアート解放、ウィジェット種類追加、広告非表示)。買い切り1,500円の永久版も併売",s:"wafu",top:1,v:1},
+{t:"茜さす",c:"空・天体",df:2,d:"夕焼け・朝焼けの『焼け具合の質』を予報する日本語アプリ。今日の夕空が何点の茜色になるかをスコアで示し、見事に焼けそうな日だけ通知が届く。海外の定番Alpenglowが日本語非対応である空白を突く先行者狙い。",p:"Alpenglow・PhotoTimeは英語のみで日本のスポット情報もない。国産の朝夕日和はAndroid限定で小規模。iOS日本語+和語表現+ダイヤモンド富士という日本特有コンテンツの組み合わせは現状どこにもない。",m:"無料は3日先まで・通知1地点。月額480円Proで7日予報・複数地点・特殊現象通知を解放。",s:"wafu",v:1},
+{t:"空見頃(そらみごろ)",c:"空・天体",df:2,d:"中秋の名月、流星群、初日の出、桜、紅葉、初雪、低緯度オーロラまで、『空と自然の見頃イベント』を一冊のカレンダーにまとめた歳時記ナビ。各イベントの当日には現地の天気と合わせて『見える確率』を通知する。数週間で作れる小粒ながらギャップど真ん中。",p:"桜のきもち=桜のみ、月齢カレンダー=月のみ、オーロラアプリ=オーロラのみと単機能アプリが個別に成立している市場で、それらを横断する統合カレンダーは不在。『一年中開く理由がある』ことが単機能勢への優位性で、御朱印帳的な収集要素は大手天気アプリにもない。",m:"基本無料+控えめなバナー広告。買い切り800円で広告除去+通知地点無制限+御朱印帳の柄追加。",s:"wafu"},
+{t:"月待ち(つきまち)",c:"空・天体",df:1,d:"月齢を『数字』ではなく『文化』で見せる、月を愛でるためのアプリ。今夜の月を立待月・寝待月・十六夜といった和名で呼び、月の出時刻と見える方角、月見にまつわる物語を一枚の美しい画面に収める。個人開発で2〜3週間で出せる最小の一手。",p:"シンプル月齢カレンダー等の既存月齢アプリは釣り・占い向けの実用表示で、和名・月見文化・物語性を扱うものは皆無(市場調査で確認済みの空白)。実用データではなく『月を愛でる体験』そのものを売る点が根本的に異なる。",m:"買い切り500円の有料アプリ(機能が明確な小粒アプリは買い切りと相性が良い)。英語版『Tsukimachi』をJapanese cultur…",s:"wafu",top:1,v:1},
+{t:"言の葉の空",c:"空・天体",df:2,d:"天気を『降水確率60%』ではなく『午後より時雨。傘を友に』のような美しい大和言葉で伝える天気アプリ。時雨・五月雨・東風・花曇り・風花など日本語の豊かな気象語彙を予報エンジンと結びつけ、CARROT Weatherが毒舌で成した『言葉による差別化』を和語の情緒で実現する。",p:"Yahoo!天気・tenki.jpは記号的な実用表現のみ、CARROTは英語の毒舌キャラ。『日本語の気象語彙を予報と結びつけるアプリは未開拓』と調査で明示されたギャップそのもの。データではなく言葉を商品にする天気アプリは国内初になれる。",m:"基本無料+月額300円(通知文のバリエーション拡張、言の葉帖全解放、共有カードの和紙テンプレート追加)。",s:"wafu"},
+{t:"空の掛軸(そらのかけじく)",c:"空・天体",df:2,d:"ホーム画面に『いまの空』を浮世絵調の一幅の絵として掛けるウィジェット・壁紙アプリ。現在地の天気・時刻・季節に連動して、朝焼け・青空・夕立・月夜・雪景色が錦絵のタッチで描き変わる。新興のMadobeが開いた和風ウィジェット市場に『天気連動』という一段上の体験で参入する。",p:"Madobeは七十二候連動の日替わりアートで天気とは連動しない。本作は『いま外で降っている雨がホーム画面の絵にも降っている』という実況連動が核で、窓の外と画面が呼応する体験は既存に存在しない。実用情報へのタップ導線で天気アプリとしての置き換えも狙える。",m:"月額200〜300円のサブスク(Madobeの$1.99と同水準)。無料は1スタイルのみ、課金で全額装・全季節アート解放。",s:"wafu"},
+{t:"星宿り(ほしやどり)",c:"空・天体",df:3,d:"日本の星文化で夜空を案内する和風プラネタリウムアプリ。スマホをかざすと昴(すばる)・彦星・織姫など星の和名で星空が表示され、今夜の『星見ごこち指数』(雲量×月明かり×光害)が星見に出るべきかを教えてくれる。Star Walk級の体験に和の物語を載せる野心作。",p:"Star Walk 2やStellariumは汎用星図として成熟済みで正面対決は不可能だが、調査の通り『日本の星名・旧暦と組み合わせた和風星空アプリは存在しない』。",m:"基本無料(AR星図+今夜の指数)+月額480円Pro(週間星見予報、星空名所提案、全伝承コンテンツ)。",s:"wafu"},
+{t:"候音(こうね)",c:"音・癒し",df:2,d:"五日ごとに移ろう七十二候に合わせて「今日の音風景」が毎日変わる、音の歳時記アプリ。「東風解凍」の日は雪解けの川音、「蟋蟀在戸」の日は戸口の虫の音と、暦そのものがDJになって季節の音を届ける。開くたびに一枚の風景画と季語・候の解説が添えられる。",p:"調査で確認された最大の空白を直撃。暦アプリ(月読君・MoonX)は実用系で音がなく、環境音アプリ(BetterSleep等)は通年同じ音。「毎日変わる音の歳時記」という両者の融合は国内外に存在しない。",m:"基本無料(各節気の代表候のみ)+買い切り1,000円前後で全72候の音と高解像度の絵を解放。",s:"wafu"},
+{t:"しじま 〜京の静寂〜",c:"音・癒し",df:3,d:"京都の竹林・苔庭・雪の石庭・縁側の雨を超高精細映像と空間オーディオで収録し、スマホやTVの画面が「京都に面した窓」になる没入型アプリ。Portal(英)の和風版であり、同じ場所を四季で撮り分ける「定点四季」が核。",p:"調査ギャップ「Portalの和風版が存在しない」を直撃。12K映像×空間オーディオ路線はApple特集実績のある勝ち筋で、日本在住でロケできる開発者の地理的・文化的真正性が海外大手への参入障壁になる。",m:"シーン買い切りパック(「春の京都」「雪の禅寺」各800円前後)+全部入りの少額サブスク併用。英語圏にはプレミアム価格で展開。",s:"wafu"},
+{t:"月白(つきしろ)",c:"音・癒し",df:2,d:"今夜の月齢・月の出時刻に連動して、おやすみ前のサウンドスケープと画面の空が毎晩変わる睡眠アプリ。満月の夜は明るく澄んだ音色、新月の夜は深い闇の静寂、朧月の春の夜は霞んだ柔らかい音と、月のリズムに寄り添って眠りに入る。",p:"調査ギャップ「月・星空×睡眠が手薄」を直撃。星座アプリは観測実用系、睡眠アプリに月齢テーマはほぼ存在しない。月の和名という日本語の美しさを核にする点で海外勢が真似しにくい。",m:"フリーミアム。基本の月齢サウンドは無料、朗読コンテンツと全月相・全季節の組み合わせはプレミアム(買い切り800円 or 月300円の選択制)…",s:"wafu"},
+{t:"あめつち",c:"音・癒し",df:3,d:"現在地のいまの天気・時刻・季節をリアルタイムに「和の風景」へ翻訳するジェネラティブ環境音アプリ。外が雨なら縁側の雨音と軒の雫、雪なら雪の禅寺の静寂、晴れた春の夜なら夜桜を渡る風と、窓の外の世界がそのまま和の音風景になる。いわば「和風Endel」。",p:"Endelが実証した「コンテキスト連動」の勝ち筋(Apple Watch App of the Year)を、調査で空白と確認された和の情緒で実装する初の例。抽象音のEndelに対し「風景の見える音」が明確な差別化。",m:"サブスク月480円(Endelの半額以下を明示的に意識)+年額・買い切り長期プランで国内のサブスク抵抗感を緩和。",s:"wafu"},
+{t:"梵音(ぼんのん)",c:"音・癒し",df:3,d:"実在の寺院で収録した梵鐘・読経・木魚・水琴窟を、寺院公認ライセンスのもとで届ける瞑想・睡眠アプリ。「この鐘の音はどこの寺のものか」という由来とともに聴き、収益の一部が寺院に還元される。僧侶監修の坐禅ガイドと英語UIで、国内と海外Zenファンの両方を狙う。",p:"韓国Kokkiriが証明した「宗教的権威×アプリ」の構図を日本の寺院で再現する本格例。国内競合は禅音1作のみで、ビジュアル・英語対応・寺院還元の仕組みのいずれも弱く(調査済み)、社会貢献性が広報の追い風にもなる。",m:"寺院パック買い切り(1か寺500〜800円)+「お布施」型の応援課金(投げ銭)。寺院とのレベニューシェア契約で音源を継続拡充。広告なし。",s:"wafu"},
+{t:"雨宿り(あまやどり)",c:"音・癒し",df:2,d:"「日本の雨」だけを徹底的に極めた、買い切り・広告なしの雨音アプリ。縁側で聴く雨、番傘に当たる雨、苔庭にしみ込む雨、トタン屋根の夕立、雪に変わる霙——情緒あるシチュエーションを一枚絵とともに聴く。小さく確実に作れる一点突破型。",p:"既存の雨音アプリ(「雨音〜快適な睡眠のために〜」等)は音の種類を列挙するだけで情景の演出が薄い。「雨の和名×日本の風景の一枚絵」という情緒特化と、買い切りモデルの明示が差別化。",m:"買い切り600〜1,000円・広告なし・追加課金なし。調査で繰り返し指摘された「買い切りの高品質環境音アプリが欲しい」という国内需要に正面か…",s:"wafu",top:1,v:1},
+{t:"一炷(いっちゅう)",c:"音・癒し",df:1,d:"線香一本が燃え尽きるまでを一回の坐禅とする、禅の伝統的な時間単位「一炷」をそのまま体験にした超ミニマル瞑想タイマー。画面の中で線香が実時間でゆっくり燃え、香の煙が静かに揺らぎ、燃え尽きると磬子(けいす)が一打だけ鳴る。機能を足すのではなく削ぎ落とす方向の一作。",p:"瞑想タイマーは無数にあるが、「線香一本=一炷」という禅の本物の時間単位を視覚体験ごと再現したものは存在しない。Insight Timer等の多機能路線の真逆を行く美学の一点勝負で、SNSで画面が映えるため無広告でも拡散が見込める。",m:"完全買い切り300〜500円、または無料+季節の香テーマの追加課金(各160円)。広告なし。",s:"wafu"},
+{t:"七十二候の庭(しちじゅうにこうのにわ)",c:"和ゲーム",df:2,d:"実時間の七十二候(約5日ごとに移ろう日本の季節暦)と完全連動した放置収集ゲーム。「東風解凍」「桜始開」など72の候ごとに庭へ現れる生き物・草花・空の色が入れ替わり、その候の間にしか出会えない。図鑑が埋まるのに丸一年かかる、「一年かけて遊ぶねこあつめ」。",p:"季節「イベント」を持つゲームは多いが、季節暦そのものを進行システムにした作品は市場調査でもほぼ空白(ギャップ1)。リアルタイム連動により「今しか会えない」希少性が5日ごとに生まれ、ねこあつめより強い再訪動機を低運用コストで作れる。",m:"庭の装飾品と別テーマの庭(山里・海辺・町家)の買い切りIAP+リワード広告(出現率アップ)。",s:"wafu",top:1},
+{t:"あまやどり",c:"和ゲーム",df:2,d:"現実の天気と連動する放置ゲーム。ユーザーの現在地で本当に雨が降ると、軒先に雨宿りのあやかし(精霊)たちがやって来る。雪の日には雪の精、雷の日には雷獣、満月の夜には月の使い——現実の空模様がそのまま出現テーブルになる「気象連動ねこあつめ」。",p:"現実の雨や満月がゲーム内の出現物を変える癒し系は未開拓(ギャップ2)。ポケモンGOの天候連動はあるが「放置×癒し×気象」は空白で、雨の日が『憂鬱な日』から『レアが来る日』へ反転する体験が唯一無二。",m:"おもてなしアイテム・軒先拡張の買い切りIAP、リワード広告(「てるてる坊主」「雨乞い」で天候ボーナス)、お土産コレクションのテーマ買い切り。",s:"wafu"},
+{t:"雪月花(せつげっか)",c:"和ゲーム",df:2,d:"山あいの見晴らし茶屋を営み、花見・月見・雪見・星見にやって来る客をもてなす放置×人情物語ゲーム。客はそれぞれの人生を抱えて風景を眺めに来ており、季節の絶景とともにその物語が少しずつ明かされる。GAGEX型の物語放置を「眺める行事(花鳥風月)」で再構築する。",p:"「月見・雪見・花見をテーマにした収集・物語ゲームの不在」(ギャップ3)と、GAGEX型が英語圏に輸出可能という実績の交点を突く。食堂物語が『食』で語った人情を『風景を眺めに来る理由』で語る点が新しく、俳句収集というコレクション軸も類例がない。",m:"動画リワード広告(売上ブースト)+広告除去買い切り、追加ストーリー章の買い切りIAP。",s:"wafu"},
+{t:"星織(ほしおり)",c:"和ゲーム",df:3,d:"天の川で離ればなれになった織姫の機織りを手伝い、夜空から星をすくって光の糸を紡ぎ、星座の織物を織り上げていくパズルアドベンチャー。すばる(六連星)・彦星など日本の星の和名と、七夕や各地の星の民話を巡る、東洋の星文化のための星座パズル。",p:"既存の星座パズルは西洋星座×小粒な作品ばかりで、星の和名や七夕伝承を扱う作品は確認されていない(ギャップ4)。Pruneが盆栽を剪定メカニクスに翻訳したように、「織る」という和の手仕事をパズルに翻訳する点が核となる独自性。",m:"買い切り(370〜600円)、または無料数章+残り章のアンロック購入。美術系パズルは買い切りと相性が良い。",s:"wafu"},
+{t:"苔生す(こけむす)",c:"和ゲーム",df:2,d:"石に苔が「むす」のを何ヶ月もかけて見守る、超低速のリアルタイム育成ゲーム。やることは1日数回の霧吹きとピンセットでの手入れだけで、早送りは一切できない。京都の苔寺のような庭が実時間の数週間〜数ヶ月でゆっくり完成する、世界一せっかちでないゲーム。",p:"盆栽・苔・日本庭園はPrune(2015)以降めぼしい新ヒットがない再挑戦領域(ギャップ5)。育成ゲームの常識「早く育てたい」を逆張りし『待つことそのもの』を価値化する。タイムラプス共有が無料のバイラル装置として機能する。",m:"鉢・庭石・灯籠の買い切りIAP、追加の庭(枯山水・坪庭)の買い切り。広告なし方針+応援課金(お布施型)で世界観を守る。",s:"wafu"},
+{t:"浮世百景(うきよひゃっけい)",c:"和ゲーム",df:3,d:"歌川広重『名所江戸百景』の世界に入り込み、浮世絵のタッチそのままの江戸の町を築く箱庭シミュレーション。住民の営みも夕立も花火もすべて木版画の線と摺りの質感で描かれ、画面そのものが一枚の浮世絵になる。",p:"『伝統美術をそのまま画面にする』中国国風ブームの和風版は日本からほぼ出ていない(ギャップ6)。旅かえる(DLの9割超が中国)が証明した中華圏の和風癒し需要を正面から取りに行ける、市場調査が最も強く示唆する空白地帯。",m:"建物・名景パックの直接購入IAP+シーズンパス型「季節の摺り暦」。ガチャは避け、美術品を買う感覚の課金設計。",s:"wafu"},
+{t:"音庭(おとにわ)",c:"和ゲーム",df:2,d:"風鈴・ししおどし・水琴窟・すだれ越しの雨音を配置して、自分だけの『鳴る庭』を組み立てる音の箱庭ゲーム。配置と風向き・雨量で音色とリズムが変わる生成音楽システムを持ち、作った庭はそのまま作業用・睡眠用の環境音として使える。聞いて遊び、置いて作曲し、流して暮らすゲーム。",p:"環境音アプリ(非ゲーム)は飽和しているが、音×放置×季節のゲーム化は手薄(ギャップ7)。『ゲームで作った庭が実用の環境音になる』二刀流により、ゲーム需要とユーティリティ需要の両方を一本で取れる。",m:"音具パック・季節音源パックの買い切りIAP+睡眠タイマー等の便利機能を月額サブスク(環境音アプリの定石を踏襲)。",s:"wafu"},
+{t:"うつしゑ",c:"カメラ・アート",df:3,d:"シャッターを押すだけで、写真が浮世絵・水墨画・琳派風の「一枚の絵」になるカメラアプリ。北斎の波、広重の雨、応挙の月のように「流派」を切り替えて撮影でき、撮った瞬間に和紙の質感と落款(らっかん)が入った掛軸風の作品が完成する。",p:"既存の「写真で和風画」「浮世絵ふぇいすカメラ」はUI・画質ともに旧世代で、調査でも品質面の空白が指摘されている。本作は中国の醒図が証明した「自国の伝統美×最新加工技術」の勝ちパターンの和風本命を、Dazz級の体験品質(撮るだけで完成・加工不要)で狙う。",m:"フリーミアム。基本2流派+透かし入り書き出しは無料、追加流派・高解像度・落款カスタムを月額400円サブスク or 1,500円買い切りで解放…",s:"wafu",top:1},
+{t:"うつろひ",c:"カメラ・アート",df:2,d:"二十四節気・七十二候を、和の伝統色と季語、短く美しい言葉で毎日届けるカレンダー&ウィジェットアプリ。「東風解凍(はるかぜこおりをとく)」のような候の名とともに、ホーム画面が5日ごとに静かに移ろっていく。",p:"「くらしのこよみ」終了(2024年)後、七十二候を現代的デザインで伝えるアプリは不在というギャップを直撃。Widgetsmithが証明した巨大な「画面を美しく飾る」市場に、和の意匠特化という未開拓の切り口で入る。",m:"無料+ウィジェット着せ替えパック(浮世絵調/琳派調/現代ミニマル)を各300円、または全部入り買い切り800円。広告なしで世界観を守る。",s:"wafu"},
+{t:"月待(つきまち)",c:"カメラ・アート",df:2,d:"月齢を浮世絵・日本画の「月」の絵柄で見せるウィジェット+名月通知アプリ。十五夜・十三夜・後の月・スーパームーン・月食を「月を待つ」日本の文化の文脈で知らせ、今夜の月の出の時刻と方角まで教えてくれる。",p:"「シンプル月齢カレンダー」など既存は実用寄りで、十三夜・名月といった和の文脈の演出が薄いと調査で指摘済み。実用データは同等に押さえつつ、「月を待つ楽しみ」という情緒を主役にする点が新しい。",m:"無料+絵柄パック課金(各300円)。月見の季節(9〜10月)に合わせた限定絵柄で毎年の再課金機会を作る。",s:"wafu"},
+{t:"あかねさす",c:"カメラ・アート",df:2,d:"夕焼け・朝焼けの「焼け具合」を予報するアプリ。雲の高さや湿度から「今日の茜空: 八分焼け」のように美しさを点数化し、焼けそうな夕方だけ事前に通知してくれる。海外で定番のAlpenglowが日本語圏に存在しない空白を突く、和製の空予報。",p:"調査の通りAlpenglowは日本ではほぼ無名で、日本語×情緒の空予報は完全な空白地帯。PhotoPillsのような機能過多を避け、「美しい空を見逃さない」一点に絞ったライト設計と、予報を和の言葉で届ける文体が独自性。",m:"基本無料(現在地1地点の予報)。通知・複数地点・時間別グラフを月額300円のサブスクで提供。写真好きの実用ニーズなので継続率が見込める。",s:"wafu"},
+{t:"花暦(はなごよみ)",c:"カメラ・アート",df:2,d:"桜前線・紅葉前線と太陽の光の条件を重ねた「日本の季節被写体」撮影プランナー。桜・紫陽花・彼岸花・紅葉・雪・天の川といった被写体ごとに、どこで・いつ・何時に撮るのがベストかを一枚の暦にまとめる。PhotoPillsの和風特化・かんたん版。",p:"調査で「開花/紅葉前線×撮影条件を組み合わせたアプリは存在しない」と確認済みのギャップ。PhotoPills(英語・機能過多・74万ユーザー)の実証済み需要を、日本の被写体と平易な日本語に特化して取りにいく。",m:"基本無料+プロ機能(複数計画の保存、光線方向の詳細表示、全被写体の通知)を年額1,500円。",s:"wafu"},
+{t:"折々(おりおり)",c:"カメラ・アート",df:2,d:"一日一枚だけ、季節のうつろいや何気ない不完全なものを撮って綴じる侘び寂び写真日記。写真に季語とひとことを添えると、和紙の余白が美しい縦書きの「一葉」になり、ひと月分が一冊の綴りになる。英語圏で生まれ始めたwabi-sabi系アプリを、本場の文脈で作る。",p:"Wabi Sabi Journal(2025年・英語圏)が競合僅少の初期市場であることは調査済み。日本人開発者が、もののあわれ・季語・縦書き・余白という本場の語彙とデザインで作る優位性をそのまま武器にし、日英両市場を狙える。",m:"基本無料。年額1,200円のプランで「綴り」のPDF/印刷用書き出し、追加の紙テーマ、全季語辞典を解放。一年使うほど価値が増すストック型。",s:"wafu"},
+{t:"墨流し(すみながし)",c:"カメラ・アート",df:3,d:"墨の滲み・かすれ、水の流れ、金箔や料紙といった和の画材を物理シミュレーションで再現する本格お絵描きアプリ。紙の上で墨が水を追いかけてじわりと滲む、その偶然性そのものを楽しむ創作体験を、評価の割れているZen Brushに代わるモダンなUIで提供する。",p:"Zen Brush 3は毛筆再現では先行するがレビューは賛否があり、UI刷新の余地が調査でも指摘されている。本作は「筆致の再現」ではなく「水と紙の物理」まで踏み込み、金箔・料紙という未踏の和画材体験を加える。",m:"買い切り1,500円(Zen Brushと同価格帯でUI・表現力で上回る)+追加画材パック。",s:"wafu"},
+{t:"候のしるべ ―七十二候の旅ごよみ―",c:"旅・地域",df:2,d:"約5日ごとに移ろう七十二候に合わせて「いま、この候に見るべき日本の風景」を1つ提案する旅の暦アプリ。「東風解凍(はるかぜこおりをとく)」なら凍解けの渓流と梅の名所、「蟄虫啓戸」なら春の里山の寺、というように候・絶景・寺社・旬の食を一枚の美しい暦カードで届ける。",p:"ホトカミ等は「場所から探す」網羅型だが、本作は「いまの季節から1つだけ提案する」逆引き型。七十二候×旅行の組み合わせは先行アプリ終了後の空白地帯で、競合不在。",m:"基本無料。月300円のサブスクで全候の詳細旅プラン・過去候アーカイブ・七十二候帖の檜表紙テーマを解放。",s:"wafu"},
+{t:"宵待(よいまち)",c:"旅・地域",df:2,d:"月と星を「和の名前」で楽しむ夜空の旅ナビ。十六夜・立待月・居待月といった月の和名と旧暦、すばる・彦星などの星の和名、七夕や二十三夜待ちの伝承を、今夜の月の出時刻・月齢・星空の見えやすさ予報と重ねて表示する。",p:"Star Walk 2やStellariumは機能的だが日本文化の文脈が皆無。月齢アプリは多数あるが「月の和名・旧暦・月待ち行事×見頃予報×名所」を束ねたアプリは未開拓。情緒で差別化する。",m:"買い切り600円(和の天体アプリとして広告なしの世界観を保つ)。追加で「月見名所ガイド」「星の和名図鑑」を各300円のアドオン販売。",s:"wafu"},
+{t:"東雲(しののめ)",c:"旅・地域",df:3,d:"雲海・ダイヤモンド富士・燃える朝焼け・霧氷・虹といった「一瞬の絶景」の出現確率を予報し、見られそうな朝に通知で起こしてくれるアプリ。海外で定番のAlpenglow(夕焼け品質予報)とMy Aurora Forecastの構造を、日本の絶景気象に特化して移植する。",p:"ウェザーニュース等は「天気」を伝えるが「絶景の出現」は予報しない。Alpenglowの日本版・雲海版にあたるアプリは市場調査でも空白と確認済み。予報精度が育つほど解約されない堀になる。",m:"無料版は当日予報+広告。月480円のPro版で7日先予報・通知スポット無制限・的中率の高い詳細予報を解放(Alpenglow/Aurora…",s:"wafu"},
+{t:"雨宿り(あまやどり)",c:"旅・地域",df:2,d:"雨の日を旅のハズレ日から「風情の当たり日」に変えるアプリ。日本語に400以上あるといわれる雨の名前(小糠雨・時雨・翠雨…)から今降っている雨を言い当て、雨に映える苔庭・紫陽花寺・雨音の美しい軒先など「雨の日にこそ行くべき場所」を提案する。",p:"観光アプリは晴天前提で雨をマイナス扱いするが、本作は雨天を主役にする逆張り。「雨の名前」を体験に変えたアプリは調査でも確認できず空白。小粒でもSNSで言葉が拡散しやすい(『今日の雨は翠雨でした』)。",m:"買い切り480円。雨音パック(京都の寺の軒、嵯峨野の竹林など)を各160円で追加販売。",s:"wafu"},
+{t:"いろどり詣(いろどりまいり)",c:"旅・地域",df:3,d:"「今月しかもらえない季節限定御朱印」と「いま見頃の花手水」だけを季節軸で横断検索できる寺社巡りアプリ。網羅型のホトカミに対し、『期間限定・見頃』という時間の希少性に特化し、毎月行き先が変わる参拝のきっかけを作る。",p:"ホトカミ(140万人)は全寺社網羅のSNSで、限定情報は埋もれがち。本作は「今月・見頃・限定」だけに絞った時限性の体験で、巨人と正面衝突せず隙間を取る。寺社側にも頒布告知チャネルとして価値がある。",m:"ユーザーは無料(投稿で情報が増えるUGC設計)。収益は寺社向けの公式掲載プラン(頒布情報の公式発信・月数千円)と、ユーザー向けプレミアム(御…",s:"wafu"},
+{t:"錦秋(きんしゅう)/ Kinshu: Japan Autumn Leaves Forecast",c:"旅・地域",df:3,d:"Sakura Naviの紅葉版を狙う、訪日外国人向けの紅葉見頃予報アプリ。全国の紅葉名所の色づき予想日・見頃メーターを英語で提供し、京都の庭園ライトアップやかなり混む名所の代替スポットまで案内する。",p:"Sakura Naviは桜のみで秋は空白。日本の紅葉情報サイトは国内向け日本語が中心で、英語×予報×旅程マッチを揃えたアプリは見当たらない。先行者の成功で支払い意思が証明済みの市場に、競合不在のまま参入できる。",m:"買い切り$4.99の有料アプリ(Sakura Naviと同じ実証済みモデル)。シーズン終了後も翌年予報で再購入不要にし、レビュー資産を蓄積す…",s:"wafu",top:1,v:1},
+{t:"一日一景(いちにちいっけい)",c:"旅・地域",df:1,d:"毎朝ひとつ、その日の季節に合った浮世絵の名所絵・季語・和歌を高精細画像と短い解説で届ける日めくりアプリ。中国の「每日故宫」で実証済みのフォーマットの日本版で、雪の日には広重の雪景、満月の夜には月の絵、と実際の暦・天気・月齢に絵が呼応する。",p:"每日故宫が中国で証明した「毎日1つの伝統美」フォーマットの日本発決定版が不在(調査で確認済みの空白)。美術館アプリは網羅型だが、本作は1日1枚に絞った引き算の体験と、実際の天気に絵が呼応する仕掛けが独自。",m:"無料+買い切り800円で全アーカイブ・高解像度壁紙書き出し・ウィジェット追加スタイルを解放。运営コストが極小なので低価格でも成立。",s:"wafu"},
+{t:"季ノ栞(きのしおり)",c:"習慣・手帳",df:2,d:"約5日ごとに移ろう七十二候に合わせて、季節の言葉・解説・「季節の小さなお題」(例: 金木犀の香りを探しに出る、初雪の音を聞く)が届く体験型の暦アプリ。お題を実行したら写真1枚と一言を添えてワンタップで記録し、1年かけて自分だけの「季節のアルバム」が編まれていく。",p:"「くらしのこよみ/72 Seasons」が2024年に終了し、現存の和暦アプリ(こよみ等)は実用表示のみでデザイン性・体験性が低い。読むだけの暦に「お題+記録」という習慣ループを足し、『眺める暦』を『暮らしに残る暦』に変える点が新しい。",m:"基本無料+年額サブスク(過去年アルバムの保存無制限、追加お題パック、ウィジェットテーマ)。買い切りオプション併売も検討。",s:"wafu"},
+{t:"結び庭(むすびにわ)",c:"習慣・手帳",df:3,d:"習慣を続けるたびに、自分だけの小さな日本庭園が育っていく育成型習慣化アプリ。石を据え、苔がひろがり、灯籠に火が入り、桜が芽吹く。習慣が途切れても庭は枯れず、落ち葉が静かに積もるだけ——再開した日に庭を「掃き清める」ことで、罰ではなく手入れとして習慣に戻れる。",p:"Forest(木)・Finch(鳥)・Bonsai(盆栽)はあるが、桜・苔・枯山水など日本庭園の美意識で統一された習慣化アプリは日英どちらにも不在(調査ギャップそのもの)。",m:"Forest型: 庭パーツ・季節テーマ・灯籠や鯉などのIAP、サブスクで全庭園様式+クラウド同期解放。",s:"wafu"},
+{t:"月待ち(つきまち)",c:"習慣・手帳",df:2,d:"月の満ち欠けと旧暦に沿って暮らす、和風の月リズム習慣アプリ。新月に願いを書き、上弦で着手を確かめ、十五夜に振り返り、立待月・居待月の夜には小さな整理をする——欧米で600万DLのMoonlyが確立した「月相×リチュアル」を、日本の月文化で再構築する。",p:"Moonlyのモデルは日本語圏に有力アプリが不在(調査ギャップ)。タロットや占星術ではなく、十五夜・月待ち講・旧暦という日本の月文化を世界観の核にする点が独自。週単位ではなく「月相単位の手帳」という時間の区切り方自体が既存の習慣アプリにない切り口。",m:"フリーミアム: 月齢カレンダー+基本記録は無料、サブスクでガイド付きリチュアル全解放・過去サイクルの振り返り分析・ウィジェットテーマ。",s:"wafu"},
+{t:"空綴り(そらつづり)",c:"習慣・手帳",df:2,d:"日記を書いたその時刻・その場所の本物の空——朝焼けの茜、梅雨の鈍色、冬の星空——が、便箋の背景として自動で描かれる日記アプリ。文章を書かなくても「今日の空」だけが毎日綴られていき、読み返すとあの日の空気ごと思い出せる。",p:"ほぼ日手帳アプリは天気を「データ」として自動記録するが、空を「情緒的な舞台装置」にする演出特化の日記は存在しない(調査ギャップ)。そら案内(天気)とシンプル日記(日記)の間の空白を突く。書かない日も空が溜まる設計で、三日坊主でも記録が途切れない。",m:"フリーミアム: 直近の記録は無料、サブスクで過去の空の再生成・複数端末同期・高解像度書き出し・カスタム空テーマ。",s:"wafu"},
+{t:"言の葉帖(ことのはちょう)",c:"習慣・手帳",df:2,d:"毎朝ひとつ「今日の季語」が届き、その由来と古典の例句を1分で味わってから、縦書きで三行だけ日記を書く——中国でApple公式表彰を受けた西窗烛(毎日一句の古典詩詞)の日本版×紙の書籍で定番の3行日記。読む・書くを合わせて3分の、最小の文芸習慣。",p:"西窗烛に相当する「古典の美意識を毎日の習慣にする」日本版アプリは不在(調査ギャップ)。3行日記ブームのデジタル受け皿も空席。muuteのようなAI分析とは逆方向の、縦書きと言葉の美しさという『引き算の差別化』。データ整備が参入障壁になり真似されにくい。",m:"買い切り(910円程度)+追加歳時記パック(例: 京都の季語、海の季語)のIAP。広告なしの静かな体験を価値にする。",s:"wafu"},
+{t:"一炷(いっしゅ)",c:"習慣・手帳",df:1,d:"禅寺で坐禅の時間を「線香一本が燃え尽きるまで(約40分)」と数えた香時計の文化をモチーフにした集中タイマー。画面の中で香がゆっくりと燃え、煙が揺らぎ、京都の川音や雨音が静かに流れる。燃え尽きた香は灰となって積もり、自分の集中の歴史になる。",p:"TIDE(自然音×タイマー)やForestと違い、「香時計」という日本の時間文化そのものをタイマーのメタファーにする点が核。「25分」ではなく「一炷」という情緒的な時間の単位を提案するアプリは存在しない。画面が美しいだけで共有されるビジュアル一点突破型。",m:"香りテーマ+音風景セットのIAP、または買い切りPro(680円程度)。無料版は白檀1種+基本音のみ。",s:"wafu"},
+{t:"暁(あかつき)",c:"習慣・手帳",df:2,d:"固定時刻ではなく、その土地の本物の日の出に同期して朝のルーティンを案内する朝活手帳アプリ。夏は早く冬はゆっくりと、太陽と同じリズムで起きて、白湯・ストレッチ・一行の朝記をこなす。画面は薄明から日の出までの空の色変化を忠実に再現し、毎朝「夜明けを見届ける」体験を作る。",p:"既存の朝活・アラームアプリはすべて固定時刻ベースで、「太陽に同期して季節とともに起床リズムが移ろう」体験を核にしたものはない。Moonly が月でやったことを太陽でやる発想であり、天気アプリ(そら案内)と習慣アプリの間の空白を突く。",m:"サブスク(ルーティン無制限・空テーマ・朝記の振り返り)。無料はアラーム+ルーティン1つ。元日の「初日の出モード」を無料開放して話題化を狙う。",s:"wafu"},
+{t:"うつろい ―七十二候の日めくり―",c:"学び・文化",df:2,d:"2024年に終了した名作「くらしのこよみ」の空席を埋める、七十二候の正統後継アプリ。約5日ごとに切り替わる候(東風解凍、桜始開など)に合わせて、美しい写真・短い読みもの・旬の食べもの・季語を日英バイリンガルで届ける。",p:"「そらこよみ」は天気予報寄り、iWareの暦アプリは実用データ表示のみ。本作は読みもの・写真・デザインの「文芸性」で勝負し、かつ唯一の日英対応七十二候アプリとして海外市場も取る。王者不在のカテゴリへの正面からの後継参入。",m:"基本無料+買い切りプレミアム(過去アーカイブ全開放・ウィジェット拡張・広告なし)1,500円程度。",s:"wafu"},
+{t:"星月夜（ほしづきよ）",c:"学び・文化",df:3,d:"スマホを夜空にかざすと、西洋星座ではなく「和の星の名前」で空が読めるプラネタリウムアプリ。すばる(昴)・彦星・織姫・北斗の柄杓、月の異名(十六夜・立待月・寝待月)、旧暦と月齢、七夕や中秋の名月などの行事を、星空観察と一体で学べる。",p:"星座表・Star Walk 2・Stellariumはいずれも和名・旧暦・日本の星文化に未対応(調査で確認済みのギャップ)。月読君は月特化でAR星図なし。「天体アプリの市場規模×和の文化」の交点は完全な空白地帯。",m:"基本無料+サブスク(月300円)で全和名図鑑・行事通知・お月見ウィジェットを開放。買い切りオプション併売。",s:"wafu"},
+{t:"季のことのは ― Kigo Journey",c:"学び・文化",df:2,d:"英語圏の俳句愛好家とJapan学習者に向けた、季語(kigo)の学習・作句支援アプリ。1日1季語を英訳・例句・背景文化とともに届け、間隔反復で覚え、5-7-5の作句エディタで自分の俳句を書ける。英語圏の俳句コミュニティはWeb中心でモバイル定番が不在という隙間を突く。",p:"俳句てふてふは日本語ネイティブ向けSNSで学習設計がなく、英語圏には定番アプリ自体が不在(調査ギャップ)。「季語×SRS×英語」の組み合わせは初。WaniKaniの漢字に対する、季語版のポジションを取る。",m:"フリーミアム。無料は1日1季語+辞書100語、サブスク(月$4.99)で全辞書・SRS無制限・句帳エクスポート。",s:"wafu"},
+{t:"みやびの径（みち）",c:"学び・文化",df:3,d:"Duolingo型のレッスン形式で「日本文化そのもの」を学ぶアプリ。茶道・和菓子・年中行事・京都の歳時記・着物・文様などを、1回3分のクイズとストーリーで段階的に学び、連続学習日数や経験値で続けたくなる設計にする。言語学習は飽和しているが、文化学習コースは世界的に空白。",p:"Duolingoは言語のみで文化は教えない(調査で指摘された空白)。観光ガイドアプリは読み物で学習設計がない。「ゲーミフィケーション×体系的な日本文化カリキュラム」は競合不在。コンテンツ量が必要な分、参入障壁がそのまま堀になる。",m:"フリーミアム+サブスク(月$5.99): 無料は1日1レッスン、有料で全コース・復習モード開放。",s:"wafu"},
+{t:"一日一美（いちにちいちび）",c:"学び・文化",df:2,d:"中国で成功した「每日故宫」の日本版。旧暦・七十二候と連動して、毎日1点だけ浮世絵・和歌・伝統文様・伝統色を、フルスクリーンの美しいUIで届ける日めくり美術館アプリ。雪の日には広重の雪景、月の美しい夜には月の和歌、というように「今日の空」と作品が呼応する。",p:"「每日故宫」モデルの日本版は不在(調査ギャップ)。美術館公式アプリは自館収蔵品の検索が主で「日めくり×暦×天気連動」の体験設計がない。パブリックドメイン素材中心なので個人開発でも高級感のあるコンテンツ量を確保できる。",m:"買い切り(1,200円)または少額サブスク(月200円)で過去アーカイブ・高解像度表示・ウィジェット全開放。広告は世界観を壊すので入れない。",s:"wafu"},
+{t:"初音帖（はつねちょう）",c:"学び・文化",df:2,d:"初桜・初蝉・初雪・初虹——自分が今年はじめて出会った季節のしるしを写真と一言で記録していく「わたしだけの歳時記」アプリ。記録すると七十二候や気象庁の生物季節観測の平年値と照合され、「今年の桜は平年より4日早い」「あなたの街の初雪は去年より遅い」と教えてくれる。",p:"ハナノナ(識別)と桜のきもち(予報)の間にある「個人の季節記録×暦との照合」は未開拓(調査ギャップそのもの)。日記アプリとも図鑑アプリとも違う、「七十二候を自分の身体で検証する」体験は唯一無二で、毎年使い続ける強いリテンション構造を持つ。",m:"基本無料+買い切りプレミアム(複数年比較・データエクスポート・家族共有)980円。将来的に匿名集計データで「みんなの初桜マップ」を作りエンゲ…",s:"wafu"},
+{t:"天つ風（あまつかぜ）",c:"学び・文化",df:2,d:"いま窓の外の天気を、美しい大和言葉で教えてくれる小さな図鑑アプリ。同じ雨でも春は「催花雨」、初冬は「時雨」、同じ風でも春は「東風(こち)」、冬は「凩」。現在地の天気・季節・時刻から「今の空の名前」を一語選んで表示し、出会った言葉がコレクションされていく。",p:"ウェザーニュース等の大手は予報精度勝負で「言葉の情緒」は扱わない。辞書アプリは天気と連動しない。「いまの空とつながる語彙学習」という体験はどこにもなく、季節コンテンツがエンゲージメントを生むという調査の実証とも合致する。",m:"広告なしの買い切り(600円)か、無料+図鑑全開放のアプリ内課金(480円)。低価格×ニッチ確実層のシンプルなモデル。",s:"wafu"},
+{t:"うつろい",c:"静かなSNS",df:2,d:"約5日ごとに移り変わる七十二候をそのまま「お題」にしたBeReal型の歳時記SNS。「東風解凍(はるかぜこおりをとく)」など候が切り替わった瞬間に通知が届き、その候のあいだに1枚だけ「いまの季節」を投稿できる。",p:"ウェザーニュースのリポートは「天気の実況」だが、本作は「季節の美しさ」専用。BeRealの希少性設計(その期間しか投稿できない)を和暦に移植した点が新しく、72 Seasons終了後に空白となった七十二候×UGCのギャップを直接突く。",m:"基本無料。サブスク(月300円程度)で過去の候のアーカイブ閲覧・歳時記の高解像度書き出し・限定の和紙風テーマを解放。",s:"wafu"},
+{t:"きざし",c:"静かなSNS",df:2,d:"初雪・金木犀の香り・蝉の初鳴き・蛍・紅葉・初霜など、桜以外の「季節のきざし」を全国のユーザーが報告し合い、日本地図の上に\"みんなの季節前線\"が描かれていく市民科学型コミュニティ。気象庁が縮小した生物季節観測を、ユーザーの手で復活させるという物語性を持たせる。",p:"開花予想アプリ(桜のきもち等)は事業者がデータを「配る」一方向型だが、本作はユーザーが前線を「描く」参加型。桜以外の季節前線マップは調査上完全な空白で、iNaturalist的な市民科学の仕組みを日本の季節感に特化させた点が独自。",m:"無料+応援サブスク(観測手帳のPDF書き出し・広域の前線予測・限定バッジ)。将来的には匿名統計データの研究機関・メディア提供も検討。",s:"wafu"},
+{t:"月待(つきまち)",c:"静かなSNS",df:2,d:"十五夜・十三夜・二十六夜待ちなど日本の月待ち文化を軸にした、和の月暦+お月見共有アプリ。月の異名(望月・居待月・寝待月…)とともに今夜の月を知らせ、満月や名月の夜だけ開く「月見の間」で、全国の人が同じ月を撮って眺め合う。",p:"シンプル月齢カレンダーは実用ツールに留まり、Moonlyは西洋占星術ベース。「日本の月見文化×共有」は調査で明確に不在とされた空白で、時限ルームというBeReal的な仕掛けでツールアプリにコミュニティの灯をともす。",m:"買い切り(600円前後)+無料版は広告なしの機能制限型。あるいはウィジェット着せ替え・月の和名コンプリート図鑑をアドオン課金。",s:"wafu"},
+{t:"茜さす",c:"静かなSNS",df:3,d:"夕焼け・朝焼け・彩雲・月の出など「空の見頃」を予報して通知し、撮った写真をその場で全国の空タイムラインに流せる日本語アプリ。「今日の18:42、あなたの街の空は茜色になります」という一報が、人々をベランダや川辺へ連れ出す。",p:"Alpenglow(140万ユーザー)が証明した需要に対し、日本語対応・日本の空文化(茜空・夕焼け小焼け)・その場共有の3点を統合したものは存在しない。天気アプリの付録ではなく「空の美しさ」だけに特化する点でウェザーニュースとも住み分ける。",m:"Alpenglow型のフリーミアム。無料は当日予報のみ、Pro(月400円)で3日先予報・地点複数登録・彩雲アラート・広告非表示。",s:"wafu"},
+{t:"言ノ葉(ことのは)",c:"静かなSNS",df:2,d:"1枚の写真に季語をひとつ添え、17音前後の短い詩を重ねて投稿する、Z世代向けの縦型フィードSNS。俳句の作法は強制せず「写真×季語×ことば」の3点セットだけをルールにし、季語を入口に若い世代が日本語の季節感で遊べる場をつくる。",p:"俳句てふてふ等の既存俳句SNSはテキスト中心・UIが旧来型で利用層が高齢寄り。本作は「写真が主役、句は写真に添えることば」という逆転の設計と縦型モダンUIで、調査で未開拓とされたZ世代×季語の領域を取りにいく。",m:"基本無料。プレミアム書体・和紙/箔のフレーム・作品の縦長画像書き出し(SNSシェア用)をサブスクで提供。",s:"wafu"},
+{t:"風信(ふうしん)",c:"静かなSNS",df:3,d:"二十四節気の暦に乗せて手紙が届く、和風スロー文通アプリ。書いた手紙は即時には届かず「次の節気の朝」にまとめて配達され、季節の挨拶(時候の挨拶)を交わしながら、国内の知らない誰かや海外の日本好きと年に24通の文通を重ねる。",p:"SLOWLYは「距離」で待たせるが、本作は「暦」で待たせる——配達日が全員同じ節気の朝になるため、世界中で同時に手紙が届く祝祭感が生まれる。和の暦×文通×インバウンドの組み合わせは調査ギャップ(海外向け和暦アプリの消滅)を正面から埋める。",m:"SLOWLY型。切手デザインパック・文箱の装丁・送信通数の拡張をアプリ内課金、翻訳上限解放と海外マッチング優先をサブスクで提供。",s:"wafu"},
+{t:"苔庭(こけにわ)",c:"静かなSNS",df:2,d:"スマホを置いて集中・休息した時間だけ、自分の小さな日本庭園に苔がむし、紅葉が育ち、灯籠に火が入るForest型の習慣化アプリ。庭には現実の天気と季節がそのまま流れ込み、雨の日は庭にも雨が降り、冬には雪が積もる。友人の庭を縁側から眺めに行ける緩やかな共有機能を持つ。",p:"Forest(6,000万ユーザー)が確立した「自然メタファー×習慣化」の文法を、調査で空白とされた和風(苔庭・枯山水)に展開。現実の天気と季節が庭に映り込む点、競争ではなく「縁側で眺め合う」静かなソーシャル設計が、海外勢にもない日本的な差別化になる。",m:"Forest同様のフリーミアム。庭パーツ(石庭セット・茶室・鯉の池)と環境音パックを課金販売、Proサブスクで詳細な集中統計と複数の庭を解放…",s:"wafu"},
+{t:"七十二候ノ栞(しちじゅうにこうのしおり)",c:"横断・技術",df:2,d:"古来の暦「七十二候」(約5日ごとに移ろう72の季節)を、ロック画面ウィジェットとライブアクティビティで静かに知らせるアプリ。「東風解凍」「桜始開」など美しい候の名と、その候にまつわる旬の言葉・俳句・色を毎朝届ける。",p:"既存の暦アプリは情報羅列型が多いが、本作は「ロック画面に常に季節が宿る」体験特化。ウィジェット+ライブアクティビティで「開かなくても季節を感じる」受動的UXが差別化点。",m:"買い切り(500〜800円)または無料+プレミアム(ウィジェットのデザインテーマ追加、俳句全文解説)。広告なしの静かな世界観を売りにする。",s:"wafu",v:1},
+{t:"掌庭(しょうてい)",c:"横断・技術",df:3,d:"ARで自分の部屋の机や床に、手のひらサイズの日本庭園を「永続設置」するアプリ。庭は現実の位置情報と天気・季節に同期し、外で雨が降れば庭にも雨が落ち、冬には雪が積もり、春には桜が散る。毎日水をやり、苔や紅葉を育てる、現実とつながった箱庭。",p:"AR盆栽・AR植物アプリはあるが、「現実の天気・季節と完全同期した永続日本庭園」は希少。ゲーム的育成ではなく「眺める・手入れする」静的な癒し体験に振る点が差別化。",m:"基本無料+庭パーツ(灯籠・鯉・茶室など)の課金、季節限定ガチャ的パック(中秋の名月セット等)。",s:"wafu"},
+{t:"月待(つきまち)",c:"横断・技術",df:2,d:"月を「待つ」ための専用アプリ。十六夜、立待月、居待月、寝待月——日本人が月の出を待つ時間にまで名前を付けた文化を現代に蘇らせる。今夜の月の和名と月の出時刻を知らせ、月の出が近づくとライブアクティビティでカウントダウン。ARで月が昇る方角と高さを空にかざして確認できる。",p:"天体アプリ(Star Walk等)は多機能で西洋的。本作は「月だけ」「待つ体験」「和名と月見文化」に絞り、見えない月も記録するという情緒的設計が独自。",m:"買い切り(800円前後)+ 月見ログのプレミアムテーマ。写真家向けに撮影計画機能(月と建物のアライメント計算)を上位課金にする手も。",s:"wafu"},
+{t:"言の葉拾ひ(ことのはひろい)",c:"横断・技術",df:3,d:"街を歩くと、その場所・その季節に詠まれた和歌や俳句が足元に「落ちている」位置情報ゲーム。ジオフェンスで神社・川辺・坂道などに近づくと通知が届き、その土地と今の季節に合った歌を一首「拾える」。拾った歌は自分だけの歌集に綴じられていく。",p:"位置情報ゲームは多いが報酬が「古典の歌」というのは前例がほぼない。歌データのタグ付けという地道なコンテンツ作業自体が参入障壁になり、模倣されにくい。",m:"基本無料+地域歌集パック(京都編・鎌倉編など)課金。観光協会・自治体とのタイアップ(ご当地歌マップ制作)というB2B展開も視野。",s:"wafu"},
+{t:"波枕(なみまくら)",c:"横断・技術",df:2,d:"Apple Watchのハプティクスで、自然のリズムを「肌で感じる」入眠・呼吸アプリ。実際の潮汐データに同期した波の満ち引き、今いる場所に降る雨の強さ、風の脈動を、手首への微細な振動パターンに変換する。画面を見ずに、自然のリズムに呼吸を合わせて眠りに落ちる。",p:"睡眠音アプリは無数にあるが、ほぼすべて「聴覚」。本物の潮汐・降雨データと同期した「触覚の自然」は空白地帯で、Apple Watchの強みを最大限使う。",m:"サブスク(月300〜500円):ハプティクスパターンとサウンドスケープの追加、潮汐同期などのライブ連動機能をプレミアムに。",s:"wafu"},
+{t:"夕影草紙(ゆうかげぞうし)",c:"横断・技術",df:2,d:"一日の終わりに数行だけ日記を書くと、生成AIがその日を一句の俳句と一枚の墨絵・浮世絵調の挿絵に変換してくれる日記アプリ。書き溜めた句は季語ごとに整理され、一年経つと自分だけの「歳時記」が完成する。日々の些事が、季節の記録として美しく残る。",p:"AI日記アプリは出始めているが「俳句×歳時記×季語で記憶を再編成する」という和の構造を持つものはない。出力の画風と季節整合性の作り込みが体験の堀になる。",m:"フリーミアム:無料は週数回の生成まで、サブスク(月480円程度)で無制限+高品質画風+製本PDF。生成コストがあるためサブスク前提の設計。",s:"wafu"},
+{t:"灯火(ともしび)",c:"横断・技術",df:2,d:"ダイナミックアイランドとライブアクティビティに、季節の小さな生きもの・気象の精が住みつくアプリ。夏の夜は蛍が明滅し、冬は雪の精が舞い、雨の日は小さな雨蛙が現れる。現実の時刻・天気・季節で住人が入れ替わり、タップするとハプティクスとともに小さく反応する。",p:"ダイナミックアイランドのペットアプリは数例あるが、いずれも汎用ペット。「現実の天気・暦と連動した季節の精」「レア気象=レア出現」という設計は和風モチーフだからこそ成立する独自路線。",m:"基本無料+追加キャラクターパック課金、図鑑コンプ要素。アイコン・ウィジェットの着せ替えテーマ販売。",s:"wafu"},
+{t:"火華(ほのか)",c:"横断・情緒",df:2,d:"線香花火を一本灯して、燃え尽きるまでの数分間だけ静かに集中する「儚さ駆動」のフォーカスタイマー。スマホに触れると火球がぽとりと落ちてしまうため、自然と手を離して目の前のことに向き合える。終わったあとには灰と火の残像が「今日の一本」として記録に残る。",p:"Forest等の「育てる」報酬設計の真逆で、「燃え尽きて消えること」自体を報酬にする無常観ドリブン。失敗しても灰が残る減点しない設計が、達成系タイマーに疲れた層に刺さる。",m:"買い切り(400〜600円)+季節限定の花火パック(春の桜火・冬の雪花火)のアドオン販売。広告なしを価値にする。",s:"wafu"},
+{t:"風のたより",c:"横断・情緒",df:3,d:"手紙が本物の風と天気に乗って届く文通アプリ。あなたの街から相手の街まで、実際の風向きと風速のデータをもとに手紙が空を旅し、雨の日に通れば文字が少し滲み、雪の日は遅れて届く。即時性を捨てることで、返事を待つ時間そのものが情緒になる。",p:"既存のスローレターアプリ(Slowly)は距離だけで配達時間が決まるが、本作は気象が物語を生む。「嵐で遅れてごめんなさい」という偶然がそのまま会話の種になる、世界の天気を共有する文通。",m:"月額サブスク(便箋・墨色・押し花の素材集、同時に送れる手紙の数を増枠)。基本の文通は無料。",s:"wafu"},
+{t:"あまやどり",c:"横断・情緒",df:2,d:"いま、日本のどこかに本当に降っている雨を聴くアプリ。雨雲レーダーのリアルタイムデータと連動し、実際に雨が降っている土地の音風景――京都の町家の軒先、海辺の堤防、杉林の山道――をその強さのまま合成して届ける。雷が実際に落ちれば、音の中にも遠雷が鳴る。",p:"既存の雨音アプリは録音のループ再生だが、本作は「本物の・いまの・あの場所の雨」という実在性が核。フィクションの環境音ではなく、現実とつながった音だからこそ生まれる安心感とノスタルジーで差別化。",m:"無料+月額サブスク(雨宿り場所の追加、スリープタイマー、オフライン再生、ふるさと通知の複数登録)。",s:"wafu"},
+{t:"砂紋(さもん)",c:"横断・情緒",df:2,d:"手のひらの中の枯山水。指を熊手に見立てて砂紋を引き、石を据え、苔を眺める、それだけのアプリ。ただし一晩経つと風が砂紋を少しだけ崩していて、庭は決して完成しない。整える行為そのものを楽しむ、無常観のデジタル庭園。",p:"既存の禅ガーデンアプリは「完成させて飾る」ものだが、本作は「必ず崩れる」ことを中心に据えた侘び寂び設計。触覚と音にこだわった引き算のUXで、ゲーミフィケーションを一切持たない点が差別化。",m:"買い切り(600〜800円)。追加の石・苔・季節の植栽パックを少額アドオンで。",s:"wafu"},
+{t:"水に流す",c:"横断・情緒",df:2,d:"手放したい言葉を灯籠に載せて、夜の川に流す儀式のアプリ。書いた内容はどこにも保存されず、灯籠が川下の闇に消えると同時に本当に消滅する。川にはほかの誰かの灯籠も流れてくるが中身は読めず、「誰かも今夜、何かを手放した」ことだけが分かる。",p:"ジャーナリングアプリが「記録して振り返る」のに対し、本作は「書いて消す」一方通行の儀式。匿名の他者の灯りによる静かな連帯感は、SNSでも日記でもない第三の居場所になる。",m:"基本無料+応援課金(特別な意匠の灯籠、川辺に灯す常夜灯)。「消すこと」が商品なのでデータを使う収益化は一切しない方針自体をブランドにする。",s:"wafu"},
+{t:"月待ち",c:"横断・情緒",df:2,d:"同じ月を見上げている人たちと過ごす、言葉のない縁側。実際の月齢・月の出入り時刻と完全に同期し、あなたの空に月が出ている時間しか開かない。チャットはなく、鈴を鳴らす・お茶を置く・月を指さすといった所作だけで他者とゆるくつながる。",p:"常時接続が前提のSNSの逆を行く「月が出ている時だけの場所」。言葉を排した所作だけの交流は荒れようがなく、モデレーションコストが構造的にほぼゼロな点も個人開発に向く。",m:"月額の小さなサブスク(縁側の意匠、季節の茶菓子、言伝の保存)。「月が出ている時間しか使えない」希少性が課金の納得感を支える。",s:"wafu"},
+{t:"言の葉みち",c:"横断・情緒",df:3,d:"俳句のジオキャッシング。歩いた先の実際の場所に俳句を「句碑」として残し、その場所を訪れた人だけがそれを読める。アプリはその土地のいまの天気と季節から季語をそっと差し出してくれるので、初心者でも一句詠める。街全体が、すれ違った誰かの感性の足跡で満ちていく。",p:"位置情報SNSは「いいね」競争になりがちだが、本作は数値评価を排し「手向け」だけにした静かな設計。Ingress的な位置ゲームと歳時記文化の掛け算は前例がなく、雨の日にだけ読める句のような気象条件ギミックが唯一無二の発見体験を作る。",m:"基本無料+プレミアム(句集の印刷製本サービス連携、埋められる句碑数の増枠、特別な筆致のフォント)。",s:"wafu"},
+{t:"風の文(かぜのふみ)",c:"横断・つながり",df:2,d:"手紙が「実際の風」に乗って届くデジタル文通アプリ。送った手紙はリアルタイムの気象データに基づいて日本地図の上をゆっくり旅し、向かい風なら遅れ、追い風なら早く届く。受け取るまでの「待つ時間」と手紙の旅路そのものを楽しむ、遅さを価値にした文通体験。",p:"海外発の文通アプリ Slowly は「距離=固定の所要時間」だが、本作は実際の気象で毎回旅路が変わるため一通ごとに物語が生まれる。和の便箋・縦書き・節気の文化文脈も国内向けの強い差別化。",m:"限定便箋・封蝋・切手デザインの買い切り課金。月額課金で送信通数の上限解放と「速達の風(風神便)」。",s:"wafu"},
+{t:"七十二候だより",c:"横断・つながり",df:1,d:"約5日ごとに移り変わる七十二候(「東風解凍」「桜始開」など)の節目にだけ、大切な人へ一筆送れる挨拶アプリ。送れるのは1候につき一通・数十文字だけという強い制約が、「マメじゃなくても続く緩やかなつながり」を生む。年賀状文化の超軽量な日常版。",p:"年賀状アプリや手紙アプリは「ちゃんと書く」重さがあるが、本作は制約によって書く言い訳と気軽さを同時に提供する。毎日の連絡を求めるメッセンジャーと違い、5日に一度しか送れないことが価値。",m:"基本無料(送れる相手3人まで)。買い切り600円で人数無制限+一年の文の暦をPDF/印刷データ化する「結い納め」機能。",s:"wafu"},
+{t:"お接待のこみち",c:"横断・つながり",df:3,d:"四国遍路の「お接待」文化をデジタル化した位置情報アプリ。散歩道や坂の上、長い階段の先などに、見知らぬ誰かへの labor of love として「お茶一杯(ねぎらいの言葉・ベンチ情報・励まし)」を置いておくと、後からそこを通った人が受け取れる。",p:"ジオキャッシングや位置ゲーは「探す・集める」が目的だが、本作は「見知らぬ人をねぎらう」が目的で、報酬の矢印が逆向き。SNSの承認欲求ではなく匿名の善意でつながる点が独自。利用者密度の確保とモデレーションが難所で、その分野心的。",m:"お接待の絵柄(京菓子、地方の銘菓モチーフ)の課金パック。自治体・観光地向けに公式お接待スポットを設置できるB2Bプラン。",s:"wafu"},
+{t:"今宵の月",c:"横断・つながり",df:2,d:"今夜、実際に同じ月を見上げている見知らぬ誰かと、一晩だけ言葉を交わせる一期一会アプリ。自分の空が晴れていて月が出ている時間帯にだけ扉が開き、同じく月が見えている地域の一人とマッチング。夜が明けると会話は消え、二度と同じ人とは繋がらない。",p:"ランダムチャットアプリとの違いは「月が見える夜しか開かない」希少性と、夜明けに消える儚さによる治安設計。常時接続できないことが荒らしの動機を削ぎ、詩的な文脈が会話の質を底上げする。",m:"月3回まで無料、月額300円で毎晩参加可能。名月イベントの記念短冊などの少額課金。",s:"wafu"},
+{t:"とおくの庭",c:"横断・つながり",df:2,d:"離れて暮らす家族や友人と一つの「庭」を共有するウィジェットアプリ。庭にはメンバー全員の住む土地のリアルな天気が同時に降り込み、札幌の雪と東京の雨と那覇の晴れが一つの庭で混ざり合う。誰かがアプリを開くと縁側に灯りがともり、言葉を交わさなくても互いの気配と空模様が伝わる。",p:"「みてね」等の家族アプリは写真や文章の投稿という発信コストを要求するが、本作は開くだけ・眺めるだけで成立する。安否確認アプリの無機質さもなく、天気という自然の媒介で監視感なく気配が伝わる。",m:"月額200〜400円のファミリープラン(庭の拡張、灯籠・苔庭・枯山水などの庭テーマ)。一年の巻物動画の高画質書き出し課金。",s:"wafu"},
+{t:"花筏(はないかだ)",c:"横断・つながり",df:2,d:"灯籠流しと「お裾分け」を掛け合わせた、美しい瞬間のリレーアプリ。今日出会った美しいもの(夕焼け、道端の花、湯気の立つ味噌汁)を写真と一言で小さな筏に乗せて川に流すと、見知らぬ誰か一人だけに流れ着く。受け取った人は自分の筏を流して次へ渡す。",p:"BeRealやSNSは「自分を皆に見せる」が、本作は「一つの美しさを一人に手渡す」。いいね数・フォロワーという比較の物差しを構造的に排除し、灯籠流し・お裾分けという文化文脈で「消えること・手放すこと」を価値にしている。",m:"筏・灯籠の意匠課金(友禅柄、市松、青海波)。年に一度、自分が受け取った筏を一冊にまとめる「川の記憶」フォトブック印刷(印刷APIと連携)。",s:"wafu"},
+{t:"初花の約束(はつはなのやくそく)",c:"横断・つながり",df:2,d:"「あなたの街で桜が咲いた日に届く手紙」など、自然の出来事をトリガーに未来へ手紙を送れるアプリ。日付ではなく、初雪・桜開花・初蝉・初雷・次の満月といった自然のしるしを配達日に指定する。受け取る人は「桜が咲いたら、あの人の手紙が来る」と季節そのものを待つようになる。",p:"日付指定のタイムカプセルアプリ(未来への手紙系)は多数あるが、「いつ届くか自然だけが知っている」不確定性を価値にしたものは無い。配達そのものが受取人の住む土地の季節と結びつく点が、年賀状・暑中見舞いの本質(季節の挨拶)の正統進化。",m:"手紙3通まで無料、以降は1通120円程度の都度課金(切手を買う感覚)。開花予想連動の限定封筒。",s:"wafu"},
+{t:"メル秘書(AIメール秘書)",c:"ビジネス日本版",df:3,d:"受信箱に常駐し、あなたの文体と正しい敬語で返信下書きを自動生成。社内/社外の文体自動使い分けと自動仕分け付き。",r:"Fyxer AI(英・ARR $1M→$30M級の史上最速級成長)",p:"日本のビジネスメールは敬語・定型マナー負荷が世界屈指=課題の移植性は本国以上。本家の日本語敬語は「不安定」評価で先行窓1〜2年。",m:"BtoBサブスク(1席 月額数千円)",s:"biz",top:1},
+{t:"オヤカタ手帳(一人親方の案件管理)",c:"ビジネス日本版",df:3,d:"電気・設備・内装などの一人親方向けに、見積→請書→請求→入金管理をスマホで完結させる。",r:"Tradify(NZ)/ServiceM8(豪)",p:"インボイス制度・電帳法・建設業2024年問題という規制の追い風。ANDPADは元請け向け・Misocaは請求単機能で、ド真ん中が空白。",m:"月額数千円のセルフサーブSaaS",s:"biz",top:1},
+{t:"もふカルテ(トリミングサロンSaaS)",c:"ビジネス日本版",df:3,d:"予約・ペット1頭ごとのカルテ・ワクチン記録・決済・リマインドを一冊に統合するトリミング特化SaaS。",r:"MoeGo(米LA)",p:"国内は汎用予約システムのみで縦特化が実質不在。ペット市場約1.8兆円×高頻度リピート業態。ホットペッパーの主戦場外で正面衝突なし。",m:"店舗月額+決済手数料",s:"biz",top:1},
+{t:"コエプル(お客様の声ウィジェット)",c:"ビジネス日本版",df:2,d:"テキスト/動画の「お客様の声」をフォームで収集し、許諾管理してLPに埋め込める軽量SaaS。",r:"Senja(2人のブートストラップで成立)",p:"日本のLP・導入事例文化は「お客様の声」依存度が極めて高いのに国産専用ツールはゼロ。Powered byバッジでCACほぼゼロのPLGまで移植可。",m:"月額数千円(コーチ・士業・中小SaaS)",s:"biz",top:1},
+{t:"コエボード(機能要望ボード)",c:"ビジネス日本版",df:2,d:"ユーザーの機能要望を投票制で収集し、公開ロードマップ・リリースノート配信まで一気通貫。",r:"Featurebase(エストニア)/Canny",p:"国内SaaSはスプレッドシート・Notion代用が実情。買い手がSaaS企業自身でBtoB月額が最も成立しやすい構図。実現性5/5。",m:"SaaS月額(企業向け)",s:"biz",top:1},
+{t:"フリビズ(ひとり仕事の相棒)",c:"ビジネス日本版",df:3,d:"CRM・提案書・電子契約・請求・時間記録・損益レポートをフリーランス1人向けに月980円で統合。",r:"Moxie/HoneyBook(米・日本展開白紙と明言)",p:"フリーランス新法(2024年11月)で取引条件の書面化・支払期日管理が義務化の追い風。約460万人市場で支払習慣も実証済み。",m:"月980円〜のサブスク",s:"biz",top:1}
+];
+
+/* ================= DATA : PATTERNS ================= */
+const PATTERNS=[
+{t:"一人の問題から始める",b:"Locketは彼女1人のための贈り物、Yukaは創業者が子どもの食品表示に迷った経験から。<b>市場調査より先に、切実な1人</b>を深く解くと、同じ悩みの100万人に届く。"},
+{t:"1機能を、確実に",b:"実用アプリは初回更新率58.1%で全カテゴリ首位。バズらないが黙って依存され、毎月払われる。<b>「何でもできる」は「何にも選ばれない」</b>。"},
+{t:"感情のご褒美を仕込む",b:"Finchはタスク完了→鳥が小さな帽子を見つける。予測不能な小さなサプライズがドーパミンを生む。<b>機能的な瞬間を、贈り物に変える</b>。"},
+{t:"ホーム画面に住む",b:"開かないと使えないアプリは開かれない。Locket・noteit・Widgetableはウィジェットが本体。<b>ロック解除のたびに目に入る場所</b>を取りに行く。"},
+{t:"口コミを構造に埋め込む",b:"Yukaは「使った人が10〜20人に話す」、Locket・Pairedは相手がいないと使えない＝招待が必須。<b>宣伝費ゼロで伸びる形</b>を最初から設計する。"},
+{t:"かわいさは世界共通言語",b:"Finchの小鳥、Widgetableのペット、Habit Rabbitのウサギ。cozy（居心地よさ）は検索需要として明文化された。<b>日本的な世界観はここで武器になる</b>。"},
+{t:"最初から英語で出す",b:"TimeTreeは初日から日英韓同時、個人開発のAtoZ Dictionaryも英語版だけで米国から伸びた。北米LTVは世界の約2倍。<b>日本語は「あとから」でいい</b>。"},
+{t:"スキャン（かざす）は最強のUX",b:"Yuka・PictureThis・Photomath・Shazam——「撮る／かざすだけ」は説明不要で、その場で話題になり、口コミと直結する。"},
+{t:"性格・世界観で差別化する",b:"CARROT Weatherは同じ天気データを毒舌キャラで包んで月$20万規模。データが同じなら<b>「誰が言うか」で差がつく</b>。"},
+{t:"受動でも進む設計",b:"Pikmin Bloomは歩くだけ、Pokémon Sleepは置くだけで毎年成長。<b>頑張らせないアプリは解約されない</b>。"},
+{t:"独立性・プライバシーは信頼になる",b:"Yukaは企業から一切お金を取らず、Daylioはデータを端末内に置く。<b>「売らない・見ない」宣言</b>そのものが選ばれる理由になる。"},
+{t:"買い切りの再評価",b:"買い切り比率は6.4%→10.3%へ増加、サブスク併設で総CVR+15〜25%。Streaks・Paprikaは買い切りで長寿。<b>サブスク疲れの受け皿</b>を用意する。"}
+];
+
+/* ================= DATA : MONEY ================= */
+const MONEY=[
+{t:"サブスクリプション",tag:"本命",b:"実用（毎週使う）なら第一候補。<b>週課金が収益の55.5%</b>を占める時代だが、noteitの週$6.99への不満レビューが示す通り、体感価値と釣り合わない週額は炎上する。目安の中央値：<b>週$7.48／月$12.99／年$38.42</b>。トライアルは実用系でLTVを最大化（$68.90）。"},
+{t:"買い切り＋サブスク併設",tag:"推奨",b:"買い切りを並べるだけで総コンバージョン<b>+15〜25%</b>。「一生モノの道具」（Paprika・Streaks型）はむしろ買い切りが誠実で、レビュー評価も安定する。"},
+{t:"装飾・テーマ課金（IAP）",tag:"喜び系",b:"Simejiのきせかえ、Widgetableのペット用品、歩く枯山水ならテーマ庭園。<b>機能は無料・愛着に課金</b>は喜び系の王道。"},
+{t:"広告",tag:"非推奨",b:"大量DLが前提（トリマ型）で、個人開発の規模では単価が出ない。癒し系との相性も最悪。<b>使うなら「広告非表示課金」への導線</b>としてのみ。"},
+{t:"物販・手数料",tag:"応用",b:"みてね（写真プリント）、Vivino（ワイン購入）、Too Good To Go（取引手数料）。<b>アプリの外の消費に接続</b>できると単価が跳ねる。まごビュー・未来ポストなど印刷/郵送系と好相性。"},
+{t:"地域価格戦略",tag:"重要",b:"欧州は北米比+29〜39%高く売れる。<b>国別価格の出し分け（App Storeの自動均衡に任せない）</b>だけで収益が変わる。まず英語で米国、価格は欧州で強気に。"},
+{t:"実験を止めない",tag:"鉄則",b:"価格・トライアル日数・プラン数の実験を回すアプリは<b>40倍稼ぐ</b>。RevenueCat/Adapty等の課金基盤を初日から入れ、A/Bできる状態でリリースする。"},
+{t:"審査・規約の下調べ",tag:"守り",b:"スクリーンタイム系・ヘルスケア系・見守り系は、iOSのAPI制限やGoogle Playのポリシー審査が厳しい領域。<b>作る前に「そのAPIで審査が通った前例」を確認</b>する（あなたのタッチエフェクト調査と同じ手順）。"}
+];
+
+/* ================= RENDER ================= */
+const $=(s)=>document.querySelector(s);
+const axisClass={"便":"s-ben","喜":"s-yoro","両":"s-ryo"};
+const esc=(s)=>s; // 信頼できる内部データのみ
+
+/* --- tabs --- */
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+
+/* --- apps --- */
+const appCats=["すべて",...new Set(APPS.map(a=>a.c))];
+const axisList=["すべて","便","喜","両"];
+let fAxis="すべて",fCat="すべて",fQ="";
+
+function chipRow(el,items,cur,cb,labelFn){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const c=document.createElement("button");
+    c.className="chip"+(it===cur?" on":"");
+    c.textContent=labelFn?labelFn(it):it;
+    c.addEventListener("click",()=>cb(it));
+    el.appendChild(c);
+  });
+}
+const axisLabel=(a)=>({"すべて":"すべて","便":"便：不便解消","喜":"喜：小さな喜び","両":"両：両方"})[a];
+
+function renderApps(){
+  chipRow($("#f-axis"),axisList,fAxis,(v)=>{fAxis=v;renderApps();},axisLabel);
+  chipRow($("#f-cat"),appCats,fCat,(v)=>{fCat=v;renderApps();});
+  const q=fQ.trim().toLowerCase();
+  const list=APPS.filter(a=>
+    (fAxis==="すべて"||a.a===fAxis)&&
+    (fCat==="すべて"||a.c===fCat)&&
+    (q===""||(a.n+a.c+a.s+a.m+a.note+a.o).toLowerCase().includes(q))
+  );
+  $("#apps-count").textContent=list.length+" 件 ／ 全 "+APPS.length+" 件";
+  $("#apps-list").innerHTML=list.map(a=>`
+    <article class="acard">
+      <div class="top">
+        <span class="seal ${axisClass[a.a]}">${a.a}</span>
+        <h3>${esc(a.n)}</h3>
+        <span class="origin">${a.o}</span>
+      </div>
+      <span class="cat">${esc(a.c)}</span>
+      <div class="row"><span class="k">規模</span><span class="v">${esc(a.s)}</span></div>
+      <div class="row"><span class="k">収益</span><span class="v">${esc(a.m)}</span></div>
+      <div class="row learn"><span class="k">学び</span><span class="v">${esc(a.note)}</span></div>
+    </article>`).join("");
+}
+$("#f-q").addEventListener("input",(e)=>{fQ=e.target.value;renderApps();});
+
+/* --- patterns --- */
+$("#patterns-list").innerHTML=PATTERNS.map((p,i)=>`
+  <article class="pcard">
+    <div class="no">其の${String(i+1).padStart(2,"0")}</div>
+    <h3>${p.t}</h3>
+    <p>${p.b}</p>
+  </article>`).join("");
+
+/* --- ideas --- */
+const srcName={"すべて":"すべて","base":"初回53案","wafu":"和風77案","biz":"ビジネス6案"};
+const srcChar={"base":"巻","wafu":"和","biz":"商"};
+const ideaSrcs=["すべて","base","wafu","biz"];
+const ideaCats=["すべて",...new Set(IDEAS.map(i=>i.c))];
+const diffList=["すべて",1,2,3];
+let iCat="すべて",iDiff="すべて",iSrc="すべて";
+const stars=(n)=>"★".repeat(n)+"☆".repeat(3-n);
+
+function renderIdeas(){
+  chipRow($("#fi-src"),ideaSrcs,iSrc,(v)=>{iSrc=v;renderIdeas();},(s)=>srcName[s]);
+  chipRow($("#fi-cat"),ideaCats,iCat,(v)=>{iCat=v;renderIdeas();});
+  chipRow($("#fi-diff"),diffList,iDiff,(v)=>{iDiff=v;renderIdeas();},(d)=>d==="すべて"?"すべて":stars(d));
+  const list=IDEAS.map((x,idx)=>({...x,no:idx+1,src:x.s||"base"})).filter(x=>
+    (iSrc==="すべて"||x.src===iSrc)&&
+    (iCat==="すべて"||x.c===iCat)&&
+    (iDiff==="すべて"||x.df===iDiff)
+  );
+  $("#ideas-count").textContent=list.length+" 案 ／ 全 "+IDEAS.length+" 案";
+  $("#ideas-list").innerHTML=list.map(x=>`
+    <article class="icard">
+      <div class="top">
+        <span class="no">#${String(x.no).padStart(3,"0")}</span>
+        <span class="src sc-${x.src}">${srcChar[x.src]}</span>
+        <h3>${x.t}${x.top?'<span class="ib ib-top">六選</span>':""}${x.v?'<span class="ib ib-v">相互一致</span>':""}</h3>
+        <span class="diff">${stars(x.df)}</span>
+      </div>
+      <p class="desc">${x.d}</p>
+      <div class="meta">
+        ${x.r?`<div class="m"><span class="mk">参考</span><span>${x.r}</span></div>`:""}
+        <div class="m"><span class="mk">＋α</span><span class="plus">${x.p}</span></div>
+        <div class="m"><span class="mk">収益</span><span>${x.m}</span></div>
+      </div>
+    </article>`).join("");
+}
+
+/* --- money --- */
+$("#money-list").innerHTML=MONEY.map(m=>`
+  <article class="mcard">
+    <h3>${m.t}<span class="tag">${m.tag}</span></h3>
+    <p>${m.b}</p>
+  </article>`).join("");
+
+/* --- init --- */
+$("#stat-apps").textContent=APPS.length;
+$("#stat-ideas").textContent=IDEAS.length;
+renderApps();
+renderIdeas();
+</script>
+</body>
+</html>

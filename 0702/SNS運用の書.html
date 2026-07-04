@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SNS運用の書｜別冊三 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9; --card:#FFFDF6; --ink:#23282C; --ink-soft:#5B6168; --line:#DFD8C6;
+  --ai:#2E5C7F; --ume:#B7566B; --matcha:#6B7F52; --karashi:#B98A22; --shu:#B33A3A;
+  --vol:var(--ume);
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--washi);background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);background-size:5px 5px;color:var(--ink);line-height:1.75;font-size:15px;padding-bottom:64px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--vol)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+nav.tabs{position:sticky;top:0;z-index:50;background:rgba(245,242,233,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{border:1px solid transparent;background:none;font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:var(--shu);border-right:1px solid var(--line);padding-right:8px;min-height:64px}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--vol);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard h3 .tag.a{background:var(--ai)} .mcard h3 .tag.m{background:var(--matcha)} .mcard h3 .tag.k{background:var(--karashi)} .mcard h3 .tag.s{background:var(--shu)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif);white-space:nowrap}
+ul.plain li b{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:21px;color:var(--vol);font-variant-numeric:tabular-nums;line-height:1.25}
+.dcard .num.warn{color:var(--shu)} .dcard .num.blue{color:var(--ai)} .dcard .num.gold{color:var(--karashi)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--vol);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--vol)}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16.5px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+.rowline{display:flex;gap:8px;font-size:12.5px;padding:7px 0;border-top:1px dashed var(--line)}
+.rowline:first-of-type{border-top:none}
+.rowline .k{min-width:88px;color:var(--ink-soft);font-size:11px;letter-spacing:.08em;padding-top:2px}
+.rowline .v{flex:1}
+.rowline .v b{color:var(--ink)}
+.plat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-top:10px}
+.plat .p-head{display:flex;align-items:baseline;gap:8px}
+.plat h4{font-family:var(--serif);font-size:15.5px;flex:1}
+.plat .p-verdict{font-size:10.5px;color:var(--washi);border-radius:4px;padding:1px 8px;letter-spacing:.08em;white-space:nowrap}
+.plat p{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+.plat p b{color:var(--ink)}
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+@media(min-width:640px){body{font-size:15.5px}.hero h1{font-size:32px}.grid2{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:no-preference){section.page.on{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 別冊三・SNS運用編 ／ 2026.07</div>
+  <h1>SNS運用の書<span class="thin">Xを起点に、どこまで広げるか。媒体の選び方と回し方</span></h1>
+  <p class="lede">現在運用中のXを土台に、Instagram・TikTok・YouTube等へ広げるべきかの判定基準と、広げる場合の順番・作り方・週間運用まで。数値は2026年時点の各種調査・プラットフォーム公表値に基づく参考値。</p>
+  <div class="stats">
+    <div class="stat"><b>1＋1</b><span>推奨の柱の数</span></div>
+    <div class="stat"><b>60〜90日</b><span>短尺動画の助走</span></div>
+    <div class="stat"><b>週3h</b><span>想定運用時間</span></div>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="章切替">
+  <div class="row">
+    <button data-t="s1" class="on">発信方針</button>
+    <button data-t="s2">媒体比較</button>
+    <button data-t="s3">広げるべきか</button>
+    <button data-t="s4">X運用の型</button>
+    <button data-t="s5">短尺動画</button>
+    <button data-t="s6">週間運用</button>
+    <button data-t="s7">伸びた後</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 発信方針 -->
+<section id="s1" class="page on">
+  <div class="sec-head"><div class="tate">声の心得</div><div><h2>発信方針 — 五ヶ条</h2><p>広告費ゼロの個人開発にとって、SNSは宣伝ではなく流通そのもの。</p></div></div>
+
+  <div class="pcard"><div class="no">第一条</div><h3>柱は「1＋1」。広げるより深く</h3><p>基本形は<b>X（日本語・本拠地）＋短尺動画1本柱（英語・DL獲得）</b>。3つ以上を同時に立ち上げると全てが中途半端になる。転用（同じ動画の複数配信）は柱に数えない——ほぼ無料だから全部やる。</p></div>
+  <div class="pcard"><div class="no">第二条</div><h3>60〜90日は数字で判断しない</h3><p>短尺動画のアルゴリズムが配信を伸ばし始めるまで<b>60〜90日</b>。2〜3週間の沈黙で撤退するアカウントは、転換点の手前で消えている。最初の30日は「投稿筋を鍛える期間」と割り切る。</p></div>
+  <div class="pcard"><div class="no">第三条</div><h3>フォロワーではなくDLを数える</h3><p>見るべきは<b>保存数・視聴完了率・プロフィール遷移→ストアクリック</b>。フォロワー1万人で DL 100より、フォロワー500でDL 1,000の方が正しい。ストアのカスタムリンク（キャンペーンパラメータ）で媒体別DLを測る。</p></div>
+  <div class="pcard"><div class="no">第四条</div><h3>build in publicは「具体」で書く</h3><p>「頑張ってます」ではなく<b>スクショ・数字・設計の迷い・失敗談</b>。具体的な進捗報告こそが、リリース前から応援者を作る。launch前に築いた関係が、launch日の初速になる。</p></div>
+  <div class="pcard"><div class="no">第五条</div><h3>コメント欄も作品のうち</h3><p>アルゴリズムは対話の深さを評価する。<b>全コメントに返信</b>し、質問には次の投稿で答える。返信は無料で作れる追加コンテンツ。</p></div>
+</section>
+
+<!-- 媒体比較 -->
+<section id="s2" class="page">
+  <div class="sec-head"><div class="tate">土俵を知る</div><div><h2>媒体比較 — 2026年の性格一覧</h2><p>アルゴリズムの性格＝「フォロワー0からどれだけ届くか」で見る。</p></div></div>
+
+  <div class="plat"><div class="p-head"><h4>X（旧Twitter）</h4><span class="p-verdict" style="background:var(--ai)">現在の本拠地</span></div>
+  <p><b>強み</b>：テキストで速い・#個人開発 コミュニティが厚い・開発ログと相性最強・日本の初期ユーザーとフィードバックが集まる。<br><b>弱み</b>：アプリDLへの直結力は短尺動画に劣る・拡散は相互関係に依存しがち・英語圏へのリーチは別アカウントが必要。<br><b>結論</b>：<b>やめない。ただしXだけでは世界のDLは取れない</b>。役割は「仲間・信頼・国内初期ユーザー」。</p></div>
+
+  <div class="plat"><div class="p-head"><h4>TikTok</h4><span class="p-verdict" style="background:var(--ume)">DL獲得の主戦場候補</span></div>
+  <p><b>強み</b>：アルゴが最も攻撃的に「他人」へ配信——<b>フォロワー0の初投稿でも数百万に届き得る</b>唯一の場所。視聴保持率78%・エンゲージ率2.8〜3.15%で最高水準。アプリのデモ動画文化が確立。検索利用も急増中。<br><b>弱み</b>：投稿寿命が短い（数日）・規制動向に注意・日本語圏のアプリ系はやや薄い。<br><b>結論</b>：<b>英語圏DL狙いの第一候補</b>。</p></div>
+
+  <div class="plat"><div class="p-head"><h4>YouTube Shorts</h4><span class="p-verdict" style="background:var(--matcha)">資産型・第二候補</span></div>
+  <p><b>強み</b>：日次視聴2,000億回規模へ急成長。<b>検索に載る唯一の短尺</b>（Google検索にも表示）で、投稿が数ヶ月〜数年効き続ける複利型。フォロワー1,000〜5,000の小規模アカウントでは<b>同規模のTikTok/Reels比で約4倍のビュー</b>という調査も。週2〜4本でよい。<br><b>弱み</b>：バズの瞬発力はTikTokに劣る・伸びが穏やか。<br><b>結論</b>：<b>転用先として初日から・題材が検索されるアプリ（How to系）なら主戦場昇格も</b>。</p></div>
+
+  <div class="plat"><div class="p-head"><h4>Instagram（Reels）</h4><span class="p-verdict" style="background:var(--karashi)">転用先。単独立ち上げ非推奨</span></div>
+  <p><b>強み</b>：25〜44歳・購買力の高い層。世界観・ビジュアルの蓄積が効く（cozy系アプリと相性）。<br><b>弱み</b>：アルゴが<b>既存フォロワーとの関係を重視</b>するため、フォロワー0からの立ち上げが三者で最も不利（エンゲージ率0.65%）。TikTokの透かし入り動画はペナルティ。<br><b>結論</b>：<b>ゼロから単独で始める場所ではない</b>。透かしを外した動画の転用先として運用し、育ったら世界観アカウントに昇格。</p></div>
+
+  <div class="plat"><div class="p-head"><h4>YouTube（長尺）</h4><span class="p-verdict" style="background:var(--ink)">今はまだ早い</span></div>
+  <p><b>強み</b>：信頼と検索資産の最終形。チュートリアル・開発Vlogは長く効く。<br><b>弱み</b>：1本の制作コストが短尺の5〜10倍。個人開発の初期に割く時間はない。<br><b>結論</b>：<b>Shortsで検索需要が確認できた題材だけ、後から長尺化</b>。</p></div>
+
+  <div class="plat"><div class="p-head"><h4>Reddit／note・Zenn</h4><span class="p-verdict" style="background:var(--ink-soft)">脇を固める</span></div>
+  <p><b>Reddit</b>：英語圏ニッチの信頼形成。貢献9：宣伝1。launch時の報告ポストはPHより実ユーザーを連れてくる（3〜8倍という報告も）。<br><b>note・Zenn</b>：日本語の長文資産。月1本、開発の裏側や技術記事を。検索で効き続ける。</p></div>
+
+  <p class="note-src">数値出典：短尺3媒体の比較調査（2026年・AutoFaceless / Influencer Marketing Hub / 各媒体公表値の集計記事）、build in public系の launch 実績報告。エンゲージ率等は測定方法により幅がある。</p>
+</section>
+
+<!-- 広げるべきか -->
+<section id="s3" class="page">
+  <div class="sec-head"><div class="tate">道を分ける</div><div><h2>広げるべきか — Xからの拡張判定</h2><p>結論：<b>今すぐ全部は増やさない。段階で1本ずつ</b>。</p></div></div>
+
+  <div class="mcard"><h3>診断・三つの問い<span class="tag">判定</span></h3>
+  <ul class="plain">
+    <li><span class="dot">問一</span><b>週に何時間出せるか？</b> 〜1.5h：Xのみ継続＋月1 note／1.5〜3h：X＋短尺動画1本柱／3h超：X＋短尺＋転用フル活用</li>
+    <li><span class="dot">問二</span><b>アプリは「絵になる」か？</b> 動くUI・かわいい・Before/Afterが見せられる → 短尺動画の効果大。文字ツール系なら X＋Shorts（解説型）寄り</li>
+    <li><span class="dot">問三</span><b>海外DLを取りに行くか？</b> Yes（本件はYes）→ 英語の短尺動画は事実上必須。X英語アカより優先</li>
+  </ul></div>
+
+  <div class="mcard"><h3>推奨ロードマップ（本件の答え）<span class="tag s">結論</span></h3>
+  <ul class="plain">
+    <li><span class="dot">段一</span><b>いま：Xを「型」で固める</b>（次章）。新媒体は増やさない。開発が画面を持つまではXの開発ログが最強のコンテンツ。</li>
+    <li><span class="dot">段二</span><b>アプリの画面ができたら：短尺動画を1本柱追加</b>。第一候補は<b>TikTok（英語）</b>——フォロワー0から届く唯一の場所でアプリDLに直結。同じ動画を<b>透かしを外してShorts・Reelsへ同時転用</b>（追加工数ほぼゼロで配信面3倍・ROI3〜4倍）。つまり「作るのは1本、置き場は3つ」。</li>
+    <li><span class="dot">段三</span><b>60〜90日後：数字で主戦場を決める</b>。瞬発（TikTok）と複利（Shorts）のどちらが伸びたかで比重を移す。検索されやすい題材（識別・How to系）ならShorts重視へ。</li>
+    <li><span class="dot">段四</span><b>育ってから：Instagramを世界観アカに昇格／YouTube長尺は検索需要が見えた題材だけ</b>。</li>
+  </ul></div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">0→数百万</div><div class="lbl">TikTokはフォロワー0の投稿でも届き得る。<b>新規参入の初速</b>は三媒体で最速</div></div>
+    <div class="dcard"><div class="num gold">約4倍</div><div class="lbl">小規模アカ（1,000〜5,000）のShortsは同規模TikTok/Reels比で平均ビュー約4倍という調査。<b>複利の器</b></div></div>
+    <div class="dcard"><div class="num warn">0.65%</div><div class="lbl">Reelsの平均エンゲージ率。既存フォロワー加重のため<b>ゼロから単独立ち上げは不利</b></div></div>
+  </div>
+
+  <div class="callout"><b>「広げない」も正解。</b>週1.5時間未満しか出せない期間（開発の山場など）は、X週5ポスト＋月1 noteだけに絞ってよい。中途半端な3媒体より、強い1媒体＋転用。SNSは撤退ではなく「省力運転モード」を用意しておくと折れない。</div>
+</section>
+
+<!-- X運用の型 -->
+<section id="s4" class="page">
+  <div class="sec-head"><div class="tate">城を固める</div><div><h2>X運用の型 — いまのアカウントを武器にする</h2><p>Xの役割：仲間・信頼・国内初期ユーザー・フィードバック。DLは短尺に任せる。</p></div></div>
+
+  <div class="mcard"><h3>プロフィール設計<span class="tag">土台</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span>名前欄：名前＋一言（「◯◯を作ってる」）。<b>何の人か3秒で分かる</b>ように。</li>
+    <li><span class="dot">・</span>bio：作っているもの一行＋現在地（「7月リリース目標」）＋リンク（アプリ or lit.link等）。</li>
+    <li><span class="dot">・</span>固定ポスト：アプリ紹介 or 開発宣言スレッド。<b>初訪問者の着地点</b>を常に整備。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>投稿の型・六選<span class="tag">制作</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>進捗スクショ</b>：Before/Afterの2枚 or 動くUIのGIF。「今日ここまで」で十分。</li>
+    <li><span class="dot">弐</span><b>数字公開</b>：DL数・収益・オンボ完了率。月次で。build in publicの中核で最も拡散される型。</li>
+    <li><span class="dot">参</span><b>失敗談・詰まった話</b>：審査リジェクト・バグ・迷い。共感と保存が伸びる。</li>
+    <li><span class="dot">四</span><b>選択を委ねる</b>：「アイコンAとB、どっち？」——エンゲージと当事者意識を同時に作る。</li>
+    <li><span class="dot">伍</span><b>知見の放出</b>：調べたこと（ASO・審査・料金相場）を惜しみなく。フォロー理由になる。</li>
+    <li><span class="dot">六</span><b>リリースノート物語</b>：「◯◯という声に応えて」——ユーザーの声→改善の往復を見せる。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>運用のリズム<span class="tag m">習慣</span></h3>
+  <div class="rowline"><span class="k">頻度</span><span class="v">毎日1ポスト（無理なら平日5）。<b>完璧な1本より雑な毎日</b></span></div>
+  <div class="rowline"><span class="k">交流</span><span class="v">毎日、同志（#個人開発 等）のポストに<b>3リプ</b>。リプは最安の露出</span></div>
+  <div class="rowline"><span class="k">タグ</span><span class="v">#個人開発 #buildinpublic（英語ポスト時）。付けすぎない（1〜2個）</span></div>
+  <div class="rowline"><span class="k">リンク</span><span class="v">外部リンクは本文でなく<b>リプ欄 or プロフィール</b>へ（リーチ低下対策の通例）</span></div>
+  <div class="rowline"><span class="k">分析</span><span class="v">週1でインプよりも<b>プロフィールアクセス数とリンククリック</b>を見る</span></div>
+  </div>
+
+  <div class="mcard"><h3>英語アカウントを分けるか<span class="tag k">判断</span></h3>
+  <p><b>分けるのが基本</b>。日英混在はどちらのフォロワーにもノイズになり、アルゴの興味推定も濁る。ただし優先度は低い：<b>英語圏への発信はX英語アカより短尺動画（TikTok英語）が先</b>。X英語アカはlaunch期に作り、Reddit・PHとの連携拠点として最小運用（週2〜3ポスト）で十分。</p></div>
+</section>
+
+<!-- 短尺動画 -->
+<section id="s5" class="page">
+  <div class="sec-head"><div class="tate">十五秒の芸</div><div><h2>短尺動画の作り方</h2><p>顔出し不要。UIが主役。1本作って3ヶ所に置く。</p></div></div>
+
+  <div class="mcard"><h3>型・五選（アプリ向け）<span class="tag">企画</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>Before/After</b>：不便な現状2秒→アプリで解決10秒→結果3秒。最初に撮っておいたBefore素材がここで生きる。</li>
+    <li><span class="dot">弐</span><b>物語内CTA</b>：「Download now」ではなく<b>「これ、自分のアプリで30秒で作った」</b>と物語の中に置く。2026年に最も効くCTA形式。</li>
+    <li><span class="dot">参</span><b>題材の豆知識</b>：アプリのテーマ自体の雑学（七十二候・月齢・洗濯表示…）。検索で発見され続ける＝Shorts向き。</li>
+    <li><span class="dot">四</span><b>開発の裏側</b>：タイムラプス・ビフォーアフターのコード画面・審査ドラマ。</li>
+    <li><span class="dot">伍</span><b>UGC風</b>：実ユーザー・マイクロクリエイターに提供して撮ってもらう。自作自演はしない。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>15〜30秒の構成公式<span class="tag a">脚本</span></h3>
+  <div class="rowline"><span class="k">0〜2秒</span><span class="v"><b>フック</b>＝結果か問題を先に見せる（「毎朝これで起きてる」「この洗濯表示、読める？」）。ここで視聴の8割が決まる</span></div>
+  <div class="rowline"><span class="k">2〜6秒</span><span class="v">状況説明は最小限。画面はもう動いている</span></div>
+  <div class="rowline"><span class="k">6〜25秒</span><span class="v">価値の実演。テロップは<b>現地語・大きく・3語前後</b>で刻む</span></div>
+  <div class="rowline"><span class="k">末尾</span><span class="v">オチ or 一言CTA（物語内）。ループするなら冒頭に戻る構成が最強</span></div>
+  </div>
+
+  <div class="mcard"><h3>制作ワークフロー（1本20分）<span class="tag m">手順</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span>画面収録（実機・縦9:16）→ 素材は長めに回す。</li>
+    <li><span class="dot">弐</span>CapCutでカット→テロップ→トレンド音源（商用可のもの）。<b>1.5〜2倍速</b>がアプリデモの体感適正。</li>
+    <li><span class="dot">参</span>書き出し→<b>TikTokに原本投稿→透かしなし版をShorts・Reelsへ</b>（透かし付き転載はReelsで抑制される）。</li>
+    <li><span class="dot">四</span>キャプションに検索語（英語：アプリの用途語）。ハッシュタグは3〜5個。</li>
+    <li><span class="dot">伍</span>当たった動画は<b>テロップ差し替えで多言語版</b>を量産（西・独・仏…ストア展開と同期）。</li>
+  </ul></div>
+
+  <div class="callout"><b>火曜まとめ撮りの掟。</b>週1回60〜90分で2〜3本をまとめて撮る。毎日撮ろうとしない。ネタ切れ対策は「型×アプリの機能×季節」の掛け算表を作っておくこと。</div>
+</section>
+
+<!-- 週間運用 -->
+<section id="s6" class="page">
+  <div class="sec-head"><div class="tate">日々の勤め</div><div><h2>週間運用と90日計画</h2><p>X毎日＋動画週2〜3本を、合計3時間で回す設計。</p></div></div>
+
+  <div class="mcard"><h3>週間ルーティン（計 約3時間）<span class="tag">時間割</span></h3>
+  <div class="rowline"><span class="k">月（15分）</span><span class="v">ネタ出し10本（X用6・動画用4）。伸びてる類似動画を3本観察</span></div>
+  <div class="rowline"><span class="k">火（75分）</span><span class="v"><b>動画まとめ撮り2〜3本</b>＋編集。Xは撮影の裏側を1ポスト</span></div>
+  <div class="rowline"><span class="k">水木（各20分）</span><span class="v">動画投稿（TikTok→Shorts/Reels転用）＋コメント全返信＋X1ポスト</span></div>
+  <div class="rowline"><span class="k">金（20分）</span><span class="v">X1ポスト＋同志へ3リプ。余力で動画1本追加</span></div>
+  <div class="rowline"><span class="k">土（15分）</span><span class="v">数字確認（保存数・完了率・リンククリック）→伸びた型をメモ</span></div>
+  <div class="rowline"><span class="k">日</span><span class="v">休む（義務）。継続は休みの設計から</span></div>
+  </div>
+
+  <div class="mcard"><h3>90日計画<span class="tag k">立ち上げ</span></h3>
+  <ul class="plain">
+    <li><span class="dot">1〜30日</span><b>型を試す</b>：五つの型を10〜15本。数字は見すぎない。Xは通常運転。</li>
+    <li><span class="dot">31〜60日</span><b>当たりを探す</b>：保存数・完了率上位の型に集中。同じ型を角度替えで反復（同じ動画の再投稿もTikTokでは有効）。</li>
+    <li><span class="dot">61〜90日</span><b>当たりを増やす</b>：多言語テロップ版展開／予算があればSpark Adsで「勝った投稿だけ」少額ブースト／主戦場（TikTok or Shorts）を決めて比重移動。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>見る数字（週1・5分）<span class="tag a">計測</span></h3>
+  <div class="rowline"><span class="k">動画</span><span class="v"><b>保存数</b>と<b>視聴完了率</b>（いいねより配信に効く）→ 型の当落判定に使う</span></div>
+  <div class="rowline"><span class="k">導線</span><span class="v">プロフィール遷移数 → <b>ストアリンククリック → DL</b>（媒体別パラメータで）</span></div>
+  <div class="rowline"><span class="k">X</span><span class="v">プロフィールアクセスとリンククリック。インプは参考程度</span></div>
+  </div>
+
+  <div class="callout"><b>やらないことリスト。</b>広告っぽい完成品PR動画／3媒体同時ゼロ立ち上げ／毎日の数字確認／フォロワー購入／バズった直後の路線変更（同じ型を続けるのが正解）／launch後の燃え尽き放置。</div>
+</section>
+
+<!-- 伸びた後 -->
+<section id="s7" class="page">
+  <div class="sec-head"><div class="tate">火を絶やさぬ</div><div><h2>伸びた後 — 火種を仕組みに変える</h2><p>バズは事件、成長は仕組み。当たった後の一手で差がつく。</p></div></div>
+
+  <div class="mcard"><h3>マイクロクリエイター提携<span class="tag">増幅</span></h3>
+  <p>フォロワー<b>1万〜10万</b>の現地クリエイターは、大物比で<b>3〜5倍のエンゲージ効率</b>。やり方：①自分の動画で反応が良かった国のクリエイターを5人リストアップ ②無料のプレミアムコード＋紹介は任意、のDM ③投稿してくれたら必ずコメント・転載（許可付き）。金銭契約は成果が見えてから。</p></div>
+
+  <div class="mcard"><h3>Spark Ads（少額ブースト）<span class="tag k">投資</span></h3>
+  <p>ゼロから作る広告ではなく、<b>オーガニックで勝った投稿をそのまま広告化</b>する方式。すでにエンゲージが証明された動画ほどCPMが安い。月数千円〜1万円台の実験から。負けた動画のブーストは金の無駄。</p></div>
+
+  <div class="mcard"><h3>UGCの雪だるま<span class="tag m">循環</span></h3>
+  <ul class="plain">
+    <li><span class="dot">・</span>アプリ内に<b>共有したくなる瞬間</b>を設計（月末の成長絵・記録カード・Before/After画像の書き出し）。</li>
+    <li><span class="dot">・</span>ユーザーの投稿は全て拾って反応・（許可を得て）紹介。<b>紹介されると分かれば投稿は増える</b>。</li>
+    <li><span class="dot">・</span>ハッシュタグを1つ決めて固定ポスト・アプリ内に明記。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>コミュニティ化の目安<span class="tag u">深化</span></h3>
+  <p>Discord等のコミュニティは<b>「質問・要望が週10件を超えたら」</b>開設を検討。早すぎる開設は過疎が信頼を削る。それまではXのリプ欄とレビュー返信がコミュニティ。月次の数字公開ポストを「定例会」として続けるだけでも、十分にコミュニティは育つ。</p></div>
+
+  <div class="callout"><b>次の一冊。</b>ここで得たDLを収益に変える設計は<b>別冊二「マネタイズの書」</b>、発信のネタ元になる開発の進め方は<b>別冊一「アプリ開発の書」</b>、全体の時系列は<b>第二巻「戦略・行程編」</b>へ。</div>
+</section>
+
+</div>
+
+<footer>調査日：2026年7月2日 ／ 作成：Claude ／ 別冊三・SNS運用編<br>各媒体のアルゴリズム・規約は頻繁に変わります。数値は2026年時点の各種調査に基づく参考値です。</footer>
+
+<script>
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+</script>
+</body>
+</html>

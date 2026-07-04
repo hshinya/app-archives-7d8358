@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>和風・季節アプリ アイデア集 | アプリ開発リサーチ</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="wafu" class="theme-wafu">
+<button class="nav-toggle" type="button" aria-label="メニュー">☰</button>
+<div class="layout">
+
+  <aside class="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand-title">アプリ開発リサーチ</span>
+      <div class="brand-sub">調査・アイデア資料集</div>
+    </a>
+    <div class="nav-group-label">レポート</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link active" href="wafu.html"><span class="nav-ico">🌸</span>和風・季節アプリ</a>
+    <a class="nav-link" href="business.html"><span class="nav-ico">💼</span>海外ビジネスアプリ</a>
+    <div class="nav-group-label">このページ</div>
+    <a class="nav-link" href="#sec-dives"><span class="nav-ico">🏆</span>トップ6 詳細設計</a>
+    <a class="nav-link" href="#sec-ideas"><span class="nav-ico">💡</span>アイデア 77案</a>
+    <a class="nav-link" href="#sec-research"><span class="nav-ico">🔍</span>市場調査</a>
+    <div class="sidebar-foot">2026年6月11日 作成</div>
+  </aside>
+
+  <main class="content">
+    <div class="page-header">
+      <div class="page-eyebrow">REPORT 01 — JAPANESE AESTHETIC APPS</div>
+      <h1>和風・季節アプリ アイデア集</h1>
+      <p class="lead">好きなイメージ(和風・京都・四季・朝日・月・星空・桜・雪・雨・風・川・海など)をもとに、8ジャンルの市場調査(国内・海外の人気アプリ)と、ジャンル別+3つの発想切り口で77案のアプリアイデアを生成。有望6案は開発着手できるレベルまで詳細設計しています。</p>
+      <div class="toc-row">
+        <a href="#sec-dives">🏆 トップ6 詳細設計</a>
+        <a href="#sec-ideas">💡 アイデアカタログ</a>
+        <a href="#sec-research">🔍 市場調査とギャップ</a>
+      </div>
+    </div>
+
+    <div class="stat-grid" id="stats"></div>
+
+    <h2 id="sec-dives">トップ6の詳細実装設計 <button class="chip" type="button" data-expand-all="#dives" style="margin-left:10px">すべて展開</button></h2>
+    <p class="muted">「個人開発での実現可能性 / 市場性 / 独自性 / 好きなイメージとの合致 / ジャンルの多様性」で77案から選定。クリックで画面構成・技術スタック・開発計画まで開きます。</p>
+    <div id="dives"></div>
+
+    <h2 id="sec-ideas">アイデアカタログ <span class="h2-count">全77案</span></h2>
+    <div class="filterbar">
+      <div class="filter-row" id="genre-chips"></div>
+      <div class="filter-row">
+        <input class="search-input" id="idea-search" type="search" placeholder="キーワード検索(例: 月、ウィジェット、買い切り)">
+        <select class="select-input" id="diff-select">
+          <option value="all">難易度: すべて</option>
+          <option value="1">難易度 1(最も易しい)</option>
+          <option value="2">難易度 2</option>
+          <option value="3">難易度 3</option>
+          <option value="4">難易度 4</option>
+          <option value="5">難易度 5(最も野心的)</option>
+        </select>
+        <select class="select-input" id="idea-sort">
+          <option value="default">並び順: 標準(レポート順)</option>
+          <option value="recommend:desc">おすすめ度が高い順</option>
+          <option value="demand:desc">需要度が高い順</option>
+          <option value="revenue:desc">収益性が高い順</option>
+          <option value="uniqueness:desc">独自性が高い順</option>
+          <option value="difficulty:asc">難易度が低い順(作りやすい)</option>
+          <option value="difficulty:desc">難易度が高い順(野心的)</option>
+        </select>
+        <span class="result-count" id="idea-count"></span>
+      </div>
+    </div>
+    <div class="x-list" id="idea-list"></div>
+
+    <h2 id="sec-research">市場調査: 国内・海外の人気アプリとギャップ <button class="chip" type="button" data-expand-all="#research" style="margin-left:10px">すべて展開</button></h2>
+    <p class="muted">8ジャンルを英語・日本語の両方でWeb調査。各ジャンルの「個人開発で狙えるギャップ」が緑色のボックスです。アプリ名をクリックすると人気の理由が開きます。</p>
+    <div id="research"></div>
+  </main>
+</div>
+<script src="assets/wafu-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

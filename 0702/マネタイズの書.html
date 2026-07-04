@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>マネタイズの書｜別冊二 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9; --card:#FFFDF6; --ink:#23282C; --ink-soft:#5B6168; --line:#DFD8C6;
+  --ai:#2E5C7F; --ume:#B7566B; --matcha:#6B7F52; --karashi:#B98A22; --shu:#B33A3A;
+  --vol:var(--karashi);
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--washi);background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);background-size:5px 5px;color:var(--ink);line-height:1.75;font-size:15px;padding-bottom:64px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--vol)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+nav.tabs{position:sticky;top:0;z-index:50;background:rgba(245,242,233,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{border:1px solid transparent;background:none;font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;letter-spacing:.32em;color:var(--shu);border-right:1px solid var(--line);padding-right:8px;min-height:64px}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--vol);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard h3 .tag.a{background:var(--ai)} .mcard h3 .tag.u{background:var(--ume)} .mcard h3 .tag.m{background:var(--matcha)} .mcard h3 .tag.s{background:var(--shu)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif);white-space:nowrap}
+ul.plain li b{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:21px;color:var(--vol);font-variant-numeric:tabular-nums;line-height:1.25}
+.dcard .num.warn{color:var(--shu)} .dcard .num.blue{color:var(--ai)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--vol);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--vol)}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16.5px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+.rowline{display:flex;gap:8px;font-size:12.5px;padding:7px 0;border-top:1px dashed var(--line)}
+.rowline:first-of-type{border-top:none}
+.rowline .k{min-width:88px;color:var(--ink-soft);font-size:11px;letter-spacing:.08em;padding-top:2px}
+.rowline .v{flex:1}
+.rowline .v b{color:var(--ink)}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-top:10px;display:flex;gap:12px;align-items:flex-start}
+.tier .t-badge{min-width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;color:var(--washi);letter-spacing:.02em;text-align:center;line-height:1.25}
+.tier .t-body{flex:1}
+.tier h4{font-family:var(--serif);font-size:14.5px}
+.tier p{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.tier p b{color:var(--ink)}
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+@media(min-width:640px){body{font-size:15.5px}.hero h1{font-size:32px}.grid2{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:no-preference){section.page.on{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 別冊二・マネタイズ編 ／ 2026.07</div>
+  <h1>マネタイズの書<span class="thin">払いたくなる導線と、上げて試す値付けの技法</span></h1>
+  <p class="lede">サブスク・買い切り・IAPの選び方から、オンボーディング→ペイウォールの導線設計、価格、実験の回し方、計測まで。数値はAdapty「State of In-App Subscriptions 2026」（$3B・16,000アプリ）、RevenueCat（$16B・115,000アプリ）等の調査に基づく参考値。</p>
+  <div class="stats">
+    <div class="stat"><b>82%</b><span>初日トライアル比率</span></div>
+    <div class="stat"><b>40倍</b><span>実験の収益差</span></div>
+    <div class="stat"><b>9割</b><span>満額で売れる</span></div>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="章切替">
+  <div class="row">
+    <button data-t="m1" class="on">収益方針</button>
+    <button data-t="m2">モデル選択</button>
+    <button data-t="m3">導線設計</button>
+    <button data-t="m4">価格設計</button>
+    <button data-t="m5">実験の回し方</button>
+    <button data-t="m6">計測と相場</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 収益方針 -->
+<section id="m1" class="page on">
+  <div class="sec-head"><div class="tate">銭の心得</div><div><h2>収益方針 — 五ヶ条</h2><p>収益はテクニックの合計ではなく、初日の設計で天井が決まる。</p></div></div>
+
+  <div class="pcard"><div class="no">第一条</div><h3>初日から課金を置く</h3><p>トライアル開始の<b>82%はインストール当日</b>。「ユーザーが増えてから課金」は、最も濃い見込み客の8割を素通りさせる設計。ダミーでもいいから初日からペイウォールを置き、数字を取り始める。</p></div>
+  <div class="pcard"><div class="no">第二条</div><h3>満額で売る。割引は例外</h3><p>サブスクの<b>約9割は満額で売れている</b>。割引の常用は価格の信頼を毀損する（実用系アプリの割引利用率はわずか1.2%）。割引を使うのは「ペイウォールを閉じた人への時限オファー」など、狙いが明確な一手だけ。</p></div>
+  <div class="pcard"><div class="no">第三条</div><h3>下げるより、上げて試す</h3><p>高価格帯アプリのLTVは低価格帯の<b>約3倍</b>。価格テストは転換率を上げないことが多い（勝率28.3%）が、<b>LTVは45.5%の確率で改善</b>する。「安くすれば売れる」は個人開発最大の錯覚。</p></div>
+  <div class="pcard"><div class="no">第四条</div><h3>毎月ひとつ実験する</h3><p>実験を回すアプリは回さないアプリの<b>40倍稼ぐ</b>。ペイウォール構成の巧拙だけでLTVに最大<b>636%</b>の差。才能の差ではなく試行回数の差。</p></div>
+  <div class="pcard"><div class="no">第五条</div><h3>解約されない価値を土台に</h3><p>実用（ユーティリティ）の初回更新率は58.1%で全カテゴリ首位。<b>「毎週使う理由」があるアプリだけがサブスクの土俵に立てる</b>。使われない月があるアプリは買い切りで売る（第二章）。</p></div>
+</section>
+
+<!-- モデル選択 -->
+<section id="m2" class="page">
+  <div class="sec-head"><div class="tate">型を選ぶ</div><div><h2>収益モデルの選択</h2><p>モデル選びはアプリの性格診断。問いに答えれば決まる。</p></div></div>
+
+  <div class="mcard"><h3>三つの問いで決める<span class="tag">診断</span></h3>
+  <ul class="plain">
+    <li><span class="dot">問一</span><b>毎週使う理由があるか？</b> → Yes：<b>サブスク主軸</b>（＋買い切り併設）／ No：次へ</li>
+    <li><span class="dot">問二</span><b>一生モノの道具か？</b>（レシピ帳・変換ツール型）→ Yes：<b>買い切り</b>（Paprika・Streaks型）</li>
+    <li><span class="dot">問三</span><b>愛着・見た目に価値があるか？</b>（育成・ウィジェット・きせかえ）→ Yes：<b>基本無料＋装飾IAP</b>（＋サブスクで機能拡張）</li>
+  </ul></div>
+
+  <div class="tier"><div class="t-badge" style="background:var(--karashi)">サブスク</div><div class="t-body"><h4>主軸 — 毎週価値が出るアプリの標準</h4><p>週課金は業界収益の55.5%を占めるが、体感価値と釣り合わない週額は<b>不満レビューの火種</b>（noteitの週$6.99問題）。個人開発は<b>年額推し＋月額</b>の2枚構成が安全。トライアルとの組み合わせは第四章。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--ai)">買い切り<br>併設</div><div class="t-body"><h4>推奨 — サブスク疲れの受け皿</h4><p>サブスクに買い切り（ライフタイム）を並べるだけで<b>総転換+15〜25%</b>。買い切り比率は市場全体で6.4%→10.3%に増加中。価格はおよそ年額の2〜3倍に設定するのが通例。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--ume)">装飾IAP</div><div class="t-body"><h4>喜び系の王道 — 機能は無料、愛着に課金</h4><p>Simejiのきせかえ、Widgetableのペット用品。テーマ・スキン・限定モチーフを<b>季節ごとに追加</b>する運用と相性がよい。単価は小さいが解約という概念がない。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--matcha)">物販・<br>手数料</div><div class="t-body"><h4>単価を跳ね上げる出口</h4><p>みてね（写真プリント）、Vivino（購入導線）。<b>アプリの外の消費に接続</b>できる場合のみ。印刷・郵送系（未来ポスト・まごビュー型の案）と好相性。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--shu)">広告</div><div class="t-body"><h4>個人開発では非推奨</h4><p>成立には大量DL（トリマ型）が必要で、癒し・cozy系の世界観とは相性最悪。使うなら<b>「広告非表示」課金への導線</b>としてのみ。</p></div></div>
+
+  <div class="mcard"><h3>アプリタイプ別の早見（第一巻の分類と対応）<span class="tag m">適用</span></h3>
+  <div class="rowline"><span class="k">ウィジェット系</span><span class="v">買い切り or 低額サブスク＋<b>テーマIAP</b>（七十二候・月と潮 など）</span></div>
+  <div class="rowline"><span class="k">育成×実用系</span><span class="v"><b>サブスク＋装飾IAP</b>の二段（貯金盆栽・歩く枯山水 など）</span></div>
+  <div class="rowline"><span class="k">スキャン系</span><span class="v"><b>サブスク＋トライアル</b>（PictureThis型）。回数制限フリーミアム</span></div>
+  <div class="rowline"><span class="k">記録・思い出系</span><span class="v">フリーミアム＋<b>保管サブスク or 印刷物販</b>（未来ポスト など）</span></div>
+  <div class="rowline"><span class="k">家族・見守り系</span><span class="v"><b>家族プラン価格</b>のサブスク（払う人＝子世帯の設計）</span></div>
+  <div class="rowline"><span class="k">超小型ツール</span><span class="v"><b>買い切り一発</b>（傘ワンタップ・単価どっち？ など）。数を並べるポートフォリオ戦略と相性</span></div>
+  </div>
+</section>
+
+<!-- 導線設計 -->
+<section id="m3" class="page">
+  <div class="sec-head"><div class="tate">道を敷く</div><div><h2>導線設計 — オンボとペイウォールは一本の物語</h2><p>ペイウォールの転換率は、ペイウォールの手前で決まっている。</p></div></div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">+37%</div><div class="lbl"><b>複数ページ型</b>オンボ→ペイウォールの転換率優位（単一画面比・Superwall調べ）</div></div>
+    <div class="dcard"><div class="num blue">約50%</div><div class="lbl">オンボ内ペイウォールが全トライアル開始に占める割合の実例（Mojo社の公開値）</div></div>
+    <div class="dcard"><div class="num">+10〜20%</div><div class="lbl">アプリ内に<b>常設アップグレード導線</b>を置いた増収事例（Avast公開値）</div></div>
+  </div>
+
+  <div class="mcard"><h3>オンボーディング五段構成（実装レシピ）<span class="tag">設計</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>約束</b>：結果を一文で（「7日で朝が変わる」）。CTAは1つ。ログイン要求はしない。</li>
+    <li><span class="dot">弐</span><b>質問2〜4問</b>：目標・頻度・レベル。<b>後の画面に反映されない質問は削除</b>。回答するほど「自分のもの」感が育つ（マイクロコミットメント）。進捗表示（2/4）で有限感を。</li>
+    <li><span class="dot">参</span><b>構築演出</b>：「あなた用に準備中…」2〜3秒のアニメ。Noomはここで予測グラフを描いて見せる。<b>ペイウォールの前口上</b>。</li>
+    <li><span class="dot">四</span><b>プラン提示</b>：回答を反映した「あなたのプラン」（週3回・20分…）。聞いたことを使った証明が信頼になる。</li>
+    <li><span class="dot">伍</span><b>ペイウォール</b>：下の解剖図どおりに。閉じるボタンは付ける（審査上も安全）。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>ペイウォール解剖図 — 必須要素<span class="tag">部品</span></h3>
+  <div class="rowline"><span class="k">見出し</span><span class="v"><b>成果ベース</b>：「◯◯を手に入れる」。機能列挙ではなくベネフィット3点</span></div>
+  <div class="rowline"><span class="k">プラン</span><span class="v">年額＋月額（＋買い切り）。<b>年額を既定選択</b>にし「月あたり◯円」表記＋節約バッジ</span></div>
+  <div class="rowline"><span class="k">CTA文言</span><span class="v">「Subscribe」でなく<b>「プランを始める」「無料で試す」</b>（行動の結果を書く）</span></div>
+  <div class="rowline"><span class="k">信頼要素</span><span class="v">評価★・レビュー引用・「いつでも解約OK」を価格の近くに</span></div>
+  <div class="rowline"><span class="k">法定表記</span><span class="v">価格・期間・自動更新・解約方法・<b>復元ボタン</b>・規約とポリシーのリンク（審査必須）</span></div>
+  <div class="rowline"><span class="k">閉じた後</span><span class="v">閉じた人フラグ→後日<b>時限オファー</b>（唯一の割引の使いどころ）</span></div>
+  </div>
+
+  <div class="mcard"><h3>配置の四点セット<span class="tag a">出現場所</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>オンボ末尾</b>（主戦場・転換の約半分がここ）</li>
+    <li><span class="dot">弐</span><b>文脈トリガー</b>：無料上限に触れた瞬間・ロック機能タップ時（「上限に達しました→無制限にする」）</li>
+    <li><span class="dot">参</span><b>常設ボタン</b>：設定やヘッダーに「Pro」導線（+10〜20%）</li>
+    <li><span class="dot">四</span><b>キャンペーン</b>：アプリ起動イベントや達成時に軽く提示（Mojoはこれだけで新規iOS収益の15%）</li>
+  </ul></div>
+</section>
+
+<!-- 価格設計 -->
+<section id="m4" class="page">
+  <div class="sec-head"><div class="tate">値を付ける</div><div><h2>価格設計 — 相場・地域・トライアル</h2><p>価格は一度決めたら終わりではなく、実験対象の筆頭。</p></div></div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">$7.48</div><div class="lbl">週額の世界中央値。月額は<b>$12.99</b>、年額は<b>$38.42</b></div></div>
+    <div class="dcard"><div class="num">45.7%</div><div class="lbl"><b>17〜32日</b>トライアルの転換率。3〜7日型（26.8%）のほぼ2倍</div></div>
+    <div class="dcard"><div class="num">+60%</div><div class="lbl"><b>構造化されたトライアル体験</b>（通知・チェックリスト設計）による初回更新率の押し上げ幅</div></div>
+    <div class="dcard"><div class="num">+18%</div><div class="lbl">欧州のサブスク価格の前年比上昇。<b>年額・月額・週額すべてで北米を抜き世界最高値圏</b>に</div></div>
+    <div class="dcard"><div class="num blue">世界最高級</div><div class="lbl"><b>日本のApp Store ARPU</b>。日本語対応は「ついで」ではなく収益戦略</div></div>
+    <div class="dcard"><div class="num">3.1倍</div><div class="lbl">APACの週額プランにおける高価格帯と低価格帯のLTV差（全地域で最大）</div></div>
+  </div>
+
+  <div class="mcard"><h3>値付けの手順<span class="tag">実務</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span>競合3〜5個の価格を表にする（国別に見る。同じアプリでも米・欧・日で違う）。</li>
+    <li><span class="dot">弐</span>初期価格は<b>競合中央値〜やや上</b>に置く（安売りスタートは後で上げにくい）。</li>
+    <li><span class="dot">参</span><b>国別価格を手動調整</b>：欧州は北米比で強気（+20〜30%も通る）、日本は北米同等、新興国はストア推奨の現地水準へ。自動換算に任せきりにしない。</li>
+    <li><span class="dot">四</span>トライアルは<b>7日から始めて14〜30日を実験</b>（長い方が転換する調査が優勢だが、カテゴリ差が大きい）。</li>
+    <li><span class="dot">伍</span>為替は年1回見直し（円建て価格の劣化に注意）。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>週課金を使うなら<span class="tag s">注意</span></h3>
+  <p>週課金は業界収益の55.5%まで伸びたが、その多くは「短期集中で価値が出るアプリ」。<b>週$6.99のnoteitが不満レビューの山を築いた</b>ように、体感価値と釣り合わない週額はブランドを削る。使う条件：①毎週明確な成果が出る ②年額と併記して選ばせる ③解約導線を隠さない。</p></div>
+</section>
+
+<!-- 実験の回し方 -->
+<section id="m5" class="page">
+  <div class="sec-head"><div class="tate">試して勝つ</div><div><h2>実験の回し方 — 月次プロトコル</h2><p>40倍の差は、才能ではなく「実験が習慣になっているか」で生まれる。</p></div></div>
+
+  <div class="mcard"><h3>月次1実験プロトコル<span class="tag">手順</span></h3>
+  <ul class="plain">
+    <li><span class="dot">壱</span><b>仮説を1行で</b>：「年額を既定にすればLTVが上がるはず」。変えるのは<b>1変数だけ</b>。</li>
+    <li><span class="dot">弐</span>第1週に開始（RevenueCat Experiments / AdaptyのA/B。<b>アプリ審査なしで</b>ペイウォールを差し替えられる）。</li>
+    <li><span class="dot">参</span>2〜3週間は触らない。<b>片群100転換前後</b>を目安に判定（少数で早断ちしない）。</li>
+    <li><span class="dot">四</span>第4週に採用/棄却→記録→翌月の実験を決める。負けた実験も「消した選択肢」として資産。</li>
+  </ul></div>
+
+  <div class="mcard"><h3>実験の優先順位（効果の大きい順）<span class="tag a">順番</span></h3>
+  <ul class="plain">
+    <li><span class="dot">一</span><b>ペイウォールの配置とゲート</b>：オンボ末尾に出しているか・ハード/ソフトの別（最大レバー。LTV差636%の主因）</li>
+    <li><span class="dot">二</span><b>プラン構成</b>：年額既定・買い切り併設・プラン数（3→2に減らす等）</li>
+    <li><span class="dot">三</span><b>トライアル日数</b>：7 vs 14 vs 30</li>
+    <li><span class="dot">四</span><b>価格</b>：±30〜50%の大胆な幅で（±10%は誤差に沈む）。目的はLTV</li>
+    <li><span class="dot">五</span><b>見た目・コピー</b>：見出し・CTA文言・画像（効くが上位ほどではない）</li>
+  </ul></div>
+
+  <div class="callout"><b>やってはいけない実験。</b>同時に2変数を変える／1週間で判定する／転換率だけ見てLTVを見ない／勝ち筋のないテスト（ボタン色など）から始める。</div>
+</section>
+
+<!-- 計測と相場 -->
+<section id="m6" class="page">
+  <div class="sec-head"><div class="tate">数字で語る</div><div><h2>計測と市場の相場観</h2><p>感想ではなく数字で意思決定するための最小セット。</p></div></div>
+
+  <div class="mcard"><h3>KPIツリー（最小構成）<span class="tag">計測</span></h3>
+  <div class="rowline"><span class="k">北極星</span><span class="v">初期：<b>週あたり新規トライアル開始数</b> → 成長期：<b>MRR（月間経常収益）</b></span></div>
+  <div class="rowline"><span class="k">入口</span><span class="v">ストア転換率（表示→DL）／オンボ完了率（70%前後が目安）</span></div>
+  <div class="rowline"><span class="k">課金前</span><span class="v"><b>ペイウォール表示率</b>（新規の何%が見たか）／トライアル開始率</span></div>
+  <div class="rowline"><span class="k">課金</span><span class="v">トライアル→有料転換率／<b>国別の7日以内キャンセル率</b>（価格不適合の早期警報）</span></div>
+  <div class="rowline"><span class="k">継続</span><span class="v">D1・D7・D30／解約時1問アンケート（理由を実験ネタ帳へ）</span></div>
+  </div>
+
+  <div class="mcard"><h3>市場の相場観（自分の位置を知る）<span class="tag m">基準</span></h3>
+  <div class="grid2">
+    <div class="dcard"><div class="num warn">$492</div><div class="lbl">サブスクアプリの<b>月収中央値</b>。59.3%は累計$1,000未満</div></div>
+    <div class="dcard"><div class="num warn">94.5%</div><div class="lbl">収益の94.5%は<b>上位10%</b>に集中。中央値の外に出る設計が前提</div></div>
+    <div class="dcard"><div class="num">$68.90</div><div class="lbl">実用系トライアル経由ユーザーの<b>12ヶ月LTV</b>（全カテゴリ最高）</div></div>
+    <div class="dcard"><div class="num">77%</div><div class="lbl">新規サブスクアプリの<b>iOS発</b>比率。収益検証はiOS先行が定石</div></div>
+    <div class="dcard"><div class="num">6.7個</div><div class="lbl">米国消費者の平均サブスク数。<b>疲れ</b>への答えが買い切り併設</div></div>
+    <div class="dcard"><div class="num">69%</div><div class="lbl">サブスク収益の69%は<b>2020年以前リリース</b>のアプリ。古参と正面衝突しない</div></div>
+  </div></div>
+
+  <div class="callout"><b>週次の見方。</b>毎週見るのは北極星＋ファネル4つ（オンボ完了→ペイウォール表示→トライアル→有料）だけ。それ以外は月次で十分。数字を見る時間より、数字を動かす実験に時間を使う。</div>
+
+  <p class="note-src">出典：Adapty「State of In-App Subscriptions 2026」・RevenueCat「State of Subscription Apps」・Superwall・RevenueCat Blog（Mojo/Avast事例）ほか。数値は調査時点の推定を含む参考値です。</p>
+</section>
+
+</div>
+
+<footer>調査日：2026年7月2日 ／ 作成：Claude ／ 別冊二・マネタイズ編<br>価格・税・ストア規約は変動します。実装時は各ストアの最新規約をご確認ください。</footer>
+
+<script>
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+</script>
+</body>
+</html>

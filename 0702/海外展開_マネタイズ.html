@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>海外展開とマネタイズ｜戦略・行程編 2026</title>
+<style>
+:root{
+  --washi:#F5F2E9;
+  --card:#FFFDF6;
+  --ink:#23282C;
+  --ink-soft:#5B6168;
+  --line:#DFD8C6;
+  --ai:#2E5C7F;
+  --ume:#B7566B;
+  --matcha:#6B7F52;
+  --karashi:#B98A22;
+  --shu:#B33A3A;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","BIZ UDMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--washi);
+  background-image:radial-gradient(rgba(0,0,0,.018) 1px,transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink);
+  line-height:1.75;
+  font-size:15px;
+  padding-bottom:64px;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+/* ---------- hero ---------- */
+header.hero{padding:34px 0 20px;border-bottom:1px solid var(--line)}
+.hero .kicker{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);margin-bottom:10px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:26px;line-height:1.45;letter-spacing:.04em}
+.hero h1 .thin{display:block;font-size:14px;font-weight:400;color:var(--ink-soft);letter-spacing:.18em;margin-top:6px}
+.hero .lede{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+.stats{display:flex;gap:10px;margin-top:18px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums;color:var(--ai)}
+.stat span{font-size:10.5px;letter-spacing:.12em;color:var(--ink-soft)}
+
+/* ---------- nav ---------- */
+nav.tabs{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,242,233,.94);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs .row{display:flex;gap:4px;padding:8px 12px;min-width:max-content}
+nav.tabs button{
+  border:1px solid transparent;background:none;
+  font-family:var(--serif);font-size:13.5px;letter-spacing:.08em;color:var(--ink-soft);
+  padding:7px 13px;border-radius:999px;white-space:nowrap;cursor:pointer;
+}
+nav.tabs button.on{background:var(--ink);color:var(--washi)}
+
+/* ---------- sections ---------- */
+section.page{display:none;padding:26px 0 40px}
+section.page.on{display:block}
+.sec-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.tate{
+  writing-mode:vertical-rl;font-family:var(--serif);font-size:11px;
+  letter-spacing:.32em;color:var(--shu);
+  border-right:1px solid var(--line);padding-right:8px;min-height:64px;
+}
+.sec-head h2{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:.05em;line-height:1.5}
+.sec-head p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.7}
+
+/* ---------- generic cards ---------- */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.mcard h3{font-family:var(--serif);font-size:15.5px;letter-spacing:.03em}
+.mcard h3 .tag{font-size:10.5px;color:var(--washi);background:var(--ai);border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:2px;letter-spacing:.1em;font-family:var(--sans)}
+.mcard h3 .tag.u{background:var(--ume)} .mcard h3 .tag.m{background:var(--matcha)} .mcard h3 .tag.k{background:var(--karashi)} .mcard h3 .tag.s{background:var(--shu)}
+.mcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.mcard p b{color:var(--ink)}
+ul.plain{list-style:none;margin-top:8px}
+ul.plain li{font-size:13px;padding:7px 0;border-top:1px dashed var(--line);display:flex;gap:9px}
+ul.plain li:first-child{border-top:none}
+ul.plain li .dot{color:var(--shu);font-family:var(--serif);white-space:nowrap}
+ul.plain li b{color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 13px 11px}
+.dcard .num{font-family:var(--serif);font-size:21px;color:var(--ai);font-variant-numeric:tabular-nums;line-height:1.25}
+.dcard .num.warn{color:var(--shu)}
+.dcard .num.gold{color:var(--karashi)}
+.dcard .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.55}
+.callout{margin-top:16px;background:var(--card);border-left:3px solid var(--karashi);border-radius:0 10px 10px 0;padding:12px 14px;font-size:13.5px}
+.callout b{color:var(--karashi)}
+.callout.aiC{border-left-color:var(--ai)} .callout.aiC b{color:var(--ai)}
+
+/* ---------- 方針(五ヶ条) ---------- */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-top:10px}
+.pcard .no{font-family:var(--serif);color:var(--shu);font-size:12px;letter-spacing:.2em}
+.pcard h3{font-family:var(--serif);font-size:16.5px;margin-top:2px;letter-spacing:.03em}
+.pcard p{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.pcard p b{color:var(--ink);font-weight:600}
+
+/* ---------- 行程表(街道) ---------- */
+.road{position:relative;margin-top:20px;padding-left:34px}
+.road::before{
+  content:"";position:absolute;left:12px;top:8px;bottom:8px;width:0;
+  border-left:2px dashed #B9AF97;
+}
+.station{position:relative;margin-bottom:26px}
+.station::before{
+  content:"";position:absolute;left:-30px;top:4px;width:16px;height:16px;border-radius:50%;
+  background:var(--washi);border:2.5px solid var(--shu);
+}
+.station .s-head{margin-bottom:8px}
+.station .s-no{font-family:var(--serif);font-size:11px;letter-spacing:.25em;color:var(--shu)}
+.station h3{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:.04em;line-height:1.4}
+.station .s-meta{font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+.station .s-goal{font-size:13px;margin-top:6px;color:var(--ink)}
+.lane{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+.lane .lane-t{font-size:10.5px;letter-spacing:.2em;color:var(--washi);display:inline-block;border-radius:4px;padding:1px 8px;margin-bottom:6px}
+.lane.main .lane-t{background:var(--ai)}
+.lane.sns .lane-t{background:var(--ume)}
+.lane ul{list-style:none}
+.lane li{font-size:13px;padding:6px 0;border-top:1px dashed var(--line);display:flex;gap:8px}
+.lane li:first-child{border-top:none}
+.lane li::before{content:"・";color:var(--ink-soft)}
+.lane li b{color:var(--ink)}
+.sekisho{
+  margin-top:10px;border:1px solid var(--shu);border-radius:12px;padding:11px 14px;
+  background:linear-gradient(0deg,rgba(179,58,58,.045),rgba(179,58,58,.045)),var(--card);
+  position:relative;
+}
+.sekisho .g-t{font-family:var(--serif);font-size:12px;letter-spacing:.3em;color:var(--shu)}
+.sekisho ul{list-style:none;margin-top:4px}
+.sekisho li{font-size:13px;padding:5px 0;display:flex;gap:8px}
+.sekisho li::before{content:"☐";color:var(--shu);font-size:14px}
+
+/* ---------- 表もどき(モバイル対応の行カード) ---------- */
+.tier{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin-top:10px;display:flex;gap:12px;align-items:flex-start}
+.tier .t-badge{
+  min-width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:15px;color:var(--washi);letter-spacing:.05em;
+}
+.tier .t-body{flex:1}
+.tier h4{font-family:var(--serif);font-size:14.5px}
+.tier p{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.tier p b{color:var(--ink)}
+.rowline{display:flex;gap:8px;font-size:12.5px;padding:7px 0;border-top:1px dashed var(--line)}
+.rowline:first-of-type{border-top:none}
+.rowline .k{min-width:88px;color:var(--ink-soft);font-size:11px;letter-spacing:.08em;padding-top:2px}
+.rowline .v{flex:1}
+.rowline .v b{color:var(--ink)}
+
+footer{margin-top:10px;padding:20px 16px 30px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+
+@media(min-width:640px){
+  body{font-size:15.5px}
+  .hero h1{font-size:32px}
+  .grid2{grid-template-columns:repeat(3,1fr)}
+  .lanes2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  .lanes2 .lane{margin-top:10px}
+}
+@media(prefers-reduced-motion:no-preference){
+  section.page.on{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">FIELD GUIDE — 第二巻 ／ 2026.07 調査</div>
+  <h1>海外展開とマネタイズ<span class="thin">多言語アプリを世界に出すための戦略と行程</span></h1>
+  <p class="lede">第一巻「調査図鑑」の続編。日本＋英語圏を起点に多言語展開するための方針・ロードマップ・多言語化・ASO・SNS運用・収益設計・週次運用を一冊にまとめた。数値は各社公表・調査レポート・報道に基づく参考値。</p>
+  <div class="stats">
+    <div class="stat"><b>6</b><span>宿場（フェーズ）</span></div>
+    <div class="stat"><b id="stat-gates">–</b><span>関所チェック</span></div>
+    <div class="stat"><b>2</b><span>並走レーン</span></div>
+  </div>
+</header>
+</div>
+
+<nav class="tabs" aria-label="セクション切替">
+  <div class="row">
+    <button data-t="sec-policy" class="on">方針</button>
+    <button data-t="sec-route">行程表</button>
+    <button data-t="sec-lang">多言語化</button>
+    <button data-t="sec-aso">ASO</button>
+    <button data-t="sec-sns">SNS運用</button>
+    <button data-t="sec-money">収益設計</button>
+    <button data-t="sec-ops">週次運用</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ 方針 ============ -->
+<section id="sec-policy" class="page on">
+  <div class="sec-head">
+    <div class="tate">道を定める</div>
+    <div>
+      <h2>基本方針 — 五ヶ条</h2>
+      <p>迷ったらここに戻る。すべての戦術はこの五ヶ条から導かれる。</p>
+    </div>
+  </div>
+
+  <div class="pcard">
+    <div class="no">第一条</div>
+    <h3>英語ファースト、日本は「第二の本拠地」</h3>
+    <p>北米ユーザーのLTVは世界平均の約2倍、新規サブスクアプリの77%がiOS発。一方で<b>日本はApp Storeで世界最高水準のARPU市場</b>でもある。だから答えは二者択一ではなく、<b>「日英2言語を初日セット」</b>にすること。UIも文言も英語を正とし、日本語を母国語ボーナスとして同梱する。それ以外の言語は需要を見てから（第三条）。</p>
+  </div>
+  <div class="pcard">
+    <div class="no">第二条</div>
+    <h3>収益設計は初日から。「後で考える」は死因</h3>
+    <p>トライアル開始の<b>82%はインストール当日（Day 0）</b>に起きる。つまりオンボーディングとペイウォールは「あとで足す機能」ではなく<b>アプリの本体</b>。課金基盤（RevenueCat / Adapty等）は最初のビルドから入れ、満額価格で始める（サブスクの9割は満額で売れている）。</p>
+  </div>
+  <div class="pcard">
+    <div class="no">第三条</div>
+    <h3>翻訳は「ストアページ→UI」の順で段階投資</h3>
+    <p>タイトルと説明文のローカライズだけでDLが激増したという古典的調査（+767%）がある一方、UI翻訳は費用も保守も重い。<b>まずストアの見た目だけ現地語化→インストール需要が確認できた言語だけUIを翻訳</b>。ただしコード側のi18n設計（文字列の外部化）だけは初日から仕込む。後からでは百倍面倒になる。</p>
+  </div>
+  <div class="pcard">
+    <div class="no">第四条</div>
+    <h3>毎月ひとつ、実験を回す</h3>
+    <p>価格・トライアル・ペイウォール構成の<b>実験を回すアプリは、回さないアプリの40倍稼ぐ</b>。設定の巧拙だけでLTVに最大636%の差。センスの議論より試行回数。「今月の実験は何か」に即答できる状態を維持する。</p>
+  </div>
+  <div class="pcard">
+    <div class="no">第五条</div>
+    <h3>SNSは開発と同日に始める。発信も「並走する本業」</h3>
+    <p>TikTok系のオーガニック成長は<b>成果が出るまで60〜90日</b>かかる。リリース日に始めたら3ヶ月遅い。開発の過程そのものがコンテンツになる（build in public）ので、<b>宿場0から発信レーンを併設</b>する。行程表のすべての宿場に「発信の脇道」を用意した。</p>
+  </div>
+
+  <div class="callout aiC"><b>全体像。</b>行程は6つの宿場：<b>出立の支度 → 普請（MVP）→ 内見 → 試走（ソフトローンチ）→ 開帳（グローバル本番）→ 巡業（多言語展開・運用）</b>。各宿場には「本道（プロダクト）」と「脇道（発信）」の2レーン、そして通過条件の<b>関所</b>がある。関所を満たさず先へ進むと、だいたい後で泣く。</div>
+</section>
+
+<!-- ============ 行程表 ============ -->
+<section id="sec-route" class="page">
+  <div class="sec-head">
+    <div class="tate">歩みを刻む</div>
+    <div>
+      <h2>行程表 — 六つの宿場</h2>
+      <p>期間は目安（副業ペース想定）。日付ではなく<b>関所（通過条件）</b>で次へ進む。</p>
+    </div>
+  </div>
+  <div class="road" id="route-list"></div>
+  <p class="note-src">ソフトローンチはリテンション+40%・収益化+25%の改善につながるという調査もある（Airbridge）。テスト国はカナダ・豪・NZが定番だが広告費が高騰しており、近年はフィリピン＋北欧、オランダ等の組み合わせが推奨される（App Masters等）。改善は「先にリテンション、次に収益化」の順。</p>
+</section>
+
+<!-- ============ 多言語化 ============ -->
+<section id="sec-lang" class="page">
+  <div class="sec-head">
+    <div class="tate">言葉を渡る</div>
+    <div>
+      <h2>多言語化の設計</h2>
+      <p>翻訳は投資。薄く広くではなく、濃く順番に。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">76%</div><div class="lbl">消費者の76%は<b>母語のアプリ・サービスを好む</b>。40%は母語でないものを避ける（業界調査）</div></div>
+    <div class="dcard"><div class="num gold">+767%</div><div class="lbl">タイトル＋説明文の現地語化だけでiPhoneアプリのDLが激増した古典的調査（Distimo）</div></div>
+    <div class="dcard"><div class="num">50言語</div><div class="lbl">App Store Connectが対応するローカライズ数（2026年3月に11言語追加）。Google Playは70超</div></div>
+  </div>
+
+  <div class="mcard">
+    <h3>三段階の投資順序<span class="tag">原則</span></h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span><b>ストアのメタデータ：</b>タイトル・サブタイトル・説明・キーワード欄。最小コストで検索流入が変わる。まずここだけ現地語化して需要を測る。</li>
+      <li><span class="dot">弐</span><b>スクリーンショット：</b>ストア上の<b>転換率を最も左右する要素</b>。テキストオーバーレイを現地語に。UIが未翻訳の言語では、英語UIが目立たない構図（イラスト・寄り）で作る。</li>
+      <li><span class="dot">参</span><b>アプリUI本体：</b>インストール需要とリテンションが確認できた言語だけ。ここまでやると継続率が上がる。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>言語ティア（優先順位）<span class="tag">計画</span></h3>
+  </div>
+  <div class="tier"><div class="t-badge" style="background:var(--ink)">T0</div><div class="t-body"><h4>英語 ＋ 日本語 — 初日から</h4><p>英語＝世界の入口・北米LTVは世界平均の約2倍。日本＝<b>世界最高水準のARPU</b>と母国語の利。この2言語はUIまで完全対応で出す。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--ai)">T1</div><div class="t-body"><h4>スペイン語（MX/ES）・ドイツ語・フランス語 — 本番後1〜3ヶ月</h4><p>スペイン語は米州＋欧州を一挙にカバーする最大の追加商圏。<b>ドイツはサブスク転換が強く母語選好も強い</b>市場。欧州はいまや世界で最も高い価格が通る地域（前年比+18%）。まずストアページのみ。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--matcha)">T2</div><div class="t-body"><h4>ポルトガル語（BR）・韓国語・イタリア語 — 需要を見て</h4><p>ブラジルはDL成長市場（単価は低め）、韓国は日本と感性が近くcozy系の相性良。ストア反応→UI翻訳の順。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--karashi)">T3</div><div class="t-body"><h4>繁体字中国語・その他 — 余力で</h4><p>台湾・香港はForest等の実績がある市場。インド系言語はApp Storeが2026年に対応拡大した新フロンティア（競合が薄い）。</p></div></div>
+  <div class="tier"><div class="t-badge" style="background:var(--shu)">保留</div><div class="t-body"><h4>簡体字中国語（中国本土）</h4><p>ストア事情・規制・決済が別世界で、<b>片手間の参入は推奨されない</b>。専用の戦略と体制ができるまで保留。</p></div></div>
+
+  <div class="mcard">
+    <h3>キーワードは「翻訳」せず「発掘」する<span class="tag s">鉄則</span></h3>
+    <p>英語キーワードの直訳は現地の検索行動とズレる。<b>その言語で実際に何と検索されているか</b>を調べる：競合アプリの現地ストアページを観察／ASOツール（AppTweak・Mobile Action等）の現地キーワード調査／ネイティブへのヒアリング。国と言語の組み合わせ（メキシコ西語とスペイン西語）でも検索語は違う。</p>
+  </div>
+
+  <div class="mcard">
+    <h3>実務のチェックリスト<span class="tag">実装</span></h3>
+    <ul class="plain">
+      <li><span class="dot">・</span><b>文字列の外部化</b>を初日から（ハードコード禁止）。Flutterならarb、iOSならString Catalog。</li>
+      <li><span class="dot">・</span><b>独語・仏語は文が長くなる</b>前提でレイアウトに余白を。日付・通貨・複数形はライブラリに任せる。</li>
+      <li><span class="dot">・</span>機械翻訳そのままはNG（品質がランキングと信頼を落とす）。<b>AI下訳 → ネイティブ校正</b>の二段構えなら低コストで実用水準。校正はクラウドソーシングで1言語数千〜数万円から。</li>
+      <li><span class="dot">・</span>翻訳管理はまずスプレッドシートで十分。言語が4つを超えたらCrowdin / Lokalise等へ。</li>
+      <li><span class="dot">・</span>ストアの<b>価格も言語と同時にローカライズ</b>（欧州は強気に、新興国は現地水準に）。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ASO ============ -->
+<section id="sec-aso" class="page">
+  <div class="sec-head">
+    <div class="tate">見つかる技</div>
+    <div>
+      <h2>ASO — ストアで見つかり、選ばれる</h2>
+      <p>ASO＝検索で見つかる（キーワード）×開いた人が入れる（ビジュアル）。両輪で1つ。</p>
+    </div>
+  </div>
+
+  <div class="mcard">
+    <h3>書ける場所と字数<span class="tag">基礎</span></h3>
+    <div class="rowline"><span class="k">iOS タイトル</span><span class="v">30字。<b>最重要キーワードを1つ</b>入れる（例：AppName - Sleep Sounds）</span></div>
+    <div class="rowline"><span class="k">iOS サブタイトル</span><span class="v">30字。ベネフィット＋第2キーワード</span></div>
+    <div class="rowline"><span class="k">iOS キーワード欄</span><span class="v">100字・カンマ区切り・<b>スペースを入れない</b>・タイトルと重複させない</span></div>
+    <div class="rowline"><span class="k">Play タイトル</span><span class="v">30字。Playは<b>説明文の本文も検索対象</b>なので長文説明に自然にキーワードを織り込む</span></div>
+    <div class="rowline"><span class="k">スクショ</span><span class="v">転換率への影響が最大。<b>1枚目に「結果・ベネフィット」</b>、機能一覧は後ろへ</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>進め方（月次の型）<span class="tag">運用</span></h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span>自分のアプリを表す<b>核キーワード3語</b>を決める（例：habit / cozy / widget）。</li>
+      <li><span class="dot">弐</span>競合上位のタイトル・サブタイトルを10本書き写し、<b>使われている語の頻度表</b>を作る。</li>
+      <li><span class="dot">参</span>タイトル1語＋サブタイトル2語に配置。残りはキーワード欄へ。</li>
+      <li><span class="dot">四</span>月1回、検索順位と転換率を確認。<b>アイコン・スクショのA/B</b>（AppleのPPO / Playのストア掲載テスト）を回す。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>レビューと評価<span class="tag u">信頼</span></h3>
+    <ul class="plain">
+      <li><span class="dot">・</span>評価依頼は<b>「良い瞬間」の直後だけ</b>（目標達成・7日継続など）。OS標準の評価ダイアログを使う。</li>
+      <li><span class="dot">・</span><b>★4.0を死守</b>。下回ると広告もASOも効率が落ちる。低評価レビューには全件、24〜48時間以内に返信。</li>
+      <li><span class="dot">・</span>不満レビューは<b>次の実験のネタ帳</b>。翻訳の違和感指摘は即修正（多言語アプリの生命線）。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>フィーチャー（ストア掲載）を自薦する<span class="tag k">攻め</span></h3>
+    <p>AppleにもGoogleにも<b>自薦フォーム</b>がある。ソフトローンチ時に取ったランキングのスクショ、季節性（新生活・年末年始・海外の季節イベント）、独自機能を添えて申請する。TimeTreeの海外成長もAppleのフィーチャーが起点だった。<b>出さなければ当たらない宝くじ</b>として、大型アップデートごとに申請を習慣化。</p>
+  </div>
+</section>
+
+<!-- ============ SNS ============ -->
+<section id="sec-sns" class="page">
+  <div class="sec-head">
+    <div class="tate">声を届ける</div>
+    <div>
+      <h2>SNS運用 — 開発と並走する発信</h2>
+      <p>広告費ゼロの個人開発にとって、SNSは「任意」ではなく<b>流通そのもの</b>。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num">60〜90日</div><div class="lbl">TikTok系で成果が出始めるまでの目安。<b>2〜3週間で判断しない</b></div></div>
+    <div class="dcard"><div class="num">週3〜5本</div><div class="lbl">継続可能な投稿ペースの基準。成長期は1日1〜2本まで増やす</div></div>
+    <div class="dcard"><div class="num">1.5〜3秒</div><div class="lbl">最初の数秒の掴みで視聴完了率＝配信量が決まる</div></div>
+    <div class="dcard"><div class="num gold">3〜4倍</div><div class="lbl">TikTok用に作った動画をReels / Shortsへ転用したときのROI倍率</div></div>
+    <div class="dcard"><div class="num">3〜5倍</div><div class="lbl">マイクロクリエイター（1万〜10万フォロワー）提携のエンゲージ効率（大物比）</div></div>
+    <div class="dcard"><div class="num">+150%</div><div class="lbl">TikTok内検索の伸び。<b>キャプションに検索語</b>を入れる（TikTok SEO）</div></div>
+  </div>
+
+  <div class="mcard">
+    <h3>チャンネルの役割分担<span class="tag">配置</span></h3>
+    <div class="rowline"><span class="k">X（日本語）</span><span class="v"><b>開発ログの本拠地</b>。#個人開発 で仲間・初期ユーザー・フィードバックを得る。build in publicは「作ってる感想」でなく<b>スクショ・数字・設計の迷い</b>を具体的に</span></div>
+    <div class="rowline"><span class="k">TikTok（英語）</span><span class="v"><b>グローバルDLの主戦場</b>。アプリのデモ・Before/Afterを15〜30秒で。フォロワー0でも当たる唯一の場所</span></div>
+    <div class="rowline"><span class="k">Reels / Shorts</span><span class="v">TikTok動画の<b>転用先</b>。テロップだけ差し替えて同時展開（ROI 3〜4倍）</span></div>
+    <div class="rowline"><span class="k">Reddit</span><span class="v">ニッチの信頼を得る場。<b>貢献9：宣伝1</b>。該当subで数週間は質問に答え、launch時に「作った報告」を1本</span></div>
+    <div class="rowline"><span class="k">Product Hunt</span><span class="v">2026年は個人の主戦場ではない（1日500件超で飽和）。<b>被リンクと実績バッジ目的</b>で1回だけ、多チャネル同日launchの一部として</span></div>
+    <div class="rowline"><span class="k">note / Zenn</span><span class="v">日本語の長文・技術記事。検索で効き続ける資産。月1本で十分</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>コンテンツの型・五選（アプリ向け）<span class="tag u">制作</span></h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span><b>Before / After：</b>「この不便が→こうなる」を15秒で。問題提起を最初の2秒に置く。</li>
+      <li><span class="dot">弐</span><b>物語内CTA型：</b>「Download now」ではなく<b>「これ、自分のアプリで30秒で作った」</b>のように物語の中にアプリを置く。2026年に最も効くCTA形式。</li>
+      <li><span class="dot">参</span><b>題材の豆知識：</b>アプリのテーマ自体の雑学（例：七十二候アプリなら「今日から蝉始鳴」）。検索で発見され続ける。</li>
+      <li><span class="dot">四</span><b>開発の裏側：</b>数字公開・失敗談・審査リジェクト話。日本語Xと相性最強。</li>
+      <li><span class="dot">伍</span><b>UGC風レビュー：</b>実ユーザーやマイクロクリエイターに提供して作ってもらう。<b>自作自演はしない</b>（見抜かれて信頼を失う）。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>週間ルーティン（合計 約3時間）<span class="tag m">習慣</span></h3>
+    <div class="rowline"><span class="k">月（15分）</span><span class="v">ネタ出し10本。伸びてる類似動画を3本観察</span></div>
+    <div class="rowline"><span class="k">火（60〜90分）</span><span class="v"><b>まとめ撮り</b>2〜3本＋編集（CapCut）。テロップの英語はAI校正</span></div>
+    <div class="rowline"><span class="k">水木（各15分）</span><span class="v">投稿＋コメント全返信（コメント欄も作品のうち）</span></div>
+    <div class="rowline"><span class="k">金（15分）</span><span class="v">転用（TikTok→Reels/Shorts）または日本語X投稿</span></div>
+    <div class="rowline"><span class="k">土（15分）</span><span class="v">数字を見る（保存数・完了率）。伸びた型をメモして翌週へ</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>90日プラン<span class="tag k">立ち上げ</span></h3>
+    <ul class="plain">
+      <li><span class="dot">1〜30日</span><b>型を試す：</b>五つの型を10〜15本。数字は見すぎない。投稿筋を鍛える期間。</li>
+      <li><span class="dot">31〜60日</span><b>当たりを探す：</b>保存数・視聴完了率が高い型に集中し、同じ型を角度替えで反復。</li>
+      <li><span class="dot">61〜90日</span><b>当たりを増幅：</b>最良投稿を英語圏へ横展開。予算があれば<b>Spark Adsで「勝った投稿だけ」</b>少額ブースト。</li>
+    </ul>
+  </div>
+
+  <div class="callout"><b>やらないことリスト。</b>広告っぽい完成品PR動画（配信されない）／全SNS同時完璧主義（X日本語＋TikTok英語の2本柱から）／毎日の数字確認（週1でよい）／フォロワー購入（アルゴリズムに死ぬ）／launch後の燃え尽き放置（型化で省力運転に切り替える）。</div>
+</section>
+
+<!-- ============ 収益設計 ============ -->
+<section id="sec-money" class="page">
+  <div class="sec-head">
+    <div class="tate">銭の骨法</div>
+    <div>
+      <h2>収益設計 — オンボーディングから逆算する</h2>
+      <p>ペイウォールは「壁」ではなく、オンボーディングという物語の最終ページ。</p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="dcard"><div class="num warn">82%</div><div class="lbl">トライアル開始の82%は<b>インストール当日</b>に起きる。初日がほぼ全て</div></div>
+    <div class="dcard"><div class="num warn">636%</div><div class="lbl">ペイウォール設定の巧拙によるLTVの最大差。デザインより<b>構成</b>の問題</div></div>
+    <div class="dcard"><div class="num">+37%</div><div class="lbl">単一画面より<b>複数ページ型オンボ→ペイウォール</b>の転換率が高い（Superwall調べ）</div></div>
+    <div class="dcard"><div class="num">45.7%</div><div class="lbl"><b>17〜32日</b>の長めトライアルの転換率。3〜7日型（26.8%）のほぼ2倍</div></div>
+    <div class="dcard"><div class="num">9割</div><div class="lbl">サブスクの約9割は<b>満額</b>で売れている。割引常用は不要（実用系の割引率はわずか1.2%）</div></div>
+    <div class="dcard"><div class="num gold">3倍</div><div class="lbl">高価格帯アプリのLTVは低価格帯の約3倍。<b>「下げる」より「上げて試す」</b></div></div>
+  </div>
+
+  <div class="mcard">
+    <h3>オンボーディングの五段構成<span class="tag">設計</span></h3>
+    <ul class="plain">
+      <li><span class="dot">壱</span><b>約束：</b>1画面目で「結果」を一文で（例：7日で朝が変わる）。ボタンは1つだけ。</li>
+      <li><span class="dot">弐</span><b>小さな質問2〜4問：</b>目標・頻度など。<b>答えが後の画面に反映される質問だけ</b>残す（マイクロコミットメントが投資感情を作る）。</li>
+      <li><span class="dot">参</span><b>構築の演出：</b>「あなた用に準備中…」のアニメーション。ここがペイウォールの前口上になる。</li>
+      <li><span class="dot">四</span><b>プランの提示：</b>回答を反映した「あなたのプラン」を見せる（聞いたことを使った証明）。</li>
+      <li><span class="dot">伍</span><b>ペイウォール：</b>成果ベースのCTA（「プランを始める」）。閉じるボタンは付ける。<b>閉じた人にだけ時限オファー</b>を出すのが定石。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>価格と商品構成<span class="tag k">値付け</span></h3>
+    <ul class="plain">
+      <li><span class="dot">・</span>基準は<b>年額プラン推し</b>（既定選択に）＋月額。<b>週額は高転換だが不満レビューの火種</b>（noteitの教訓）。使うなら価値が毎週明確な場合のみ。</li>
+      <li><span class="dot">・</span>世界の中央値目安：<b>週$7.48／月$12.99／年$38.42</b>。日本円は為替で年1回見直し。</li>
+      <li><span class="dot">・</span><b>買い切りの併設で総転換+15〜25%</b>。「一生モノ派」の受け皿を用意。</li>
+      <li><span class="dot">・</span>地域価格：<b>欧州は最も高く売れる地域</b>（前年比+18%で北米超え）。新興国は現地水準へ調整。ストアの自動換算に任せきりにしない。</li>
+      <li><span class="dot">・</span>価格テストは転換率を上げないことが多い（勝率28.3%）が、<b>LTVは45.5%の確率で改善</b>。目的を間違えない。</li>
+      <li><span class="dot">・</span>アプリ内に常設の<b>「アップグレード」ボタン</b>（+10〜20%の増収事例）。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>トライアルの設計<span class="tag u">体験</span></h3>
+    <p>長めのトライアル（17〜32日）は転換率がほぼ2倍だが、その分<b>「体験の設計」が必須</b>：初日にコア価値→3日目に習慣化のフック→7日目に成果の可視化、という通知とチェックリストを組む。構造化されたトライアル体験は初回更新率を最大60%押し上げる。</p>
+  </div>
+
+  <div class="mcard">
+    <h3>計測の最低ライン<span class="tag m">数字</span></h3>
+    <div class="rowline"><span class="k">入口</span><span class="v">ストア転換率（表示→DL）／オンボ完了率</span></div>
+    <div class="rowline"><span class="k">課金前</span><span class="v"><b>ペイウォール表示率</b>（全員に見えているか）／トライアル開始率</span></div>
+    <div class="rowline"><span class="k">課金</span><span class="v">トライアル→有料転換率／国別の7日以内キャンセル率</span></div>
+    <div class="rowline"><span class="k">継続</span><span class="v">D1・D7・D30リテンション／解約理由（1問アンケート）</span></div>
+    <div class="rowline"><span class="k">北極星</span><span class="v"><b>週あたりの新規トライアル開始数</b>（初期）→ 月間経常収益MRR（成長期）</span></div>
+  </div>
+</section>
+
+<!-- ============ 週次運用 ============ -->
+<section id="sec-ops" class="page">
+  <div class="sec-head">
+    <div class="tate">回し続ける</div>
+    <div>
+      <h2>週次運用 — 小さく、休まず、実験を</h2>
+      <p>個人開発の敵は競合ではなく息切れ。省力で回る仕組みを先に作る。</p>
+    </div>
+  </div>
+
+  <div class="mcard">
+    <h3>週10時間モデル（副業想定・配分は例）<span class="tag">時間割</span></h3>
+    <div class="rowline"><span class="k">開発・改善 5h</span><span class="v">今月の実験（第四条）＋不具合修正＋小さな磨き込み1つ</span></div>
+    <div class="rowline"><span class="k">SNS 2.5h</span><span class="v">まとめ撮り＋投稿＋コメント返信（SNSタブの週間ルーティン）</span></div>
+    <div class="rowline"><span class="k">ASO・実験 1h</span><span class="v">順位・転換率チェック、A/Bの判定と次の仕込み</span></div>
+    <div class="rowline"><span class="k">サポート 1h</span><span class="v">レビュー返信・問い合わせ。不満は実験ネタ帳へ転記</span></div>
+    <div class="rowline"><span class="k">数字と計画 0.5h</span><span class="v">KPIを眺め、来週の「一番大事な1つ」を決める</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>月次のリズム<span class="tag m">周期</span></h3>
+    <ul class="plain">
+      <li><span class="dot">第1週</span>今月の<b>実験を1つ開始</b>（価格／トライアル日数／ペイウォール構成／スクショ…どれか1つだけ）。</li>
+      <li><span class="dot">第2-3週</span>データ収集。触らない。SNSは通常運転。</li>
+      <li><span class="dot">第4週</span>判定→採用/棄却。<b>月次の数字をSNSで公開</b>（build in publicの継続）→翌月の実験を決める。</li>
+    </ul>
+  </div>
+
+  <div class="mcard">
+    <h3>道具箱（ツールスタック）<span class="tag">装備</span></h3>
+    <div class="rowline"><span class="k">開発</span><span class="v"><b>Flutter</b>（単一コードで両OS・i18n機構が堅い）。iOS体験を極めるならSwiftUIも可</span></div>
+    <div class="rowline"><span class="k">課金</span><span class="v"><b>RevenueCat</b> または <b>Adapty</b>（ペイウォールA/B・無料枠あり・初日から）</span></div>
+    <div class="rowline"><span class="k">分析</span><span class="v">まずApp Store Connect＋Play Console。イベント分析が要るときにFirebase / Amplitude</span></div>
+    <div class="rowline"><span class="k">翻訳</span><span class="v">AI下訳＋ネイティブ校正（クラウドソーシング）。4言語超からCrowdin等</span></div>
+    <div class="rowline"><span class="k">動画・画像</span><span class="v">CapCut（動画）／Figma（スクショ・OGP）</span></div>
+    <div class="rowline"><span class="k">ASO</span><span class="v">最初は手動観察で十分。収益が立ったらAppTweak等の有料ツール</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>初期費用の目安<span class="tag k">予算</span></h3>
+    <div class="rowline"><span class="k">必須</span><span class="v">Apple Developer <b>$99/年</b>・Google Play <b>$25（買切）</b>・ドメイン数千円/年</span></div>
+    <div class="rowline"><span class="k">推奨</span><span class="v">翻訳校正 数千〜数万円/言語・アイコン等の素材 0〜数万円</span></div>
+    <div class="rowline"><span class="k">任意</span><span class="v">ソフトローンチ広告 数万円規模から（数十万円は不要）・Spark Ads少額</span></div>
+  </div>
+
+  <div class="mcard">
+    <h3>リスクと備え<span class="tag s">守り</span></h3>
+    <ul class="plain">
+      <li><span class="dot">審査</span>ガイドライン先読み＋<b>「そのAPIで通った前例」確認</b>を実装前に（特にAndroidの機微な権限・スクリーンタイム系）。リジェクトは仕様で返す。</li>
+      <li><span class="dot">依存</span>特定SNS・特定APIへの依存を薄く。<b>メール等の自前導線</b>（サイト＋リスト）を細くても持つ。</li>
+      <li><span class="dot">為替</span>年1回、地域価格を見直す（ストア一括変更ではなく国別に）。</li>
+      <li><span class="dot">燃え尽き</span>「大きく作って沈黙」より<b>「小さく出して毎週語る」</b>。SNSは型化で省力運転に。</li>
+      <li><span class="dot">撤退線</span>90日単位で判定。D7と有料転換が基準未満なら、第一巻の採点表に戻って<b>次の案へ</b>（1本に固執しない）。</li>
+    </ul>
+  </div>
+
+  <div class="callout"><b>最初の一歩。</b>この行程表の宿場0は今週から始められる：①第一巻のアイデア帳から1案を選ぶ ②競合レビューの採掘をClaudeに依頼する ③英語で発音できる名前の候補を10個出す。ここまでで「出立の支度」の半分が終わる。</div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  調査日：2026年7月2日 ／ 作成：Claude ／ 第二巻・戦略行程編<br>
+  出典：Adapty「State of In-App Subscriptions 2026」・RevenueCat・Superwall・Airbridge・AppTweak・SEM Nexus・App Masters・a16z・Hootsuite・Stackmatix ほか各社調査・公表・報道。数値は推定を含む参考値です。
+</footer>
+
+<script>
+/* ================= DATA : 行程（宿場） ================= */
+const PHASES=[
+{no:"宿場〇",name:"出立の支度 — 構想と検証",span:"1〜2週間",goal:"「何を・誰に・いくらで」を紙の上で固める。コードはまだ書かない。",
+main:[
+"第一巻の採点表（六つの問い）でアイデア3案→1案に絞る（◯5つ以上）",
+"競合上位5アプリの<b>★2〜3レビューを50件</b>読み、不満を3行に要約（＋αの種）",
+"アプリ名：<b>英語で発音できる・綴りが唯一・ドメインとSNSハンドルが空いている</b>・商標ざっと確認",
+"価格仮説を先に書く：誰が／何に／週・月・年いくら／買い切り併設の有無",
+"技術選定はi18n前提（Flutter等）。文字列外部化のルールを最初に決める"
+],
+sns:[
+"X（日本語）で開発宣言。#個人開発 で同志をフォロー・交流開始",
+"英語圏の偵察：該当Redditのsub購読／類似アプリのTikTok動画を50本見て「型」をメモ",
+"Before素材の撮影（アプリがない今の不便な状態。後日Before/After動画の前半になる）"
+],
+gate:[
+"提供価値を一文で言える",
+"「誰が・何に・いくら払うか」に即答できる",
+"名前のドメイン・ハンドル確保＆商標の重複なし"
+]},
+{no:"宿場一",name:"普請 — MVP開発",span:"2〜6週間",goal:"1機能を確実に。オンボーディングとペイウォールまで含めて「本体」。",
+main:[
+"コア機能は<b>1つを深く</b>。設定画面を増やすより初回体験を磨く",
+"オンボーディング五段構成（収益設計タブ）＋ペイウォールを<b>初日から実装</b>",
+"課金基盤（RevenueCat / Adapty）導入。<b>満額</b>で開始、割引なし",
+"UIは英語を正、日本語を同時収録（T0）。他言語は文字列だけ準備",
+"プライバシーポリシー・データ最小化（「端末内保存」は喜び系で武器になる）"
+],
+sns:[
+"週2〜3本の開発ログ（スクショ／失敗談／設計の迷いを具体的に）",
+"画面収録→15〜30秒に編集する練習。<b>最初の2秒に結果</b>を置く構成を体で覚える",
+"「あと◯週間で公開」の進捗を固定ポストに"
+],
+gate:[
+"自分が7日連続で毎日使った",
+"初起動→オンボ→ペイウォールまで迷いなく流れる",
+"課金のサンドボックステストが通る"
+]},
+{no:"宿場二",name:"内見 — クローズドテスト",span:"1〜2週間",goal:"身内の10〜30人で、恥ずかしい不具合と翻訳の違和感を潰す。",
+main:[
+"TestFlight／Playの内部テストで<b>10〜30人</b>（日英混成が理想）",
+"オンボ完了率とD1を計測（分析イベントの動作確認を兼ねる)",
+"Androidは審査が厳しめの領域を先に露出して問題を洗う（権限・ポリシー文言）",
+"翻訳の違和感・文字あふれ（独語対策の余白確認は今のうち）"
+],
+sns:[
+"テスター募集自体をコンテンツに（X日本語＋該当コミュニティ）",
+"もらったフィードバックを（許可を得て）紹介→「聞く開発者」の信頼形成",
+"公開日を宣言してカウントダウン開始"
+],
+gate:[
+"致命バグ0・クラッシュ率1%未満",
+"オンボ完了率70%前後",
+"テスターの半数が「友人に薦めたい」と回答"
+]},
+{no:"宿場三",name:"試走 — ソフトローンチ",span:"4〜8週間",goal:"世界に出る前に、小さな英語圏市場で「本番の数字」を作る。",
+main:[
+"英語圏の小市場<b>1〜3ヶ国に限定公開</b>：フィリピン＋北欧（ノルウェー/スウェーデン）、オランダ、NZ等。定番の加・豪は広告費高騰",
+"実ユーザー<b>1,000人規模</b>を目標に、小さな広告（数万円〜）またはコミュニティ投稿で集める",
+"改善順序は<b>①リテンション→②収益化</b>。戻らない人は課金しない",
+"ASOのA/B開始（アイコン・スクショ1枚目・サブタイトル）",
+"良いランキングが取れたら<b>スクショ保存</b>（後のフィーチャー自薦の証拠）"
+],
+sns:[
+"限定国向けにTikTok英語投稿を本格化。伸びた「型」を記録",
+"Redditで貢献→控えめに1本だけ報告ポスト",
+"レビュー・コメント<b>全返信</b>（初期の熱量がコミュニティの種になる）"
+],
+gate:[
+"D1が30%前後・D7が15%前後（カテゴリで補正）",
+"トライアル開始率とクラッシュ率が基準内",
+"改善サイクルが2周回り「世界に出せる」と言い切れる"
+]},
+{no:"宿場四",name:"開帳 — グローバル本番（英語圏＋日本）",span:"launch週＋2週間",goal:"祭は一日。多チャネル同日で最大瞬間風速を作り、余韻で定常運転へ。",
+main:[
+"英語圏全体＋日本で公開。<b>火〜木</b>の週央、朝（米国時間）に",
+"同日多チャネル：X英日／Reddit報告／Product Hunt（被リンクと実績バッジ狙い）／必要ならHacker News",
+"プレスキット常備：アイコン・スクショ・1段落説明・デモGIF・連絡先",
+"Apple / Googleに<b>フィーチャー自薦</b>（ソフトローンチ実績を添付）",
+"最初の2時間はコメント・質問への即応に全振り"
+],
+sns:[
+"launch週はTikTok/Reels/Shortsを1日1〜2本（作り置きしておく）",
+"「なぜ作ったか」のストーリー動画を公開（launch動画で最も伸びやすい型）",
+"日本語Xで開発の裏側まとめ＋noteで長文1本（検索資産）"
+],
+gate:[
+"初週に<b>有料転換が発生</b>している",
+"オーガニック流入の型が1つ見えた（どの動画・どの検索語か）",
+"ストア評価4.0以上を維持"
+]},
+{no:"宿場五",name:"巡業 — 多言語展開と運用",span:"恒久（月次サイクル）",goal:"当たった型を言語へ、実験を数字へ。ここからが本当の商売。",
+main:[
+"多言語化タブの順で展開：T1（西MX/ES・独・仏）の<b>ストアページのみ</b>先行→需要が出た言語からUI翻訳",
+"キーワードは翻訳せず<b>現地で発掘</b>。国別に価格も調整（欧州は強気）",
+"<b>毎月1実験</b>（価格／トライアル日数／ペイウォール構成／スクショ）",
+"季節イベント・大型アップデートの年間リズムを作り、都度フィーチャー自薦",
+"レビュー返信と解約理由の収集を仕組み化（実験ネタ帳へ）"
+],
+sns:[
+"当たった動画の型を<b>テロップ差し替えで多言語横展開</b>",
+"現地マイクロクリエイター（1万〜10万）に無料提供して紹介依頼",
+"月次で数字公開の振り返りポスト（build in publicの継続が次作の資産になる）"
+],
+gate:[
+"月次実験が3ヶ月連続で回っている",
+"収益の国別内訳で3ヶ国以上",
+"SNS→インストールの導線が数字で説明できる"
+]}
+];
+
+/* ================= RENDER ================= */
+const $=(s)=>document.querySelector(s);
+
+document.querySelectorAll("nav.tabs button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.t).classList.add("on");
+    window.scrollTo({top:0});
+  });
+});
+
+$("#route-list").innerHTML=PHASES.map(p=>`
+  <div class="station">
+    <div class="s-head">
+      <div class="s-no">${p.no}｜${p.span}</div>
+      <h3>${p.name}</h3>
+      <p class="s-goal">${p.goal}</p>
+    </div>
+    <div class="lanes2">
+      <div class="lane main"><span class="lane-t">本道｜プロダクト</span><ul>${p.main.map(t=>`<li><span>${t}</span></li>`).join("")}</ul></div>
+      <div class="lane sns"><span class="lane-t">脇道｜発信</span><ul>${p.sns.map(t=>`<li><span>${t}</span></li>`).join("")}</ul></div>
+    </div>
+    <div class="sekisho"><div class="g-t">関 所 — 通過条件</div><ul>${p.gate.map(t=>`<li><span>${t}</span></li>`).join("")}</ul></div>
+  </div>`).join("");
+
+$("#stat-gates").textContent=PHASES.reduce((a,p)=>a+p.gate.length,0);
+</script>
+</body>
+</html>

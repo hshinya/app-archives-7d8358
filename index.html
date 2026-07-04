@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アプリ開発 資料館｜総合目次</title>
+<meta name="description" content="アプリ開発・SNS運用・マネタイズの調査資料をまとめた総合目次ページ">
+<style>
+:root{
+  --washi:#F5F2E9;
+  --card:#FFFDF6;
+  --ink:#23282C;
+  --ink-soft:#5B6168;
+  --line:#DFD8C6;
+  --ai:#2E5C7F;
+  --ume:#B7566B;
+  --matcha:#6B7F52;
+  --karashi:#B98A22;
+  --shu:#B33A3A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  background:var(--washi);
+  background-image:radial-gradient(rgba(35,40,44,.045) 1px, transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink);
+  line-height:1.75;
+  font-size:15px;
+}
+.serif{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- header ---------- */
+header{padding:40px 0 8px;position:relative}
+.eyebrow{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);text-transform:uppercase}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:clamp(26px,6vw,38px);letter-spacing:.08em;margin:6px 0 4px}
+.subtitle{color:var(--ink-soft);font-size:13.5px;max-width:560px}
+.stamp{
+  position:absolute;right:0;top:44px;
+  width:74px;height:74px;border:2px solid var(--shu);border-radius:50%;
+  color:var(--shu);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Hiragino Mincho ProN",serif;font-size:15px;letter-spacing:.1em;line-height:1.3;
+  transform:rotate(6deg);opacity:.85;user-select:none;
+}
+.stamp small{font-size:9px;letter-spacing:.2em}
+@media(max-width:560px){.stamp{width:60px;height:60px;font-size:12px;top:36px}}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 8px}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 8px;text-align:center}
+.stat b{display:block;font-family:"Hiragino Mincho ProN",serif;font-size:22px;color:var(--ai);letter-spacing:.02em}
+.stat span{font-size:11px;color:var(--ink-soft)}
+
+/* ---------- toolbar ---------- */
+.toolbar{position:sticky;top:0;z-index:10;background:var(--washi);padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:8px}
+.search{
+  width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);font-size:15px;color:var(--ink);outline:none;
+}
+.search:focus{border-color:var(--ai)}
+.chips{display:flex;gap:6px;margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.chip{
+  flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+  border-radius:999px;padding:5px 14px;font-size:12.5px;cursor:pointer;white-space:nowrap;
+  font-family:inherit;
+}
+.chip.active{background:var(--ink);color:var(--washi);border-color:var(--ink)}
+
+/* ---------- sections ---------- */
+section{margin-top:34px;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--sec,var(--ai));padding-bottom:8px;margin-bottom:14px}
+.sec-num{
+  font-family:"Hiragino Mincho ProN",serif;color:var(--shu);font-size:13px;letter-spacing:.2em;
+  writing-mode:vertical-rl;line-height:1;align-self:center;
+}
+h2{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:20px;letter-spacing:.1em}
+.sec-desc{font-size:12.5px;color:var(--ink-soft);margin-left:auto;text-align:right}
+@media(max-width:640px){.sec-desc{display:none}}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+a.card{
+  display:flex;flex-direction:column;gap:8px;
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sec,var(--ai));
+  border-radius:12px;padding:16px 16px 14px;text-decoration:none;color:var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+a.card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(35,40,44,.10)}
+a.card:active{transform:translateY(0)}
+.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.badge{
+  font-size:10.5px;letter-spacing:.08em;border-radius:4px;padding:2px 8px;
+  background:var(--sec,var(--ai));color:#fff;font-weight:600;
+}
+.badge.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line);font-weight:400}
+.badge.new{background:var(--shu)}
+.card h3{font-family:"Hiragino Mincho ProN",serif;font-size:16.5px;letter-spacing:.04em;line-height:1.5}
+.card p{font-size:13px;color:var(--ink-soft);flex:1}
+.card .go{font-size:12.5px;color:var(--sec,var(--ai));font-weight:600;letter-spacing:.05em}
+.card.dim{opacity:.72}
+
+/* section accent colors */
+.sec-idea{--sec:var(--ai)}
+.sec-strategy{--sec:var(--karashi)}
+.sec-sns{--sec:var(--ume)}
+
+/* ---------- reading order ---------- */
+.order{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 16px;margin-top:38px}
+.order h2{border:none;font-size:18px;margin-bottom:10px}
+.steps{display:flex;flex-direction:column;gap:0;counter-reset:step}
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border-bottom:none}
+.step-num{
+  flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ai);color:var(--ai);
+  display:flex;align-items:center;justify-content:center;font-family:"Hiragino Mincho ProN",serif;font-size:14px;
+}
+.step-body{font-size:13.5px}
+.step-body b{font-size:14px}
+.step-body a{color:var(--ai)}
+.step-body small{display:block;color:var(--ink-soft);font-size:12px}
+
+/* ---------- status ---------- */
+.status{margin-top:26px;border-left:4px solid var(--matcha);background:var(--card);border-radius:0 12px 12px 0;padding:14px 16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.status h2{border:none;font-size:16px;margin-bottom:6px}
+.status ul{list-style:none;font-size:13px}
+.status li{padding:3px 0 3px 22px;position:relative;color:var(--ink-soft)}
+.status li::before{content:"□";position:absolute;left:0;color:var(--matcha)}
+.status li.done::before{content:"■"}
+.status li.done{text-decoration:none;color:var(--ink)}
+
+.empty{display:none;text-align:center;color:var(--ink-soft);padding:40px 0;font-size:13.5px}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-soft);text-align:center;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">APP DEVELOPMENT ARCHIVES</div>
+  <h1>アプリ開発 資料館</h1>
+  <p class="subtitle">個人開発によるスマホアプリ開発・マネタイズ計画の調査資料 総合目次。アイデア調査から戦略・開発・収益化・SNS発信まで、全資料にここから移動できます。</p>
+  <div class="stamp serif"><span>資料館</span><small>総目次</small></div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>230件</b><span>調査した成功事例</span></div>
+  <div class="stat"><b>136案</b><span>アプリのアイデア</span></div>
+  <div class="stat"><b>12案</b><span>詳細設計まで完了</span></div>
+  <div class="stat"><b>5冊</b><span>戦略・運用の書</span></div>
+</div>
+
+<div class="toolbar">
+  <input type="search" class="search" id="search" placeholder="資料をキーワードで探す（例: マネタイズ / Flutter / X運用）" aria-label="資料検索">
+  <div class="chips" id="chips" role="tablist">
+    <button class="chip active" data-cat="all">すべて</button>
+    <button class="chip" data-cat="idea">アイデア・調査</button>
+    <button class="chip" data-cat="strategy">戦略・開発・収益</button>
+    <button class="chip" data-cat="sns">SNS運用</button>
+  </div>
+</div>
+
+<!-- ================= アイデア・市場調査 ================= -->
+<section class="sec-idea" data-cat="idea">
+  <div class="sec-head">
+    <span class="sec-num">其の一</span>
+    <h2>アイデア・市場調査</h2>
+    <span class="sec-desc">何を作るかを決めるための資料</span>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="0702/app-idea-research-v2.html" data-key="調査図鑑 改訂版 成功アプリ 事例 アイデア 136案 和風 統合 採点表 図鑑 idea research">
+      <div class="card-top"><span class="badge new">最新版</span><span class="badge ghost">2026-07</span></div>
+      <h3>調査図鑑 改訂版</h3>
+      <p>世界の成功アプリ事例と、そこから生まれたアイデア帳の統合改訂版。和風77案を取り込み全136案。軸・分野・キーワードで絞り込み可。アイデア選定はここから。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="site/wafu.html" data-key="和風 季節 アプリ アイデア集 77案 京都 四季 空 天体 自然 詳細設計 wafu">
+      <div class="card-top"><span class="badge">アイデア集</span><span class="badge ghost">2026-06</span></div>
+      <h3>和風・季節アプリ アイデア集</h3>
+      <p>和風・京都・四季・空・天体・自然のイメージから8ジャンルの市場調査と77案を生成。有望トップ6は画面構成・技術スタック・開発計画まで設計済み。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="site/business.html" data-key="海外 ビジネス アプリ 調査 145 SaaS 日本展開 日本版 価格 GTM business">
+      <div class="card-top"><span class="badge">市場調査</span><span class="badge ghost">2026-06</span></div>
+      <h3>海外ビジネスアプリ調査</h3>
+      <p>海外で人気だが日本では無名のビジネス系アプリ/SaaSを11分野・145件調査。有望6件は日本版プロダクトとして商習慣適応・価格・GTMまで設計済み。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card dim" href="0702/アプリ_アイデア.html" data-key="調査図鑑 初版 85件 53案 成功アプリ アーカイブ">
+      <div class="card-top"><span class="badge ghost">初版・アーカイブ</span><span class="badge ghost">2026-07</span></div>
+      <h3>調査図鑑 初版</h3>
+      <p>成功アプリ85件＋アイデア53案の初版。内容は改訂版に統合済みのため、通常は改訂版を参照。</p>
+      <span class="go">開く →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ================= 戦略・開発・マネタイズ ================= -->
+<section class="sec-strategy" data-cat="strategy">
+  <div class="sec-head">
+    <span class="sec-num">其の二</span>
+    <h2>戦略・開発・マネタイズ</h2>
+    <span class="sec-desc">どう作り、どう稼ぐかの書</span>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="総合ロードマップ.html" data-key="総合ロードマップ 行程表 現在地 宿場 関所 Re:Night リリース 専業 生活費 収益 週間運用 心得 roadmap master">
+      <div class="card-top"><span class="badge new">最新版</span><span class="badge ghost">2026-07</span></div>
+      <h3>総合ロードマップ</h3>
+      <p>いま何をやるかの行程表。Re:Nightリリース→運用×次アプリ検証→複利→専業移行までを宿場と関所で管理。現在地・お金の設計・週間運用・心得。迷ったらまずここ。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="0702/海外展開_マネタイズ.html" data-key="海外展開 マネタイズ 戦略 行程 ロードマップ 宿場 関所 多言語 ローカライズ ASO ソフトローンチ 英語">
+      <div class="card-top"><span class="badge">戦略・行程編</span><span class="badge ghost">2026-07</span></div>
+      <h3>海外展開とマネタイズ</h3>
+      <p>全体戦略の本編。基本方針五ヶ条、ロードマップ「六つの宿場」（通過条件18項目）、多言語化の言語ティア、ASO、収益設計、週次運用まで。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="0702/アプリ開発の書.html" data-key="アプリ開発の書 別冊一 開発 技術選定 Flutter React Native SwiftUI i18n ウィジェット 審査 6週間 MVP">
+      <div class="card-top"><span class="badge">別冊一</span><span class="badge ghost">2026-07</span></div>
+      <h3>アプリ開発の書</h3>
+      <p>1機能を世界水準でひとりで作る手引き。技術選定（Flutter推奨の判断フロー）、i18n・オンボ・ウィジェット実装、審査対策、6週間MVPモデル。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="0702/マネタイズの書.html" data-key="マネタイズの書 別冊二 収益 サブスク 価格 ペイウォール トライアル 課金 KPI RevenueCat 実験">
+      <div class="card-top"><span class="badge">別冊二</span><span class="badge ghost">2026-07</span></div>
+      <h3>マネタイズの書</h3>
+      <p>払いたくなる導線と値付けの技法。収益モデル選択診断、オンボ五段構成＋ペイウォール解剖図、価格設計、月次実験プロトコル、KPIツリーと市場相場。</p>
+      <span class="go">開く →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ================= SNS運用 ================= -->
+<section class="sec-sns" data-cat="sns">
+  <div class="sec-head">
+    <span class="sec-num">其の三</span>
+    <h2>SNS運用・発信</h2>
+    <span class="sec-desc">開発と並走する発信の資料</span>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="0702/SNS運用の書.html" data-key="SNS運用の書 別冊三 X TikTok Shorts Reels 媒体比較 短尺動画 90日 ルーティン 拡張判定">
+      <div class="card-top"><span class="badge">別冊三</span><span class="badge ghost">2026-07</span></div>
+      <h3>SNS運用の書</h3>
+      <p>Xを起点にどこまで広げるかの判断書。媒体比較（X・TikTok・Shorts・Reels等）、Xからの拡張判定、X運用の型6選、短尺動画の作り方、週3時間ルーティン、90日計画。</p>
+      <span class="go">開く →</span>
+    </a>
+
+    <a class="card" href="sns_marketing/site/index.html" data-key="SNS戦略ガイド X 発信 プレイブック ロードマップ 参考アカウント デザインガイド TODO build in public アルゴリズム">
+      <div class="card-top"><span class="badge">実践ガイド</span><span class="badge ghost">2026-06</span></div>
+      <h3>SNS戦略ガイド（X発信）</h3>
+      <p>個人開発×X発信の実践ガイドサイト。発信プレイブック・ロードマップ・参考アカウント・デザインガイド・TODOチェックリストの5部構成。日々の運用はこちら。</p>
+      <span class="go">開く →</span>
+    </a>
+
+  </div>
+</section>
+
+<p class="empty" id="empty">該当する資料がありません。キーワードを変えてお試しください。</p>
+
+<!-- ================= 読み順 ================= -->
+<div class="order" id="order">
+  <h2 class="serif">おすすめの読み順</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num serif" style="border-color:var(--shu);color:var(--shu)">道</div><div class="step-body"><b><a href="総合ロードマップ.html">総合ロードマップ</a></b>で現在地と次の一手を確認<small>いまの宿場と関所（通過条件）を見れば、やることが決まる</small></div></div>
+    <div class="step"><div class="step-num">一</div><div class="step-body"><b><a href="0702/app-idea-research-v2.html">調査図鑑 改訂版</a></b>でアイデアを選ぶ<small>採点表（六つの問いで◯5つ以上）を使って136案から絞り込む</small></div></div>
+    <div class="step"><div class="step-num">二</div><div class="step-body"><b><a href="0702/海外展開_マネタイズ.html">戦略・行程編</a></b>で全体の道筋を確認<small>六つの宿場と関所（通過条件）で進め方を把握する</small></div></div>
+    <div class="step"><div class="step-num">三</div><div class="step-body"><b><a href="0702/アプリ開発の書.html">アプリ開発の書</a></b>で6週間MVP計画に落とす<small>技術選定と第1週の疎通確認項目をここで決める</small></div></div>
+    <div class="step"><div class="step-num">四</div><div class="step-body"><b><a href="0702/マネタイズの書.html">マネタイズの書</a></b>で収益設計を初日から組み込む<small>オンボ・ペイウォール・価格は後付けにしない</small></div></div>
+    <div class="step"><div class="step-num">五</div><div class="step-body"><b><a href="0702/SNS運用の書.html">SNS運用の書</a></b>＋<b><a href="sns_marketing/site/index.html">SNS戦略ガイド</a></b>で発信を並走させる<small>開発ログ自体がコンテンツ。Xの型を固めてから媒体を広げる</small></div></div>
+  </div>
+</div>
+
+<!-- ================= 現在地 ================= -->
+<div class="status">
+  <h2 class="serif">現在地（2026-07-04 時点）</h2>
+  <ul>
+    <li class="done">市場調査（成功アプリ85件＋海外サービス145件）</li>
+    <li class="done">アイデア出し（統合136案・詳細設計12案）</li>
+    <li class="done">全体戦略・ロードマップ策定／開発・マネタイズ・SNSの分冊化</li>
+    <li class="done">総合ロードマップ策定（Re:Nightリリース→複利→専業移行）</li>
+    <li>Re:Night v1.0 商用化（課金・プランUI・オンボ）→ 審査提出（目安8月末）</li>
+    <li>2本目の検証（宿場三・10月〜）／詳細は総合ロードマップ参照</li>
+  </ul>
+</div>
+
+<footer>
+  アプリ開発 資料館 — 総合目次｜資料はすべてブラウザ閲覧用（スマホ対応）｜数値は調査時点の推定を含む参考値
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var search = document.getElementById('search');
+  var chips = document.querySelectorAll('.chip');
+  var sections = document.querySelectorAll('section[data-cat]');
+  var empty = document.getElementById('empty');
+  var order = document.getElementById('order');
+  var currentCat = 'all';
+
+  function apply(){
+    var q = search.value.trim().toLowerCase();
+    var visibleTotal = 0;
+    sections.forEach(function(sec){
+      var catOk = (currentCat === 'all' || sec.dataset.cat === currentCat);
+      var visibleInSec = 0;
+      sec.querySelectorAll('a.card').forEach(function(card){
+        var text = (card.textContent + ' ' + (card.dataset.key || '')).toLowerCase();
+        var show = catOk && (!q || text.indexOf(q) !== -1);
+        card.style.display = show ? '' : 'none';
+        if (show) visibleInSec++;
+      });
+      sec.style.display = visibleInSec ? '' : 'none';
+      visibleTotal += visibleInSec;
+    });
+    empty.style.display = visibleTotal ? 'none' : 'block';
+    // 絞り込み中は読み順ガイドを畳んで結果を見やすくする
+    order.style.display = (q || currentCat !== 'all') ? 'none' : '';
+  }
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      currentCat = chip.dataset.cat;
+      apply();
+    });
+  });
+  search.addEventListener('input', apply);
+})();
+</script>
+</body>
+</html>

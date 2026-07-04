@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>発信プレイブック | SNS戦略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニューを開く">☰</button>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <div class="brand-title">SNS戦略ガイド</div>
+    <div class="brand-sub">個人開発×X発信 完全ガイド</div>
+  </a>
+  <nav>
+    <div class="nav-group-label">ガイド</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="roadmap.html"><span class="nav-ico">🗺️</span>ロードマップ</a>
+    <a class="nav-link" href="todo.html"><span class="nav-ico">✅</span>TODOチェックリスト</a>
+    <a class="nav-link" href="playbook.html"><span class="nav-ico">📝</span>発信プレイブック</a>
+    <a class="nav-link" href="accounts.html"><span class="nav-ico">👥</span>参考アカウント</a>
+    <a class="nav-link" href="design.html"><span class="nav-ico">🎨</span>デザインガイド</a>
+  </nav>
+  <div class="sidebar-foot">作成: 2026-06-11<br>調査レポート11本に基づく</div>
+</aside>
+<main class="content">
+  <header class="page-header">
+    <div class="page-eyebrow">PLAYBOOK</div>
+    <h1>発信プレイブック</h1>
+    <p class="lead">投稿の型・テンプレート・運用ルール。アルゴリズムの要点からコピペで使える投稿テンプレ、週間スケジュール、検証ポストの読み方まで、日々の発信はこのページだけで回せる。</p>
+  </header>
+
+  <div class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#algorithm">アルゴリズムの要点(2026年6月時点)</a></li>
+      <li><a href="#profile">プロフィール設計</a></li>
+      <li><a href="#templates">投稿の型テンプレート(コピペして使う)</a></li>
+      <li><a href="#reply">リプライ戦略</a></li>
+      <li><a href="#schedule">週間スケジュール</a></li>
+      <li><a href="#neta">ネタ帳システム</a></li>
+      <li><a href="#validation">検証ポストの運用</a></li>
+      <li><a href="#kpi">KPIと数字の運用</a></li>
+      <li><a href="#donts">やってはいけないこと(まとめ)</a></li>
+    </ol>
+  </div>
+
+  <p class="footnote">根拠: research/01_x-algorithm.md(アルゴリズム)、research/04_content-strategy.md(投稿戦略)、research/06_idea-validation.md(検証)、research/11_sustainable-operation.md(継続運用)</p>
+
+  <section id="algorithm">
+    <h2>1. アルゴリズムの要点(2026年6月時点)</h2>
+    <p><strong>2026年1月</strong>にXの新アルゴリズムがオープンソース化(GitHub: <strong>xai-org/x-algorithm</strong>)。Grok系AIが投稿内容を意味理解し、興味クラスタにマッチングする方式。</p>
+
+    <h3>エンゲージメントの重み(2023年公開コード由来の序列、方向性は現在も有効)</h3>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-value">0.5</div>
+        <div class="stat-label">いいね</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1</div>
+        <div class="stat-label">リポスト</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">10</div>
+        <div class="stat-label">ブックマーク</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">13.5</div>
+        <div class="stat-label">リプライ</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">75</div>
+        <div class="stat-label">著者との会話往復</div>
+      </div>
+    </div>
+
+    <h3>7つの実践ルール</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-num">1</div>
+        <h3>会話が最強</h3>
+        <p>いいね0.5 &lt; リポスト1 &lt; ブックマーク10 &lt; リプライ13.5 &lt; <strong>著者との会話往復75</strong>(2023年公開コード由来の序列、方向性は現在も有効)。<mark>リプライを誘発し、もらったら即返す</mark>。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">2</div>
+        <h3>初動30〜60分が勝負</h3>
+        <p>自分が張り付ける時間に投稿し、直後<strong>15〜30分はリプ返し</strong>に充てる。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">3</div>
+        <h3>外部リンクは本文に貼らない</h3>
+        <p>無料アカウントのリンク付き投稿はエンゲージ中央値<mark>ほぼゼロ</mark>(Buffer社<strong>1,880万投稿</strong>分析)。リンクは<strong>1件目のリプライ・固定ポスト・プロフィール</strong>へ。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">4</div>
+        <h3>ハッシュタグはほぼ無効</h3>
+        <p>使うなら <strong>#個人開発 1個まで</strong>(3個以上はペナルティ)。代わりに本文へ固有名詞(PHP/Next.js/Claude/Expo等)を入れて興味クラスタに正しく分類させる。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">5</div>
+        <h3>テーマの一貫性がリーチを作る</h3>
+        <p>「<strong>プログラミング×AI×個人開発</strong>」に固定。無関係なトレンド便乗・対立煽りはネガティブシグナル(通報は<strong>約-369</strong>)で中長期的に逆効果。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">6</div>
+        <h3>形式</h3>
+        <p>テキストのみが最高ER(<strong>0.40%</strong>)、動画は露出量で有利。個人開発の最強フォーマットは「<mark>30〜60秒のデモ動画(冒頭3秒で機能を見せる)</mark>」と「スクショ+短文」。スレッドは<strong>週1本・3〜6ポスト</strong>の短型(15連投は廃れた)。</p>
+      </div>
+      <div class="card">
+        <div class="card-num">7</div>
+        <h3>シャドウバン自己チェック</h3>
+        <p><strong>週1回</strong>ログアウト状態で「from:自分のID」検索。主因は<strong>同一宣伝文の連投・リンク乱発・大量フォロー</strong>。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="profile">
+    <h2>2. プロフィール設計(リプ露出→プロフ訪問→フォローの導線)</h2>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">プロフィールひな形</span><button class="copy-btn">コピー</button></div>
+      <pre>名前: ○○○｜Web屋がAIで個人開発
+bio:  PHP/JS歴N年のWeb系エンジニア
+      AI×個人開発の進捗・学び・失敗を毎日発信
+      ○月リリース目標「(アプリ名)」の裏側を全公開中
+      (人間味の一言: コーヒー/猫/サウナ等)
+固定ポスト: 自己紹介+挑戦宣言 → Phase 2以降はウェイトリストLP付き投稿に差し替え</pre>
+    </div>
+
+    <ul>
+      <li><mark>5秒で「何者か・フォローする価値」が伝わるか?</mark>が全て</li>
+      <li>実績ゼロのうちは「<strong>現在進行形の挑戦</strong>」が実績の代わり</li>
+      <li><strong>フォロー転換率(フォロワー増 ÷ プロフアクセス)</strong>が低ければここを直す</li>
+    </ul>
+  </section>
+
+  <section id="templates">
+    <h2>3. 投稿の型テンプレート(コピペして使う)</h2>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">A. 進捗型(Show)<span class="tpl-meta">基本形・毎日</span></span><button class="copy-btn">コピー</button></div>
+      <pre>開発○日目: ○○を実装した。
+ハマったのは△△(理由)。
+明日は□□をやる。
+[スクショ/GIF添付]</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">B. 学び・Tips型(Teach)<span class="tpl-meta">週2〜3</span></span><button class="copy-btn">コピー</button></div>
+      <pre>○○で3時間溶かした。
+原因は△△。
+同じ罠にハマる人のために共有:
+1. …
+2. …
+3. …</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">C. 数字型(Prove)<span class="tpl-meta">節目ごと</span></span><button class="copy-btn">コピー</button></div>
+      <pre>個人開発○日目の数字:
+・フォロワー: ○人(+○)
+・ウェイトリスト: ○人
+・やったこと3つ→ (続く)</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">D. 失敗談型<span class="tpl-meta">最も伸びる型・月1〜2</span></span><button class="copy-btn">コピー</button></div>
+      <pre>正直に言うと、○○は失敗だった。
+3ヶ月かけた△△、結果は□□。
+原因を分析すると…(続きで学びを共有)</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">E. 意思決定・投票型(検証兼用)<span class="tpl-meta">検証期に</span></span><button class="copy-btn">コピー</button></div>
+      <pre>開発中のアプリ、次にどっちを作るべき?
+A: ○○(こういう人向け)
+B: △△(こういう人向け)
+[アンケート: A / B / どちらも不要 / その他(リプで教えて)]</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">F. Before/After型</span><button class="copy-btn">コピー</button></div>
+      <pre>AIにリファクタさせる前と後。
+Before: 120行 / After: 45行
+プロンプトはこれ→(画像)</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">G. 分析型(実績ゼロ期の主力)<span class="tpl-meta">週3〜5</span></span><button class="copy-btn">コピー</button></div>
+      <pre>海外の個人開発者○○、月収$○○Kの戦略を分解すると:
+1. …
+2. …
+3. …
+一番真似できるのは△△。
+[図解 or スクショ]</pre>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="tpl-title">H. 週次振り返りスレッド<span class="tpl-meta">毎週金or日(単発の3〜5倍のエンゲージ)</span></span><button class="copy-btn">コピー</button></div>
+      <pre>個人開発 週次振り返り(第○週)🧵
+今週やったこと / 数字 / 学び / 来週やること
+(3〜6ポストで展開、最後にフォロー導線)</pre>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title">📊 比率の目安</div>
+      <p><strong>有益7:共感・人間味3</strong>。宣伝は全体の<strong>1〜2割まで</strong>(価値8:宣伝2)。</p>
+    </div>
+  </section>
+
+  <section id="reply">
+    <h2>4. リプライ戦略(フォロワー1,000人までの主戦場)</h2>
+    <ul>
+      <li><mark>時間の70%をリプライに</mark>(<strong>70/30ルール</strong>)。自投稿<strong>400インプ</strong>に対しリプライ1本で<strong>12,000インプ</strong>の海外実測例</li>
+      <li><strong>対象</strong>: 自分の<strong>5〜20倍規模(2,500〜1万フォロワー)</strong>の個人開発・AI界隈の中堅アカウント<strong>10〜20個</strong>(Xリスト化)</li>
+      <li><strong>タイミング</strong>: 相手の投稿後<mark>30分以内</mark></li>
+      <li><strong>内容</strong>: 実体験・検証データ・補足・具体的な質問。<strong>空リプ・絵文字だけ・宣伝リプは逆効果</strong>(2026年の品質スコアで降格)</li>
+      <li><strong>1日の目安</strong>: 朝10件+昼夜で計<strong>15〜30件</strong></li>
+      <li>見込み顧客(作るアプリのターゲット層)の投稿にも<strong>1日5件</strong>、売り込みなしでリプライ</li>
+    </ul>
+  </section>
+
+  <section id="schedule">
+    <h2>5. 週間スケジュール(兼業向け・SNS1日45分上限)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>曜日</th><th>SNS</th><th>開発</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>月〜金</strong></td>
+            <td>朝: リプライ+予約確認(15〜20分)/昼: リプ返+ネタメモ(10分)/夜: 開発後に進捗1ポスト(10〜15分)</td>
+            <td>夜60〜120分</td>
+          </tr>
+          <tr>
+            <td><strong>土</strong></td>
+            <td>リプライのみ</td>
+            <td>まとまった開発3〜4時間</td>
+          </tr>
+          <tr>
+            <td><strong>日</strong></td>
+            <td><strong>バッチ90分</strong>: 数値レビュー15分→ネタ帳整理→ストック5〜7本作成→予約投稿+IG用画像(Phase 3以降)</td>
+            <td>任意</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><strong>投稿時間</strong>: <mark>夜20〜23時が基本</mark>(エンジニア層のコアタイム)。朝7〜9時・昼12〜13時も有効。2〜4週ごとに自分のアナリティクスで補正</li>
+      <li><strong>予約投稿</strong>: X公式Web版(無料・64件・18ヶ月先まで。ただし1件ずつ登録/スレッド予約不可)。物足りなくなったらSocialDog Free→Personal(<strong>月1,480円</strong>)かTypefully</li>
+      <li><strong>ストック投稿(Tips・学び)=予約/フロー投稿(今日の進捗・会話)=リアルタイム</strong>の2層構造</li>
+    </ul>
+  </section>
+
+  <section id="neta">
+    <h2>6. ネタ帳システム(ネタ切れの構造的防止)</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-title">即メモ</div>
+        <p>開発中・通勤中に思いついたら1行で放り込む(分類は後回し)。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">変換ルール</div>
+        <ul>
+          <li><strong>コミットしたら1ネタ</strong>(その日のgit logから「人に話せる発見」を1つ)</li>
+          <li><strong>エラー解決に30分以上かかったら確実に1ネタ</strong>(誰かの役に立つ)</li>
+          <li><strong>micro-winを祝う</strong>(「初めてテストが通った」レベルで投稿してよい。完成を待たない)</li>
+        </ul>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">曜日テーマ固定(意思決定コストをゼロに)</div>
+        <p>例)月=今週やること宣言/水=技術Tips/金=週次スレッド/日=人間味・雑感</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">再利用</div>
+        <p>3ヶ月前の高反応ポストは別角度で再投稿してよい(フォロワーの大半は見ていない)。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">日曜バッチで分類</div>
+        <p>進捗/Tips/失敗談/AI活用/質問/雑感に振り分けて型に流し込む。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="validation">
+    <h2>7. 検証ポストの運用(実装前に作るか決める)</h2>
+
+    <h3>サイクル全体をコンテンツ化する</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-title">課題提起</div>
+        <p>「○○で困ってる人いる?」</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">宣言</div>
+        <p>「作ります。△△というアプリ」</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">モック公開</div>
+        <p>「画面イメージできた。欲しい人いる?」</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">投票</div>
+        <p>「機能AとBどっちが先?」</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">結果共有</div>
+        <p>「投票結果と、こう決めた理由」</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-title">進捗デモ</div>
+        <p>動くGIFを公開する。</p>
+      </div>
+    </div>
+
+    <h3>シグナルの読み方(弱→強)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>シグナル</th><th>意味</th><th>扱い</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-gray">いいね</span></td>
+            <td>社交辞令含む最弱シグナル</td>
+            <td>参考程度(誰からも「いいね」だけのアイデアは逆に警戒)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gray">アンケート投票</span></td>
+            <td>コストゼロの意見</td>
+            <td>優先順位の確認のみ。<strong>Go/No-Go判断には使わない</strong></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-amber">ブックマーク</span></td>
+            <td>「あとで使いたい」実用価値</td>
+            <td>技術系の品質指標。ブックマーク率を記録</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-amber">具体的リプライ</span></td>
+            <td>関心+思考コスト</td>
+            <td>インタビュー候補。内容を記録</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-indigo">DM</span></td>
+            <td>深い関心</td>
+            <td>必ず返信しインタビュー打診</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-indigo">ウェイトリスト登録</span></td>
+            <td>行動コストを払った関心</td>
+            <td><strong>主要KPI</strong>(ただし購入転換は<strong>1〜2%</strong>)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">前金(500円〜)</span></td>
+            <td>支払い意思の証明</td>
+            <td><mark>最強の証拠(転換30〜50%)</mark>。「700人の無料登録より7人の有料ユーザー」</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">⚠️ 鉄則</div>
+      <ul>
+        <li>反応の絶対数でなく<strong>インプレッション比の率</strong>で判断(フォロワーが少ない時期の反応ゼロは「届いていないだけ」)</li>
+        <li>エンジニアのフォロワー≠一般消費者。一般向けアプリの需要判断は<strong>LP+少額広告・インタビュー</strong>で(2つのダッシュボード)</li>
+        <li>合格ラインは<strong>テスト開始前に書面で</strong>決める</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="kpi">
+    <h2>8. KPIと数字の運用</h2>
+
+    <h3>ファネル</h3>
+    <pre class="code">インプ
+  → ER(2〜3%合格 / 5%優秀)
+    → プロフアクセス
+      → フォロー転換
+        → リンククリック
+          → ウェイトリスト登録(最終KPI)</pre>
+
+    <ul>
+      <li><strong>1〜2ヶ月目</strong>: 行動KPIのみ(投稿数・リプ数・継続率)</li>
+      <li><strong>3ヶ月目〜</strong>: ER・ブックマーク率・プロフクリックを<strong>週次15分</strong>でレビュー</li>
+      <li><strong>検証期〜</strong>: ウェイトリスト登録数・流入元(どの投稿から来たか)を必ず記録</li>
+      <li><strong>診断の使い方</strong>: インプ低→アルゴリズム対策とフック改善/ER低→内容が刺さってない/プロフクリック少→「もっと知りたい」要素不足/フォローされない→プロフィール改善/クリックされない→CTA・導線改善</li>
+      <li>ベンチマークより<mark>先月の自分比</mark>。X収益化(<strong>500万インプ</strong>)はKPIにしない</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <div class="callout-title">🛡️ メンタル防衛ルール</div>
+      <ul>
+        <li>投稿後<strong>48時間</strong>は分析を見ない</li>
+        <li>通知オフ+リプ確認は<strong>朝晩20分</strong>の窓のみ</li>
+        <li>数値レビューは<strong>週1回</strong>だけ</li>
+        <li><strong>月1回</strong>のSNS断食日</li>
+        <li>「今週は本業が忙しいので低浮上」と正直に言ってよい(それ自体がコンテンツ)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="donts">
+    <h2>9. やってはいけないこと(まとめ)</h2>
+    <div class="callout callout-danger">
+      <div class="callout-title">🚫 NG行動リスト</div>
+      <ul>
+        <li>本文への外部リンク直貼り/ハッシュタグ乱用(2個以上)/同一宣伝文の連投</li>
+        <li>相互フォロー企画・フォロワー購入・無差別フォロー(<strong>興味クラスタを汚染し、検証精度自体を壊す</strong>)</li>
+        <li>空リプ・絵文字だけのリプライ/AI生成丸出しの一般論ポスト(実体験がないものはGrok品質評価で不利)</li>
+        <li>技術や他人の否定・対立煽り(ネガティブシグナルで降格)</li>
+        <li>「今日○○しました」だけの価値ゼロ進捗日記/フォロワー数の日次チェック/バズ追い</li>
+        <li>投稿するためのタスク作り(<strong>開発ファースト原則の逆転</strong>)</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <span>SNS戦略ガイド — 個人開発×X発信(2026-06-11作成)</span>
+    <span><a href="index.html">ホーム</a></span>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

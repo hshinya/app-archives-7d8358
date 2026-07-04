@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ロードマップ | SNS戦略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニューを開く">☰</button>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <div class="brand-title">SNS戦略ガイド</div>
+    <div class="brand-sub">個人開発×X発信 完全ガイド</div>
+  </a>
+  <nav>
+    <div class="nav-group-label">ガイド</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="roadmap.html"><span class="nav-ico">🗺️</span>ロードマップ</a>
+    <a class="nav-link" href="todo.html"><span class="nav-ico">✅</span>TODOチェックリスト</a>
+    <a class="nav-link" href="playbook.html"><span class="nav-ico">📝</span>発信プレイブック</a>
+    <a class="nav-link" href="accounts.html"><span class="nav-ico">👥</span>参考アカウント</a>
+    <a class="nav-link" href="design.html"><span class="nav-ico">🎨</span>デザインガイド</a>
+  </nav>
+  <div class="sidebar-foot">作成: 2026-06-11<br>調査レポート11本に基づく</div>
+</aside>
+<main class="content">
+  <header class="page-header">
+    <div class="page-eyebrow">ROADMAP</div>
+    <h1>個人開発×SNS発信 ロードマップ(X中心)</h1>
+    <p class="lead">SNS発信ほぼ未経験の現役Web系エンジニア(HTML/CSS/JS/PHP)が、個人開発アプリのマネタイズに向けて X発信をPhase 0〜5で進めるための全体設計図。<code class="kbd">research/</code> 配下の<strong>11本の調査レポート</strong>(2026年6月時点のWeb調査・出典付き)に基づく。</p>
+  </header>
+
+  <div class="callout callout-info">
+    <div class="callout-title">📌 このロードマップの目的(4つ)</div>
+    <ul>
+      <li>① <strong>リリース時に利用者がいる状態</strong>を作る</li>
+      <li>② SNS経由でアプリを知ってもらう</li>
+      <li>③ <strong>実装前に反応を見て</strong>機能を取捨選択する</li>
+      <li>④ SNSマーケティングスキルの習得</li>
+    </ul>
+  </div>
+
+  <nav class="toc" id="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#principles">戦略の核(5原則・要約)</a></li>
+      <li><a href="#map">全体マップ</a></li>
+      <li><a href="#phase0">Phase 0: 準備(今週〜2週間)</a></li>
+      <li><a href="#phase1">Phase 1: 習慣化と土台づくり(1〜2ヶ月目)</a></li>
+      <li><a href="#phase2">Phase 2: アイデア検証と質の確立(2〜4ヶ月目)</a></li>
+      <li><a href="#phase3">Phase 3: 実装+プレローンチ(4〜6ヶ月目)</a></li>
+      <li><a href="#phase4">Phase 4: ローンチと初速(リリース週〜1ヶ月)</a></li>
+      <li><a href="#phase5">Phase 5: グロースと複利(6ヶ月目以降)</a></li>
+      <li><a href="#reality">数字の現実(期待値の調整表)</a></li>
+      <li><a href="#failures">失敗パターンと防衛ルール</a></li>
+      <li><a href="#docs">関連ドキュメント</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="principles">戦略の核(これだけは外さない5原則)</h2>
+  <p>ロードマップ全体は、調査から導かれた次の5原則の上に組み立てている。詳しい根拠と数字は<a href="index.html">ホーム</a>に詳述。</p>
+  <div class="card">
+    <ol>
+      <li><strong>Xはアプリへの「導線」であり、フォロワー数はKPIではない</strong> — フォロワー数と売上はほぼ無相関(相関<mark>0.04</mark>)。目標は「見込み顧客100人のウェイトリスト登録」</li>
+      <li><strong>2026年のXアルゴリズムは「会話」が全て</strong> — リプライ13.5・会話往復75の重み。フォロワー1,000人までは他者への質の高いリプライが主エンジン(<mark>70/30ルール</mark>)。外部リンクは本文に貼らない</li>
+      <li><strong>「SNSの反応」と「需要」は別物。2つのダッシュボードで測る</strong> — Xは認知・応援・フィードバック用。支払い意思の検証はLP+少額広告・Mom Test式インタビューで</li>
+      <li><strong>今はBuild in Publicの「フルオープンが最適」なフェーズ</strong> — <strong>$10K MRR</strong>(月150万円)までは数字も過程も全公開→以降は非公開化。顔出し・実名は不要</li>
+      <li><strong>気合いではなく仕組みで続ける</strong> — 開発:SNS=<mark>2:1以上</mark>を死守、SNSは1日45分上限。最初の90日は反応ゼロが仕様、継続自体が参入障壁</li>
+    </ol>
+  </div>
+
+  <h2 id="map">全体マップ</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>フェーズ</th><th>期間目安</th><th>テーマ</th><th>主KPI</th><th>出口条件</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="#phase0"><strong>Phase 0</strong></a></td><td>今週〜2週間</td><td>アカウント・環境・企画の準備</td><td>準備チェックリスト完了</td><td>初投稿+固定ポスト公開</td></tr>
+        <tr><td><a href="#phase1"><strong>Phase 1</strong></a></td><td>1〜2ヶ月目</td><td>発信の習慣化と土台づくり</td><td>行動KPIのみ(投稿数・リプ数・継続率)</td><td>45分ルーチンが3週間途切れず回る</td></tr>
+        <tr><td><a href="#phase2"><strong>Phase 2</strong></a></td><td>2〜4ヶ月目</td><td>アイデア検証と投稿の質の確立</td><td>ER2%以上、検証シートの完了数</td><td>作るアプリが1本決まる(or 撤退判断)</td></tr>
+        <tr><td><a href="#phase3"><strong>Phase 3</strong></a></td><td>4〜6ヶ月目</td><td>実装+プレローンチ(並行)</td><td>ウェイトリスト登録数(まず25→100人)</td><td>ストア審査提出+事前登録開始</td></tr>
+        <tr><td><a href="#phase4"><strong>Phase 4</strong></a></td><td>リリース週〜1ヶ月</td><td>ローンチと初速</td><td>初週300DL・月1万円</td><td>リリース後記事公開+改善サイクル稼働</td></tr>
+        <tr><td><a href="#phase5"><strong>Phase 5</strong></a></td><td>6ヶ月目以降</td><td>グロースと複利</td><td>MRR、2本目の検証開始</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout callout-warn">
+    <div class="callout-title">⏱ 期間の前提</div>
+    <p>期間は「兼業・1日合計2〜3時間(開発含む)」前提の目安。Phase 2と3は検証結果次第で前後し、<strong>検証に失敗したらPhase 2を繰り返す</strong>(それが「無駄な実装をしない」ことの実体)。</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- ============ Phase 0 ============ -->
+    <section class="phase" id="phase0">
+      <div class="phase-marker" style="--phase-color: var(--p0)">P0</div>
+      <div class="phase-head" style="--phase-color: var(--p0)">
+        <div class="phase-period">今週〜2週間</div>
+        <h2 class="phase-title">Phase 0: 準備</h2>
+        <div class="phase-goal">ゴール: <strong>「何を作っている人か」が3秒で分かるアカウントで初投稿を出す。</strong></div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>0-1. アカウント設計</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-acct-1"><span class="check-text">ハンドルネーム+固定アイコンで開始(顔出し・実名は不要)。アイコン400×400、ヘッダー1500×500をCanva無料プランで作成</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-acct-2"><span class="check-text">名前は「名前｜肩書き」形式(例: 「○○○｜Web屋がAIで個人開発」)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-acct-3"><span class="check-text">bioは3要素: ①何者か(Web系エンジニア、PHP/JS歴N年) ②フォローする価値(AI×個人開発の進捗・学び・失敗を毎日発信) ③現在進行形の挑戦(「○月リリース目標のアプリの裏側を全公開中」)<small>実績ゼロ期は「挑戦の全公開」が実績の代わりになる</small></span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-acct-4"><span class="check-text">固定ポスト: 自己紹介+挑戦宣言(後にウェイトリストLPに差し替える)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-acct-5"><span class="check-text">X Premiumに<strong>Webブラウザ経由で</strong>加入(アプリ内課金は割高。月1,000円台)<small>リンクペナルティ緩和・アナリティクス・長文投稿が目的。Premium+は不要</small></span></label></li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>0-2. 方針の文書化(あとでブレないように)</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-doc-1"><span class="check-text">発信テーマを「プログラミング×AI×個人開発」に固定(テーマ一貫性自体がアルゴリズム対策)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-doc-2"><span class="check-text">公開ラインを決める: 数字・過程は$10K MRRまでフルオープン/差別化の核となる実装アイデアは出しすぎない(ペイン・進捗・数字は公開、核は非公開)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-doc-3"><span class="check-text">法務チェック(一般知識ベース・各自確認): 会社の就業規則(副業規定)を確認/年20万円超の雑所得は確定申告/案件紹介等を受ける場合はステマ規制(景品表示法)に留意</span></label></li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>0-3. 観察環境と道具</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-env-1"><span class="check-text">参考アカウントをフォロー(<a href="accounts.html">参考アカウント集</a>参照)。中堅層10〜20アカウントを<strong>Xのリスト</strong>にまとめ、毎日のリプライ先にする</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-env-2"><span class="check-text">ネタ帳を作る(スマホのメモ/Notion。思いついたら1行で放り込む)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-env-3"><span class="check-text">投稿ログ用スプレッドシートを用意(日時・型・インプ・ER・ブックマーク・リプ数・プロフクリック・メモ)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-env-4"><span class="check-text">Canva無料アカウント作成、X用テンプレ(1600×900)を3種選定。配色2〜3色・フォント1〜2種に固定</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-env-5"><span class="check-text">入江慎吾『自分のサービスで生きていく〈個人開発の教科書〉』を読む(けい氏・ぶべ氏のnoteも)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>0-4. 企画の設計(ゼロから追ってもらう仕掛け)</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-plan-1"><span class="check-text">チャレンジ型企画を1つ決める(大塚あみ式)。例: 「100日でAIアプリを○本作る」「30日で月1万円アプリに挑戦」<small>毎日成果物スクショ付きで投稿し「開発○日目」でカウントを公開する</small></span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p0-plan-2"><span class="check-text">Solomaker(solomaker.dev)に登録(アイデア段階の壁打ち先・テスター募集先として)</span></label></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Phase 1 ============ -->
+    <section class="phase" id="phase1">
+      <div class="phase-marker" style="--phase-color: var(--p1)">P1</div>
+      <div class="phase-head" style="--phase-color: var(--p1)">
+        <div class="phase-period">1〜2ヶ月目</div>
+        <h2 class="phase-title">Phase 1: 習慣化と土台づくり</h2>
+        <div class="phase-goal">ゴール: <strong>1日45分ルーチンが習慣として固定され、界隈に「顔見知り」ができている。</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>1-1. 毎日のルーチン(合計45分以内・タイマー必須)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>タイミング</th><th>内容</th><th>時間</th></tr></thead>
+            <tbody>
+              <tr><td>朝(出勤前/通勤中)</td><td>リプライ返信+界隈の投稿10件に価値あるリプライ</td><td>15〜20分</td></tr>
+              <tr><td>昼休み</td><td>リプ返+界隈観察(ネタ帳にメモ)</td><td>10分</td></tr>
+              <tr><td>夜</td><td><strong>開発(最優先)60〜120分</strong></td><td>—</td></tr>
+              <tr><td>開発終了直後</td><td>進捗を1ポスト(スクショ/GIF添付)+翌日分の下書き</td><td>10〜15分</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>投稿は<strong>1日1本で十分</strong>。エネルギーの<mark>70〜80%はリプライに使う</mark>(リプライ先は自分の5〜20倍規模=2,500〜1万フォロワーの中堅アカウント、投稿後30分以内、実体験・データ・補足を添える。空リプ・絵文字だけは逆効果)</li>
+          <li>投稿時間は<strong>夜20〜23時</strong>を基本に(日本のエンジニア層のコアタイム)、<strong>投稿直後15〜30分はリプ返しに張り付く</strong>(初動と著者返信が最重要シグナル)</li>
+          <li>疲れた日は「リプ返5件だけ」でOK。<mark>ゼロの日を作らない</mark></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>1-2. コンテンツの方針</h3>
+        <ul>
+          <li><strong>Teach(学び・Tips)/ Show(進捗・裏側)/ Prove(数字・小さな実績)</strong>の3本柱をローテーション。<mark>価値8:宣伝2</mark></li>
+          <li>実績がない最初の30日は<strong>分析型ポスト</strong>(海外indie hacker事例の日本語解説、AIツールを自分で動かした検証)を週3〜5本混ぜて価値提供の土台を作る(ウマたん式・ぬこぬこ式)</li>
+          <li>30日目から<strong>週次振り返りスレッド</strong>(金曜or日曜: やったこと+数字+学び+来週の目標。単発の<mark>3〜5倍</mark>のエンゲージメント)</li>
+          <li>週末(日曜)に90分のバッチ作成枠: 週次数値レビュー15分→ネタ帳整理→ストック投稿5〜7本作成→予約投稿(X公式Web版は無料・64件まで)。<strong>進捗報告だけはリアルタイムで出す</strong>(ストック=予約、フロー=リアルタイムの2層構造)</li>
+          <li>Threadsを開設し、Xの投稿を会話調に直して転載(1日5分)</li>
+          <li>Zennに月1〜2本(開発の学び・失敗談)。記事末尾に「開発過程はXで発信中」導線。外部リンクは本文に貼らずリプ欄へ</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>1-3. この期間のKPI(行動KPIのみ。数字KPIは見ない)</h3>
+        <ul>
+          <li>週5日以上の投稿、リプライ週50件以上、継続日数</li>
+          <li><strong>最低ライン(これだけは死守): 週3ポスト+毎日リプ返5件</strong></li>
+          <li>投稿後<mark>48時間はアナリティクスを見ない</mark>。数値レビューは日曜の15分だけ</li>
+        </ul>
+      </div>
+
+      <div class="callout callout-danger">
+        <div class="callout-title">🚫 1-4. やらないこと</div>
+        <ul>
+          <li>ハッシュタグ乱用(使うなら <strong>#個人開発 1個まで</strong>。代わりに本文へ固有名詞: PHP/Next.js/Claude等)</li>
+          <li>本文への外部リンク直貼り/同一宣伝文の連投/相互フォロー企画/大量フォロー/技術や他人の否定</li>
+          <li>フォロワー数チェックの日課化、バズ追い</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Phase 2 ============ -->
+    <section class="phase" id="phase2">
+      <div class="phase-marker" style="--phase-color: var(--p2)">P2</div>
+      <div class="phase-head" style="--phase-color: var(--p2)">
+        <div class="phase-period">2〜4ヶ月目</div>
+        <h2 class="phase-title">Phase 2: アイデア検証と質の確立</h2>
+        <div class="phase-goal">ゴール: <strong>「作るべきアプリ」が1本、数字の根拠付きで決まる。反応がなければ作らない。</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>2-1. 検証の手順(アイデアごとに繰り返す)</h3>
+        <div class="flow">
+          <div class="flow-step">
+            <div class="flow-title">検証シートを作る</div>
+            <p>テスト開始前に合格ラインを書面で決める(例: LP訪問1,000件でCVR10%以上、8週間でウェイトリスト100人、前金3件)。<strong>後出しで基準を緩めない</strong>。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">課題提起ポスト</div>
+            <p>「○○で困ってる人いますか?」で反応の絶対数でなく<strong>インプレッション比の率</strong>を見る(千三つ=反応率<strong>0.3%</strong>が相場)。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">モック投稿</div>
+            <p>Figma/AI生成/手書きのモック画像+「これ欲しい人いる?」。見るのは<strong>ブックマーク率・具体的リプライ・DM数</strong>(いいねは最弱シグナル)。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">投票で機能の優先順位</div>
+            <p>Xアンケートは「AとBどちらを先に作るか」の優先順位確認専用(Go/No-Go判断には使わない)。4つ目に「その他(リプで教えて)」。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">Mom Test式インタビュー</div>
+            <p>具体的リプ・DMをくれた人に「15分だけ」と打診し5〜10人。アイデアを語らず<strong>過去の行動だけ</strong>聞く(最後にいつ・何を試し・いくら払ったか)。「いいね!」という褒め言葉は全部捨てる。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">一般消費者向けアプリの場合</div>
+            <p>X上の反応を需要判断に使わない(フォロワー=同業者バイアス)。ペライチ/自作LP+Meta広告orX広告に総額<strong>1〜2万円</strong>を投下しCVRを測る(平均2〜5%、<strong>10%以上で強いGO</strong>、3%未満は再考)。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">PWA/Webデモを1〜2週間で公開</div>
+            <p>現有のHTML/CSS/JS/PHPスキルで審査不要・即日公開できる。<strong>動くものへの反応が最も正確な検証</strong>。</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-title">判断</div>
+            <p>合格→Phase 3へ。<strong>不合格を2回→そのアイデアは撤退</strong>し、次へ(これが「無駄な実装をしない」の実行)。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-success">
+        <div class="callout-title">🔁 2-2. 検証の流れ自体をコンテンツにする</div>
+        <p>「困りごと問いかけ→作ります宣言→モック公開→投票で機能選定→結果と決定理由を共有」のサイクルをそのまま投稿する。<strong>検証とフォロワー獲得が同時に進む。</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>2-3. 投稿の質の確立</h3>
+        <ul>
+          <li>月1回、投稿ログからトップ3/ワースト3を抽出し「勝ちパターン」を3個言語化→翌月のコンテンツ配分に反映</li>
+          <li>目安: <mark>ER2%未満=改善対象/2〜3%=合格/5%超=勝ちパターン</mark>として再現</li>
+          <li>60日目を目処に<strong>ウェイトリストLPを公開</strong>(Vercel/Cloudflare Pages無料枠で自作+フォームはTally/LaunchList無料)。X固定ポストとプロフィールリンクに設置</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>2-4. この期間のKPI</h3>
+        <ul>
+          <li><strong>ER2%以上</strong>、勝ちパターン3個、検証シート完了数(=判断した数)、ウェイトリスト登録(まず<strong>25人</strong>: この頃にどの流入チャネルが機能するか見え始める)</li>
+          <li>フォロワーは「<strong>3〜6ヶ月で1,000人</strong>」が日本語技術系の標準ペース。未達でも検証が回っていれば問題ない</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Phase 3 ============ -->
+    <section class="phase" id="phase3">
+      <div class="phase-marker" style="--phase-color: var(--p3)">P3</div>
+      <div class="phase-head" style="--phase-color: var(--p3)">
+        <div class="phase-period">4〜6ヶ月目</div>
+        <h2 class="phase-title">Phase 3: 実装+プレローンチ(並行)</h2>
+        <div class="phase-goal">ゴール: <strong>「ローンチは6〜12週間のプロセス」を設計通りに実行し、リリース日に通知できるリストを持っている。</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>3-1. 技術選定と開発(検証合格後)</h3>
+        <ul>
+          <li>本命アプリは <strong>React Native(Expo)+RevenueCat</strong> で開発し<strong>iOS優先</strong>(インストール単価収益 iOS <mark>$2.28</mark> vs Android <mark>$0.89</mark>、新規サブスクアプリの<strong>77%がiOS発</strong>)。JS資産が活きるためFlutterより導入が速い</li>
+          <li>Apple Developer Program(年$99)とGoogle Play(初回$25)に登録</li>
+          <li>収益設計: 「無料+広告+サブスク(広告非表示込み・月額480〜800円+年額)」のハイブリッド。<strong>安売りしない</strong>(ハードペイウォールの転換率はフリーミアムの<mark>約5倍</mark>、高価格帯LTVは低価格帯の<mark>約6倍</mark>)</li>
+          <li>開発中もBuild in Public継続: 「1週間開発・1週間マーケ」(Yongfook式)か毎日の進捗ポストで、<strong>開発期間そのものを予告編にする</strong></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>3-2. Instagram開始(Xフォロワー500〜1,000到達後でよい)</h3>
+        <ul>
+          <li>位置づけは「Xで反応が良かった投稿のリパーパス専用」。週2〜3投稿の省力運用(8〜10枚カルーセル: フック→展開→まとめ→CTA。Canva/Contentdripsで1セッション10〜20分)</li>
+          <li>IGの技術系オーディエンスは「学習者・転職希望者・AI興味層」。アプリが非エンジニア向けならIGの優先度を一段上げる(ぶべ式: プロダクトのターゲットがいる場所で発信)</li>
+          <li>予約はMeta Business Suite(無料)</li>
+        </ul>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>3-3. プレローンチ作業(T=リリース日)</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-1"><span class="check-text"><strong>T-6〜4週: Google Play事前登録を開始+クローズドテスト</strong><small>2023/11/13以降作成の個人アカウントは「テスター12人以上×14日連続」が製品版公開の必須要件 → X・Solomaker・相互テストコミュニティで募集(テスター募集ポスト自体がコンテンツになる)</small></span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-2"><span class="check-text">T-6〜4週: <strong>TestFlightパブリックリンク</strong>公開(URL共有だけで最大1万人に配布可)+<strong>App Store予約注文</strong>設定<small>リリース2〜180日前から可。予約は初日DLに計上されランキング初速に効く</small></span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-3"><span class="check-text">T-4週: ストア素材を作成(<a href="design.html">デザインガイド</a>参照)。タイトルにキーワード、スクショ1〜3枚目で価値訴求</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-4"><span class="check-text">T-4週: デモ動画(「3秒で課題→10〜20秒デモ→CTA」30秒以内・字幕付き縦型)。素材はリール/Shorts/TikTokにも転用</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-5"><span class="check-text">T-2〜3週: Zennに開発の学び記事を1〜2本出してアカウントを温める(リリース記事の布石)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-6"><span class="check-text">T-1週: ウェイトリストへ予告メール。週1進捗メールは登録時から継続(ローンチ時転換15〜25%を維持する仕組み)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p3-pre-7"><span class="check-text">リリース時: Apple Small Business Program+Googleの15%プログラムに申請(手数料30%→15%)</span></label></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>3-4. この期間のKPI</h3>
+        <ul>
+          <li>ウェイトリスト登録<strong>100人</strong>(8週間で100人に届かなければポジショニングを疑う)、事前登録数、テスター<strong>12人</strong>確保</li>
+          <li>参考実例: 個人開発RPG「魔女の育成」は事前登録<mark>269人</mark>→初週<mark>3,377DL</mark>・Play新着3位</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Phase 4 ============ -->
+    <section class="phase" id="phase4">
+      <div class="phase-marker" style="--phase-color: var(--p4)">P4</div>
+      <div class="phase-head" style="--phase-color: var(--p4)">
+        <div class="phase-period">リリース週〜1ヶ月</div>
+        <h2 class="phase-title">Phase 4: ローンチと初速</h2>
+        <div class="phase-goal">ゴール: <strong>初週にDLを集中させて新着ランキングの二次流入を起こし、改善サイクルに入る。</strong></div>
+      </div>
+
+      <div class="checklist-group">
+        <div class="checklist-head"><h3>4-1. ローンチ週チェックリスト</h3><span class="checklist-count"></span></div>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <ul class="checklist">
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-1"><span class="check-text">ウェイトリストへリリースメール一斉送信</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-2"><span class="check-text">X固定ポストを差し替え: 本文で価値を語り、<strong>ストアリンクは1件目のリプライに</strong>(OS振り分けLPがあれば尚良)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-3"><span class="check-text">デモ動画付きリリースポスト+全リプライに即返信(初動を最大化)</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-4"><span class="check-text">Zenn/Qiitaに「作りました」技術記事、noteに「なぜ作ったか」ストーリー記事</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-5"><span class="check-text">個人開発系の無料掲載サイト(Solomaker等)に登録</span></label></li>
+          <li class="check-item"><label><input type="checkbox" data-id="rm-p4-launch-6"><span class="check-text">Product Huntは海外向けプロダクトのときだけ<small>2026年現在CVR約3.1%まで低下。日本向けならZenn/Qiita/noteが主砲</small></span></label></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>4-2. リリース後1〜4週</h3>
+        <ul>
+          <li>毎日「使われ方・数字・改善」を投稿(<strong>リリース後こそネタの宝庫</strong>)</li>
+          <li>良い体験の直後にレビュー依頼を表示(評価<mark>4.5以上は4.0未満の1.7倍</mark>のインストール率)</li>
+          <li>DL数・継続率を記録し、「リリースして学んだこと」記事で<strong>2回目の山</strong>を作る</li>
+          <li><strong>目標: 初週300DL・月1万円</strong>(サブスクアプリの1年後月収中央値は約$72。月1万円は立派な上位戦績)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ Phase 5 ============ -->
+    <section class="phase" id="phase5">
+      <div class="phase-marker" style="--phase-color: var(--p5)">P5</div>
+      <div class="phase-head" style="--phase-color: var(--p5)">
+        <div class="phase-period">6ヶ月目以降</div>
+        <h2 class="phase-title">Phase 5: グロースと複利</h2>
+        <div class="phase-goal">ゴール: <strong>改善の継続と2本目の検証で、収益とフォロワーを複利で伸ばす。</strong></div>
+      </div>
+
+      <div class="card">
+        <h3>やることリスト</h3>
+        <ul>
+          <li>リリース後<strong>3ヶ月以上の改善継続</strong>(収益化率が大きく変わる)。ASOのA/Bテスト(スクショ変更で中央値<mark>+11.8%</mark>)</li>
+          <li><strong>収益数字の公開をフックにする</strong>(小さくても正直に): 「個人開発アプリ、最初の月の収益は○円でした」型は最強の拡散フォーマット</li>
+          <li>2本目の検証を<a href="#phase2">Phase 2の手順</a>で開始(入江氏は<strong>30本以上</strong>作っている。1本目で当てる前提にしない)</li>
+          <li>運用ツール強化: SocialDog Personal(月1,480円)で予約・分析を一元化</li>
+          <li>IGリパーパス本格化+デモ動画素材のShorts/TikTokついで配信</li>
+          <li>スマホ新法(2025年12月施行)対応のWeb決済(Stripe・手数料15%/小規模10%)は第2弾で検討</li>
+          <li><strong>$10K MRR(月150万円)に近づいたら数字の公開を縮小</strong>(コピーキャット対策。最初に決めた公開ラインの実行)</li>
+        </ul>
+      </div>
+    </section>
+
+  </div><!-- /.timeline -->
+
+  <hr class="divider">
+
+  <h2 id="reality">数字の現実(期待値の調整表)</h2>
+  <p>SNSとアプリ収益の「相場」を先に知っておくことで、途中で心が折れるのを防ぐ。</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-value">3〜6ヶ月</div><div class="stat-label">0→1,000フォロワーの標準ペース</div></div>
+    <div class="stat"><div class="stat-value">2〜3%</div><div class="stat-label">エンゲージメント率の合格ライン(5%超で優秀)</div></div>
+    <div class="stat"><div class="stat-value">0.3%</div><div class="stat-label">告知→行動の転換率(千三つ)</div></div>
+    <div class="stat"><div class="stat-value">1〜2%</div><div class="stat-label">無料ウェイトリスト→購入の転換率</div></div>
+    <div class="stat"><div class="stat-value">約$72</div><div class="stat-label">サブスクアプリ1年後の月収中央値</div></div>
+    <div class="stat"><div class="stat-value">4〜6ヶ月</div><div class="stat-label">効果実感までの期間(90日の反応ゼロは仕様)</div></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>現実的な目安</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>0→1,000フォロワー</td><td>毎日投稿+リプ交流で<strong>3〜6ヶ月</strong></td><td>大半は2ヶ月で挫折=継続が参入障壁</td></tr>
+        <tr><td>1,000→5,000</td><td>さらに6ヶ月〜1年</td><td>「5000人の壁」で鈍化が普通</td></tr>
+        <tr><td>エンゲージメント率</td><td><strong>2〜3%で合格、5%超で優秀</strong></td><td>インプレッションベース・自分比が主軸</td></tr>
+        <tr><td>告知→行動の転換</td><td>千三つ(<strong>0.3%</strong>)</td><td>100ユーザー獲得≒33,000インプ。1回の告知では絶対足りない</td></tr>
+        <tr><td>無料ウェイトリスト→購入</td><td><strong>1〜2%</strong></td><td>前金(500円〜)付きなら<strong>30〜50%</strong></td></tr>
+        <tr><td>サブスクアプリ1年後の月収</td><td>中央値<strong>約$72</strong></td><td>2年で月$1K到達は17.3%、$10Kは4.6%</td></tr>
+        <tr><td>効果実感まで</td><td><strong>4〜6ヶ月</strong></td><td>最初の90日の反応ゼロは「仕様」</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="failures">失敗パターンと防衛ルール</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>失敗パターン</th><th>防衛ルール</th></tr></thead>
+      <tbody>
+        <tr><td>価値提供のない進捗日記化</td><td>全投稿を<strong>Teach/Show/Prove</strong>のどれかに該当させる。「今日○○を実装しました」だけの投稿を禁止</td></tr>
+        <tr><td>リプライせず投稿だけ</td><td><strong>70/30ルール</strong>。リプライ件数を週次の行動KPIにする</td></tr>
+        <tr><td>反応ゼロで3ヶ月以内に心が折れる</td><td>最初の90日は「種まき期」と宣言。行動KPIのみで自己評価</td></tr>
+        <tr><td>毎日投稿宣言→停止→自己嫌悪で全停止</td><td>宣言は最低ライン(週3ポスト)で行う。<strong>「週2回を半年」&gt;「毎日を1ヶ月」</strong></td></tr>
+        <tr><td>SNSばかりやって開発が進まない</td><td>開発ファースト原則+SNS<strong>45分タイマー</strong>+週次で開発:SNS比率チェック(1:1を切ったら翌週SNS縮小)</td></tr>
+        <tr><td>フォロワー数のKPI化・バズ追い</td><td>KPIは会話数・ウェイトリスト登録・検証完了数。投稿後<strong>48時間は分析を見ない</strong></td></tr>
+        <tr><td>エンジニア向けに作って一般人に売る混線</td><td>アイデアごとに「顧客はXのフォロワーか?」を最初に判定。違うなら検証はLP+広告で</td></tr>
+        <tr><td>一発ローンチ思考</td><td>ローンチは<strong>6〜12週間のプロセス</strong>。Product Hunt一発勝負はしない</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="docs">関連ドキュメント</h2>
+  <div class="card-grid">
+    <a class="card link-card" href="todo.html">
+      <h3>✅ TODOチェックリスト</h3>
+      <p>今日・今週・今月のチェックリスト。</p>
+      <span class="go">開く →</span>
+    </a>
+    <a class="card link-card" href="playbook.html">
+      <h3>📝 発信プレイブック</h3>
+      <p>投稿の型・テンプレート・週間スケジュール・ネタ帳システム。</p>
+      <span class="go">開く →</span>
+    </a>
+    <a class="card link-card" href="accounts.html">
+      <h3>👥 参考アカウント</h3>
+      <p>参考アカウント集(全36: 国内30+海外6)。</p>
+      <span class="go">開く →</span>
+    </a>
+    <a class="card link-card" href="design.html">
+      <h3>🎨 デザインガイド</h3>
+      <p>画像・ストア素材・デモ動画の作り方(デザイン未経験向け)。</p>
+      <span class="go">開く →</span>
+    </a>
+    <div class="card">
+      <h3>📚 調査レポート</h3>
+      <p><code class="kbd">research/01〜11_*.md</code> — 全調査レポート(出典・確信度付き)。本ロードマップの根拠資料。</p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <span>SNS戦略ガイド — 個人開発×X発信(2026-06-11作成)</span>
+    <span><a href="index.html">ホーム</a></span>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

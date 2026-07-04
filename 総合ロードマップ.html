@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>総合ロードマップ｜アプリ開発で食べていく行程表</title>
+<meta name="description" content="Re:Nightリリースから複数アプリの複利、専業移行までの総合ロードマップ。現在地・行程・お金の設計・週間運用・心得。">
+<style>
+:root{
+  --washi:#F5F2E9; --card:#FFFDF6; --ink:#23282C; --ink-soft:#5B6168;
+  --line:#DFD8C6; --ai:#2E5C7F; --ume:#B7566B; --matcha:#6B7F52;
+  --karashi:#B98A22; --shu:#B33A3A;
+  --vol:var(--shu);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  background:var(--washi);
+  background-image:radial-gradient(rgba(35,40,44,.045) 1px, transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink); line-height:1.8; font-size:15px;
+}
+.serif{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+/* header */
+header{padding:36px 0 14px;position:relative}
+.eyebrow{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);text-transform:uppercase}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:clamp(25px,6vw,34px);letter-spacing:.08em;margin:6px 0 4px}
+.subtitle{color:var(--ink-soft);font-size:13.5px;max-width:560px}
+.stamp{
+  position:absolute;right:0;top:40px;width:72px;height:72px;
+  border:2px solid var(--vol);border-radius:50%;color:var(--vol);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Hiragino Mincho ProN",serif;font-size:20px;letter-spacing:.1em;line-height:1.25;
+  transform:rotate(6deg);opacity:.85;user-select:none;
+}
+.stamp small{font-size:9px;letter-spacing:.2em}
+@media(max-width:560px){.stamp{width:58px;height:58px;font-size:16px;top:34px}}
+
+/* tabs */
+nav{position:sticky;top:0;z-index:20;background:var(--washi);border-bottom:1px solid var(--line);margin:14px -16px 0;padding:0 16px}
+.tabs{display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{
+  flex:none;border:none;background:none;cursor:pointer;color:var(--ink-soft);
+  font-family:"Hiragino Mincho ProN",serif;font-size:14px;letter-spacing:.12em;
+  padding:12px 13px 10px;border-bottom:3px solid transparent;white-space:nowrap;
+}
+.tab.active{color:var(--washi);background:var(--ink);border-bottom-color:var(--vol)}
+section.page{display:none;padding-top:26px}
+section.page.show{display:block}
+
+/* section label */
+.slabel{
+  font-family:"Hiragino Mincho ProN",serif;color:var(--shu);font-size:12px;letter-spacing:.25em;
+  writing-mode:vertical-rl;line-height:1;float:right;margin:4px 0 10px 12px;user-select:none;
+}
+h2{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:21px;letter-spacing:.1em;margin-bottom:4px}
+.lead{color:var(--ink-soft);font-size:13.5px;margin-bottom:18px}
+h3.h{font-family:"Hiragino Mincho ProN",serif;font-size:16.5px;letter-spacing:.06em;margin:28px 0 10px;padding-left:10px;border-left:4px solid var(--vol)}
+
+/* cards */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin-bottom:12px}
+.mcard h4{font-family:"Hiragino Mincho ProN",serif;font-size:15.5px;letter-spacing:.04em;margin-bottom:6px}
+.mcard p{font-size:13.5px;color:var(--ink-soft)}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag{font-size:10.5px;letter-spacing:.08em;border-radius:4px;padding:2px 8px;background:var(--vol);color:#fff;font-weight:600}
+.tag.ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line);font-weight:400}
+.tag.ai{background:var(--ai)} .tag.matcha{background:var(--matcha)} .tag.karashi{background:var(--karashi)} .tag.ume{background:var(--ume)}
+
+.callout{border-left:4px solid var(--vol);background:var(--card);border-radius:0 10px 10px 0;padding:12px 14px;margin:14px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px}
+.callout b{color:var(--vol)}
+.callout.ai{border-left-color:var(--ai)} .callout.ai b{color:var(--ai)}
+.callout.matcha{border-left-color:var(--matcha)} .callout.matcha b{color:var(--matcha)}
+.callout.karashi{border-left-color:var(--karashi)} .callout.karashi b{color:var(--karashi)}
+
+/* number cards */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+@media(max-width:560px){.dgrid{grid-template-columns:repeat(2,1fr)}}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center}
+.dcard b{display:block;font-family:"Hiragino Mincho ProN",serif;font-size:19px;color:var(--vol);letter-spacing:.02em;line-height:1.4}
+.dcard span{font-size:10.5px;color:var(--ink-soft);line-height:1.5;display:block}
+
+/* rows */
+.rowline{display:flex;justify-content:space-between;gap:12px;padding:8px 2px;border-bottom:1px dashed var(--line);font-size:13.5px;align-items:baseline}
+.rowline:last-child{border-bottom:none}
+.rowline .k{color:var(--ink-soft);flex:none}
+.rowline .v{text-align:right;font-weight:600}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th{background:rgba(35,40,44,.05);font-family:"Hiragino Mincho ProN",serif;font-weight:600;letter-spacing:.05em;padding:8px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b.num{font-family:"Hiragino Mincho ProN",serif;color:var(--vol)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px -16px;padding:0 16px}
+.tscroll table{min-width:520px;margin:0}
+
+/* ladder */
+.ladder{list-style:none;margin:14px 0}
+.ladder li{display:flex;gap:12px;align-items:stretch}
+.ladder .rail{flex:none;width:26px;display:flex;flex-direction:column;align-items:center}
+.ladder .dot{flex:none;width:14px;height:14px;border-radius:50%;border:3px solid var(--vol);background:var(--card);margin-top:6px}
+.ladder li.now .dot{background:var(--vol)}
+.ladder .bar{flex:1;width:2px;background:var(--line);margin:2px 0}
+.ladder li:last-child .bar{display:none}
+.ladder .lbody{padding:0 0 20px;flex:1;min-width:0}
+.ladder .ltitle{font-family:"Hiragino Mincho ProN",serif;font-size:15.5px;letter-spacing:.04em}
+.ladder .ltitle small{font-size:11.5px;color:var(--ink-soft);font-family:inherit;letter-spacing:0;margin-left:8px}
+.ladder .ldesc{font-size:13px;color:var(--ink-soft)}
+.ladder .lmoney{font-family:"Hiragino Mincho ProN",serif;color:var(--vol);font-size:13px;letter-spacing:.03em}
+
+/* stations (行程) */
+.station{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.st-head{padding:13px 16px 11px;border-bottom:1px solid var(--line);background:rgba(35,40,44,.03);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.st-num{font-family:"Hiragino Mincho ProN",serif;color:var(--vol);font-size:13px;letter-spacing:.15em;flex:none}
+.st-head h4{font-family:"Hiragino Mincho ProN",serif;font-size:17px;letter-spacing:.06em}
+.st-head .period{margin-left:auto;font-size:11.5px;color:var(--ink-soft);flex:none}
+.st-body{padding:13px 16px 15px}
+.lane{margin-bottom:12px}
+.lane-name{font-size:11.5px;font-weight:700;letter-spacing:.12em;margin-bottom:5px}
+.lane-name.hon{color:var(--ai)} .lane-name.waki{color:var(--ume)} .lane-name.kane{color:var(--karashi)}
+.lane ul{list-style:none;font-size:13.5px}
+.lane li{padding:3px 0 3px 16px;position:relative}
+.lane li::before{content:"・";position:absolute;left:0;color:var(--ink-soft)}
+.lane li b{font-weight:600}
+.lane li small{color:var(--ink-soft);font-size:12px}
+
+/* 関所 checklist */
+.gate{border-top:1px dashed var(--line);margin-top:12px;padding-top:11px}
+.gate-name{font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--shu);margin-bottom:5px}
+.gate label{display:flex;gap:9px;padding:5px 0;font-size:13.5px;cursor:pointer;align-items:flex-start;line-height:1.6}
+.gate input{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--shu)}
+.gate label.checked{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:rgba(179,58,58,.5)}
+.refs{border-top:1px dashed var(--line);margin-top:12px;padding-top:10px;font-size:12px;color:var(--ink-soft)}
+.refs a{color:var(--ai);text-decoration:none;border-bottom:1px dotted var(--ai)}
+
+/* 五ヶ条 / 心得 */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:13px}
+.pnum{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--vol);color:var(--vol);display:flex;align-items:center;justify-content:center;font-family:"Hiragino Mincho ProN",serif;font-size:15px}
+.pbody b{font-family:"Hiragino Mincho ProN",serif;font-size:15px;letter-spacing:.03em;display:block;margin-bottom:2px}
+.pbody p{font-size:13px;color:var(--ink-soft)}
+
+/* week table */
+.week{list-style:none;margin:10px 0}
+.week li{display:flex;gap:12px;padding:9px 2px;border-bottom:1px dashed var(--line);font-size:13.5px;align-items:baseline}
+.week li:last-child{border-bottom:none}
+.wday{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ai);color:var(--ai);display:flex;align-items:center;justify-content:center;font-family:"Hiragino Mincho ProN",serif;font-size:14px;align-self:flex-start;margin-top:2px}
+.wbody{flex:1}
+.wbody small{display:block;color:var(--ink-soft);font-size:12px}
+
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:6px}
+footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-soft);letter-spacing:.04em;line-height:1.9}
+footer a{color:var(--ai)}
+.backlink{font-size:12.5px;margin-top:8px}
+.backlink a{color:var(--ai);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">MASTER ROADMAP</div>
+  <h1>総合ロードマップ</h1>
+  <p class="subtitle">Re:Nightのリリースから、複数アプリの複利、そして「アプリ開発だけで生活する」まで。いま何をやり、何で判断し、どこで次に進むかの行程表。</p>
+  <div class="stamp serif"><span>道</span><small>行程表</small></div>
+  <p class="backlink"><a href="index.html">← 資料館 総目次へ</a></p>
+</header>
+
+<nav>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-page="now">現在地</button>
+    <button class="tab" data-page="map">全体地図</button>
+    <button class="tab" data-page="route">行程</button>
+    <button class="tab" data-page="money">お金の設計</button>
+    <button class="tab" data-page="ops">週間運用</button>
+    <button class="tab" data-page="mind">心得</button>
+  </div>
+</nav>
+
+<!-- ================================================== 現在地 -->
+<section class="page show" id="page-now">
+  <span class="slabel serif">現在地</span>
+  <h2 class="serif">いま、どこにいるか</h2>
+  <p class="lead">2026年7月4日時点。調査と戦略策定はすべて完了し、実行フェーズに入っている。位置は「宿場一（普請）」の終盤——アプリの中身はほぼできていて、<b>売るための部分だけが丸ごと残っている</b>状態。</p>
+
+  <div class="mcard">
+    <div class="tagrow"><span class="tag ai">開発中</span><span class="tag ghost">iOS / React Native + Swift</span></div>
+    <h4>Re:Night — 夜のスマホ依存を「構造」で止めるアプリ</h4>
+    <p>ターゲットは20代後半〜40代の成長志向の社会人。Free／Pro 月480円／Oni 月980円のフリーミアム3プラン。ScreenTime連携の中核（最難関）は突破済み。</p>
+    <div style="margin-top:10px">
+      <div class="rowline"><span class="k">ネイティブ／ScreenTime中核</span><span class="v" style="color:var(--matcha)">約85%（成熟）</span></div>
+      <div class="rowline"><span class="k">JS機能層（Night・緊急解除・Tools等）</span><span class="v" style="color:var(--matcha)">約75〜80%</span></div>
+      <div class="rowline"><span class="k">商用化層（課金・プランUI・オンボ）</span><span class="v" style="color:var(--shu)">0%（ここが本丸）</span></div>
+      <div class="rowline"><span class="k">実機テスト（計画約100項目）</span><span class="v" style="color:var(--shu)">未実施</span></div>
+    </div>
+  </div>
+
+  <div class="mcard">
+    <div class="tagrow"><span class="tag ume">運用中</span></div>
+    <h4>X（日本語）— 運用開始済み</h4>
+    <p>柱は「1＋1」戦略：X（日本語・本拠地）＋アプリ画面ができたら短尺動画（英語）。いまは新媒体を増やさず、Xを型で固める時期。毎日1ポスト＋3リプ、1日45分上限。</p>
+  </div>
+
+  <div class="mcard">
+    <div class="tagrow"><span class="tag matcha">完了</span></div>
+    <h4>調査・戦略 — すべて資料化済み</h4>
+    <p>成功アプリ230件調査、アイデア136案、詳細設計12案、戦略・開発・マネタイズ・SNSの分冊マニュアル。<b>もう調べる段階ではない。作って出す段階。</b></p>
+  </div>
+
+  <div class="callout"><b>最優先の確認（6/15時点の情報）：</b>核心ロジック約717行／17ファイルが未コミットのまま滞留していた（JS↔Swift相互依存）。まだなら<b>何より先に一括コミット</b>すること。失うと整合性が丸ごと巻き戻る。対応済みならこの項は消化済みでOK。</div>
+
+  <h3 class="h serif">今週の一手（7日以内）</h3>
+  <div class="mcard">
+    <div class="gate" style="border-top:none;margin-top:0;padding-top:0">
+      <label><input type="checkbox" data-ck="w1"><span><b>git整理</b> — 未コミット分を一括コミット（or 退避ブランチ）。作業の土台を安全にする</span></label>
+      <label><input type="checkbox" data-ck="w2"><span><b>課金基盤の決定</b> — RevenueCat導入 or StoreKit2直書きを決める（推奨：RevenueCat。ペイウォールA/Bが後で効く）</span></label>
+      <label><input type="checkbox" data-ck="w3"><span><b>実機テスト開始</b> — TEST_PLANの重大項目（複数ソース同時稼働・stop経路）から。ScreenTime APIはシミュレーター非対応</span></label>
+      <label><input type="checkbox" data-ck="w4"><span><b>Xで開発ログ開始</b> — Re:Nightの進捗を毎日1ポスト（スクショ添付）＋他者へ3リプ。淡々と数字と画面で</span></label>
+      <label><input type="checkbox" data-ck="w5"><span><b>リリース日を仮決めする</b> — 逆算で全部が動き出す。目安：8月末審査提出→9月上旬リリース</span></label>
+    </div>
+  </div>
+  <p class="note-src">チェックはこの端末のブラウザに保存されます（localStorage）。</p>
+</section>
+
+<!-- ================================================== 全体地図 -->
+<section class="page" id="page-map">
+  <span class="slabel serif">全体地図</span>
+  <h2 class="serif">ゴールまでの一本道</h2>
+  <p class="lead">道は6段。各段は日付ではなく<b>関所（通過条件）</b>で進む。常に2レーン並走——<b style="color:var(--ai)">本道＝プロダクト</b>と<b style="color:var(--ume)">脇道＝発信</b>。発信は開発ログそのものがコンテンツになる。</p>
+
+  <ul class="ladder">
+    <li class="now">
+      <div class="rail"><div class="dot"></div><div class="bar"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">宿場一　普請仕上げ<small>2026年7月〜8月（いまここ）</small></div>
+        <p class="ldesc">Re:Nightの商用化層（課金・プランUI・オンボ）を完成させ、審査に出す。</p>
+        <p class="lmoney">収益：0円 — 仕込みの期間</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot"></div><div class="bar"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">宿場二　開帳<small>2026年9月（リリース月）</small></div>
+        <p class="ldesc">リリースと初速づくり。多チャネル同日告知、レビュー導線、初速の計測。</p>
+        <p class="lmoney">目標：初週300DL・月1万円（最初の売上）</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot"></div><div class="bar"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">宿場三　巡業と仕込み<small>2026年10月〜12月</small></div>
+        <p class="ldesc">Re:Nightで毎月1実験を回しつつ、並行して2本目の検証（LP＋広告＋前金）を進める。</p>
+        <p class="lmoney">目標：月3〜10万円＋2本目のGO/NO-GO判定</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot"></div><div class="bar"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">宿場四　二本目普請<small>2027年1月〜6月</small></div>
+        <p class="ldesc">検証を通った案を6週間MVPで開発。今度は英語ファースト・日英初日。ソフトローンチ→グローバル。</p>
+        <p class="lmoney">目標：合計MRR10万円＋短尺動画の勝ちパターン1つ</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot"></div><div class="bar"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">宿場五　複利<small>2027年後半〜</small></div>
+        <p class="ldesc">複数アプリのMRRを積み上げる。伸びた1本に集中投資、多言語展開、3本目の判断。</p>
+        <p class="lmoney">目標：合計MRR＝生活費の100%を6ヶ月連続 → 専業移行判定</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot"></div></div>
+      <div class="lbody">
+        <div class="ltitle serif">その先　拡張<small>専業以降</small></div>
+        <p class="ldesc">専業化で開発時間が週12時間→40時間超に。Re:Night事業目標（売上月100万円）や新規開発の加速へ。</p>
+        <p class="lmoney">目標：生活費＋α（月50万〜100万円台）</p>
+      </div>
+    </li>
+  </ul>
+
+  <h3 class="h serif">決定済みの3つの戦略判断</h3>
+  <div class="pcard"><div class="pnum">一</div><div class="pbody"><b>Re:Nightは日本先行で出す</b><p>ターゲット（日本の社会人）・価格（480/980円）・文言がすべて日本市場設計のため。ただしi18n設計（文字列外部化）は入れておき、英語版は需要を見て判断。</p></div></div>
+  <div class="pcard"><div class="pnum">二</div><div class="pbody"><b>2本目から英語ファーストを全面適用</b><p>北米LTVは世界平均の約2倍。日英2言語を初日から、ソフトローンチ（フィリピン＋北欧等）→グローバルの型で出す。</p></div></div>
+  <div class="pcard"><div class="pnum">三</div><div class="pbody"><b>SNSはXを固め、アプリ画面ができたら短尺動画（英語）を追加</b><p>3媒体同時ゼロ立ち上げはしない。同じ縦動画をTikTok・Shorts・Reelsに透かしなしで転用（1本作って配信面3倍）。</p></div></div>
+
+  <div class="callout ai"><b>この地図の読み方：</b>日付はあくまで目安で、進むかどうかは各宿場の関所で決める。遅れるのは問題ではない。<b>関所を飛ばして進むのが一番危ない</b>（例：リテンションを見ずに宣伝に金を使う）。</div>
+</section>
+
+<!-- ================================================== 行程 -->
+<section class="page" id="page-route">
+  <span class="slabel serif">行程</span>
+  <h2 class="serif">宿場ごとの具体的なやること</h2>
+  <p class="lead">各宿場に「本道（プロダクト）」「脇道（発信）」「関所（通過条件）」がある。関所のチェックはブラウザに保存される。</p>
+
+  <!-- 宿場一 -->
+  <div class="station">
+    <div class="st-head"><span class="st-num">宿場一</span><h4 class="serif">普請仕上げ — Re:Night v1.0</h4><span class="period">7月〜8月末・約8週</span></div>
+    <div class="st-body">
+      <div class="lane">
+        <div class="lane-name hon">本道 ─ プロダクト</div>
+        <ul>
+          <li><b>git整理と実機テスト</b> — 未コミット分の一括コミット→TEST_PLAN重大項目（同時稼働・stop経路・緊急解除）を実機で消化</li>
+          <li><b>StoreKit2課金＋RevenueCat導入</b> — 工数最大（1〜2週）。最初に着手する<small>サンドボックス課金テストまで通す</small></li>
+          <li><b>プラン選択UI</b> — Free/Pro/Oniのペイウォール。完成済みのOniAgreementScreenをナビゲーターに接続</li>
+          <li><b>オンボーディング</b> — 5段構成（歓迎→問題提起→権限→価値体験→ペイウォール）。トライアルの82%は初日に始まる。ここがアプリの本体</li>
+          <li><b>FocusFlowShieldのXcodeターゲット登録</b> — 制限中の独自文言・カウントダウン表示。強制力UXの完成</li>
+          <li><b>法定表記の実装</b> — サブスク画面に価格・期間・解約方法・復元ボタン・規約リンク。<b>欠落はiOS最多リジェクト</b></li>
+          <li><b>Apple Small Business Program申請</b> — 手数料30%→15%。売上が立つ前に登録</li>
+          <li><b>ストア素材</b> — タイトル30字（アプリ名＋主要キーワード）・スクショ（転換率の最重要要素）・キーワード100字</li>
+          <li><b>TestFlightクローズドテスト10〜30人</b> — Xで募集。フィードバック反映→審査提出</li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name waki">脇道 ─ 発信</div>
+        <ul>
+          <li>X毎日1ポスト（開発ログ・スクショ）＋他者へ3リプ。固定ポストにRe:Night紹介</li>
+          <li>ウェイトリスト（事前登録）開始 — 目標25人→100人。TestFlight募集を兼ねる</li>
+          <li>Zenn記事1本 — ScreenTime API攻略など技術ネタ。検索から長く効く</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gate-name">関所（全部揃ったら宿場二へ）</div>
+        <label><input type="checkbox" data-ck="g1a"><span>自分がRe:Nightを7日連続で使った（自分に効かないものは売れない）</span></label>
+        <label><input type="checkbox" data-ck="g1b"><span>実機テストの重大項目をクリア（クラッシュフリーで一晩越えられる）</span></label>
+        <label><input type="checkbox" data-ck="g1c"><span>サンドボックスで購入→復元→解約が通った</span></label>
+        <label><input type="checkbox" data-ck="g1d"><span>TestFlightで10人以上が実際に触った</span></label>
+        <label><input type="checkbox" data-ck="g1e"><span>審査提出済み</span></label>
+      </div>
+      <div class="refs">参照：<a href="0702/アプリ開発の書.html">アプリ開発の書</a>（審査対策・6週間MVP）／<a href="0702/マネタイズの書.html">マネタイズの書</a>（オンボ五段構成・ペイウォール解剖図）</div>
+    </div>
+  </div>
+
+  <!-- 宿場二 -->
+  <div class="station">
+    <div class="st-head"><span class="st-num">宿場二</span><h4 class="serif">開帳 — リリースと初速</h4><span class="period">9月・リリース〜4週</span></div>
+    <div class="st-body">
+      <div class="lane">
+        <div class="lane-name hon">本道 ─ プロダクト</div>
+        <ul>
+          <li><b>火〜木にリリース</b>（週末はストアの動きが鈍い）</li>
+          <li><b>初速の3つの数字を毎日見る</b> — D1リテンション（目安30%）・D7（目安15%）・クラッシュフリー率（99%以上）</li>
+          <li><b>レビュー依頼の実装</b> — 好体験の直後（Night完走翌朝など）にだけ出す。評価4.5以上は4.0未満の1.7倍インストールされる</li>
+          <li>クラッシュ・不具合の即日修正体制。細かい改善は週1リリースにまとめる</li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name waki">脇道 ─ 発信</div>
+        <ul>
+          <li><b>多チャネル同日告知</b> — X告知スレ・Zennリリース記事・該当コミュニティ・ウェイトリストへメール</li>
+          <li>リリース後2週間で「数字公開」ポスト（DL数・気づき）。build in publicの本領</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gate-name">関所</div>
+        <label><input type="checkbox" data-ck="g2a"><span>初週300DL（未達でも即撤退ではない→下の注記）</span></label>
+        <label><input type="checkbox" data-ck="g2b"><span>最初の売上が立った（月1万円が目標ライン）</span></label>
+        <label><input type="checkbox" data-ck="g2c"><span>D1/D7/課金転換の計測が回っている（数字が見えない状態で次に進まない）</span></label>
+        <label><input type="checkbox" data-ck="g2d"><span>ストア評価4.5前後を維持</span></label>
+      </div>
+      <div class="callout matcha" style="margin-bottom:0"><b>判断の順序：</b>初速が弱くても<b>D7が15%前後あるなら勝ち筋はある</b>（ASOと発信で伸ばせる）。逆にDLが多くてもD7が8%を切るなら宣伝より製品改善を優先する。改善順序は常に「①リテンション→②収益化」。</div>
+      <div class="refs">参照：<a href="0702/海外展開_マネタイズ.html">戦略・行程編</a>（launch手順）／<a href="sns_marketing/site/index.html">SNS戦略ガイド</a>（告知テンプレ）</div>
+    </div>
+  </div>
+
+  <!-- 宿場三 -->
+  <div class="station">
+    <div class="st-head"><span class="st-num">宿場三</span><h4 class="serif">巡業と仕込み — 運用×次アプリ検証</h4><span class="period">10月〜12月</span></div>
+    <div class="st-body">
+      <div class="lane">
+        <div class="lane-name hon">本道A ─ Re:Night運用（毎月1実験）</div>
+        <ul>
+          <li><b>10月：年額プラン追加</b> — 現状は月額のみ。年額推し＋買い切り併設で総転換+15〜25%が定石</li>
+          <li><b>11月：トライアル実験</b> — 7日→14日で転換率比較（長めのトライアルは転換が約2倍のデータ）</li>
+          <li><b>12月：ペイウォール構成実験</b> — 見せ方・順序・訴求文。構成の巧拙だけでLTV最大636%差</li>
+          <li>ASO改善 — 検索キーワード順位の確認、スクショABテスト（中央値+11.8%）</li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name hon">本道B ─ 2本目の検証（4週間×2〜3案）</div>
+        <ul>
+          <li><b>案の絞り込み</b> — 調査図鑑136案から採点表（六つの問い◯5つ以上）で3案<small>候補例：空暦・うつしゑ・Kinshu（和風トップ6）／Senja・Moxie型（ビジネス系）</small></li>
+          <li><b>Week1</b> X定性（課題ポスト→モック画像→具体リプ3〜5件が合格）</li>
+          <li><b>Week2</b> インタビュー5〜10人（Mom Test式。10人中5人以上が課題に金/時間を使っていれば合格）</li>
+          <li><b>Week3</b> LP＋広告1〜2万円（CVR10%以上で強いGO。平均は2〜5%）</li>
+          <li><b>Week4</b> 前金検証（少額の早期アクセス販売。<b>赤の他人からの前金3件で実装GO</b>）</li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name waki">脇道 ─ 発信</div>
+        <ul>
+          <li>X継続＋Re:Nightの数字を月1で公開（MRR・DL・学び）</li>
+          <li>Re:Nightの画面素材で短尺動画を試作 → TikTok英語アカ開始の判定材料に</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gate-name">関所</div>
+        <label><input type="checkbox" data-ck="g3a"><span>実験を3回転させた（結果はどうあれ回した事実が資産）</span></label>
+        <label><input type="checkbox" data-ck="g3b"><span>Re:Night 月3万円 or 「改善で伸びる見込み」の根拠ある判断</span></label>
+        <label><input type="checkbox" data-ck="g3c"><span>2本目のGO判定 — 前金3件 or ウェイトリスト100人</span></label>
+        <label><input type="checkbox" data-ck="g3d"><span>X：エンゲージメント率2%以上が安定</span></label>
+      </div>
+      <div class="callout karashi" style="margin-bottom:0"><b>検証は2つのダッシュボードで：</b>Xで集まるフォロワーは同業者。X上の反応と、LP＋広告で測る一般消費者の需要は<b>別物として測る</b>。Xの「いいね」でGOを出さない。</div>
+      <div class="refs">参照：<a href="0702/app-idea-research-v2.html">調査図鑑 改訂版</a>（136案・採点表）／<a href="0702/マネタイズの書.html">マネタイズの書</a>（月次実験プロトコル）</div>
+    </div>
+  </div>
+
+  <!-- 宿場四 -->
+  <div class="station">
+    <div class="st-head"><span class="st-num">宿場四</span><h4 class="serif">二本目普請 — 英語ファーストで作る</h4><span class="period">2027年1月〜6月</span></div>
+    <div class="st-body">
+      <div class="lane">
+        <div class="lane-name hon">本道 ─ 2本目開発（6週間MVP）</div>
+        <ul>
+          <li><b>第1週</b> i18n（日英）・課金SDK・分析・クラッシュ計測を先に全部つなぐ。画面は空でいい</li>
+          <li><b>第2〜3週</b> コア機能1つを「動く→気持ちいい」まで磨く</li>
+          <li><b>第4週</b> オンボ＋ペイウォール＋サンドボックス課金</li>
+          <li><b>第5〜6週</b> 日英仕上げ・ストア素材・審査提出</li>
+          <li><b>ソフトローンチ</b> — フィリピン＋北欧などの小市場でD1 30%・D7 15%を確認してからグローバル＋日本で開帳</li>
+          <li>Re:Nightは<b>省力運転</b> — 月1実験＋レビュー対応のみ。触りすぎない</li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name waki">脇道 ─ 発信</div>
+        <ul>
+          <li><b>TikTok（英語）開始</b> — アプリ画面があるので着手条件クリア。週3〜5本、最初の1.5秒が勝負</li>
+          <li>同じ動画を透かしなしでShorts・Reelsへ転用。60〜90日後に数字で主戦場を判定</li>
+          <li>X（日本語）は省力運転モードでも継続（週2回が最低ライン）</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gate-name">関所</div>
+        <label><input type="checkbox" data-ck="g4a"><span>2本目：ソフトローンチでD1約30%・D7約15%を通過</span></label>
+        <label><input type="checkbox" data-ck="g4b"><span>合計MRR10万円（Re:Night＋2本目）</span></label>
+        <label><input type="checkbox" data-ck="g4c"><span>短尺動画で「伸びた型」を1つ特定した</span></label>
+      </div>
+      <div class="refs">参照：<a href="0702/アプリ開発の書.html">アプリ開発の書</a>（6週間MVP・技術選定）／<a href="0702/SNS運用の書.html">SNS運用の書</a>（短尺動画の作り方・拡張判定）</div>
+    </div>
+  </div>
+
+  <!-- 宿場五 -->
+  <div class="station">
+    <div class="st-head"><span class="st-num">宿場五</span><h4 class="serif">複利 — 積み上げと専業判定</h4><span class="period">2027年後半〜</span></div>
+    <div class="st-body">
+      <div class="lane">
+        <div class="lane-name hon">本道 ─ ポートフォリオ運用</div>
+        <ul>
+          <li><b>集中の原則</b> — どれかが月10万円を超えたら、時間の70%をそのアプリに寄せる。均等分散はしない</li>
+          <li>多言語T1展開 — 西・独・仏の<b>ストアページのみ</b>先行翻訳（DL+767%の古典調査。UI翻訳は需要確認後）</li>
+          <li>3本目は「2本の運用が月次ルーティン化してから」。検証プロトコルは宿場三と同じ</li>
+          <li>サブスク収益の69%は2020年以前リリースのアプリ——<b>古いアプリが稼ぐ。だから早く出して長く運用する</b></li>
+        </ul>
+      </div>
+      <div class="lane">
+        <div class="lane-name kane">専業移行の関所（この3つが揃うまで辞めない）</div>
+        <ul>
+          <li>合計MRRが<b>生活費の100%を6ヶ月連続</b>で超え、トレンドが横ばい以上</li>
+          <li><b>生活費12ヶ月分の貯蓄</b>がある</li>
+          <li>国民健康保険・年金・税金の試算済み（個人事業の手取りは会社員の額面より目減りする。目標MRRは生活費×1.3〜1.5で見る）</li>
+        </ul>
+      </div>
+      <div class="gate">
+        <div class="gate-name">関所</div>
+        <label><input type="checkbox" data-ck="g5a"><span>合計MRR＝生活費の50%を6ヶ月連続（→専業準備を開始する合図）</span></label>
+        <label><input type="checkbox" data-ck="g5b"><span>合計MRR＝生活費の100%を6ヶ月連続＋貯蓄12ヶ月分（→専業移行）</span></label>
+      </div>
+      <div class="refs">参照：<a href="0702/海外展開_マネタイズ.html">戦略・行程編</a>（多言語ティア・週次運用）</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== お金の設計 -->
+<section class="page" id="page-money">
+  <span class="slabel serif">お金</span>
+  <h2 class="serif">いくら稼げば、何人いればいいか</h2>
+  <p class="lead">「生活費を稼ぐ」を具体的な人数とDL数に分解する。数字が見えれば、やることは作業になる。</p>
+
+  <h3 class="h serif">収益のはしご — Re:Nightの人数換算</h3>
+  <p style="font-size:13px;color:var(--ink-soft)">手数料15%控除後の手取りベース（Small Business Program適用時。Pro 480円→手取り408円／Oni 980円→833円）。</p>
+  <div class="tscroll"><table>
+    <tr><th>手取り月額</th><th>意味</th><th>Proのみの場合</th><th>Pro＋Oni（2:1）</th></tr>
+    <tr><td><b class="num">月1万円</b></td><td>最初の関所。世界の中央値越え</td><td>約25人</td><td>Pro12＋Oni6</td></tr>
+    <tr><td><b class="num">月5万円</b></td><td>副業として実感が出る</td><td>約123人</td><td>Pro61＋Oni30</td></tr>
+    <tr><td><b class="num">月10万円</b></td><td>集中投資の判断ライン</td><td>約245人</td><td>Pro121＋Oni61</td></tr>
+    <tr><td><b class="num">月30万円</b></td><td>生活費ライン（単身目安）</td><td>約735人</td><td>Pro364＋Oni182</td></tr>
+    <tr><td><b class="num">月87万円</b></td><td>Re:Night事業目標（売上100万円）</td><td>—</td><td>Pro1,000＋Oni550</td></tr>
+  </table></div>
+  <p class="note-src">課金転換率を2〜5%とすると、月30万円（有料546〜735人）には累計1.1万〜3.7万の有効DLが必要。1本で届かなければ複数本で積む——それが宿場四・五の意味。</p>
+
+  <h3 class="h serif">先に現実を見る</h3>
+  <div class="dgrid">
+    <div class="dcard"><b>$72</b><span>リリース1年後の月収中央値（約1.1万円）</span></div>
+    <div class="dcard"><b>17.3%</b><span>2年以内に月$1K（約15万円）に到達する割合</span></div>
+    <div class="dcard"><b>94.5%</b><span>収益の94.5%を上位10%が独占</span></div>
+  </div>
+  <div class="callout"><b>この分布を前提に設計する：</b>「1本で当てる」計画は分布の否定でしかない。取るべき戦略は<b>①毎月実験する（実験するアプリは40倍稼ぐ）②複数本を早く出して長く運用する ③ストア外の流通を持つ</b>（IsTalkは流入の85%がTikTok＋紹介で月商250万円）。この3レバーが分布の右側に行く再現性のある方法。</div>
+
+  <h3 class="h serif">Re:Nightの当面の収益設計</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">基本形</span><span class="v">無料＋サブスク（年額推し）＋買い切り併設</span></div>
+    <div class="rowline"><span class="k">価格方針</span><span class="v">満額主義。割引は離脱者への時限オファーのみ</span></div>
+    <div class="rowline"><span class="k">実験の方向</span><span class="v">下げるより上げて試す（高価格帯LTVは約3倍）</span></div>
+    <div class="rowline"><span class="k">トライアル</span><span class="v">7日から始め14日を実験</span></div>
+    <div class="rowline"><span class="k">週課金</span><span class="v">使わない（不満レビューの火種）</span></div>
+    <div class="rowline"><span class="k">広告モデル</span><span class="v">使わない（個人開発では非効率）</span></div>
+  </div>
+
+  <h3 class="h serif">手数料と制度 — 取りこぼさない</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">Apple Small Business Program</span><span class="v">手数料30%→15%。宿場一で申請</span></div>
+    <div class="rowline"><span class="k">Google Play 15%プログラム</span><span class="v">Android展開時に登録</span></div>
+    <div class="rowline"><span class="k">Web決済（スマホ新法）</span><span class="v">外部リンク誘導で実効10〜15%＋決済3.6%の選択肢。規模が出てから検討</span></div>
+    <div class="rowline"><span class="k">確定申告</span><span class="v">売上が立ったら開業届＋青色申告（65万円控除）。宿場二の後に着手</span></div>
+  </div>
+
+  <h3 class="h serif">専業移行の判断基準（再掲）</h3>
+  <div class="pcard"><div class="pnum">壱</div><div class="pbody"><b>MRR＝生活費の50%を6ヶ月連続</b><p>→ 専業準備の開始合図。税・保険の試算、貯蓄ペースの確認。</p></div></div>
+  <div class="pcard"><div class="pnum">弐</div><div class="pbody"><b>MRR＝生活費の100%を6ヶ月連続 ＋ 貯蓄12ヶ月分</b><p>→ 専業移行。単月の瞬間風速では判断しない。サブスクは解約と季節変動がある。</p></div></div>
+  <div class="pcard"><div class="pnum">参</div><div class="pbody"><b>目標MRRは生活費×1.3〜1.5で見る</b><p>国保・年金・住民税・所得税で手取りは目減りする。月30万円の生活なら、MRR40〜45万円が実質の専業ライン。</p></div></div>
+</section>
+
+<!-- ================================================== 週間運用 -->
+<section class="page" id="page-ops">
+  <span class="slabel serif">運用</span>
+  <h2 class="serif">毎週・毎月のまわし方</h2>
+  <p class="lead">気合いではなく仕組みで続ける。原則は<b>開発:SNS＝2:1以上</b>、SNSは1日45分上限。週の総投下は開発10〜14時間＋発信3〜5時間が持続ライン。</p>
+
+  <h3 class="h serif">週間テンプレート</h3>
+  <ul class="week">
+    <li><div class="wday">月</div><div class="wbody">夜：開発60〜120分／SNS：今週やること宣言＋ネタ出し15分<small>開発終了直後に進捗1ポスト（スクショ添付）＋翌日分の下書き</small></div></li>
+    <li><div class="wday">火</div><div class="wbody">夜：開発／SNS：朝リプ5〜10件・昼リプ返10分<small>毎日共通：朝15〜20分（予約確認＋リプ）・昼10分・投稿15分＝計45分以内</small></div></li>
+    <li><div class="wday">水</div><div class="wbody">夜：開発／SNS：技術Tips投稿（Teach枠）</div></li>
+    <li><div class="wday">木</div><div class="wbody">夜：開発／SNS：進捗・裏側投稿（Show枠）</div></li>
+    <li><div class="wday">金</div><div class="wbody">夜：開発／SNS：週次まとめスレ（Prove枠：数字・小さな実績）</div></li>
+    <li><div class="wday">土</div><div class="wbody">開発のまとまった枠（2〜4時間）／SNS：数字チェック15分<small>週次でER・インプレ・ウェイトリスト増分だけメモ</small></div></li>
+    <li><div class="wday">日</div><div class="wbody">休み or コンテンツ製造枠90分（翌週分5〜10本をまとめて下書き→予約）<small>休むのも仕組みのうち。「毎日を1ヶ月」より「週2を半年」</small></div></li>
+  </ul>
+
+  <h3 class="h serif">月次リズム — 見るのは5つの数字だけ</h3>
+  <div class="mcard">
+    <p style="font-size:13.5px;color:var(--ink)"><b>月初（1時間）：</b>今月の実験を1つ決めて仕込む（価格・トライアル・ペイウォール・ASOのどれか）。<br><b>月末（1時間）：</b>スコアカード1枚に記録して、翌月の実験を決める。</p>
+    <div style="margin-top:10px">
+      <div class="rowline"><span class="k">① MRR（手取り月次収益）</span><span class="v">生活のものさし</span></div>
+      <div class="rowline"><span class="k">② DL数（週次）</span><span class="v">流入のものさし</span></div>
+      <div class="rowline"><span class="k">③ D1／D7リテンション</span><span class="v">製品のものさし</span></div>
+      <div class="rowline"><span class="k">④ 課金転換率</span><span class="v">収益化のものさし</span></div>
+      <div class="rowline"><span class="k">⑤ ウェイトリスト／ER</span><span class="v">発信のものさし</span></div>
+    </div>
+  </div>
+  <div class="callout ume"><b>ネタ切れ対策の変換ルール：</b>コミットしたら1ネタ／エラー解決に30分以上かかったら確実に1ネタ／小さな勝利（初めてテストが通った）も1ネタ。開発ログ自体がコンテンツ——別途ネタを「作る」時間は要らない。</div>
+
+  <h3 class="h serif">忙しい週の縮退運転</h3>
+  <div class="mcard">
+    <p>週の可処分が1.5時間を切る週は、迷わず<b>省力運転モード</b>に切り替える：X週2ポスト＋リプ返のみ。開発が完全停止しても発信の火は消さない。<b>最初の90日は種まき期</b>——反応ゼロは正常で、大半が2ヶ月で消えるからこそ、続いていること自体が参入障壁になる。</p>
+  </div>
+</section>
+
+<!-- ================================================== 心得 -->
+<section class="page" id="page-mind">
+  <span class="slabel serif">心得</span>
+  <h2 class="serif">判断に迷ったら、ここに戻る</h2>
+  <p class="lead">全資料から抽出した、この道の十ヶ条。日々の細かい判断はすべてこの原則に従う。</p>
+
+  <div class="pcard"><div class="pnum">一</div><div class="pbody"><b>収益設計は初日から</b><p>トライアル開始の82%はインストール当日。オンボとペイウォールはアプリの本体であって、後付けの飾りではない。</p></div></div>
+  <div class="pcard"><div class="pnum">二</div><div class="pbody"><b>毎月1実験</b><p>実験するアプリはしないアプリの40倍稼ぐ。ペイウォール構成だけでLTV最大636%差。月1回、必ず何かを試す。</p></div></div>
+  <div class="pcard"><div class="pnum">三</div><div class="pbody"><b>フォロワー数はKPIではない</b><p>フォロワー数と売上の相関はほぼゼロ（0.04）。追うのはウェイトリスト登録と具体的な会話。X約4,000フォロワーでMRR30万円の実例がある。</p></div></div>
+  <div class="pcard"><div class="pnum">四</div><div class="pbody"><b>検証は2つのダッシュボード</b><p>Xの反応（同業者）と市場の需要（LP＋広告）は別物。SNSの「いいね」で作る判断をしない。</p></div></div>
+  <div class="pcard"><div class="pnum">五</div><div class="pbody"><b>前金が最強のシグナル</b><p>無料登録→購入は1〜2%、前金あり→30〜50%。実装を始めていいのは、赤の他人が金を払ってからだ。</p></div></div>
+  <div class="pcard"><div class="pnum">六</div><div class="pbody"><b>満額主義、下げるより上げる</b><p>サブスクの約9割は満額で売れる。高価格帯のLTVは約3倍。価格実験は転換率でなくLTVで判定する。</p></div></div>
+  <div class="pcard"><div class="pnum">七</div><div class="pbody"><b>開発:SNS＝2:1を死守</b><p>SNSは1日45分上限。発信が開発を食い始めたら本末転倒。プロダクトがない発信者に価値はない。</p></div></div>
+  <div class="pcard"><div class="pnum">八</div><div class="pbody"><b>最初の90日は種まき</b><p>反応ゼロは異常ではなく仕様。行動KPI（投稿数・継続率）だけで自己評価する。フォロワー目標は4ヶ月目から。</p></div></div>
+  <div class="pcard"><div class="pnum">九</div><div class="pbody"><b>撤退基準は先に書く</b><p>検証のGO/NO-GO、実験の成否、アプリの見切りライン——始める前に数字で決めておく。サンクコストは判断を必ず歪める。</p></div></div>
+  <div class="pcard"><div class="pnum">十</div><div class="pbody"><b>完成させて、出す</b><p>サブスク収益の69%は2020年以前リリースのアプリ。稼ぐのは「古くから出ているアプリ」だ。磨き続けるより、出して運用年数を稼ぎ始めるほうが早い。いまのRe:Nightに必要なのは新機能ではなく、リリースそのもの。</p></div></div>
+
+  <div class="callout" style="margin-top:22px"><b>最後にひとつ。</b>この道の分岐点はすべて「関所」に書いてある。迷ったら行程タブに戻り、いまの宿場の関所を見る。関所が開いていないなら、やることは決まっている。</div>
+</section>
+
+<footer>
+  総合ロードマップ（2026-07-04 作成）｜Re:Nightの実装状況は2026-06-15時点のステータスレポートに基づく。<br>
+  数値の出典：Adapty「State of In-App Subscriptions 2026」／RevenueCat「State of Subscription Apps 2026」ほか各調査資料（<a href="index.html">資料館 総目次</a>参照）。すべて調査時点の推定を含む参考値。<br>
+  収益換算はApp Store手数料15%（Small Business Program）適用・税引前の概算。
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // tab switching
+  var tabs = document.querySelectorAll('.tab');
+  var pages = document.querySelectorAll('section.page');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      pages.forEach(function(p){p.classList.remove('show')});
+      var target = document.getElementById('page-' + t.dataset.page);
+      if (target) target.classList.add('show');
+      window.scrollTo({top:0});
+    });
+  });
+
+  // persistent checkboxes
+  var KEY = 'roadmap-checks-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
+  document.querySelectorAll('input[data-ck]').forEach(function(cb){
+    var id = cb.dataset.ck;
+    if (saved[id]) { cb.checked = true; cb.closest('label').classList.add('checked'); }
+    cb.addEventListener('change', function(){
+      saved[id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      cb.closest('label').classList.toggle('checked', cb.checked);
+    });
+  });
+})();
+</script>
+</body>
+</html>

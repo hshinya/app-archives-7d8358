@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X運用の自動化 | SNS戦略ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニューを開く">☰</button>
+<div class="layout">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <div class="brand-title">SNS戦略ガイド</div>
+    <div class="brand-sub">個人開発×X発信 完全ガイド</div>
+  </a>
+  <nav>
+    <div class="nav-group-label">ガイド</div>
+    <a class="nav-link" href="index.html"><span class="nav-ico">🏠</span>ホーム</a>
+    <a class="nav-link" href="roadmap.html"><span class="nav-ico">🗺️</span>ロードマップ</a>
+    <a class="nav-link" href="todo.html"><span class="nav-ico">✅</span>TODOチェックリスト</a>
+    <a class="nav-link" href="playbook.html"><span class="nav-ico">📝</span>発信プレイブック</a>
+    <a class="nav-link" href="accounts.html"><span class="nav-ico">👥</span>参考アカウント</a>
+    <a class="nav-link" href="design.html"><span class="nav-ico">🎨</span>デザインガイド</a>
+    <div class="nav-group-label">運用</div>
+    <a class="nav-link active" href="ops.html"><span class="nav-ico">🤖</span>X運用の自動化</a>
+  </nav>
+  <div class="sidebar-foot">作成: 2026-07-05<br>Claude Code Skills/Agents/Hooks</div>
+</aside>
+<main class="content">
+  <header class="page-header">
+    <div class="page-eyebrow">運用 / 自動化</div>
+    <h1>X運用の半自動化(Skills / Agents / Hooks)</h1>
+    <p class="lead">戦略を「毎日回る仕組み」にするための自動化セット。<strong>情報収集</strong>と<strong>情報発信の下書き</strong>をClaude Codeが担当し、<strong>投稿・リプライは人間が手動</strong>で行う(human-in-the-loop)。X APIは使わない=<strong>コスト0円・凍結リスク0</strong>。</p>
+  </header>
+
+  <p>
+    <span class="badge badge-indigo">作成日: 2026-07-05</span>
+    <span class="badge badge-green">コスト0円(X APIなし)</span>
+    <span class="badge badge-gray">Skills 4 / Agent 1 / Hook 1 / Script 4</span>
+  </p>
+
+  <div class="toc">
+    <div class="toc-title">このページの内容</div>
+    <ol>
+      <li><a href="#idea">設計思想(なぜこの形か)</a></li>
+      <li><a href="#overview">システム全体像</a></li>
+      <li><a href="#parts">作ったもの一覧</a></li>
+      <li><a href="#flow">毎日・週次の運用フロー</a></li>
+      <li><a href="#commands">コマンド早見表</a></li>
+      <li><a href="#setup">セットアップ手順</a></li>
+      <li><a href="#customize">停止・カスタマイズ</a></li>
+      <li><a href="#notes">前提と注意(2026年のX事情)</a></li>
+    </ol>
+  </div>
+
+  <section id="idea">
+    <h2>設計思想(なぜこの形か)</h2>
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-num">1</span>
+        <h3>投稿は必ず人間</h3>
+        <p>Xアルゴリズムは<strong>会話最重視</strong>で、初動の人間のリアルタイム反応が効く。加えてXは「人間が画面をタップしていないと凍結されうる」と製品責任者が明言。<strong>AIは下書き・収集まで、投稿ボタンは人間</strong>が押す。</p>
+      </div>
+      <div class="card">
+        <span class="card-num">2</span>
+        <h3>X APIを使わない</h3>
+        <p>X APIは2026年2月に従量課金化(リンク付き投稿は$0.20/件)。収集は<strong>RSS/公開API</strong>(Hacker News・はてブ・Zenn・Qiita・Reddit・GitHub Trending)で足りる。認証不要・<mark>コスト0円</mark>。</p>
+      </div>
+      <div class="card">
+        <span class="card-num">3</span>
+        <h3>下ごしらえを削るだけ</h3>
+        <p>目的は「45分ルーチンを軽くする」こと。<strong>開発ファースト原則は維持</strong>。AIが素材を用意しても、書くのは実体験に基づく人間(<strong>AI丸出しの一般論は品質評価で不利</strong>なので捏造させない)。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <h2>システム全体像</h2>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">9</div><div class="stat-label">収集ソース(RSS/公開API)</div></div>
+      <div class="stat"><div class="stat-value">4</div><div class="stat-label">スキル(/collect /draft /weekly /review)</div></div>
+      <div class="stat"><div class="stat-value">毎朝7:00</div><div class="stat-label">自動実行(launchd)</div></div>
+      <div class="stat"><div class="stat-value">¥0</div><div class="stat-label">ランニングコスト</div></div>
+    </div>
+<pre class="code">[毎朝7:00 launchd]
+      │
+      ▼
+  collect.sh ──► claude -p "/collect"  (Sonnet・無人)
+      │                │
+      │                ├─ fetch_sources.py … RSS/公開APIを取得(X APIなし)
+      │                ▼
+      │           collect/YYYY-MM-DD.md（界隈ダイジェスト）
+      │           ネタ帳.md へ 型付きネタ候補を追記
+      ▼
+┌──────────────────── 人間(手動) ────────────────────┐
+│ 朝  : Xでリプライ10件・リプ返し(70/30ルール)           │
+│ 夜  : /draft today → 下書き2〜3案 → 選んで手動投稿      │
+│ 日曜: /review(数値)→ /draft ×5〜7(ストック)→ /weekly │
+└─────────────────────────────────────────────────────┘
+      ▲
+      └ SessionStartフック: Claude Code起動時に
+        「今日のダイジェスト＋曜日テーマ＋最低ライン」を表示</pre>
+    <div class="callout callout-info">
+      <div class="callout-title">ℹ️ 2層構造</div>
+      <p><strong>情報収集用</strong>(スクリプト+<span class="kbd">/collect</span>+<span class="kbd">trend-scout</span>+毎朝の自動実行)と、<strong>情報発信用</strong>(<span class="kbd">/draft</span> <span class="kbd">/weekly</span> <span class="kbd">/review</span>+NGリンター)。どちらも最後は人間が手を動かす。</p>
+    </div>
+  </section>
+
+  <section id="parts">
+    <h2>作ったもの一覧</h2>
+
+    <h3>A. 情報収集用</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ファイル</th><th>種別</th><th>役割</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kbd">scripts/fetch_sources.py</span></td><td>Pythonスクリプト</td><td>RSS/公開APIを取得しJSON化(標準ライブラリのみ・AIなし)。取得先とキーワードは先頭で設定。1ソース失敗しても継続</td></tr>
+          <tr><td><span class="kbd">.claude/skills/collect/</span></td><td>Skill <span class="kbd">/collect</span></td><td>fetch実行→テーマ適合で選別→各ネタに投稿の型(A〜H)とフック案を付与→ダイジェスト書き出し+ネタ帳追記</td></tr>
+          <tr><td><span class="kbd">.claude/agents/trend-scout.md</span></td><td>Subagent</td><td>1トピックの深掘り。海外indie事例やAIツールを調査し「分析型ポスト(G型)」の素材(数字・出典・切り口)を返す</td></tr>
+          <tr><td><span class="kbd">scripts/collect.sh</span></td><td>シェル</td><td>無人実行ラッパー。<span class="kbd">claude -p "/collect"</span> を必要ツールだけ許可して起動、cron.logに記録</td></tr>
+          <tr><td><span class="kbd">scripts/com.hshinya.x-collect.plist</span></td><td>launchd</td><td>毎朝7:00に collect.sh を実行(ローカル・無料)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote">収集ソース: Hacker News(Algolia API)/ はてなブックマークIT / Zenn(全体・個人開発)/ Qiita(個人開発・生成AI)/ Reddit r/SideProject / GitHub Trending。</p>
+
+    <h3>B. 情報発信用(すべて投稿は人間が手動)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ファイル</th><th>種別</th><th>役割</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kbd">.claude/skills/draft/</span></td><td>Skill <span class="kbd">/draft</span></td><td>実体験(git log/バグ/数値/ネタ帳)を素材に、型テンプレで下書き2〜3案。<strong>淡々・ドライなビルダー調</strong>に固定。NGチェック通過。捏造しない</td></tr>
+          <tr><td><span class="kbd">.claude/skills/weekly/</span></td><td>Skill <span class="kbd">/weekly</span></td><td>週次振り返りスレッド(H型・3〜6ポスト:やったこと/数字/学び/来週)を生成</td></tr>
+          <tr><td><span class="kbd">.claude/skills/review/</span></td><td>Skill <span class="kbd">/review</span></td><td>投稿ログ(手貼りの数値)からトップ3・ワースト3→勝ちパターン→来週「増やす1つ・やめる1つ」</td></tr>
+          <tr><td><span class="kbd">scripts/lint_post.py</span></td><td>Pythonスクリプト</td><td>NGチェック(本文リンク直貼り/ハッシュタグ2個以上/絵文字だけ/280字超/宣伝過多)。/draft が内部で呼ぶ</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C. 横断(フック・データ)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ファイル</th><th>種別</th><th>役割</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kbd">.claude/settings.json</span></td><td>Hook(SessionStart)</td><td>起動時に <span class="kbd">session_brief.py</span> を実行し、今日のダイジェスト+曜日テーマ+最低ラインを表示</td></tr>
+          <tr><td><span class="kbd">ネタ帳.md</span></td><td>データ</td><td>1行メモの受け皿。/collect が自動追記、人間も追記、/draft が消化</td></tr>
+          <tr><td><span class="kbd">投稿ログ.md</span></td><td>データ</td><td>日時/型/インプ/ER/BM/リプ/プロフ。/review が読む(スプレッドシートのローカル版)</td></tr>
+          <tr><td><span class="kbd">collect/</span></td><td>データ</td><td>日次ダイジェスト・raw JSON・cron.log の保存先</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="flow">
+    <h2>毎日・週次の運用フロー</h2>
+    <p>既存の<a href="roadmap.html#phase1">45分ルーチン</a>にそのまま乗せる。<strong>自動</strong>=AIが勝手にやる / <strong>手動</strong>=人間がやる。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>タイミング</th><th>自動(AI)</th><th>手動(人間)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>毎朝7:00</strong></td><td>launchd → <span class="kbd">/collect</span> がダイジェスト生成・ネタ帳更新</td><td>—</td></tr>
+          <tr><td><strong>朝 15〜20分</strong></td><td>起動時にSessionStartフックが今日のネタ+曜日テーマを表示</td><td>Xで中堅アカウントに価値あるリプライ10件・リプ返し</td></tr>
+          <tr><td><strong>昼 10分</strong></td><td>—</td><td>リプ返し+ネタ帳に1行メモ</td></tr>
+          <tr><td><strong>夜(開発後)10〜15分</strong></td><td><span class="kbd">/draft today</span> が下書き2〜3案</td><td>1案を選んで手動投稿+直後15〜30分リプ返し</td></tr>
+          <tr><td><strong>日曜バッチ 90分</strong></td><td><span class="kbd">/review</span>→<span class="kbd">/draft</span>×5〜7→<span class="kbd">/weekly</span></td><td>数値を貼る・下書き確認・予約投稿(X公式Web版)・スレッド投稿</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-success">
+      <div class="callout-title">✅ 最低ライン(これだけは死守)</div>
+      <p>リプ返5件 / 週3ポスト以上 / ネタ帳に1行。<strong>投稿後48時間は数字を見ない</strong>。SNS合計45分を超えたら閉じる。エネルギーの7割はリプライ(70/30)。</p>
+    </div>
+  </section>
+
+  <section id="commands">
+    <h2>コマンド早見表</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>コマンド</th><th>いつ使う</th><th>何をする</th></tr></thead>
+        <tbody>
+          <tr><td><span class="kbd">/collect</span></td><td>毎朝(自動)/ 手動でも</td><td>RSS収集→界隈ダイジェスト→ネタ帳に型付きネタ追記</td></tr>
+          <tr><td><span class="kbd">/draft today</span></td><td>夜・開発後</td><td>実体験から下書き2〜3案(NGチェック済・ドライな文体)</td></tr>
+          <tr><td><span class="kbd">/draft 失敗談 &lt;内容&gt;</span></td><td>型を指定したいとき</td><td>指定の型・ネタで下書き</td></tr>
+          <tr><td><span class="kbd">/weekly</span></td><td>金 or 日</td><td>週次振り返りスレッド(3〜6ポスト)の下書き</td></tr>
+          <tr><td><span class="kbd">/review</span></td><td>日曜15分</td><td>投稿ログの数値からトップ3/来週の一手</td></tr>
+          <tr><td>trend-scout(agent)</td><td>1トピック深掘りしたいとき</td><td>調査して分析型ポストの素材(数字・出典・切り口)を返す</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote">スキルは <span class="kbd">/名前</span> で呼ぶ。trend-scout はサブエージェントなので「〜を trend-scout で深掘りして」と依頼する。</p>
+  </section>
+
+  <section id="setup">
+    <h2>セットアップ手順</h2>
+    <div class="callout callout-info">
+      <div class="callout-title">ℹ️ 前提</div>
+      <p>Python3(macOS標準)と Claude Code CLI が使えること。追加インストールは不要(fetch_sources.py は標準ライブラリのみ)。作業ディレクトリは <span class="kbd">/Applications/smart_app_development/make_idea</span>。</p>
+    </div>
+<pre class="code"># 1) 収集の動作確認(手動・ネット取得できるか)
+cd /Applications/smart_app_development/make_idea
+python3 sns_marketing/scripts/fetch_sources.py --print
+
+# 2) Claude Code内で /collect を手動実行 → ダイジェスト生成を確認
+/collect
+
+# 3) 無人実行(headless)の確認
+bash sns_marketing/scripts/collect.sh
+cat  sns_marketing/collect/cron.log      # 生成ログを確認
+
+# 4) 毎朝7:00の自動実行を有効化(launchd)
+cp   sns_marketing/scripts/com.hshinya.x-collect.plist ~/Library/LaunchAgents/
+launchctl load  ~/Library/LaunchAgents/com.hshinya.x-collect.plist
+launchctl start com.hshinya.x-collect    # 今すぐ1回テスト実行</pre>
+    <div class="callout callout-warn">
+      <div class="callout-title">⚠️ 権限について</div>
+      <p>無人実行では <span class="kbd">--dangerously-skip-permissions</span> は使わない。collect.sh は <span class="kbd">/collect</span> が使うツール(python3実行・ファイル読み書き)だけを <span class="kbd">--allowedTools</span> と <span class="kbd">--permission-mode acceptEdits</span> で許可している。モデルはコスト節約のため <span class="kbd">--model sonnet</span>。</p>
+    </div>
+    <div class="callout callout-info">
+      <div class="callout-title">ℹ️ スケジュールの挙動</div>
+      <p>launchdはMacが起動中の7:00に実行する。スリープ/電源オフの時刻はスキップされ、次回起動後にまとめて走ることがある(仕様)。実行ログは <span class="kbd">collect/cron.log</span>、launchd自身のエラーは <span class="kbd">collect/launchd.err.log</span>。</p>
+    </div>
+  </section>
+
+  <section id="customize">
+    <h2>停止・カスタマイズ</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>やりたいこと</th><th>どこを触る</th></tr></thead>
+        <tbody>
+          <tr><td>収集ソース・キーワードを増減</td><td><span class="kbd">scripts/fetch_sources.py</span> の <span class="kbd">SOURCES</span> / <span class="kbd">KEYWORDS</span></td></tr>
+          <tr><td>実行時刻を変える</td><td>plist の <span class="kbd">Hour</span> / <span class="kbd">Minute</span> を編集して load し直す</td></tr>
+          <tr><td>自動実行を止める</td><td><span class="kbd">launchctl unload ~/Library/LaunchAgents/com.hshinya.x-collect.plist</span></td></tr>
+          <tr><td>起動時ブリーフを消す</td><td><span class="kbd">.claude/settings.json</span> の hooks を削除(このプロジェクトは他資料の作業もするため、うるさければオフに)</td></tr>
+          <tr><td>収集モデルを変える</td><td><span class="kbd">collect.sh</span> の <span class="kbd">--model</span>(sonnet→opus等)</td></tr>
+          <tr><td>下書きの文体を調整</td><td><span class="kbd">.claude/skills/draft/SKILL.md</span> の「文体(固定ルール)」</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-info">
+      <div class="callout-title">🔭 将来: 界隈のXも自動で追いたくなったら</div>
+      <p>今はXアカウント追跡を入れていない(Nitter系は2026年時点で不安定・ブラウザ自動化はBANリスク)。界隈のXは人間が普段見て拾う運用。どうしても自動化するなら、リスクを理解した上でブラウザ自動化MCPを別途検証する(投稿は引き続き手動)。</p>
+    </div>
+  </section>
+
+  <section id="notes">
+    <h2>前提と注意(2026年のX事情)</h2>
+    <div class="callout callout-danger">
+      <div class="callout-title">⚠️ 使う前に押さえる</div>
+      <ul>
+        <li><strong>X APIは2026年2月に従量課金化</strong>(新規はFreeティア廃止)。投稿$0.015/件・<strong>リンク付き$0.20/件</strong>・読み取り$0.005/件。→ 本システムは<strong>X APIを使わない</strong>。</li>
+        <li><strong>自動投稿はしない</strong>。X製品責任者が「人間が画面をタップしていないと(関連アカウントごと)凍結されうる」と明言。投稿・リプは人間が手動。</li>
+        <li><strong>AIに一般論を書かせない</strong>。実体験の素材が無いときは /draft は人間に質問して止まる(捏造禁止)。AI丸出しポストは品質評価で不利。</li>
+        <li>料金・API仕様・各ツールの無料枠は変動が激しい。利用直前に公式で再確認。</li>
+      </ul>
+    </div>
+    <p class="footnote">この自動化は<a href="playbook.html">発信プレイブック</a>と<a href="roadmap.html">ロードマップ</a>の戦略を実行に落とすための道具。戦略の考え方はそちらを参照。</p>
+  </section>
+
+  <footer class="page-footer">
+    <span>SNS戦略ガイド — X運用の自動化(2026-07-05作成)</span>
+    <span><a href="index.html">ホーム</a></span>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

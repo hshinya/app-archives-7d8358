@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>標準工程｜アプリを作り、出し、稼ぐまでの型</title>
+<meta name="description" content="どのアプリにも繰り返し適用する標準工程の詳細版。アイデア検証→開発→リリース→SNS並走→マネタイズ→運用判断→次のアプリ、のサイクル全体の進め方・考え方・実務手順。">
+<style>
+:root{
+  --washi:#F5F2E9; --card:#FFFDF6; --ink:#23282C; --ink-soft:#5B6168;
+  --line:#DFD8C6; --ai:#2E5C7F; --ume:#B7566B; --matcha:#6B7F52;
+  --karashi:#B98A22; --shu:#B33A3A;
+  --vol:var(--matcha);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  background:var(--washi);
+  background-image:radial-gradient(rgba(35,40,44,.045) 1px, transparent 1px);
+  background-size:5px 5px;
+  color:var(--ink); line-height:1.8; font-size:15px;
+}
+.serif{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 72px}
+
+/* header */
+header{padding:36px 0 14px;position:relative}
+.eyebrow{font-size:11px;letter-spacing:.35em;color:var(--ink-soft);text-transform:uppercase}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:clamp(25px,6vw,34px);letter-spacing:.08em;margin:6px 0 4px}
+.subtitle{color:var(--ink-soft);font-size:13.5px;max-width:560px}
+.stamp{
+  position:absolute;right:0;top:40px;width:72px;height:72px;
+  border:2px solid var(--vol);border-radius:50%;color:var(--vol);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Hiragino Mincho ProN",serif;font-size:20px;letter-spacing:.1em;line-height:1.25;
+  transform:rotate(6deg);opacity:.85;user-select:none;
+}
+.stamp small{font-size:9px;letter-spacing:.2em}
+@media(max-width:560px){.stamp{width:58px;height:58px;font-size:16px;top:34px}}
+
+/* tabs */
+nav{position:sticky;top:0;z-index:20;background:var(--washi);border-bottom:1px solid var(--line);margin:14px -16px 0;padding:0 16px}
+.tabs{display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{
+  flex:none;border:none;background:none;cursor:pointer;color:var(--ink-soft);
+  font-family:"Hiragino Mincho ProN",serif;font-size:14px;letter-spacing:.12em;
+  padding:12px 12px 10px;border-bottom:3px solid transparent;white-space:nowrap;
+}
+.tab.active{color:var(--washi);background:var(--ink);border-bottom-color:var(--vol)}
+section.page{display:none;padding-top:26px}
+section.page.show{display:block}
+
+/* section label */
+.slabel{
+  font-family:"Hiragino Mincho ProN",serif;color:var(--shu);font-size:12px;letter-spacing:.25em;
+  writing-mode:vertical-rl;line-height:1;float:right;margin:4px 0 10px 12px;user-select:none;
+}
+h2{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:21px;letter-spacing:.1em;margin-bottom:4px}
+.lead{color:var(--ink-soft);font-size:13.5px;margin-bottom:18px}
+h3.h{font-family:"Hiragino Mincho ProN",serif;font-size:16.5px;letter-spacing:.06em;margin:30px 0 10px;padding-left:10px;border-left:4px solid var(--vol)}
+
+/* cards */
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin-bottom:12px}
+.mcard h4{font-family:"Hiragino Mincho ProN",serif;font-size:15.5px;letter-spacing:.04em;margin-bottom:6px}
+.mcard p{font-size:13.5px;color:var(--ink-soft)}
+.mcard p b{color:var(--ink)}
+
+.callout{border-left:4px solid var(--vol);background:var(--card);border-radius:0 10px 10px 0;padding:12px 14px;margin:14px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px}
+.callout b{color:var(--vol)}
+.callout.ai{border-left-color:var(--ai)} .callout.ai b{color:var(--ai)}
+.callout.shu{border-left-color:var(--shu)} .callout.shu b{color:var(--shu)}
+.callout.karashi{border-left-color:var(--karashi)} .callout.karashi b{color:var(--karashi)}
+.callout.ume{border-left-color:var(--ume)} .callout.ume b{color:var(--ume)}
+
+/* number cards */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+@media(max-width:560px){.dgrid{grid-template-columns:repeat(2,1fr)}}
+.dgrid.g2{grid-template-columns:repeat(2,1fr)}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center}
+.dcard b{display:block;font-family:"Hiragino Mincho ProN",serif;font-size:19px;color:var(--vol);letter-spacing:.02em;line-height:1.4}
+.dcard span{font-size:10.5px;color:var(--ink-soft);line-height:1.5;display:block}
+
+/* rows */
+.rowline{display:flex;justify-content:space-between;gap:12px;padding:8px 2px;border-bottom:1px dashed var(--line);font-size:13.5px;align-items:baseline}
+.rowline:last-child{border-bottom:none}
+.rowline .k{color:var(--ink-soft)}
+.rowline .v{text-align:right;font-weight:600;flex:none;max-width:60%}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th{background:rgba(35,40,44,.05);font-family:"Hiragino Mincho ProN",serif;font-weight:600;letter-spacing:.05em;padding:8px 8px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b.num{font-family:"Hiragino Mincho ProN",serif;color:var(--vol)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px -16px;padding:0 16px}
+.tscroll table{min-width:540px;margin:0}
+
+/* cycle */
+.cycle{list-style:none;margin:14px 0}
+.cycle li{display:flex;gap:12px}
+.cycle .rail{flex:none;width:26px;display:flex;flex-direction:column;align-items:center}
+.cycle .dot{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--vol);background:var(--card);color:var(--vol);display:flex;align-items:center;justify-content:center;font-family:"Hiragino Mincho ProN",serif;font-size:14px;margin-top:2px}
+.cycle .bar{flex:1;width:2px;background:var(--line);margin:2px 0}
+.cycle li:last-child .bar{display:none}
+.cycle li.loop .dot{border-style:dashed;color:var(--shu);border-color:var(--shu)}
+.cycle .cbody{padding:2px 0 20px;flex:1;min-width:0}
+.cycle .ctitle{font-family:"Hiragino Mincho ProN",serif;font-size:15.5px;letter-spacing:.04em}
+.cycle .ctitle small{font-size:11.5px;color:var(--ink-soft);font-family:inherit;letter-spacing:0;margin-left:8px}
+.cycle .cdesc{font-size:13px;color:var(--ink-soft)}
+.cycle .cgoal{font-size:12.5px;color:var(--vol);font-weight:600}
+
+/* funnel */
+.funnel{margin:12px 0}
+.frow{margin-bottom:9px}
+.frow .fmeta{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px}
+.frow .fmeta b{font-family:"Hiragino Mincho ProN",serif;color:var(--vol)}
+.frow .fbar{height:14px;border-radius:4px;background:var(--vol);opacity:.85;min-width:14px}
+.frow.f2 .fbar{opacity:.7}.frow.f3 .fbar{opacity:.55}.frow.f4 .fbar{opacity:.4}.frow.f5 .fbar{opacity:.3}
+
+/* checklist */
+.check{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:12px}
+.check-name{font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--vol);margin-bottom:5px}
+.check label{display:flex;gap:9px;padding:5px 0;font-size:13.5px;cursor:pointer;align-items:flex-start;line-height:1.6}
+.check input{flex:none;width:17px;height:17px;margin-top:3px;accent-color:var(--matcha)}
+.check label.checked{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:rgba(107,127,82,.5)}
+.check label small{color:var(--ink-soft);font-size:12px;display:block}
+
+/* 条 cards */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:13px}
+.pnum{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--vol);color:var(--vol);display:flex;align-items:center;justify-content:center;font-family:"Hiragino Mincho ProN",serif;font-size:15px}
+.pcard.bad .pnum{border-color:var(--shu);color:var(--shu)}
+.pbody b{font-family:"Hiragino Mincho ProN",serif;font-size:15px;letter-spacing:.03em;display:block;margin-bottom:2px}
+.pbody p{font-size:13px;color:var(--ink-soft)}
+.pbody p b{display:inline;font-family:inherit;font-size:inherit;color:var(--ink)}
+
+/* quadrant */
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+@media(max-width:560px){.quad{grid-template-columns:1fr}}
+.qcell{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+.qcell .qtag{font-size:10.5px;font-weight:700;letter-spacing:.1em;display:inline-block;padding:1px 8px;border-radius:4px;color:#fff;margin-bottom:5px}
+.qcell h5{font-family:"Hiragino Mincho ProN",serif;font-size:14px;margin-bottom:3px}
+.qcell p{font-size:12.5px;color:var(--ink-soft)}
+
+.lane ul{list-style:none;font-size:13.5px}
+.lane li{padding:3px 0 3px 16px;position:relative}
+.lane li::before{content:"・";position:absolute;left:0;color:var(--ink-soft)}
+.lane li small{color:var(--ink-soft);font-size:12px}
+.lane li b{font-weight:600}
+
+/* details accordion */
+details.dt{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0;overflow:hidden}
+details.dt summary{padding:11px 14px;cursor:pointer;font-weight:600;font-size:13.5px;list-style:none;position:relative;padding-left:30px;letter-spacing:.02em}
+details.dt summary::-webkit-details-marker{display:none}
+details.dt summary::before{content:"▸";position:absolute;left:13px;color:var(--vol);transition:transform .15s}
+details.dt[open] summary::before{transform:rotate(90deg)}
+details.dt[open] summary{border-bottom:1px dashed var(--line)}
+details.dt .din{padding:10px 14px 13px;font-size:13.5px}
+details.dt .din p{color:var(--ink-soft);font-size:13px;margin-bottom:6px}
+details.dt .din p b{color:var(--ink)}
+
+/* template block */
+.tmpl{background:rgba(35,40,44,.045);border:1px dashed var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.75;white-space:pre-wrap;font-family:inherit;margin:8px 0;color:var(--ink)}
+.tmpl .tl{display:block;font-size:10.5px;color:var(--vol);font-weight:700;letter-spacing:.1em;margin-bottom:2px}
+
+/* KPI tree */
+.tree{background:rgba(35,40,44,.045);border:1px dashed var(--line);border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.9;white-space:pre;overflow-x:auto;font-family:"SF Mono",Menlo,Consolas,monospace;margin:8px 0;color:var(--ink)}
+
+.refs{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.refs a{color:var(--ai);text-decoration:none;border-bottom:1px dotted var(--ai)}
+.note-src{font-size:11px;color:var(--ink-soft);margin-top:6px}
+footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-soft);letter-spacing:.04em;line-height:1.9}
+footer a{color:var(--ai)}
+.backlink{font-size:12.5px;margin-top:8px}
+.backlink a{color:var(--ai);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">STANDARD PROCESS</div>
+  <h1>標準工程</h1>
+  <p class="subtitle">アプリを作り、出し、SNSと並走させ、収益化し、続けるか決めて、次を作る。<b>どのアプリにも繰り返し使う「型」の詳細版</b>。工程の流れだけでなく、各工程の実務手順・テンプレート・判断基準まで踏み込む。</p>
+  <div class="stamp serif"><span>型</span><small>標準工程</small></div>
+  <p class="backlink"><a href="index.html">← 資料館 総目次へ</a>　<a href="総合ロードマップ.html">総合ロードマップ（個別計画）→</a></p>
+</header>
+
+<nav>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-page="cycle">全体像</button>
+    <button class="tab" data-page="v">〇 検証</button>
+    <button class="tab" data-page="dev">一 開発</button>
+    <button class="tab" data-page="launch">二 リリース</button>
+    <button class="tab" data-page="ops">三 運用</button>
+    <button class="tab" data-page="sns">SNS並走</button>
+    <button class="tab" data-page="mind">考え方</button>
+  </div>
+</nav>
+
+<!-- ================================================== 全体像 -->
+<section class="page show" id="page-cycle">
+  <span class="slabel serif">全体像</span>
+  <h2 class="serif">1本のアプリが金になるまでの一周</h2>
+  <p class="lead">この工程は円環になっている。最後の「判断」で運用に残すか畳むかを決め、必ず次の検証に戻る。<b>1周＝約6〜9ヶ月</b>（検証開始から初収益まで最短4〜5ヶ月）。一周回すたびに、アプリ・読者・学びの3つの資産が積み上がる。</p>
+
+  <ul class="cycle">
+    <li>
+      <div class="rail"><div class="dot serif">〇</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">検証 — 作る価値の証明<small>2〜6週</small></div>
+        <p class="cdesc">コードを書く前に、需要を数字で確かめる。X定性→インタビュー→LP＋広告→前金の4段階。</p>
+        <p class="cgoal">出口：前金3件 or ウェイトリスト100人でGO</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">一</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">開発 — 6週間MVP<small>6〜8週</small></div>
+        <p class="cdesc">第1週に土台（i18n・課金SDK・分析）を全部つなぎ、1機能を「気持ちいい」まで磨く。オンボとペイウォールはコア機能と同じ熱量で作る。</p>
+        <p class="cgoal">出口：自分が7日連続で使える＋サンドボックス課金が通る</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">二</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">リリース — 内見・試走・開帳<small>4〜8週（開発後半と重なる）</small></div>
+        <p class="cdesc">テスター10〜30人→ストア素材→審査→火〜木に多チャネル同日リリース。初速はDLでなくリテンションで読む。</p>
+        <p class="cgoal">出口：D1/D7/転換の計測が回り、最初の売上が立つ</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">三</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">運用 — 毎月1実験<small>リリース後6ヶ月</small></div>
+        <p class="cdesc">ペイウォール配置→プラン構成→トライアル→価格の順に月1本ずつ実験。実験するアプリはしないアプリの40倍稼ぐ。</p>
+        <p class="cgoal">出口：6ヶ月・実験6本を回しきってから、次の判断へ</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">四</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">判断 — 集中か、省力か、撤退か<small>リリース6ヶ月後</small></div>
+        <p class="cdesc">数字で3択を決める。月10万円超なら時間の70%を集中投資。横ばいなら省力運転で資産化。伸びる根拠がなければ畳む。</p>
+        <p class="cgoal">出口：このアプリの「学び1枚」を書き残す</p>
+      </div>
+    </li>
+    <li class="loop">
+      <div class="rail"><div class="dot serif">↺</div></div>
+      <div class="cbody">
+        <div class="ctitle serif" style="color:var(--shu)">次のアプリへ — 検証に戻る</div>
+        <p class="cdesc">運用が月次ルーティン化したら（週の手入れ2〜3時間以下）、次の検証を始める。SNSの読者と前作の学びを持って回る2周目は、1周目より速くて精度が高い。</p>
+      </div>
+    </li>
+  </ul>
+
+  <h3 class="h serif">お金になるまでのファネル — 数字の通り道</h3>
+  <p style="font-size:13px;color:var(--ink-soft)">1,000DLあたりの標準的な減り方。この5段のどこが細いかで、やるべき仕事が決まる（→リリースタブの四象限、運用タブの実験優先順位）。</p>
+  <div class="mcard">
+    <div class="funnel">
+      <div class="frow"><div class="fmeta"><span>インストール</span><b>1,000人</b></div><div class="fbar" style="width:100%"></div></div>
+      <div class="frow f2"><div class="fmeta"><span>翌日も使う（D1 目安30%）</span><b>300人</b></div><div class="fbar" style="width:30%"></div></div>
+      <div class="frow f3"><div class="fmeta"><span>7日後も使う（D7 目安15%）</span><b>150人</b></div><div class="fbar" style="width:15%"></div></div>
+      <div class="frow f4"><div class="fmeta"><span>課金する（対DL 2〜5%）</span><b>20〜50人</b></div><div class="fbar" style="width:5%"></div></div>
+      <div class="frow f5"><div class="fmeta"><span>初回更新まで残る（実用系 目安58.1%）</span><b>12〜29人</b></div><div class="fbar" style="width:3%"></div></div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:9px"><b style="color:var(--ink)">売上の計算式：</b>月間DL × 課金転換率 × 月額価格 ＝ 月間売上。<br>例：月1,000DL × 3% × 600円 ≒ 月1.8万円（手数料15%後 約1.5万円）。月10万円が欲しければ「DLを6倍にする」「転換を上げる」「単価を上げる」の3通りしかない——実験とは、この3つのどれかを動かす行為。</p>
+  </div>
+  <div class="dgrid">
+    <div class="dcard"><b>82%</b><span>トライアル開始はインストール当日に起きる</span></div>
+    <div class="dcard"><b>65%</b><span>iOSのDLは検索経由（ASOが流入の本丸）</span></div>
+    <div class="dcard"><b>40倍</b><span>実験を回すアプリの収益差</span></div>
+  </div>
+
+  <h3 class="h serif">関所 十八ヶ所 — 全行程の通過条件一覧</h3>
+  <p style="font-size:13px;color:var(--ink-soft)">工程は日付でなく関所で進む。6つの節目×3条件。<b>関所を飛ばして進むのが一番危ない</b>（例：リテンションを確認せずに宣伝へ金を使う）。</p>
+  <div class="tscroll"><table>
+    <tr><th>節目</th><th>関所（3条件すべて）</th></tr>
+    <tr><td><b class="num">支度</b><br>（検証）</td><td>①提供価値を一文で言える　②「誰が・何に・いくら払うか」に即答できる　③名前のドメイン・ハンドル確保＆商標の重複なし</td></tr>
+    <tr><td><b class="num">普請</b><br>（開発）</td><td>①自分が7日連続で毎日使った　②初起動→オンボ→ペイウォールまで迷いなく流れる　③課金のサンドボックステストが通る</td></tr>
+    <tr><td><b class="num">内見</b><br>（テスト）</td><td>①致命バグ0・クラッシュ率1%未満　②オンボ完了率70%前後　③テスターの半数が「友人に薦めたい」と回答</td></tr>
+    <tr><td><b class="num">試走</b><br>（ソフトローンチ）</td><td>①D1約30%・D7約15%（カテゴリで補正）　②トライアル開始率とクラッシュ率が基準内　③改善サイクルが2周回り「世界に出せる」と言い切れる</td></tr>
+    <tr><td><b class="num">開帳</b><br>（本番リリース）</td><td>①初週に有料転換が発生している　②オーガニック流入の型が1つ見えた（どの動画・どの検索語か）　③ストア評価4.0以上を維持</td></tr>
+    <tr><td><b class="num">巡業</b><br>（運用）</td><td>①月次実験が3ヶ月連続で回っている　②収益の国別内訳で3ヶ国以上（海外展開時）　③SNS→インストールの導線が数字で説明できる</td></tr>
+  </table></div>
+
+  <h3 class="h serif">最初にかかる金 — 初期費用の全景</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">Apple Developer Program（必須）</span><span class="v">$99／年</span></div>
+    <div class="rowline"><span class="k">Google Play 登録（必須）</span><span class="v">$25（買い切り）</span></div>
+    <div class="rowline"><span class="k">ドメイン</span><span class="v">数千円／年</span></div>
+    <div class="rowline"><span class="k">課金SDK・分析・クラッシュ計測</span><span class="v">無料枠で開始可</span></div>
+    <div class="rowline"><span class="k">検証用のLP＋広告</span><span class="v">1〜2万円／案</span></div>
+    <div class="rowline"><span class="k">翻訳のネイティブ校正</span><span class="v">数千〜数万円／言語（AI下訳＋校正）</span></div>
+    <div class="rowline"><span class="k">アイコン等の外注（任意）</span><span class="v">0〜3万円</span></div>
+    <div class="rowline"><span class="k">ソフトローンチ広告（海外向け時）</span><span class="v">数万円規模から</span></div>
+  </div>
+  <p class="note-src">1本あたり総額5〜15万円もあれば検証からリリースまで走り切れる。時間こそが最大の投資。</p>
+
+  <h3 class="h serif">複数本の回し方 — パイプラインの定常形</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">運用中</span><span class="v">N本（各・月1実験＋レビュー対応のみ）</span></div>
+    <div class="rowline"><span class="k">開発中</span><span class="v">常に1本だけ（2本同時開発はしない）</span></div>
+    <div class="rowline"><span class="k">検証中</span><span class="v">アイデア2〜3案（開発の裏で回せる）</span></div>
+    <div class="rowline"><span class="k">SNS</span><span class="v">1本の帯として全アプリ共通で流す</span></div>
+  </div>
+  <div class="callout"><b>なぜ複数本か：</b>サブスク収益の69%は2020年以前リリースのアプリ——ストアでは「運用年数」が資産になる。早く出して長く置いたアプリの本数が、そのまま収益の裾野になる。1本の大当たりを狙うのではなく、<b>打席数を仕組みで増やす</b>。</div>
+</section>
+
+<!-- ================================================== 検証 -->
+<section class="page" id="page-v">
+  <span class="slabel serif">検証</span>
+  <h2 class="serif">工程〇　検証 — コードの前に、需要</h2>
+  <p class="lead">個人開発の最大の死因は「誰も欲しがらないものを数ヶ月かけて作る」こと。検証はそれを2〜6週と1〜2万円で防ぐ保険。<b>始める前に、撤退基準を先に書く。</b></p>
+
+  <h3 class="h serif">4週間プロトコル</h3>
+  <div class="tscroll"><table>
+    <tr><th>週</th><th>やること</th><th>合格ライン</th></tr>
+    <tr><td><b class="num">Week 0</b></td><td>案の絞り込み（採点表：六つの問いで◯5つ以上）＋「顧客はXのフォロワーか？」を判定</td><td>3案まで絞る</td></tr>
+    <tr><td><b class="num">Week 1</b></td><td>X定性：課題ポスト→モック画像→アンケートの順で投げる</td><td>「自分も困ってる」の具体リプ3〜5件＋DM1件以上</td></tr>
+    <tr><td><b class="num">Week 2</b></td><td>インタビュー5〜10人（具体リプ・DMをくれた人にMom Test式で）</td><td>10人中5人以上がその課題に金か時間を使っている</td></tr>
+    <tr><td><b class="num">Week 3</b></td><td>LP＋少額広告（総額1〜2万円）でCVR計測</td><td>CVR 10%以上で強いGO（平均は2〜5%）</td></tr>
+    <tr><td><b class="num">Week 4</b></td><td>支払い検証：早期アクセスを少額販売（Stripe Payment Link等）</td><td><b>赤の他人からの前金3件</b></td></tr>
+  </table></div>
+  <div class="callout shu"><b>フォロワーが数百人以下なら、Week 1は機能しない。</b>リーチ自体がないので「反応ゼロ＝需要ゼロ」ではなく「届いていないだけ」。この段階では<b>Week 3のLP＋広告（リーチを金で買う）に直行</b>したほうが判断材料として正確。</div>
+
+  <h3 class="h serif">インタビューの技法 — Mom Test式</h3>
+  <div class="mcard">
+    <p style="color:var(--ink)">母親にアイデアを見せれば「いいね」と言う——優しさは検証を殺す。だから<b>意見を聞かず、過去の事実だけを聞く</b>。3原則：</p>
+    <div style="margin-top:8px" class="lane"><ul>
+      <li><b>① 自分のアイデアの話をしない。</b>相手の生活・仕事の話だけを聞く</li>
+      <li><b>② 未来の意見でなく、過去の具体的事実を聞く。</b>「あったら使う？」は禁句</li>
+      <li><b>③ 褒め言葉はすべてノイズとして捨てる</b></li>
+    </ul></div>
+  </div>
+  <div class="tscroll"><table>
+    <tr><th>✕ 悪い質問（未来の意見）</th><th>◯ 良い質問（過去の事実）</th></tr>
+    <tr><td>「こういうアプリ、あったら使いますか？」</td><td>「最後にその問題で困ったのはいつですか？」</td></tr>
+    <tr><td>「月500円なら払いますか？」</td><td>「その問題を解決するために、何を試しましたか？いくら／何時間かけましたか？」</td></tr>
+    <tr><td>「便利だと思いますか？」</td><td>「いま、どうやってしのいでいますか？それのどこが一番面倒ですか？」</td></tr>
+  </table></div>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">進め方：</b>課題ポストに具体リプをくれた人へ「15分だけ話を聞かせてください」とDM → 「今・金額・時間」を聞く。<b style="color:var(--ink)">判定：</b>10人中8人が課題を強く認めればGO、2人ならピボット。核心はただ一つ——<b style="color:var(--ink)">その課題にすでに金か時間を使っているか</b>。何も対処していない課題は、本人にとって痛くない課題。</p>
+  </div>
+
+  <h3 class="h serif">シグナルの強さ — 何を信じるか</h3>
+  <div class="tscroll"><table>
+    <tr><th>シグナル</th><th>本気度</th><th>扱い方</th></tr>
+    <tr><td>いいね</td><td>ほぼゼロ</td><td>社交辞令を含む。判断に使わない</td></tr>
+    <tr><td>アンケート投票</td><td>ほぼゼロ</td><td>優先順位の確認のみ。GO/NO-GOには使わない</td></tr>
+    <tr><td>ブックマーク</td><td>低</td><td>いいねより強い実用関心。傾向として見る</td></tr>
+    <tr><td>具体的なリプライ</td><td>中</td><td>インタビュー候補の最重要シグナル</td></tr>
+    <tr><td>DM・問い合わせ</td><td>中〜高</td><td>能動的関心。必ず個別に話を聞く</td></tr>
+    <tr><td>ウェイトリスト登録</td><td>中〜高</td><td>定量検証の主役。登録→購入は1〜2%だが、<b>登録→顧客の転換が20%を超えたらPMFの強いシグナル</b></td></tr>
+    <tr><td><b class="num">前金・プレオーダー</b></td><td><b class="num">最高</b></td><td>支払い意思の証明。前金ありリスト→購入は30〜50%（無料型の15〜25倍）</td></tr>
+  </table></div>
+
+  <h3 class="h serif">LPと広告の実務 — 1〜2万円で需要を測る</h3>
+  <div class="mcard">
+    <h4 class="serif">LPに載せるのは5つだけ</h4>
+    <div class="lane"><ul>
+      <li>① 1行の価値提案（誰の・何の痛みを・どう解決するか）</li>
+      <li>② デモ動画 or モックGIF（アプリが実在するように見せる「フェイクドア」でよい）</li>
+      <li>③ メール登録フォーム</li>
+      <li>④ 「登録者だけの先行アクセス・特典」の明記</li>
+      <li>⑤ 開発者のXアカウントへのリンク</li>
+    </ul></div>
+  </div>
+  <div class="tscroll"><table>
+    <tr><th>道具</th><th>費用</th><th>向き</th></tr>
+    <tr><td>自作LP（Vercel / Cloudflare Pages）＋フォームはTally</td><td>無料</td><td>コードが書けるならこれが最安・最柔軟</td></tr>
+    <tr><td>LaunchList</td><td>無料100件〜・買い切り$19〜</td><td>LP＋紹介（リファラル）機能＋不正検知が一体</td></tr>
+    <tr><td>Waitlister</td><td>無料（100登録まで）</td><td>最速でフォームだけ置きたいとき</td></tr>
+    <tr><td>Googleフォーム＋X固定ポスト</td><td>無料</td><td>今日から始める最小構成</td></tr>
+  </table></div>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">広告の回し方：</b>1日$5〜10 × 1〜2週間（総額1〜2万円）をX広告 or Meta広告で流す。<b style="color:var(--ink)">判定の最低ライン：訪問1,000件（または表示1万件）</b>を集めてから。それ未満の数字は統計的に無意味。<br><b style="color:var(--ink)">ベンチマーク：</b>平均CVR 2〜5%／優良10〜15%／専用ウェイトリストLPなら15〜40%。<br><b style="color:var(--ink)">実験シートを先に書く</b>——何を測るか・何人に届けるか・何%で合格か。事後の都合いい解釈を防ぐ唯一の方法。</p>
+  </div>
+
+  <h3 class="h serif">100人ルール — ウェイトリストの集め方</h3>
+  <div class="tscroll"><table>
+    <tr><th>区間</th><th>集め方</th><th>目安</th></tr>
+    <tr><td>最初の10人</td><td>身内・知人から直接</td><td>48時間以内</td></tr>
+    <tr><td>次の40人</td><td>すでに参加しているコミュニティ（個人dev・Indie Hackers等）</td><td>1〜2週</td></tr>
+    <tr><td>次の50人</td><td>XでのBuild in Public（進捗・モック公開の積み重ね）</td><td>2〜4週</td></tr>
+    <tr><td>100人以降</td><td>登録者の紹介（リファラル特典）</td><td>—</td></tr>
+  </table></div>
+  <div class="callout karashi"><b>8週間かけて100人に届かないなら、それ自体が検証結果。</b>ポジショニングかターゲットがずれている。訴求を変えて再挑戦するか、案を落とす。登録率の目安：LP訪問の10〜20%なら有望、3%未満なら訴求かアイデアを再考。</div>
+
+  <h3 class="h serif">GO / NO-GO の判定表（着手前に書き写して埋める）</h3>
+  <div class="tscroll"><table>
+    <tr><th>段階</th><th>弱い・再考</th><th>合格</th></tr>
+    <tr><td>Xでの反応</td><td>インプレ比0.5%未満・具体リプ0</td><td>具体リプ3〜5件＋DM1件以上（絶対数でなく率で見る）</td></tr>
+    <tr><td>インタビュー</td><td>10人中2人未満が金/時間を使用</td><td>10人中5〜8人以上</td></tr>
+    <tr><td>LP＋広告</td><td>CVR 5%未満</td><td>10%以上（訪問1,000件以上で判定）</td></tr>
+    <tr><td>ウェイトリスト</td><td>100人未満（8週かけても）</td><td>100人以上</td></tr>
+    <tr><td>前金</td><td>0件</td><td>3〜10件</td></tr>
+  </table></div>
+  <div class="callout"><b>全部◯でなくていい。</b>原則は「前金3件 or（ウェイトリスト100人＋インタビュー合格）」でGO。ただし<b>NO-GOのときに理由を探して延命しない</b>。検証の価値は落とす速さにある。3案検証して3案落ちたら、3ヶ月の開発を3回節約したということ。</div>
+
+  <h3 class="h serif">検証にも例外はある</h3>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">1本目のアプリ</b>は学習が半分の目的なので、GO基準を厳密に守るより「出し切る経験」を優先していい。<b style="color:var(--ink)">自分が毎日使う自分用ツール</b>も、自分自身が検証装置なので前金は不要（ただし課金設計は入れて出す）。厳密な検証が効くのは<b style="color:var(--ink)">2本目以降・他人の課題を解くアプリ</b>——ここからは前金3件を厳守する。参考：Bufferは中身のないLPと料金ボタンだけで支払い意思を確かめてから開発した。</p>
+  </div>
+  <div class="refs">道具：採点表と136案 → <a href="0702/app-idea-research-v2.html">調査図鑑 改訂版</a>／検証の詳細 → <a href="sns_marketing/site/playbook.html">SNS戦略ガイド・プレイブック</a></div>
+</section>
+
+<!-- ================================================== 開発 -->
+<section class="page" id="page-dev">
+  <span class="slabel serif">開発</span>
+  <h2 class="serif">工程一　開発 — 6週間で「売れる状態」まで</h2>
+  <p class="lead">MVPの定義は「最小の機能」ではなく<b>「1つの機能が気持ちよく動き、課金でき、計測できる状態」</b>。オンボーディングと課金は飾りではなくアプリの本体——初起動からの数分間で収益のほぼすべてが決まる。</p>
+
+  <h3 class="h serif">開発方針 五ヶ条</h3>
+  <div class="pcard"><div class="pnum">一</div><div class="pbody"><b>1機能を、確実に</b><p>提供価値が一文で言えない機能は作らない。競合との差は機能数ではなく「その1機能の完成度と気持ちよさ」で付く。設定画面を増やす前に、初回体験を磨く。</p></div></div>
+  <div class="pcard"><div class="pnum">二</div><div class="pbody"><b>オンボーディングと課金も「本体」</b><p>トライアル開始の82%は初日。初起動→オンボ→ペイウォールの数分間がアプリの本丸。「機能ができてから課金を足す」は最頻出の失敗。</p></div></div>
+  <div class="pcard"><div class="pnum">三</div><div class="pbody"><b>i18nは初日に仕込む</b><p>UI翻訳は後でいいが、文字列の外部化・日付や通貨のロケール処理・余白設計は初日から。ハードコードした文字列を後から数百箇所掘り出す作業は、新機能1つ分の工数を食う。</p></div></div>
+  <div class="pcard"><div class="pnum">四</div><div class="pbody"><b>小さく出して、毎週磨く</b><p>「大きく作って沈黙」は燃え尽きと方向違いの二重リスク。2〜6週でMVP→隔週リリースのリズム。ストアの段階的公開を使えばリリースの怖さも小さくできる。</p></div></div>
+  <div class="pcard"><div class="pnum">五</div><div class="pbody"><b>AIを相棒にする</b><p>雛形生成・リファクタ・テスト作成・翻訳の下訳・ストア文案はAI（Claude Code等）に任せ、判断と体験の磨き込みに人間の時間を使う。個人開発の最大の制約は時間。</p></div></div>
+
+  <h3 class="h serif">初日にやる4点セット — 後付けにすると全部やり直しになる</h3>
+  <div class="dgrid g2">
+    <div class="dcard"><b>i18n</b><span>文字列の外部化（Flutter: arb／iOS: String Catalog）。直書き禁止</span></div>
+    <div class="dcard"><b>課金SDK</b><span>RevenueCat / Adapty。無料枠で初日から。審査なしでペイウォール差し替え可</span></div>
+    <div class="dcard"><b>分析</b><span>オンボ完了・ペイウォール表示・トライアル開始の3イベントから</span></div>
+    <div class="dcard"><b>クラッシュ計測</b><span>Crashlytics。クラッシュフリー率99%の監視</span></div>
+  </div>
+
+  <h3 class="h serif">技術選定 — 3つの問いで決める</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">問一：ホーム画面ウィジェットが主役？</span><span class="v">Yes → Flutter＋ウィジェット部だけネイティブ（WidgetKit / Glance）。第1週に疎通確認</span></div>
+    <div class="rowline"><span class="k">問二：Web版も見据える？</span><span class="v">Yes寄り → React Native（またはFlutter Web）</span></div>
+    <div class="rowline"><span class="k">問三：迷ったら</span><span class="v">Flutter。両OS・i18n・表現力のバランスが個人開発の既定解</span></div>
+  </div>
+  <details class="dt"><summary>周辺スタックの既定構成（そのまま使える装備表）</summary><div class="din">
+    <div class="rowline"><span class="k">データ</span><span class="v">まず端末内保存（SQLite / Isar）。クラウド同期は課金機能として後付け</span></div>
+    <div class="rowline"><span class="k">バックエンド</span><span class="v">必要になってからFirebase / Supabase。「サーバーレスで済む設計」を先に考える</span></div>
+    <div class="rowline"><span class="k">通知</span><span class="v">ローカル通知が基本。プッシュ基盤は必要時にFCM</span></div>
+    <div class="rowline"><span class="k">デザイン</span><span class="v">Figma＋SF Symbols / Material Symbols。スクショはテンプレ流用で1日</span></div>
+    <div class="rowline"><span class="k">CI/CD</span><span class="v">最初は手動でよい。慣れたらGitHub Actions＋Fastlane</span></div>
+    <p style="margin-top:8px">課金型はiOS先行が合理的：インストール1件あたり収益はiOS $2.28 vs Android $0.89、新規サブスクアプリの77%がiOS発。</p>
+  </div></details>
+
+  <h3 class="h serif">6週間MVPモデル</h3>
+  <div class="tscroll"><table>
+    <tr><th>週</th><th>やること</th><th>勘所</th></tr>
+    <tr><td><b class="num">第1週</b><br>骨組み</td><td>プロジェクト作成・i18n・課金SDK・分析・クラッシュ計測</td><td>画面は空でいい。「土台が全部つながった空アプリ」を作る。ウィジェット主役ならネイティブ連携の疎通もここで</td></tr>
+    <tr><td><b class="num">第2〜3週</b><br>コア機能</td><td>1機能を「動く→気持ちいい」まで磨く</td><td>毎日ビルドを自分のスマホに入れて生活で使う。2つ目の機能はv1.1リストへ</td></tr>
+    <tr><td><b class="num">第4週</b><br>売り場</td><td>オンボ5段構成＋ペイウォール＋計測イベント＋サンドボックス課金テスト</td><td>購入・復元・解約まで通す。復元ボタン欠落は定番リジェクト</td></tr>
+    <tr><td><b class="num">第5週</b><br>仕上げ</td><td>日英文言校正（AI下訳→自分で見直し）・空状態/エラー文・アイコン・スクショ素材撮影</td><td>スクショはストア転換率の最重要要素</td></tr>
+    <tr><td><b class="num">第6週</b><br>配布</td><td>TestFlight/内部テスト→スモーク表消化→ストア下書き→審査提出</td><td>審査は落ちる前提で予備1週を見る</td></tr>
+  </table></div>
+
+  <h3 class="h serif">オンボーディング五段構成 — 実装レシピ</h3>
+  <p style="font-size:13px;color:var(--ink-soft)">複数ページ型オンボは単一画面より転換率+37%。オンボ内ペイウォールが全トライアル開始の約半分を作る。</p>
+  <div class="tscroll"><table>
+    <tr><th>段</th><th>画面</th><th>設計指針</th></tr>
+    <tr><td><b class="num">壱</b></td><td>約束</td><td>1画面目で「結果」を一文で売る（例：7日で朝が変わる）。CTAは1つだけ。ログイン要求はしない</td></tr>
+    <tr><td><b class="num">弐</b></td><td>質問2〜4問</td><td>目標・頻度・レベルを聞く。<b>後の画面に反映されない質問は削除</b>。回答が「自分のもの」感を育てる（マイクロコミットメント）。進捗表示（2/4）で有限感を</td></tr>
+    <tr><td><b class="num">参</b></td><td>構築演出</td><td>「あなた用に準備中…」2〜3秒のアニメーション。ペイウォールの前口上。Noomはここで予測グラフを見せる</td></tr>
+    <tr><td><b class="num">四</b></td><td>プラン提示</td><td>「あなたのプラン（週3回・20分…）」——聞いた質問を使った証明が信頼になる</td></tr>
+    <tr><td><b class="num">伍</b></td><td>ペイウォール</td><td>下の解剖図の通り。閉じるボタンは付ける（審査上も安全）</td></tr>
+  </table></div>
+  <details class="dt"><summary>実装のポイント4つ（コードの構え方）</summary><div class="din">
+    <div class="lane"><ul>
+      <li><b>PageView＋状態1つで足りる。</b>凝った作りより差し替えやすさ重視——ここは毎月実験する場所</li>
+      <li><b>回答→ペイウォール文言のマッピングを設定ファイル化</b>（「◯◯のためのプラン」を出し分ける）</li>
+      <li><b>計測イベントを画面ごとに仕込む</b>（onboarding_step_1…paywall_view）。どこで離脱したかが改善のすべて</li>
+      <li><b>閉じた人フラグを保存</b>し、後日の時限オファーに使う（唯一の割引の使いどころ）。スキップ導線は付けるが目立たせない</li>
+    </ul></div>
+  </div></details>
+
+  <h3 class="h serif">ペイウォール解剖図 — 6つの必須要素</h3>
+  <div class="tscroll"><table>
+    <tr><th>要素</th><th>設計指針</th></tr>
+    <tr><td>見出し</td><td>機能列挙ではなく成果ベースの訴求「◯◯を手に入れる」＋ベネフィット3点</td></tr>
+    <tr><td>プラン表示</td><td><b>年額を既定選択</b>にし「月あたり◯円」表記＋節約バッジ。買い切り併設なら3枚</td></tr>
+    <tr><td>CTA文言</td><td>「Subscribe」でなく「プランを始める」「無料で試す」——行動の結果を書く</td></tr>
+    <tr><td>信頼要素</td><td>★評価・レビュー引用・「いつでも解約OK」を価格の近くに置く</td></tr>
+    <tr><td>法定表記</td><td>価格・期間・自動更新・解約方法・復元ボタン・規約とポリシーのリンク（欠落はiOS最多リジェクト）</td></tr>
+    <tr><td>閉じた後の導線</td><td>閉じた人フラグ→後日の時限オファー。割引を使っていいのはここだけ</td></tr>
+  </table></div>
+
+  <h3 class="h serif">収益モデルの選択 — 三つの問いで決める</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">問一：毎週使う理由があるか？</span><span class="v">Yes → サブスク主軸＋買い切り併設</span></div>
+    <div class="rowline"><span class="k">問二：一生モノの道具か？（変換ツール・レシピ帳型）</span><span class="v">Yes → 買い切り</span></div>
+    <div class="rowline"><span class="k">問三：愛着・見た目に価値があるか？（育成・きせかえ）</span><span class="v">Yes → 基本無料＋装飾IAP</span></div>
+  </div>
+  <div class="tscroll"><table>
+    <tr><th>項目</th><th>初期値</th><th>根拠</th></tr>
+    <tr><td>構成</td><td>無料＋サブスク（年額推し）＋買い切り併設</td><td>買い切り併設で総転換+15〜25%。買い切り価格は年額の2〜3倍が通例</td></tr>
+    <tr><td>月額</td><td>480〜800円から。安売りしない</td><td>高価格帯LTVは約3倍。世界中央値は月$12.99／年$38.42</td></tr>
+    <tr><td>トライアル</td><td>7日で開始→後で14〜30日を実験</td><td>17〜32日型の転換45.7% vs 3〜7日型26.8%（約1.7倍）</td></tr>
+    <tr><td>週課金</td><td>原則使わない</td><td>高転換だが不満レビューの火種。使う条件は「毎週明確な成果」「年額併記」「解約導線を隠さない」の3つ全部</td></tr>
+    <tr><td>広告モデル</td><td>使わない</td><td>成立には大量DLが必要。「広告非表示」課金への導線としてのみ</td></tr>
+    <tr><td>割引</td><td>満額主義</td><td>サブスクの約9割は満額で売れる。実用系の割引利用率はわずか1.2%</td></tr>
+  </table></div>
+
+  <h3 class="h serif">信頼を守る作法 — 通知・権限</h3>
+  <div class="mcard">
+    <div class="lane"><ul>
+      <li><b>通知許可は価値を見せた後に文脈で求める。</b>初回起動の即ダイアログは拒否率最悪。プレ許可画面→OS本ダイアログの二段構え</li>
+      <li><b>通知は「ユーザーが得する情報」だけ。</b>リテンション目的の空砲は解約と通知オフの近道</li>
+      <li><b>機微権限（位置・ヘルスケア等）は本当に必要か三度問う。</b>権限が少ないほど審査は速く、信頼は厚い</li>
+      <li>データは端末内保存を基本に——プライバシーがそのまま訴求になる</li>
+    </ul></div>
+  </div>
+
+  <h3 class="h serif">テスト戦略と品質の合格線</h3>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">全画面のテストは書かない。</b>①クリティカルパス（起動→オンボ→課金画面表示→コア機能1周）だけ自動化 ②リリース前の手動スモーク表10項目（両OS・日英・小さい画面）を固定化 ③TestFlight/内部テストで10〜30人 ④課金はサンドボックスで購入・復元・解約まで。</p>
+    <div style="margin-top:8px">
+      <div class="rowline"><span class="k">コールドスタート</span><span class="v">2秒以内</span></div>
+      <div class="rowline"><span class="k">クラッシュフリー率</span><span class="v">99%以上（Playのおすすめ掲載の足切りに直結）</span></div>
+      <div class="rowline"><span class="k">初回DLサイズ</span><span class="v">50MB以下</span></div>
+      <div class="rowline"><span class="k">主要動線</span><span class="v">タップ3回以内。60fpsを落とすリストは作らない</span></div>
+      <div class="rowline"><span class="k">オフライン</span><span class="v">機内モードで主要機能が動く</span></div>
+    </div>
+  </div>
+  <div class="refs">詳細：<a href="0702/アプリ開発の書.html">アプリ開発の書</a>（技術選定・i18nチェックリスト・道具箱）／<a href="0702/マネタイズの書.html">マネタイズの書</a>（オンボ・ペイウォール・価格）</div>
+</section>
+
+<!-- ================================================== リリース -->
+<section class="page" id="page-launch">
+  <span class="slabel serif">開帳</span>
+  <h2 class="serif">工程二　リリース — 出し方で初速が変わる</h2>
+  <p class="lead">リリースは「ボタンを押す日」ではなく6〜8週の工程。事前に貯めた期待（テスター・ウェイトリスト・読者）を1日に集中させて初速を作り、<b>初速の数字で次の一手を決める</b>。Androidは要件上、T-8週から動かないと間に合わない。</p>
+
+  <h3 class="h serif">プレローンチ・チェックリスト（T-8週〜前日）</h3>
+  <div class="check">
+    <div class="check-name">T-8〜6週</div>
+    <label><input type="checkbox" data-ck="p10"><span>Android：クローズドテスト開始<small>2023/11以降の個人アカウントは「テスター12人×14日連続」が製品公開の必要条件。14日未満で離脱すると連続性が切れるので余裕を持って。X募集や相互テストコミュニティで確保</small></span></label>
+    <label><input type="checkbox" data-ck="p1"><span>iOS：TestFlightパブリックリンク公開<small>URL共有だけで最大1万人に配布可。ベータ審査は本審査より緩い。テスター10〜30人（日英混成）、オンボ完了率とD1を必ず計測</small></span></label>
+    <label><input type="checkbox" data-ck="p3"><span>Apple Small Business Program＋Google 15%プログラム申請<small>手数料30%→15%。売上ゼロのうちに済ませる</small></span></label>
+  </div>
+  <div class="check">
+    <div class="check-name">T-6〜4週</div>
+    <label><input type="checkbox" data-ck="p2"><span>iOS：App Store予約注文を設定（リリース2〜180日前で可）<small>予約分は初日のDLとしてまとめて計上→新着ランキング初速に直結。追加費用ゼロ</small></span></label>
+    <label><input type="checkbox" data-ck="p11"><span>Android：Google Play事前登録を開始（最大90日）<small>公開時に登録者へプッシュ通知＋対応端末に自動インストール——iOSより強い。登録期間中からストア検索にインデックスされる</small></span></label>
+  </div>
+  <div class="check">
+    <div class="check-name">T-4〜2週</div>
+    <label><input type="checkbox" data-ck="p4"><span>ストア素材：タイトル30字（アプリ名＋主要キーワード）・サブタイトル30字・キーワード欄100字・スクショ<small>詳細は下のASO実務へ</small></span></label>
+    <label><input type="checkbox" data-ck="p5"><span>デモ動画（30秒以内・縦型・字幕付き）を1本<small>ストア用とSNS用を兼ねる。「なぜ作ったか」ストーリー版も仕込むとlaunch週に効く</small></span></label>
+    <label><input type="checkbox" data-ck="p6"><span>審査の3大リジェクト対策を通す<small>下の審査対策を参照。特に課金画面の法定表記</small></span></label>
+  </div>
+  <div class="check">
+    <div class="check-name">T-2週〜前日</div>
+    <label><input type="checkbox" data-ck="p7"><span>技術記事1〜2本を公開（Zenn / Qiita）＋リリース記事の下書き<small>「技術構成・苦労・学びの中でプロダクトを紹介する」形式がトレンドに乗りやすい</small></span></label>
+    <label><input type="checkbox" data-ck="p8"><span>ウェイトリストへ「◯月◯日リリース」予告メール＋Xカウントダウン</span></label>
+    <label><input type="checkbox" data-ck="p9"><span>審査提出（リジェクト猶予3〜5日）→承認後「開発者による公開」で日付を固定</span></label>
+  </div>
+
+  <h3 class="h serif">審査対策 — 落ちる理由は毎回同じ</h3>
+  <div class="tscroll"><table>
+    <tr><th>iOS</th><th>内容</th><th>対策</th></tr>
+    <tr><td><b class="num">2.1 完成度</b></td><td>クラッシュ・仮文言・リンク切れ</td><td>審査用デモ情報（動作手順メモ）を添える</td></tr>
+    <tr><td><b class="num">3.1 課金</b></td><td>法定表記の欠落が<b>最多</b></td><td>サブスク画面に価格・期間・自動更新・解約方法・復元ボタン・規約リンクを明記。外部決済への誘導はNG</td></tr>
+    <tr><td><b class="num">4.3 スパム</b></td><td>テンプレ量産と見なされる</td><td>既存アプリの軽微な差し替えは危険。独自性を示す</td></tr>
+    <tr><td><b class="num">5.1 プライバシー</b></td><td>権限の目的文が曖昧</td><td>「アプリの機能向上のため」は落ちる。具体的に書き、App Privacy申告と実装を一致させる</td></tr>
+    <tr><td><b class="num">2.3 メタデータ</b></td><td>スクショ・タイトル違反</td><td>他社商標・実機外UI・キーワード詰め込みタイトルはNG</td></tr>
+  </table></div>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">Androidの勘所：</b>データセーフティ申告と実際の収集の不一致が主要な違反事由（SDKが勝手に集める広告IDも申告対象）。機微権限（位置・UsageStats・アクセシビリティ）は宣言と用途動画の提出が要る場合がある。ポリシーは頻繁に変わるのでリリース前週に最新版を確認。</p>
+    <p style="margin-top:6px"><b style="color:var(--ink)">鉄則——前例確認：</b>機微なAPI（スクリーンタイム・ヘルス・常駐通知等)を使う機能は、<b style="color:var(--ink)">「そのAPIで審査に通った同種アプリ」を実装前にストアで確認</b>する。前例ゼロの領域は技術的に可能でも審査で死ぬ。</p>
+    <p style="margin-top:6px"><b style="color:var(--ink)">リジェクトされたら：</b>①感情より読解——引用されたガイドライン番号の原文を読む ②再現手順の動画＋修正内容を添えて返信（審査員は次回別人前提で誤解の余地を潰す）③解釈に自信があればResolution Centerで反論（通ることは珍しくない）④3回落ちたら仕様側を変える。審査と戦う時間は開発に使う。</p>
+  </div>
+
+  <h3 class="h serif">ASO実務 — 検索がDLの65%を運んでくる</h3>
+  <div class="tscroll"><table>
+    <tr><th>要素</th><th>枠</th><th>書き方</th></tr>
+    <tr><td>タイトル</td><td>30字</td><td>「アプリ名＋主要キーワード」。検索順位への影響が最大。サジェスト（ストア検索窓の補完）を必ず調査</td></tr>
+    <tr><td>サブタイトル（iOS）</td><td>30字</td><td>第2キーワード群＋ベネフィット</td></tr>
+    <tr><td>キーワード欄（iOS）</td><td>100字</td><td>カンマ区切り。タイトルと重複させない。Playは説明文全体がインデックス対象</td></tr>
+    <tr><td>スクショ</td><td>1〜3枚目</td><td>検索結果に表示されるのは最初の1〜3枚——ここで価値を伝え切る。キャプション文字もインデックス対象になった。A/Bテスト中央値+11.8%、上位アプリは年2〜4回更新</td></tr>
+    <tr><td>評価</td><td>4.5目標</td><td>4.5以上は4.0未満の1.7倍インストール。3.5未満で可視性が大幅低下。好体験の直後にだけ依頼を出す</td></tr>
+  </table></div>
+  <div class="callout ai"><b>ASOの正しい期待値：</b>ASO単独でDLが伸びるのはニッチキーワードに需要があるカテゴリだけ。本質は<b>「SNS等で発生した需要を取りこぼさない装置」</b>。検索Top3は8〜15位の約4.6倍のDL——順位を上げる価値は大きいが、順位の燃料は外から運んでくる。</div>
+
+  <h3 class="h serif">リリース当日 — 貯めた期待を1日に集中させる</h3>
+  <div class="mcard">
+    <div class="lane"><ul>
+      <li><b>火〜木の週央に公開</b>（海外向けなら米国時間の朝）</li>
+      <li>① ウェイトリストへリリースメール（<b>最優先</b>。健全ライン：メール→行動15〜25%）</li>
+      <li>② X固定ポスト差し替え＋リリース投稿（デモ動画付き）</li>
+      <li>③ Zenn/Qiitaリリース記事公開＋noteストーリー記事</li>
+      <li>④ 掲載サイトに全部出す：個人dev・Crieit・予約トップ10など<small>単体の流入は小さいが無料・工数小なので「全部に出す」が正解</small></li>
+      <li>⑤ 海外向けならReddit（貢献実績のあるsubに控えめに1本）等へ。Product Huntは海外Webツールのみ有効、日本向けスマホアプリなら不要</li>
+      <li><b>最初の2時間はコメント・質問への即応に全振り</b>。初日のエンゲージが拡散を決める</li>
+      <li>リリース後1週間は毎日1本「使われ方・数字・改善」を投稿。2週間後に「リリースして学んだこと」記事——<b>報告→経過報告は2度おいしい</b></li>
+    </ul></div>
+  </div>
+  <div class="callout karashi"><b>千三つの法則：</b>広告の経験則では1,000人が見て3人が動く（0.3%）。100ユーザー獲得には約33,000インプレッションが必要——<b>1回の告知では絶対に足りない。複数チャネル×複数回が前提</b>。「告知が恥ずかしい」は最初の壁だが、実例ではユーザー増はほぼ告知タイミングと一致する。</div>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">実例（国内個人開発）：</b>RPG「魔女の育成」はリリース2週間前からiOS予約注文＋Play事前登録＋無料掲載サイト＋少額広告を実施。事前登録269人→初週3,377DL・Play新着3位。著者の総括は「素材が揃っていれば準備は半日〜1日。次回は1〜2ヶ月前から始める」。</p>
+  </div>
+
+  <h3 class="h serif">海外向けの場合 — ソフトローンチを挟む</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">対象国</span><span class="v">英語圏の小市場1〜3ヶ国（フィリピン＋北欧、オランダ、NZ等。加・豪は広告費高騰で回避）</span></div>
+    <div class="rowline"><span class="k">期間・規模</span><span class="v">4〜8週間・実ユーザー1,000人規模（広告数万円〜 or コミュニティ投稿）</span></div>
+    <div class="rowline"><span class="k">見る数字</span><span class="v">D1約30%・D7約15%＋トライアル開始率＋クラッシュ率</span></div>
+    <div class="rowline"><span class="k">改善の順序</span><span class="v">①リテンション→②収益化。戻らない人は課金しない</span></div>
+    <div class="rowline"><span class="k">並行作業</span><span class="v">ASOのA/B開始・TikTok英語投稿の型探し・レビュー全返信</span></div>
+  </div>
+  <p class="note-src">ソフトローンチを経たアプリはリテンション+40%・収益化+25%の改善につながるという調査（Airbridge）。良いランキングが取れたらスクショ保存——後のフィーチャー自薦の証拠になる。</p>
+
+  <h3 class="h serif">初速の読み方 — DL×リテンションの四象限</h3>
+  <p style="font-size:13px;color:var(--ink-soft)">リリース2〜4週後、「DLの量」と「D7リテンション（目安15%）」で現在地を判定する。<b>打ち手はDLではなくD7で決まる。</b></p>
+  <div class="quad">
+    <div class="qcell"><span class="qtag" style="background:var(--matcha)">DL多 × D7高</span><h5 class="serif">勝ち筋。攻める</h5><p>ASO強化・発信増・広告テストで流入を最大化。値上げ実験もここで。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--ai)">DL少 × D7高</span><h5 class="serif">製品は良い。流通の問題</h5><p>刺さる人には刺さっている。ASO見直し・発信チャネル追加・キーワード再発掘。焦って機能を足さない。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--karashi)">DL多 × D7低</span><h5 class="serif">興味は引けた。中身の問題</h5><p>宣伝を止めて製品改善に集中。オンボ・初回体験・コア価値の到達速度を直す。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--shu)">DL少 × D7低</span><h5 class="serif">検証に戻る</h5><p>課題設定そのものを疑う。ユーザー5人に話を聞き、ピボットか撤退かを1ヶ月で決める。</p></div>
+  </div>
+  <div class="refs">詳細：<a href="0702/海外展開_マネタイズ.html">戦略・行程編</a>（launch手順・ソフトローンチ）／<a href="0702/アプリ開発の書.html">アプリ開発の書</a>（審査対策）</div>
+</section>
+
+<!-- ================================================== 運用 -->
+<section class="page" id="page-ops">
+  <span class="slabel serif">運用</span>
+  <h2 class="serif">工程三　運用 — 実験が収益を作る</h2>
+  <p class="lead">リリースは終わりではなく計測の始まり。ここからの6ヶ月で実験を月1本回す。<b>実験を回すアプリは回さないアプリの40倍稼ぎ、ペイウォール構成だけでLTVに最大636%の差がつく。</b>リリース時の設定のまま放置するのが一番もったいない。</p>
+
+  <h3 class="h serif">月次実験プロトコル — 4週で1本</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">第1週：仮説と開始</span><span class="v">仮説を1行で書く（例「年額を既定にすればLTVが上がる」）。変えるのは1変数だけ。RevenueCat/AdaptyのA/Bなら審査なしで差し替え可</span></div>
+    <div class="rowline"><span class="k">第2〜3週：計測</span><span class="v">触らない。片群100転換前後を目安に判定。少数で早断ちしない</span></div>
+    <div class="rowline"><span class="k">第4週：判定と記録</span><span class="v">採用/棄却→スコアカードに記録→月次の数字をSNSで公開→翌月の実験を決める</span></div>
+  </div>
+  <div class="callout shu"><b>やってはいけない実験：</b>同時に2変数を変える／1週間で判定する／転換率だけ見てLTVを見ない／勝ち筋のないテスト（ボタンの色など）から始める。<b>負けた実験も「消した選択肢」として資産</b>——記録しなければただの損。</div>
+
+  <h3 class="h serif">実験の優先順位 — 効く順に並んでいる</h3>
+  <div class="tscroll"><table>
+    <tr><th>順</th><th>実験対象</th><th>効き目</th><th>中身</th></tr>
+    <tr><td><b class="num">一</b></td><td>ペイウォールの配置とゲート</td><td><b class="num">最大</b></td><td>オンボ末尾に出しているか・ハード/ソフトの別。LTV差636%の主因</td></tr>
+    <tr><td><b class="num">二</b></td><td>プラン構成</td><td>大</td><td>年額既定・買い切り併設・プラン数を3→2に減らす等</td></tr>
+    <tr><td><b class="num">三</b></td><td>トライアル日数</td><td>中</td><td>7 vs 14 vs 30。長い方が優勢だがカテゴリ差が大きい</td></tr>
+    <tr><td><b class="num">四</b></td><td>価格</td><td>中</td><td><b>±30〜50%の大胆な幅で</b>（±10%は誤差に沈む）。判定は転換率でなくLTV（改善確率45.5%）</td></tr>
+    <tr><td><b class="num">五</b></td><td>見出し・CTA・画像</td><td>小</td><td>効くが上位ほどではない。上4つを回してから</td></tr>
+  </table></div>
+
+  <h3 class="h serif">ペイウォールの置き場所 — 四点セット</h3>
+  <div class="quad">
+    <div class="qcell"><span class="qtag" style="background:var(--matcha)">オンボ末尾</span><h5 class="serif">主戦場</h5><p>全トライアル開始の約半分がここで発生。最優先で磨く。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--ai)">文脈トリガー</span><h5 class="serif">欲しい瞬間に出す</h5><p>無料上限に触れた瞬間・ロック機能タップ時。「上限に達しました→無制限にする」。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--karashi)">常設ボタン</span><h5 class="serif">+10〜20%増収</h5><p>設定やヘッダーに「Pro」導線を常設（Avast公開値）。</p></div>
+    <div class="qcell"><span class="qtag" style="background:var(--ume)">キャンペーン</span><h5 class="serif">軽く添える</h5><p>達成時・節目に提示。Mojoはこれだけで新規iOS収益の15%。</p></div>
+  </div>
+
+  <h3 class="h serif">トライアル体験の構造化 — 放置しない7日間</h3>
+  <div class="mcard">
+    <p>長めのトライアルは転換率が約1.7倍だが、その分「体験の設計」が必須。<b style="color:var(--ink)">初日にコア価値→3日目に習慣化のフック→7日目に成果の可視化</b>、という通知とチェックリストを組む。構造化されたトライアル体験は初回更新率を最大60%押し上げる。</p>
+  </div>
+
+  <h3 class="h serif">解約と向き合う — チャーン対策</h3>
+  <div class="mcard">
+    <div class="lane"><ul>
+      <li><b>解約時1問アンケート</b>を必ず出す。理由は実験ネタ帳へ直行——次の実験の種はここから出る</li>
+      <li><b>短いトライアルの解約の55%は初日に起きる</b>——チャーン対策の最大レバーは初回体験の設計</li>
+      <li>ペイウォールを閉じた人への<b>時限オファー</b>が唯一の割引の使いどころ</li>
+      <li>根本原則：毎週使う理由があるアプリだけがサブスクの土俵に立てる。使われない月があるなら買い切りで売る</li>
+    </ul></div>
+  </div>
+
+  <h3 class="h serif">KPIツリー — 何をどの順で見るか</h3>
+  <pre class="tree">北極星
+├─ 初期：週あたり新規トライアル開始数
+└─ 成長期：MRR（月次経常収益）
+
+入口      ストア転換率（表示→DL）
+          オンボ完了率（70%前後が目安）
+課金前    ペイウォール表示率（新規の何%が見たか）
+          トライアル開始率
+課金      トライアル→有料転換率
+          国別の7日以内キャンセル率（価格不適合の早期警報）
+継続      D1・D7・D30
+          解約時1問アンケート → 実験ネタ帳へ</pre>
+  <div class="callout karashi"><b>週次で見るのは「北極星＋ファネル4つ」だけ</b>（オンボ完了→ペイウォール表示→トライアル→有料）。それ以外は月次で十分。数字を見る時間より、数字を動かす実験に時間を使う。数字を見る上限は月2時間。</div>
+
+  <h3 class="h serif">週10時間モデル — 副業ペースの時間割</h3>
+  <div class="tscroll"><table>
+    <tr><th>枠</th><th>時間</th><th>中身</th></tr>
+    <tr><td>開発・改善</td><td><b class="num">5h</b></td><td>今月の実験＋不具合修正＋小さな磨き込み1つ</td></tr>
+    <tr><td>SNS</td><td><b class="num">2.5h</b></td><td>まとめ撮り＋投稿＋コメント返信（SNS並走タブの週間ルーティン）</td></tr>
+    <tr><td>ASO・実験</td><td><b class="num">1h</b></td><td>順位・転換率チェック、A/Bの判定と次の仕込み</td></tr>
+    <tr><td>サポート</td><td><b class="num">1h</b></td><td>レビュー返信・問い合わせ。不満は実験ネタ帳へ転記</td></tr>
+    <tr><td>数字と計画</td><td><b class="num">0.5h</b></td><td>KPIを眺め、来週の「一番大事な1つ」を決める</td></tr>
+  </table></div>
+
+  <h3 class="h serif">多言語展開 — 投資は三段階の順で</h3>
+  <div class="mcard">
+    <div class="rowline"><span class="k">壱：ストアのメタデータだけ現地語化</span><span class="v">最小コスト×最大効果。タイトル＋説明の現地語化だけでDL+767%の古典調査</span></div>
+    <div class="rowline"><span class="k">弐：スクリーンショット</span><span class="v">転換率を最も左右する要素。UI未翻訳の言語では英語UIが目立たない構図で作る</span></div>
+    <div class="rowline"><span class="k">参：アプリUI本体</span><span class="v">需要とリテンションが確認できた言語だけ</span></div>
+  </div>
+  <details class="dt"><summary>言語ティアとキーワード発掘の詳細</summary><div class="din">
+    <p><b>T0（初日・UIまで）：</b>英語＋日本語。英語＝世界の入口（北米LTVは世界平均の約2倍）、日本＝世界最高水準のARPU。<br>
+    <b>T1（本番後1〜3ヶ月・ストアページのみ）：</b>スペイン語（米州＋欧州を一挙カバー）・ドイツ語（サブスク転換が強く母語選好も強い）・フランス語。欧州は前年比+18%で世界最高値圏——強気の価格が通る。<br>
+    <b>T2（需要を見て）：</b>ポルトガル語(BR)・韓国語・イタリア語。<b>T3（余力で）：</b>繁体字中国語・インド系言語。<b>保留：</b>簡体字中国語（中国本土は別戦略が必要）。</p>
+    <p><b>キーワードは翻訳せず発掘する。</b>英語の直訳は現地の検索行動とズレる——競合の現地ストアページ観察・ASOツールの現地調査・ネイティブへのヒアリングで「実際に何と検索されているか」を拾う。メキシコ西語とスペイン西語でも検索語は違う。</p>
+    <p>翻訳はAI下訳→ネイティブ校正の二段構え（1言語数千〜数万円）。機械翻訳そのままは品質がランキングと信頼を落とす。消費者の76%は母語のアプリを好み、40%は母語でないものを避ける。価格も言語と同時にローカライズする。</p>
+  </div></details>
+
+  <h3 class="h serif">リリース6ヶ月後の判断 — 3つの出口</h3>
+  <div class="tscroll"><table>
+    <tr><th>出口</th><th>条件（目安）</th><th>やること</th></tr>
+    <tr><td><b class="num">集中投資</b></td><td>月10万円超、またはD7 20%超で成長中</td><td>時間の70%を投下。多言語T1、短尺動画、機能拡張</td></tr>
+    <tr><td><b class="num">省力運転</b></td><td>月1〜5万円で横ばい。D7は健全</td><td>月1実験＋レビュー対応のみ（月2〜3時間）。資産として保持し、次の開発へ</td></tr>
+    <tr><td><b class="num">撤退</b></td><td>月数千円以下・D7 8%未満が改善せず・実験のタネが尽きた</td><td>更新停止を告知しメンテモード or 取り下げ。学びを1枚に書いて次へ</td></tr>
+  </table></div>
+  <div class="callout shu"><b>撤退の作法：</b>6ヶ月・実験6本を回しきる前に畳まない（初速だけで殺さない）。ただし6ヶ月経ったら感情でなく表の条件で決める。畳んだアプリは失敗ではなく授業料の領収書——<b>「何が効いて何が効かなかったか」の1枚が、次のアプリの検証精度を上げる。</b></div>
+  <div class="refs">詳細：<a href="0702/マネタイズの書.html">マネタイズの書</a>（実験プロトコル・KPIツリー・価格）／<a href="0702/海外展開_マネタイズ.html">戦略・行程編</a>（多言語ティア・週次運用）</div>
+</section>
+
+<!-- ================================================== SNS並走 -->
+<section class="page" id="page-sns">
+  <span class="slabel serif">発信</span>
+  <h2 class="serif">SNS並走 — 全工程を貫く1本の帯</h2>
+  <p class="lead">SNSは工程の1つではなく、検証から運用まで<b>全工程と並走する帯</b>。役割は工程ごとに変わる：検証期は「聞く道具」、開発期は「記録する道具」、リリース期は「集める道具」、運用期は「配る道具」。アカウントはアプリごとに作り直さない——<b>読者は全アプリ共通の資産</b>。</p>
+
+  <h3 class="h serif">工程ごとのSNSの仕事</h3>
+  <div class="tscroll"><table>
+    <tr><th>工程</th><th>役割</th><th>具体的にやること</th></tr>
+    <tr><td><b class="num">〇 検証</b></td><td>聞く</td><td>課題ポスト・モック公開・アンケート。具体リプをくれた人をインタビューへ。ウェイトリスト開設</td></tr>
+    <tr><td><b class="num">一 開発</b></td><td>記録する</td><td>毎日1ポストの開発ログ（スクショ＋淡々と事実）。コミット1つ＝ネタ1つ。テスター募集</td></tr>
+    <tr><td><b class="num">二 リリース</b></td><td>集める</td><td>事前登録の告知、デモ動画、リリース同日の多チャネル投下、2週間後に数字公開</td></tr>
+    <tr><td><b class="num">三 運用</b></td><td>配る</td><td>月次で数字と学びを公開。短尺動画でDL獲得。レビュー・要望への公開返信</td></tr>
+    <tr><td><b class="num">四 判断〜次へ</b></td><td>持ち越す</td><td>次アプリの検証を同じ読者に投げる。前作の実績が次作の信用になる</td></tr>
+  </table></div>
+
+  <h3 class="h serif">Xアルゴリズムの構造 — 何が効いて何が沈むか</h3>
+  <div class="tscroll"><table>
+    <tr><th>アクション</th><th>重み（いいね比）</th><th>含意</th></tr>
+    <tr><td>いいね</td><td>1倍</td><td>最弱のポジティブシグナル</td></tr>
+    <tr><td>リポスト</td><td>2倍</td><td>—</td></tr>
+    <tr><td>投稿に2分以上滞在</td><td>20倍</td><td>スレッド・長文が有利</td></tr>
+    <tr><td>ブックマーク</td><td>20倍</td><td>「保存したくなる実用情報」が強い</td></tr>
+    <tr><td>プロフィールクリック→反応</td><td>24倍</td><td>フォロー転換の入口</td></tr>
+    <tr><td>リプライ獲得</td><td>27倍</td><td>会話が起きる投稿を設計する</td></tr>
+    <tr><td><b class="num">著者がリプに返信（会話往復）</b></td><td><b class="num">150倍</b></td><td>最強シグナル。リプ返しはご褒美タイムではなく配信ブースト</td></tr>
+    <tr><td>通報・ミュート・ブロック</td><td>−148〜−738倍</td><td>釣り・対立煽りは中長期で自滅</td></tr>
+  </table></div>
+  <div class="mcard">
+    <div class="lane"><ul>
+      <li><b>投稿直後30〜60分がテスト配信。</b>まずフォロワーの一部に出て、初動の速度で拡散範囲が決まる。自分のアクティブな時間に投稿し、<b>投稿後15〜30分はリプに即返信</b>（150倍を自分で起こす）</li>
+      <li><b>外部リンク付き投稿は沈む</b>（無料アカのエンゲージ中央値ほぼ0% vs テキストのみ0.40%）。本文で語り、リンクはリプ欄・固定ポスト・プロフィールへ</li>
+      <li><b>ハッシュタグは1〜2個まで</b>（3個以上でペナルティ）。初期は #個人開発 を「同族に見つけてもらう」目的で1個。1,000人を超えたら外す</li>
+      <li><b>ゴールデンタイムは平日夜20〜22時</b>（エンジニア層のコアタイム）。朝7〜9時・昼12〜13時も有効</li>
+      <li><b>X Premium（約980円/月）は入る価値がある：</b>リンクペナルティの大幅緩和・リプライ優先表示・実測でリーチ中央値に約10倍差。マーケ費用として最安クラス。Premium+は不要</li>
+    </ul></div>
+  </div>
+
+  <h3 class="h serif">投稿の型6選 — 開発ログをコンテンツに変える</h3>
+  <div class="tscroll"><table>
+    <tr><th>型</th><th>中身</th><th>頻度</th></tr>
+    <tr><td><b class="num">壱 進捗スクショ</b></td><td>Before/Afterの2枚 or 動くUIのGIF。「今日ここまで」で十分</td><td>毎日</td></tr>
+    <tr><td><b class="num">弐 数字公開</b></td><td>DL数・収益・完了率。build in publicの中核で最も拡散される</td><td>月次</td></tr>
+    <tr><td><b class="num">参 失敗談</b></td><td>リジェクト・バグ・迷いを正直に。共感と保存が伸びる最強型のひとつ</td><td>月1〜2本</td></tr>
+    <tr><td><b class="num">四 選択を委ねる</b></td><td>「アイコンAとB、どっち？」。エンゲージと当事者意識を同時に作る</td><td>検証期・迷った時</td></tr>
+    <tr><td><b class="num">伍 知見の放出</b></td><td>調べたこと（ASO・審査・相場）を惜しみなく。フォローする理由になる</td><td>週2〜3本</td></tr>
+    <tr><td><b class="num">六 リリースノート物語</b></td><td>「◯◯という声に応えて直しました」——ユーザーとの往復を見せる</td><td>更新時</td></tr>
+  </table></div>
+  <details class="dt"><summary>そのまま使える投稿テンプレート4本</summary><div class="din">
+    <pre class="tmpl"><span class="tl">進捗型（毎日）</span>開発◯日目：◯◯を実装した。
+ハマったのは△△（理由）。
+明日は□□をやる。
+［スクショ/GIF添付］</pre>
+    <pre class="tmpl"><span class="tl">学び型（週2〜3）</span>◯◯で3時間溶かした。
+原因は△△。
+同じ罠にハマる人のために共有：
+1. …
+2. …
+3. …</pre>
+    <pre class="tmpl"><span class="tl">数字型（月次）</span>個人開発◯日目の数字：
+・フォロワー：◯人（+◯）
+・ウェイトリスト：◯人
+・やったこと3つ→（スレッドで続ける）</pre>
+    <pre class="tmpl"><span class="tl">失敗談型（月1〜2）</span>正直に言うと、◯◯は失敗だった。
+3ヶ月かけた△△、結果は□□。
+原因を分析すると…（続きで学びを共有）</pre>
+    <p>比率の目安：有益7：共感・人間味3。宣伝は全体の1〜2割まで。</p>
+  </div></details>
+  <div class="callout ume"><b>70/30ルール：</b>フォロワー1,000人までは時間の70%を「他者へのリプライ」に使う。対象は自分の5〜20倍規模の個人開発・技術系アカウント10〜20個をリスト化し、<b>相手の投稿後30分以内</b>に実体験・補足・具体的な質問で返す。「すごいです！」だけの一言リプは品質スコアで沈み逆効果。自分の投稿400インプに対し、伸びている投稿への気の利いたリプ1本で12,000インプという実測例がある。</div>
+
+  <h3 class="h serif">短尺動画 — 作るのは1本、置き場は3つ</h3>
+  <div class="tscroll"><table>
+    <tr><th>秒</th><th>役割</th><th>コツ</th></tr>
+    <tr><td><b class="num">0〜2秒</b></td><td>フック＝結果か問題を先に見せる</td><td>「この洗濯表示、読める？」。ここで視聴の8割が決まる</td></tr>
+    <tr><td>2〜6秒</td><td>状況説明は最小限</td><td>画面はもう動いている</td></tr>
+    <tr><td>6〜25秒</td><td>価値の実演</td><td>テロップは現地語・大きく・3語前後で刻む。再生速度1.5〜2倍がデモの体感適正</td></tr>
+    <tr><td>末尾</td><td>オチ or 物語内CTA</td><td>「Download now」でなく「これ、自分のアプリで30秒で作った」。ループ構成が最強</td></tr>
+  </table></div>
+  <details class="dt"><summary>製造ワークフローと90日計画</summary><div class="din">
+    <p><b>1本20分の工程：</b>①実機で画面収録（縦9:16・素材は長めに回す）②CapCutでカット→テロップ→商用可のトレンド音源 ③TikTokに原本投稿→<b>透かしなし版をShorts・Reelsへ転用</b>（透かし付き転載はReelsで抑制）④キャプションに検索語（英語の用途語）・タグ3〜5個 ⑤当たった動画はテロップ差し替えで多言語版を量産。</p>
+    <p><b>週の回し方：</b>火曜に60〜90分で2〜3本まとめ撮り。毎日撮ろうとしない。ネタは「型×機能×季節」の掛け算表から。水木に1本ずつ投稿＋コメント全返信。</p>
+    <p><b>90日計画：</b>1〜30日=型を10〜15本試す（数字は見すぎない）→31〜60日=保存数・完了率上位の型に集中、同じ型を角度替えで反復 →61〜90日=当たり型の多言語展開＋Spark Adsで「勝った投稿だけ」少額ブースト（負けた動画のブーストは金の無駄）。</p>
+    <p><b>週1回・5分だけ数字を見る：</b>保存数と視聴完了率（いいねより配信に効く）→プロフィール遷移→ストアリンククリック→DL。</p>
+  </div></details>
+
+  <h3 class="h serif">媒体の広げ方 — 順番を間違えない</h3>
+  <ul class="cycle">
+    <li>
+      <div class="rail"><div class="dot serif">1</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">まずXを型で固める<small>常時</small></div>
+        <p class="cdesc">毎日1ポスト＋他者へ3リプ。数字は隠さず公開。新媒体はまだ増やさない。週に出せる時間が1.5時間未満なら「X＋月1記事」の省力運転で正解。</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">2</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">アプリの画面ができたら短尺動画を追加<small>開発後半〜</small></div>
+        <p class="cdesc">TikTokはフォロワー0でも数百万に届き得る唯一の媒体。同じ動画をShorts・Reelsへ転用で配信面3倍・ROI3〜4倍。週3〜5本。</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">3</div><div class="bar"></div></div>
+      <div class="cbody">
+        <div class="ctitle serif">60〜90日後、数字で主戦場を決める<small>リリース前後</small></div>
+        <p class="cdesc">瞬発のTikTok vs 検索に載り複利で効くShorts（小規模アカで約4倍ビューの調査）。検索されやすい題材（識別・How to系）ならShorts重視へ。</p>
+      </div>
+    </li>
+    <li>
+      <div class="rail"><div class="dot serif">4</div></div>
+      <div class="cbody">
+        <div class="ctitle serif">育ってから広げる<small>運用期</small></div>
+        <p class="cdesc">Instagramはゼロ立ち上げ不利（エンゲージ0.65%）——転用先として使い、育ったら世界観アカに昇格。YouTube長尺は検索需要が見えた題材のみ。3媒体同時ゼロ立ち上げは絶対にしない。</p>
+      </div>
+    </li>
+  </ul>
+
+  <h3 class="h serif">読者を巻き込む仕掛け — UGC・提携・コミュニティ</h3>
+  <div class="mcard">
+    <div class="lane"><ul>
+      <li><b>共有したくなる瞬間をアプリ内に設計する</b>（月末の成長絵・記録カード・Before/After画像の書き出し）。ハッシュタグを1つ決めて固定ポストとアプリ内に明記。ユーザーの投稿は全部拾って反応し、許可を得て紹介——紹介されると分かれば投稿は増える</li>
+      <li><b>マイクロクリエイター提携：</b>フォロワー1万〜10万の現地クリエイターは大物比3〜5倍のエンゲージ効率。反応が良かった国のクリエイター5人に「無料のプレミアムコード＋紹介は任意」のDM。金銭契約は成果が見えてから</li>
+      <li><b>Discord等の開設は「質問・要望が週10件を超えたら」。</b>早すぎる開設は過疎が信頼を削る。それまではXのリプ欄とレビュー返信がコミュニティで、月次の数字公開が定例会代わり</li>
+    </ul></div>
+  </div>
+
+  <h3 class="h serif">SNSのKPIと、やってはいけないこと</h3>
+  <div class="dgrid">
+    <div class="dcard"><b>0.04</b><span>フォロワー数と売上の相関（ほぼ無関係）</span></div>
+    <div class="dcard"><b>100人</b><span>追うのはウェイトリスト登録（見込み客）</span></div>
+    <div class="dcard"><b>ER 2%</b><span>投稿の合格ライン（5%超で勝ちパターン）</span></div>
+  </div>
+  <div class="mcard">
+    <p><b style="color:var(--ink)">やってはいけない：</b>広告っぽい完成品PR動画／3媒体同時ゼロ立ち上げ／毎日の数字確認（週1回に限定）／フォロワー購入／バズった直後の路線変更（同じ型を続けるのが正解）／launch後の燃え尽き放置。</p>
+  </div>
+  <div class="callout ume"><b>最初の90日は種まき期。</b>反応ゼロは異常ではなく仕様。大半のアカウントは2ヶ月で更新が止まる——だから<b>続いていること自体が参入障壁</b>。90日間は行動KPI（投稿数・継続率）だけで自己評価し、フォロワー目標は4ヶ月目から。SNSは1日45分でタイマーを切り、開発:SNS＝2:1以上を死守する。</div>
+  <div class="refs">詳細：<a href="0702/SNS運用の書.html">SNS運用の書</a>（媒体比較・短尺動画）／<a href="sns_marketing/site/index.html">SNS戦略ガイド</a>（プレイブック・テンプレ全集・参考アカウント）</div>
+</section>
+
+<!-- ================================================== 考え方 -->
+<section class="page" id="page-mind">
+  <span class="slabel serif">考え方</span>
+  <h2 class="serif">進め方の原則と、よくある死に方</h2>
+  <p class="lead">工程は型で回せるが、判断は考え方で決まる。「大原則」「典型的な失敗」「迷ったときの判断表」、そして「周回ごとに変わること」の4つを持つ。</p>
+
+  <h3 class="h serif">五つの大原則</h3>
+  <div class="pcard"><div class="pnum">一</div><div class="pbody"><b>出すことが最大の学習である</b><p>調査10時間より、リリース1回。ストアの現実（検索・審査・レビュー・課金）はリリースした者にしか見えない。サブスク収益の69%は古参アプリ——出した日から「運用年数」という資産が貯まり始める。</p></div></div>
+  <div class="pcard"><div class="pnum">二</div><div class="pbody"><b>感情ではなく、事前に決めた数字で判断する</b><p>GO/NO-GO基準・関所・撤退条件は着手前に書く。作った後のプロダクトは我が子に見えて、判断は必ず甘くなる。実験シートも同じ——合格ラインを先に書くから、事後の都合いい解釈ができなくなる。</p></div></div>
+  <div class="pcard"><div class="pnum">三</div><div class="pbody"><b>収益は「当てる」ものではなく「実験で作る」もの</b><p>月収中央値$72・上位10%が収益の94.5%という分布の世界で、再現性があるのは実験（40倍差）・複数本・ストア外流通の3レバーだけ。宝くじではなく複利を買う。</p></div></div>
+  <div class="pcard"><div class="pnum">四</div><div class="pbody"><b>ボトルネックは常に1つ。全部は直さない</b><p>ファネル（DL→D1→D7→課金→継続）のいちばん細い段だけを今月の実験対象にする。D7が低いのにDLを増やすのは、穴の空いたバケツに水を注ぐ行為。</p></div></div>
+  <div class="pcard"><div class="pnum">五</div><div class="pbody"><b>資産はアプリ・読者・学びの3つ。全部持ち越す</b><p>アプリはMRRを、SNSの読者は次のローンチの初速を、学びの1枚は次の検証の精度を持ち越す。1本ごとにゼロから始めない設計が「個人開発で生活する」の正体。</p></div></div>
+
+  <h3 class="h serif">よくある死に方と処方箋</h3>
+  <div class="pcard bad"><div class="pnum">壱</div><div class="pbody"><b>検証せずに作り始める</b><p>数ヶ月後に「誰も欲しがらない」と判明する最大の死因。<b>処方箋：</b>他人の課題を解くアプリは前金3件が出るまでコードを書かない。</p></div></div>
+  <div class="pcard bad"><div class="pnum">弐</div><div class="pbody"><b>Xのいいねを需要だと思う</b><p>フォロワーは同業者。「オーディエンスは拍手する。市場は払う。両者はほぼ同じ部屋にいない」。<b>処方箋：</b>需要の量はLP＋広告1〜2万円で測る。ダッシュボードは2つ。</p></div></div>
+  <div class="pcard bad"><div class="pnum">参</div><div class="pbody"><b>課金を「完成してから」付ける</b><p>トライアルの82%は初日に始まるのに、その導線がない。後付けは構造ごと作り直しになる。<b>処方箋：</b>課金SDK・オンボ・ペイウォールは第1週の土台に含める。</p></div></div>
+  <div class="pcard bad"><div class="pnum">四</div><div class="pbody"><b>完璧主義でリリースが延びる</b><p>「あと1機能」を繰り返して季節が変わる。<b>処方箋：</b>判断基準は「それがないとリリースできないか？」のみ。Noならv1.1リストへ。</p></div></div>
+  <div class="pcard bad"><div class="pnum">五</div><div class="pbody"><b>リリース後に放置する</b><p>初期設定のまま置かれたアプリは、実験するアプリに40倍差をつけられる。<b>処方箋：</b>月1実験を予定表に固定。月初1時間・月末1時間。</p></div></div>
+  <div class="pcard bad"><div class="pnum">六</div><div class="pbody"><b>初速が悪くて即座に諦める</b><p>初週のDLは体温であって死亡宣告ではない。<b>処方箋：</b>D7で判断する（四象限）。撤退判定は6ヶ月・実験6本の後。</p></div></div>
+  <div class="pcard bad"><div class="pnum">七</div><div class="pbody"><b>SNSが開発を食う</b><p>発信が楽しくなり、プロダクトが進まない逆転現象。<b>処方箋：</b>SNSは1日45分でタイマーを切る。開発:SNS=2:1を割った週は発信を減らす（逆ではない）。</p></div></div>
+  <div class="pcard bad"><div class="pnum">八</div><div class="pbody"><b>毎日投稿を宣言して燃え尽きる</b><p>「毎日を1ヶ月」より「週2を半年」。<b>処方箋：</b>頻度は最低ラインで宣言し、日曜のバッチ作成＋予約投稿で平日を軽くする。休む日も設計に入れる——継続は休みの設計から。</p></div></div>
+  <div class="pcard bad"><div class="pnum">九</div><div class="pbody"><b>告知が恥ずかしくて一度しかしない</b><p>千三つ——1,000人が見て3人が動く。100ユーザーには約33,000インプが要る。<b>処方箋：</b>複数チャネル×複数回を「しつこい」ではなく「まだ届いていない」と捉え直す。実例ではユーザー増はほぼ告知タイミングと一致する。</p></div></div>
+  <div class="pcard bad"><div class="pnum">十</div><div class="pbody"><b>審査・規約と戦って時間を溶かす</b><p>前例ゼロのAPIで粘る、リジェクトに感情で反論する。<b>処方箋：</b>実装前に「そのAPIで通った前例」を確認。3回落ちたら仕様側を変える。審査と戦う時間は開発に使う。</p></div></div>
+
+  <h3 class="h serif">周回ごとに変わること — 1周目・2周目・3周目</h3>
+  <div class="mcard">
+    <div class="tagrow" style="display:flex;gap:6px;margin-bottom:8px"><span style="font-size:10.5px;letter-spacing:.08em;border-radius:4px;padding:2px 8px;background:var(--ai);color:#fff;font-weight:600">1周目</span></div>
+    <h4 class="serif">目的は「出し切ること」と「計測を覚えること」</h4>
+    <p>検証は緩めでいい。完走が最優先——審査・課金・ASO・レビューという「ストアの現実」を一度全部体験する。収益目標は控えめに（初週300DL・月1万円）。ここで作った読者と計測の習慣が2周目の元手になる。</p>
+  </div>
+  <div class="mcard">
+    <div class="tagrow" style="display:flex;gap:6px;margin-bottom:8px"><span style="font-size:10.5px;letter-spacing:.08em;border-radius:4px;padding:2px 8px;background:var(--karashi);color:#fff;font-weight:600">2周目</span></div>
+    <h4 class="serif">検証を厳格にし、市場を広げる</h4>
+    <p>前金3件を厳守。英語ファースト・日英初日・ソフトローンチの型を全面適用する。1周目の読者に検証を投げられるので、Week 1の定性検証が今度は機能する。前作の実績（数字公開）が信用となり、ウェイトリストの集まりも速い。</p>
+  </div>
+  <div class="mcard">
+    <div class="tagrow" style="display:flex;gap:6px;margin-bottom:8px"><span style="font-size:10.5px;letter-spacing:.08em;border-radius:4px;padding:2px 8px;background:var(--matcha);color:#fff;font-weight:600">3周目〜</span></div>
+    <h4 class="serif">ポートフォリオで考える</h4>
+    <p>どのアプリに時間の70%を置くかという配分の問題になる。月10万円を超えた1本があればそこへ集中し、他は省力運転。新作は「運用が月次ルーティン化してから」。検証→開発→運用の各工程が並走し始めたら、それが「個人開発で食べる」体制の完成形。</p>
+  </div>
+
+  <h3 class="h serif">迷ったときの判断表</h3>
+  <div class="tscroll"><table>
+    <tr><th>状況</th><th>見る数字</th><th>次の行動</th></tr>
+    <tr><td>作るべきか迷う</td><td>前金・ウェイトリスト・インタビュー</td><td>GO基準未達なら作らない。検証を続けるか次の案へ</td></tr>
+    <tr><td>機能を足すか迷う</td><td>「ないとリリースできないか」</td><td>Noならv1.1リストへ書いて忘れる</td></tr>
+    <tr><td>DLが伸びない</td><td>D7リテンション</td><td>15%あるならASO・発信の問題。ないなら製品の問題</td></tr>
+    <tr><td>収益が伸びない</td><td>ファネルの各段</td><td>いちばん細い段を特定→そこだけ今月の実験に。順番はペイウォール配置→プラン→トライアル→価格</td></tr>
+    <tr><td>値付けに迷う</td><td>LTV（転換率ではない）</td><td>下げずに±30〜50%の幅で上げて試す</td></tr>
+    <tr><td>SNSがしんどい</td><td>週の投稿数（行動KPIのみ）</td><td>省力運転モードへ。火を消さないことだけ守る</td></tr>
+    <tr><td>アプリを畳むか迷う</td><td>6ヶ月経過・実験6本・D7・MRR</td><td>出口3択の表で機械的に判定。学び1枚を書いて次へ</td></tr>
+    <tr><td>次を作るか迷う</td><td>現行アプリの週次手入れ時間</td><td>2〜3時間以下にルーティン化できていれば次の検証へ</td></tr>
+  </table></div>
+
+  <div class="callout"><b>この資料の使い分け：</b>「型」はこの標準工程、「いつ・どのアプリで何をやるか」は<a href="総合ロードマップ.html" style="color:var(--ai)">総合ロードマップ</a>。新しいアプリに着手するたびに、この工程の〇から一周する。さらに深い原典は各分冊（開発の書・マネタイズの書・SNS運用の書・戦略行程編）へ。</div>
+</section>
+
+<footer>
+  標準工程（2026-07-04 作成・同日深掘り改訂）｜どのアプリにも適用する汎用の工程書。<br>
+  数値の出典：Adapty「State of In-App Subscriptions 2026」／RevenueCat「State of Subscription Apps 2026」／Superwall・Airbridge・AppTweak・Buffer・Distimo ほか各調査資料（<a href="index.html">資料館 総目次</a>参照）。すべて調査時点の推定を含む参考値。<br>
+  チェックリストはこの端末のブラウザに保存。新しいアプリで使い回すときは「<a href="#" id="resetCk">チェックをリセット</a>」。
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  var pages = document.querySelectorAll('section.page');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      pages.forEach(function(p){p.classList.remove('show')});
+      var target = document.getElementById('page-' + t.dataset.page);
+      if (target) target.classList.add('show');
+      window.scrollTo({top:0});
+    });
+  });
+
+  var KEY = 'standard-process-checks-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
+  var boxes = document.querySelectorAll('input[data-ck]');
+  boxes.forEach(function(cb){
+    var id = cb.dataset.ck;
+    if (saved[id]) { cb.checked = true; cb.closest('label').classList.add('checked'); }
+    cb.addEventListener('change', function(){
+      saved[id] = cb.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+      cb.closest('label').classList.toggle('checked', cb.checked);
+    });
+  });
+  var reset = document.getElementById('resetCk');
+  if (reset) reset.addEventListener('click', function(e){
+    e.preventDefault();
+    if (!confirm('この資料のチェックをすべてリセットしますか？')) return;
+    saved = {};
+    try { localStorage.removeItem(KEY); } catch(e2){}
+    boxes.forEach(function(cb){ cb.checked = false; cb.closest('label').classList.remove('checked'); });
+  });
+})();
+</script>
+</body>
+</html>

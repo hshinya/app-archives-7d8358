@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想の人物像 — 確定版まとめ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEDE7;
+    --panel:#F4F4EF;
+    --panel-2:#E3E5DD;
+    --ink:#182233;
+    --ink-2:#3B4658;
+    --muted:#727982;
+    --line:#CBCFC5;
+    --line-strong:#AFB4A8;
+    --accent:#A9741F;
+    --accent-deep:#7E5514;
+    --accent-wash:#EADFC5;
+    --done:#2C6E63;
+    --live:#A9741F;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New",system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.85;
+    font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .mono{font-family:"IBM Plex Mono",monospace;font-feature-settings:normal;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    max-width:1120px;margin:0 auto;padding:76px 32px 40px;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--accent-deep);margin:0 0 22px;
+  }
+  .hero h1{
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(2.2rem,5.4vw,3.5rem);line-height:1.24;
+    margin:0 0 8px;letter-spacing:.02em;
+  }
+  .hero .sub{
+    font-family:"Shippori Mincho",serif;font-weight:500;
+    color:var(--ink-2);font-size:clamp(1rem,2.2vw,1.2rem);margin:0 0 34px;
+  }
+  .phrases{
+    border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
+    padding:26px 0;margin:6px 0 30px;
+    display:flex;flex-wrap:wrap;gap:14px 34px;align-items:baseline;
+  }
+  .phrases .plabel{
+    font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--muted);width:100%;margin-bottom:4px;
+  }
+  .phrases .p{
+    font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:clamp(1.25rem,3.4vw,1.9rem);color:var(--accent-deep);
+    position:relative;
+  }
+  .phrases .p::before{content:"「";color:var(--line-strong);}
+  .phrases .p::after{content:"」";color:var(--line-strong);}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 26px;
+    font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--muted);
+  }
+  .meta b{color:var(--ink);font-weight:600;}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px 120px;
+    display:grid;grid-template-columns:210px 1fr;gap:52px;align-items:start;}
+  nav.spine{position:sticky;top:24px;}
+  nav.spine .navlabel{
+    font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+    padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+  nav.spine a{
+    display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:baseline;
+    text-decoration:none;color:var(--ink-2);padding:6px 0;
+    font-size:.86rem;line-height:1.35;border-left:2px solid transparent;
+    padding-left:10px;margin-left:-12px;transition:color .2s,border-color .2s;
+  }
+  nav.spine a .n{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted);}
+  nav.spine a:hover{color:var(--ink);}
+  nav.spine a.active{color:var(--accent-deep);border-left-color:var(--accent);}
+  nav.spine a.active .n{color:var(--accent);}
+
+  main{min-width:0;}
+
+  /* ---------- STRATUM SECTIONS ---------- */
+  section.layer{
+    padding:34px 0 30px;border-top:1px solid var(--line);
+    opacity:0;transform:translateY(14px);
+    transition:opacity .6s ease,transform .6s ease;
+  }
+  section.layer.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    section.layer{opacity:1;transform:none;transition:none;}
+  }
+  section.layer:first-of-type{border-top:none;}
+  .lhead{display:flex;align-items:baseline;gap:16px;margin-bottom:6px;flex-wrap:wrap;}
+  .lnum{
+    font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.92rem;
+    color:var(--accent);letter-spacing:.05em;
+  }
+  .lhead h2{
+    font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(1.4rem,3vw,1.85rem);margin:0;letter-spacing:.02em;
+  }
+  .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.14em;
+    text-transform:uppercase;padding:3px 9px;border-radius:20px;
+    border:1px solid currentColor;line-height:1;
+  }
+  .tag.done{color:var(--done);}
+  .tag.live{color:var(--live);background:var(--accent-wash);border-color:transparent;}
+  .lead{color:var(--ink-2);margin:12px 0 18px;max-width:64ch;}
+
+  p{margin:0 0 14px;max-width:66ch;}
+  strong{font-weight:700;color:var(--ink);}
+  .key{color:var(--accent-deep);font-weight:700;}
+
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:66ch;}
+  ul.clean li{position:relative;padding-left:20px;margin-bottom:7px;}
+  ul.clean li::before{
+    content:"";position:absolute;left:2px;top:.72em;
+    width:7px;height:1px;background:var(--accent);
+  }
+
+  /* callout */
+  .callout{
+    background:var(--panel);border-left:3px solid var(--accent);
+    padding:16px 20px;margin:16px 0;border-radius:var(--radius);
+    max-width:66ch;
+  }
+  .callout .ct{
+    font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent-deep);margin-bottom:6px;
+  }
+  .callout p{margin:0;color:var(--ink);}
+  .callout p + p{margin-top:8px;}
+
+  /* tables */
+  .twrap{overflow-x:auto;margin:16px 0 20px;
+    border:1px solid var(--line);border-radius:var(--radius);}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:480px;}
+  caption{
+    text-align:left;font-family:"IBM Plex Mono",monospace;font-size:.68rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    padding:0 0 8px;
+  }
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);
+    vertical-align:top;line-height:1.6;}
+  thead th{
+    background:var(--panel-2);color:var(--ink);font-weight:700;
+    font-size:.8rem;letter-spacing:.04em;border-bottom:1px solid var(--line-strong);
+    position:sticky;top:0;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  td.h{font-weight:700;color:var(--ink);white-space:nowrap;}
+  .mono-c{font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--accent-deep);}
+
+  /* two-column facts */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:15px 17px;}
+  .card h4{margin:0 0 6px;font-family:"Shippori Mincho",serif;font-size:1rem;font-weight:600;}
+  .card p{margin:0;font-size:.88rem;color:var(--ink-2);}
+
+  footer{max-width:1120px;margin:0 auto;padding:30px 32px 70px;
+    border-top:1px solid var(--line);color:var(--muted);
+    font-family:"IBM Plex Mono",monospace;font-size:.74rem;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (max-width:820px){
+    .wrap{grid-template-columns:1fr;gap:0;}
+    nav.spine{position:static;margin-bottom:8px;display:none;}
+    header.hero{padding-top:52px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow">理想の人物像 &nbsp;/&nbsp; Ideal Persona &nbsp;— Confirmed</p>
+  <h1>静かに積み上げる人</h1>
+  <p class="sub">過去の自分を超え続けるために、家族と趣味を全力で楽しむために、全力で積み上げる。</p>
+
+  <div class="phrases">
+    <span class="plabel">行動トリガー（合言葉）</span>
+    <span class="p">今日、何をする？</span>
+    <span class="p">誠実にいこう</span>
+    <span class="p">面白くしていこう</span>
+  </div>
+
+  <div class="meta">
+    <span>更新 <b>2026.07</b></span>
+    <span>フェーズ <b>A（人物像を描き切る）</b></span>
+    <span>到達点 <b>Q71（学習の入力源）</b></span>
+    <span>直近確定 <b>健康と体・学習</b></span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="spine" aria-label="目次">
+    <p class="navlabel">積層 / Strata</p>
+    <a href="#l00"><span class="n">00</span><span>横断する原則</span></a>
+    <a href="#l01"><span class="n">01</span><span>人物の核</span></a>
+    <a href="#l02"><span class="n">02</span><span>価値観と倫理</span></a>
+    <a href="#l03"><span class="n">03</span><span>思考パターン</span></a>
+    <a href="#l04"><span class="n">04</span><span>時間哲学</span></a>
+    <a href="#l05"><span class="n">05</span><span>平日の1日</span></a>
+    <a href="#l06"><span class="n">06</span><span>週末</span></a>
+    <a href="#l07"><span class="n">07</span><span>人との接し方</span></a>
+    <a href="#l08"><span class="n">08</span><span>困難への対処</span></a>
+    <a href="#l09"><span class="n">09</span><span>健康と体</span></a>
+    <a href="#l10"><span class="n">10</span><span>学習</span></a>
+  </nav>
+
+  <main>
+
+    <!-- 00 原則 -->
+    <section class="layer" id="l00">
+      <div class="lhead"><span class="lnum">00</span><h2>横断する原則</h2></div>
+      <p class="lead">個別領域の判断は、すべてこの6つの軸の上で下される。新しい問いは、まずこれらに照らして検証される。</p>
+      <div class="twrap">
+      <table>
+        <caption>判断を貫く6軸</caption>
+        <thead><tr><th>軸</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td class="h">目的 vs 手段</td><td><strong>家族と趣味が目的。積み上げ（仕事・蓄積）は手段。</strong>この順序を反転させないことが最重要。全力で楽しむために全力で働く＝「メリハリ」の正体。</td></tr>
+          <tr><td class="h">並行期 vs 専念期</td><td>会社員＋事業の両立期と、事業専念期。すべての行動規範はどちらの期に属するかを明示する。並行期は必要性が支配し、専念期は興味・自由の余地が広がる。</td></tr>
+          <tr><td class="h">惰性 vs 意図</td><td>行動が許されるのは、惰性・流された結果ではなく、明確で意識的な選択である時だけ。最も嫌う状態は「自分の意志で判断していない」こと。</td></tr>
+          <tr><td class="h">型は固定・配分は流動</td><td>核となる型（朝の集中・睡眠・趣味の非交渉性）は固定し、その上で時間の配分だけを状況に応じて自由に動かす。</td></tr>
+          <tr><td class="h">勝ちすぎ（弱点）</td><td>勝ちにこだわりすぎ、過程で自分や周りを追い詰める危険。手段（仕事）が目的（家族・趣味）を侵食し始めた時のサイン。自己修正機構を内蔵する。</td></tr>
+          <tr><td class="h">名前より合言葉</td><td>立派なラベル（旧称「積み上げる勝者」は撤回）より、日常で呼び出せる合言葉が目的に直接効く。「勝利」「勝者」という抽象名詞は多用しない。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- 01 核 -->
+    <section class="layer" id="l01">
+      <div class="lhead"><span class="lnum">01</span><h2>人物の核</h2><span class="tag done">確定</span></div>
+      <ul class="clean">
+        <li><strong>中心概念</strong>：過去の自分を超え続けること（自己更新）。他人に勝つことではない。</li>
+        <li><strong>影響力の使い方</strong>：必要な時だけ表に出て、影響力を加速させる。</li>
+        <li><strong>存在感</strong>：常に目立つ人ではない。結果と信用で静かに積み上げる人。</li>
+      </ul>
+    </section>
+
+    <!-- 02 価値観 -->
+    <section class="layer" id="l02">
+      <div class="lhead"><span class="lnum">02</span><h2>価値観と倫理</h2><span class="tag done">確定</span></div>
+      <p><strong>勝ち筋の作り方</strong>：合理（数字・検証）で勝ち筋を作り、最後は人間理解で決断する。</p>
+      <p class="key" style="margin-bottom:6px;">絶対にしないこと（倫理的境界線）</p>
+      <ul class="clean">
+        <li>人を踏み台にしない</li>
+        <li>嘘をつかない、誇張しない</li>
+        <li>人の時間を溶かす設計はしない</li>
+        <li>短期の利益のために長期の信用を売らない</li>
+      </ul>
+      <div class="grid2">
+        <div class="card"><h4>弱点</h4><p>勝ちにこだわりすぎること。過程で自分や周りを追い詰める可能性がある。</p></div>
+        <div class="card"><h4>安全装置</h4><p>プライドを捨てて人に頼る。弱さを認めて助けを求めることが、長期の強さを支える。</p></div>
+      </div>
+    </section>
+
+    <!-- 03 思考 -->
+    <section class="layer" id="l03">
+      <div class="lhead"><span class="lnum">03</span><h2>思考パターン</h2><span class="tag done">確定</span></div>
+      <p class="lead">常時稼働する2つの装置が、判断を自動で駆動する。</p>
+      <div class="grid2">
+        <div class="card"><h4>装置① 誠実フィルター</h4><p>すべての選択肢に「誠実にいこう」が自動で走り、不誠実な選択肢（楽な逃げ・嘘・誇張・自己中心・他責）を消す。内省ではなく、行動を選ぶための自動装置。</p></div>
+        <div class="card"><h4>装置② 行動リセット</h4><p>迷いや停滞で止まりかけた時、「今日、何をする？」で動ける最小の一歩に戻す。感情の整理を待たない。</p></div>
+      </div>
+      <div class="twrap">
+      <table>
+        <caption>場面別の判断軸</caption>
+        <thead><tr><th>場面</th><th>最初に浮かぶ問い</th><th>判断基準</th></tr></thead>
+        <tbody>
+          <tr><td class="h">事業の判断</td><td>これはユーザーのためになるか？</td><td>ユーザー価値 → 事業の勝ち筋 → 1年後の後悔</td></tr>
+          <tr><td class="h">倫理の判断</td><td>これは誠実か？</td><td>誠実さ最優先。ただし全てを話す必要はなく、誠実でも成果を出せる第三の道を探す</td></tr>
+          <tr><td class="h">感情の乱れ</td><td>今日、何をする？</td><td>感情を整理せず、動ける一手に戻す</td></tr>
+          <tr><td class="h">人間関係</td><td>プライドが邪魔してないか？</td><td>自我を外して目的に戻る</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="key" style="margin-bottom:6px;">思考の流儀</p>
+      <ul class="clean">
+        <li>常に行動している。止まって考え込むより、仮説を立てながら動く（順次型ではなく同時並行型）</li>
+        <li>事例から学び、自分で試して検証する</li>
+        <li>任せられるものは任せる（自分より上手い人がいる／勝ち筋に直結しない／自分なしで回る）</li>
+        <li>問題が起きたら、感情の整理より先に行動する（謝罪・修正・再発防止を一体で動かす）</li>
+      </ul>
+    </section>
+
+    <!-- 04 時間 -->
+    <section class="layer" id="l04">
+      <div class="lhead"><span class="lnum">04</span><h2>時間哲学</h2><span class="tag done">確定</span></div>
+      <div class="callout">
+        <p class="ct">根底のイメージ</p>
+        <p>時間は増減する資源。有意義に使えば成長として還元され、無駄に消費すれば何も残らない。（※ この「増減する資源」観の身体版が <span class="key">体＝資本</span> — 層09参照）</p>
+      </div>
+      <div class="twrap">
+      <table>
+        <caption>守る時間の二重構造</caption>
+        <thead><tr><th>階層</th><th>時間</th><th>役割</th></tr></thead>
+        <tbody>
+          <tr><td class="h">基盤の守る時間</td><td>朝の集中、睡眠</td><td>積み上げを可能にする土台</td></tr>
+          <tr><td class="h">目的かつ守る時間</td><td>家族、趣味</td><td>積み上げの目的であり、同時に削ってはいけない時間</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <ul class="clean">
+        <li><strong>断つ時間</strong>：愚痴・陰口、他人の評価を気にすること、SNS・ニュースの惰性的な受動消費。ただし専門外の学びは断たない（投資）。</li>
+        <li><strong>惰性 vs 娯楽</strong>：嫌うのは惰性であって娯楽ではない。同じアニメ・ゲームでも、惰性で流すなら断つ、意図的に選んで全力で楽しむなら守る。</li>
+        <li><strong>無駄の定義</strong>：①前進ゼロで1日が終わる、②意思決定せず考えただけで終わる。動かなかった1日は時間の死。</li>
+        <li><strong>過去への姿勢</strong>：悔しさ・苦しさは消化する対象ではなく力に変える素材。過去を引きずる人ではなく、過去を使い切る人。</li>
+      </ul>
+    </section>
+
+    <!-- 05 平日 -->
+    <section class="layer" id="l05">
+      <div class="lhead"><span class="lnum">05</span><h2>平日の1日</h2><span class="tag done">確定</span></div>
+      <div class="grid2">
+        <div class="card">
+          <h4>並行期（会社員＋事業）</h4>
+          <p>4:30起床・水・軽い運動の短い儀式 → 朝の集中ブロック（3時間以上、前夜に決めた最優先タスクを実行）→ 7:00頃から家族の朝（事業とは完全に別領域）→ 通勤を学習時間に → 会社では本業に全集中、事業は頭から切る → 終業後は曜日で分ける（家族の日／事業の日を週頭に決める）。</p>
+        </div>
+        <div class="card">
+          <h4>専念期（事業に専念）</h4>
+          <p>4:30起床・朝の集中は並行期と同じ → 見送り後は「深い1人作業」と「人と動かす仕事」の2モードを行き来 → 夕方の終了は理想は固定時刻・現実は柔軟（この差を正直に認識）。</p>
+        </div>
+      </div>
+      <p class="key" style="margin-bottom:6px;">夕方〜夜（両期共通）</p>
+      <ul class="clean">
+        <li>家族との夕食は完全にデジタル断ち。自分から仕事の話を持ち出さない</li>
+        <li>夕食後は日によって変わる（家族と過ごす／家族が寝た後にもう一度作業）。家族時間そのものは絶対に削らない</li>
+        <li>寝る前30分は電子機器を断ち、1日の振り返りと読書・学習</li>
+        <li>就寝 21:30〜22:00（早朝の集中を守る夜の規律）。金曜の夜は1人時間を長く取り週次レビュー</li>
+      </ul>
+    </section>
+
+    <!-- 06 週末 -->
+    <section class="layer" id="l06">
+      <div class="lhead"><span class="lnum">06</span><h2>週末</h2><span class="tag done">確定</span></div>
+      <p class="lead">リズム（起床・就寝）は平日と同じで固定。<strong>異なるのは配分。</strong>型を固定するからこそ、配分を自由に動かせる。</p>
+      <div class="twrap">
+      <table>
+        <caption>週末の3パターン</caption>
+        <thead><tr><th>パターン</th><th>頻度</th><th>起床後〜家族目覚めまで</th><th>以降</th></tr></thead>
+        <tbody>
+          <tr><td class="h">1：予定なし</td><td>最も多い</td><td>集中作業</td><td>家族と朝食、家族時間を長めに</td></tr>
+          <tr><td class="h">2：午後に予定</td><td>中</td><td>集中作業</td><td>予定まで集中継続 → 午後は家族時間</td></tr>
+          <tr><td class="h">3：丸一日家族</td><td>稀</td><td>集中作業（短め）</td><td>以降は完全に家族時間</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="callout">
+        <p class="ct">非交渉装置</p>
+        <p>どのパターンでも「起床後〜家族が目覚めるまでの集中時間」は必ず存在する。位置と質は固定、長さと量は流動。</p>
+      </div>
+      <ul class="clean">
+        <li><strong>家族時間の2軸</strong>：在り方の軸（日常の共有・近所の外出・会話の質）／企画の軸（日帰り体験・旅行）。<strong>家族時間では主役を譲る</strong>——場を明るくする責任は持つが、場の主役にはならない。</li>
+        <li><strong>趣味（非交渉領域）</strong>：意図的に趣味の時間を作る。趣味がない状況は想定しない。複数を持ち固定されない（1人系・人と系の両方、スポーツ・読書・ゲーム・アニメ・ライブなど）。自己学習とは別物。</li>
+        <li><strong>日曜の夜</strong>：翌週の準備＋軽い振り返り・助走＋平日モードへの切り替え。金曜＝本格レビュー、日曜＝次週への助走。</li>
+      </ul>
+    </section>
+
+    <!-- 07 人 -->
+    <section class="layer" id="l07">
+      <div class="lhead"><span class="lnum">07</span><h2>人との接し方</h2><span class="tag done">確定</span></div>
+      <ul class="clean">
+        <li><strong>話し方の温度</strong>：場面で使い分ける（穏やかさ・率直さ・温かさ・論理性）</li>
+        <li><strong>初対面</strong>：聞き役が多いが、バランスを取り自分も適切に開示する</li>
+        <li><strong>信頼の勝ち取り方</strong>：最重視は「結果を出す」。ただし結果のために何でもするわけではなく、守るべきことが一貫。長期目線で双方に良い結果を追求</li>
+        <li><strong>信頼の見極め</strong>：小さな約束を守るか＋時間をかけた観察</li>
+        <li><strong>反対意見への対応</strong>：まず相手を理解した上で、自分の見方を「別の視点」として提示。対立構造を作らない</li>
+        <li><strong>時間泥棒への対応</strong>：役割・境界を明確に伝える。改善がなければ徐々に距離を取る</li>
+        <li><strong>家族への関わり</strong>：①一緒にいる時間の質を最優先、②頼られる存在でいる、③ムードメーカー。家族の話を引き出す</li>
+      </ul>
+    </section>
+
+    <!-- 08 困難 -->
+    <section class="layer" id="l08">
+      <div class="lhead"><span class="lnum">08</span><h2>困難への対処</h2><span class="tag done">確定</span></div>
+      <div class="twrap">
+      <table>
+        <caption>場面 × 時間スケール</caption>
+        <thead><tr><th>場面</th><th>スケール</th><th>対応の核</th></tr></thead>
+        <tbody>
+          <tr><td class="h">失敗の24時間</td><td>短期</td><td>即行動（骨格）＋並走分析。複数発生時は優先度で順次対応</td></tr>
+          <tr><td class="h">大きな挫折</td><td>中長期</td><td>原因分析・仕組みでの再発防止 → 長期視点で俯瞰 → プライドが邪魔なら人に頼る（条件付き）</td></tr>
+          <tr><td class="h">不安・恐れ</td><td>事前</td><td>外部化（書き出し＋シナリオ化・対策）＋行動（止まらない）の同時稼働。先回り</td></tr>
+          <tr><td class="h">批判・攻撃</td><td>即時</td><td>中身に向き合う＋温度を上げない → ノイズ処理か相手理解か → 歪んでいれば人に相談</td></tr>
+          <tr><td class="h">勝ちすぎ検知</td><td>自己診断</td><td>振り返り時間が中心装置。振り返りが取れないこと自体が第一警報。最深部は外部の指摘</td></tr>
+          <tr><td class="h">勝ちすぎ修正</td><td>自己修正</td><td>頭を冷やす → 守る時間を物理的に戻す → 状況に応じた個別調整</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="key" style="margin-bottom:6px;">抽出された原則</p>
+      <ul class="clean">
+        <li>困難を特別扱いしない。平時のOS（動きながら考える・誠実フィルター・行動リセット）が困難時も同じ流儀で発動する</li>
+        <li>感情の意味づけ変更はしないが、外部化・対象化はする（書き出し・シナリオ化・計算可能な対象への変換）</li>
+        <li>時間スケールが違えば対応レイヤーが変わる（短期＝行動と分析の並行／中長期＝構造化と俯瞰）</li>
+        <li>振り返り時間は二重機能——過去を糧に変える装置であり、同時に勝ちすぎへの警報装置</li>
+        <li>「人に頼る」は無条件ではなく条件付き（プライド・見方の歪み・振り返りの消失がトリガー）</li>
+      </ul>
+    </section>
+
+    <!-- 09 健康 -->
+    <section class="layer" id="l09">
+      <div class="lhead"><span class="lnum">09</span><h2>健康と体</h2><span class="tag live">最新確定</span></div>
+      <div class="callout">
+        <p class="ct">この領域を貫く一文</p>
+        <p>健康は、弱点「勝ちにこだわりすぎる／止まらない」が最も物理的に致命傷になる領域。だからこの人物は、自分の最大の駆動をここでは<strong>構造で抑え込む</strong>。</p>
+      </div>
+      <div class="twrap">
+      <table>
+        <caption>健康と体 — 確定事項</caption>
+        <thead><tr><th>項目</th><th>確定内容</th></tr></thead>
+        <tbody>
+          <tr><td class="h">位置づけ</td><td><span class="key">体＝資本</span>（手段・土台）。「時間は増減する資源」の身体版。</td></tr>
+          <tr><td class="h">基本姿勢</td><td>維持型寄りの投資型。維持がベースライン、投資は余力次第の上乗せ。「適度」＝資本を取り崩さない規律（攻めすぎを止める抑制）。</td></tr>
+          <tr><td class="h">例外<br>（維持を削る）</td><td>原則死守。<strong>計画モード</strong>（前夜に意志で決定）が基本＋<strong>突発モード</strong>（明確な期限／明確な利益）。共通条件は「明確さ＝意志による判断」。出口は振り返りで検知 → 守る時間を物理的に戻す。</td></tr>
+          <tr><td class="h">食事</td><td>二重構造（燃料＋楽しみ・関係）。<strong>ケ＝資本最適化、ハレ＝意図的に全力で楽しむ</strong>（質・誰との2軸）。頻度・場面が歯止め。</td></tr>
+          <tr><td class="h">運動</td><td>維持の運動（手段）＋趣味のスポーツ（楽しみ）の二面。</td></tr>
+          <tr><td class="h">メンテナンス</td><td>予防・先回り型。壊れる前に手を打つ（資本のメンテナンスコストを最初から織り込む）。</td></tr>
+          <tr><td class="h">不調・怪我</td><td>例外判断の「資本損傷版」。基本は守る（完全停止／縮小継続）、押し通すのは強く明確な理由がある時だけ、回復後に必ず戻す。重症度が発動ハードルを上げる。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- 10 学習 -->
+    <section class="layer" id="l10">
+      <div class="lhead"><span class="lnum">10</span><h2>学習</h2><span class="tag live">進行中</span></div>
+      <p class="lead">位置づけは <strong>投資（手段）</strong>。趣味（楽しみ）とは別物。構造は仮固定、入力源（Q71）は未確定。</p>
+      <div class="twrap">
+      <table>
+        <caption>学習の構造 — 仮固定</caption>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td class="h">駆動</td><td>必要（目標）＋好奇心。両方が学習を動かす。フェーズで配分が変わる。</td></tr>
+          <tr><td class="h">2つのモード</td><td><strong>意図的学習</strong>（対象を選んで取りに行く）＋<strong>姿勢としての学習</strong>（あらゆる経験から学びを抜き取る「何事も学ぶ」）。ただし後者は惰性消費の正当化ではない。</td></tr>
+          <tr><td class="h">3層構造</td><td>核（目標直結・常時深く）／周辺・専門外（常時広く浅く・アンテナ）／深掘りスパイク（トリガー発動）。</td></tr>
+          <tr><td class="h">深掘りトリガー</td><td>必要が主・興味が副。並行期（現状）は必要を強く優先、専念期は興味駆動の余地が拡大。</td></tr>
+          <tr><td class="h" style="color:var(--accent-deep)">入力源</td><td class="mono-c">未確定 — Q71（次の問い）。体験・実践／事例・観察／人との対話／文献・本 の重み・順位。</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <span>理想の人物像 — 確定版まとめ / フェーズA</span>
+  <span>次の問い：Q71 学習の入力源</span>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var layers = Array.prototype.slice.call(document.querySelectorAll("section.layer"));
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav.spine a"));
+
+  // reveal on scroll
+  if("IntersectionObserver" in window && !reduce){
+    var revealObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); revealObs.unobserve(e.target);} });
+    },{threshold:0.08,rootMargin:"0px 0px -8% 0px"});
+    layers.forEach(function(l){ revealObs.observe(l); });
+  } else {
+    layers.forEach(function(l){ l.classList.add("in"); });
+  }
+
+  // scroll-spy
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id = e.target.getAttribute("id");
+        links.forEach(function(a){
+          a.classList.toggle("active", a.getAttribute("href") === "#"+id);
+        });
+      }
+    });
+  },{rootMargin:"-20% 0px -70% 0px"});
+  layers.forEach(function(l){ spy.observe(l); });
+})();
+</script>
+</body>
+</html>

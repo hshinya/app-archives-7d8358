@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マイskillガイド | Claude Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f6fb; --surface:#fff; --ink:#1f2937; --ink-soft:#4b5563; --ink-faint:#9ca3af;
+    --line:#e5e7eb; --accent:#4f46e5; --accent-soft:#eef2ff; --accent-2:#0ea5e9;
+    --green:#059669; --green-soft:#ecfdf5; --amber:#d97706; --amber-soft:#fffbeb;
+    --rose:#e11d48; --rose-soft:#fff1f2; --sidebar-bg:#111827; --sidebar-ink:#d1d5db;
+    --radius:14px; --shadow:0 1px 3px rgba(17,24,39,.06),0 6px 24px -8px rgba(17,24,39,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px}
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:264px;flex:0 0 264px;background:var(--sidebar-bg);color:var(--sidebar-ink);padding:22px 16px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brand{display:block;text-decoration:none;color:#fff;margin-bottom:12px}
+  .brand-title{font-weight:900;font-size:18px}
+  .brand-sub{font-size:12px;color:var(--ink-faint);margin-top:2px}
+  .nav-group-label{font-size:11px;letter-spacing:.1em;color:var(--ink-faint);margin:16px 6px 6px;text-transform:uppercase}
+  .nav-link{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;color:var(--sidebar-ink);text-decoration:none;font-size:14px;transition:background .15s,color .15s}
+  .nav-link:hover{background:rgba(255,255,255,.07);color:#fff}
+  .nav-link.active{background:var(--accent);color:#fff;font-weight:700}
+  .nav-ico{width:20px;text-align:center}
+  .sidebar-foot{margin-top:22px;font-size:11.5px;color:var(--ink-faint);line-height:1.6}
+  .content{flex:1;max-width:920px;padding:38px 46px 90px}
+  .nav-toggle{display:none;position:fixed;top:12px;left:12px;z-index:20;border:1px solid var(--line);border-radius:10px;
+    width:42px;height:42px;background:var(--surface);box-shadow:var(--shadow);font-size:19px;cursor:pointer;color:var(--ink)}
+  .page-eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em}
+  h1{font-size:30px;font-weight:900;margin:.2em 0 .3em;line-height:1.25}
+  h2{font-size:22px;font-weight:800;margin:1.7em 0 .5em;padding-left:14px;border-left:5px solid var(--accent);line-height:1.4;scroll-margin-top:20px}
+  h3{font-size:16.5px;font-weight:700;margin:1.2em 0 .3em}
+  .lead{font-size:17px;color:var(--ink-soft)}
+  a{color:var(--accent)}
+  code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.86em;background:#eef0f4;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  mark{background:linear-gradient(transparent 62%,#fde68a 62%);padding:0 1px}
+  .footnote{font-size:12.5px;color:var(--ink-faint)}
+  .badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin:2px 4px 2px 0}
+  .badge-indigo{background:var(--accent-soft);color:var(--accent)}
+  .badge-gray{background:#f1f2f6;color:var(--ink-soft)}
+  .badge-green{background:var(--green-soft);color:var(--green)}
+  .toc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 22px;margin:20px 0}
+  .toc-title{font-weight:800;font-size:13px;color:var(--ink-faint);letter-spacing:.06em;margin-bottom:6px}
+  .toc ol{margin:0;padding-left:20px}
+  .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:18px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  thead th{background:#f9fafb;text-align:left;font-weight:700;padding:12px 16px;border-bottom:2px solid var(--line);white-space:nowrap}
+  tbody td{padding:11px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:hover{background:#fafbff}
+  .callout{border-radius:var(--radius);padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--surface)}
+  .callout-success{background:var(--green-soft);border-color:#a7f3d0}
+  .callout-warn{background:var(--amber-soft);border-color:#fde68a}
+  .callout-info{background:var(--accent-soft);border-color:#c7d2fe}
+  /* skillカード */
+  .skill{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 26px;margin:18px 0}
+  .skill-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .skill-cmd{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-weight:900;font-size:19px;color:var(--accent)}
+  .skill-tag{font-size:12px;color:var(--ink-faint)}
+  .skill-lead{color:var(--ink-soft);margin:.4em 0 .8em}
+  .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:14px;margin:10px 0}
+  .kv dt{color:var(--ink-faint);font-weight:700}
+  .kv dd{margin:0}
+  .chips span{display:inline-block;background:#f1f2f6;color:var(--ink-soft);border-radius:7px;padding:2px 9px;font-size:12.5px;margin:2px 4px 2px 0}
+  .cmd-line{display:flex;align-items:center;gap:8px;background:#0f172a;border-radius:10px;padding:9px 12px;margin:6px 0;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13.5px;color:#e2e8f0}
+  .cmd-line .prompt{color:#64748b}
+  .copy-btn{margin-left:auto;font-size:11.5px;border:1px solid #334155;background:#1e293b;border-radius:7px;padding:2px 9px;cursor:pointer;color:#cbd5e1;white-space:nowrap}
+  .copy-btn:hover{background:#334155}
+  @media(max-width:820px){
+    .sidebar{position:fixed;left:-280px;z-index:15;transition:left .2s}
+    .sidebar.open{left:0}
+    .content{padding:64px 20px 80px}
+    .nav-toggle{display:block}
+    .kv{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<button class="nav-toggle" aria-label="メニュー">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="#top">
+      <div class="brand-title">マイskillガイド</div>
+      <div class="brand-sub">Claude Code / 個人用skill一覧</div>
+    </a>
+    <nav>
+      <div class="nav-group-label">基本</div>
+      <a class="nav-link" href="#intro"><span class="nav-ico">📘</span>これは何か</a>
+      <a class="nav-link" href="#scope"><span class="nav-ico">📁</span>置き場所とスコープ</a>
+      <a class="nav-link" href="#howto"><span class="nav-ico">⌨️</span>使い方(共通)</a>
+      <div class="nav-group-label">skill一覧</div>
+      <a class="nav-link" href="#x-draft"><span class="nav-ico">✍️</span>/x-draft</a>
+      <a class="nav-link" href="#morning"><span class="nav-ico">🌅</span>/morning</a>
+      <a class="nav-link" href="#capture"><span class="nav-ico">💡</span>/capture</a>
+      <a class="nav-link" href="#to-html"><span class="nav-ico">🎨</span>/to-html</a>
+      <a class="nav-link" href="#tackle"><span class="nav-ico">🧭</span>/tackle</a>
+      <a class="nav-link" href="#tackle-retro"><span class="nav-ico">🔁</span>/tackle-retro</a>
+      <a class="nav-link" href="#fable"><span class="nav-ico">🧠</span>/fable</a>
+      <div class="nav-group-label">その他</div>
+      <a class="nav-link" href="#agents"><span class="nav-ico">🤖</span>agent(investigator)</a>
+      <a class="nav-link" href="#builtin"><span class="nav-ico">🧰</span>標準搭載skill</a>
+      <a class="nav-link" href="#maintain"><span class="nav-ico">🔧</span>追加・編集の仕方</a>
+    </nav>
+    <div class="sidebar-foot">作成: 2026-07-07<br>skill 7本 / agent 1本 / git管理</div>
+  </aside>
+
+  <main class="content" id="top">
+    <header>
+      <div class="page-eyebrow">Claude Code / リファレンス</div>
+      <h1>マイskillガイド</h1>
+      <p class="lead">全プロジェクトで使える個人用 Claude Code skill の一覧と使い方。<code>~/.claude/skills/</code> に置いた7本を、どのディレクトリからでも <code>/コマンド</code> で呼べる。</p>
+      <p>
+        <span class="badge badge-indigo">skill 7本</span>
+        <span class="badge badge-indigo">agent 1本</span>
+        <span class="badge badge-green">全ディレクトリ有効</span>
+        <span class="badge badge-green">git管理</span>
+      </p>
+      <p class="footnote">作成日: 2026-07-05〜07。このページ自体 <code>/to-html</code> の様式で生成。</p>
+
+      <div class="toc">
+        <div class="toc-title">このページの内容</div>
+        <ol>
+          <li><a href="#intro">これは何か</a></li>
+          <li><a href="#scope">置き場所とスコープ(どこで使える?)</a></li>
+          <li><a href="#howto">使い方(共通ルール)</a></li>
+          <li><a href="#x-draft">/x-draft — X投稿草案</a> / <a href="#morning">/morning</a> / <a href="#capture">/capture</a> / <a href="#to-html">/to-html</a> / <a href="#tackle">/tackle</a> / <a href="#tackle-retro">/tackle-retro</a> / <a href="#fable">/fable</a></li>
+          <li><a href="#agents">まだ作っていないもの(agent候補)</a></li>
+          <li><a href="#builtin">標準搭載skill(参考)</a> / <a href="#maintain">追加・編集の仕方</a></li>
+        </ol>
+      </div>
+    </header>
+
+    <section id="intro">
+      <h2>これは何か</h2>
+      <p><strong>skill</strong> は、Claude Code に「決まった手順・方針」を覚えさせておき、<code>/名前</code> で呼び出せる再利用可能なワークフロー。毎回同じ指示を書かなくても、狙った動きをさせられる。</p>
+      <p>ここに載っているのは、あなた(Shin)の個人開発・X発信・日々の運用に合わせて作った <mark>自作skill 5本</mark>。プロジェクトを横断して使えるよう、すべてユーザー共通の場所に置いてある。</p>
+      <div class="callout callout-info"><strong>agentとの違い:</strong> agent(サブエージェント)は「別働隊に丸ごと任せる」仕組み。今回作ったのは全部 skill で、agent はまだ0本(<a href="#agents">候補は後述</a>)。</div>
+    </section>
+
+    <section id="scope">
+      <h2>置き場所とスコープ(どこで使える?)</h2>
+      <p>使える範囲は<strong>置き場所で決まる</strong>。今回の5本はすべて一番上の「グローバル」に置いてある = <strong>このMacの全ディレクトリで有効</strong>。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>置き場所</th><th>使える範囲</th><th>今回</th></tr></thead>
+        <tbody>
+          <tr><td><code>~/.claude/skills/&lt;名前&gt;/SKILL.md</code><br><span class="footnote">グローバル / ユーザー共通</span></td><td><strong>全ディレクトリ・全プロジェクト</strong>。どこで開いても <code>/名前</code> が出る</td><td><span class="badge badge-green">これ</span></td></tr>
+          <tr><td><code>&lt;プロジェクト&gt;/.claude/skills/…</code><br><span class="footnote">プロジェクト固有</span></td><td>そのプロジェクト配下でのみ表示</td><td>—</td></tr>
+          <tr><td>プラグイン経由</td><td>プラグインを入れた環境</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-warn"><strong>優先順位:</strong> 同名 skill がグローバルとプロジェクト両方にあると、<strong>プロジェクト側が優先</strong>。特定プロジェクトだけ挙動を変えたい時は、そのプロジェクトの <code>.claude/skills/</code> に同名で置けば上書きできる。</div>
+    </section>
+
+    <section id="howto">
+      <h2>使い方(共通ルール)</h2>
+      <h3>呼び出し</h3>
+      <p>チャットで <code>/コマンド名</code> と打つ。引数を付けられるものは <code>/x-draft ScreenTime APIの話</code> のように続ける。</p>
+      <h3>反映のタイミング</h3>
+      <div class="callout callout-warn">新しく作った/編集した skill は <strong>セッション開始時に読み込まれる</strong>。今サジェストに出ないときは <strong>Claude Code を一度立ち上げ直す</strong>と、次回から全プロジェクトで有効になる。</div>
+      <h3>編集</h3>
+      <p>各 skill の中身は <code>SKILL.md</code>(Markdown)。方針を変えたくなったら該当ファイルを直接編集すればいい。<a href="#maintain">追加・編集の仕方</a>を参照。</p>
+    </section>
+
+    <!-- ============ /x-draft ============ -->
+    <section id="x-draft">
+      <h2>✍️ /x-draft — X投稿草案</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/x-draft</span><span class="skill-tag">X投稿ドラフト生成</span></div>
+        <p class="skill-lead">X投稿の草案を、<strong>淡々・ドライなビルダー調</strong>で3〜5案生成する。ポエミー禁止・技術のハマりどころを淡々と出す文体ルールを内蔵。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>ツイート作って</span><span>今日のポスト</span><span>これ発信したい</span><span>スレにして</span></dd>
+          <dt>入力</dt><dd>トピックを引数で渡す。<strong>引数なしなら、今いるプロジェクトの直近git活動</strong>(コミット・差分)から自動でネタを拾う。</dd>
+          <dt>出力</dt><dd>単発3本(報告 / 技術ハマりどころ / 小ネタ)＋スレ案1本。各案に推定文字数付き。</dd>
+          <dt>保存先</dt><dd>採用案は <code>make_idea/sns_marketing/posts_log.md</code> に追記(任意)。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/x-draft/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/x-draft</span><button class="copy-btn" data-copy="/x-draft">コピー</button></div>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/x-draft Re:Nightのロック維持をScreenTime APIで実装した話</span><button class="copy-btn" data-copy="/x-draft Re:Nightのロック維持をScreenTime APIで実装した話">コピー</button></div>
+      </div>
+    </section>
+
+    <!-- ============ /morning ============ -->
+    <section id="morning">
+      <h2>🌅 /morning — 朝ブリーフィング</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/morning</span><span class="skill-tag">1日の頭出し</span></div>
+        <p class="skill-lead">今日の予定・要対応メール・「今日やるべき一手」を1画面にまとめる。専業移行に向けた日次運用用。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>朝ブリーフィング</span><span>今日の予定</span><span>今日やること</span><span>morning</span></dd>
+          <dt>集める情報</dt><dd>① Googleカレンダーの今日の予定 ② 要対応の未読Gmail(広告・通知は除外)3〜5件 ③ <code>総合ロードマップ.html</code> 由来の「今日の一手」1〜3個。</dd>
+          <dt>依存</dt><dd>Googleカレンダー / Gmail の MCP 連携(初回は認証)。取れない情報は「取得できず」と明記してスキップ。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/morning/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/morning</span><button class="copy-btn" data-copy="/morning">コピー</button></div>
+        <div class="callout callout-info"><strong>毎朝自動化したい場合:</strong> 手動実行が一番確実(ローカルのMCP認証＋ローカルファイルを両方使うため)。定期化するなら <code>/schedule</code>(クラウドcron)や <code>/loop</code> を使う。ただしクラウド実行ではカレンダー/Gmailの認証やローカルファイルが届かないことがあり、その場合はロードマップ中心の縮小版になる。運用が固まったら設定を依頼。</div>
+      </div>
+    </section>
+
+    <!-- ============ /capture ============ -->
+    <section id="capture">
+      <h2>💡 /capture — アイデア捕獲</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/capture</span><span class="skill-tag">思いつきを構造化保存</span></div>
+        <p class="skill-lead">思いついたアイデア・タスク・メモを1コマンドで構造化し、1箇所のバックログに追記する。散らからない。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>これメモしといて</span><span>アイデア:〜</span><span>バックログに入れて</span><span>あとで考える</span></dd>
+          <dt>動作</dt><dd>種別(idea/task/bug/post-idea/research)を推定し、<strong>発信元プロジェクト名も自動で記録</strong>してテーブルに1行追記。</dd>
+          <dt>保存先</dt><dd><code>make_idea/idea_backlog.md</code>(日付 / 種別 / 発信元 / 内容 / 詳細 / status のテーブル)。</dd>
+          <dt>一覧</dt><dd>「バックログ見せて」で種別・status別に整理して表示。status更新も可。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/capture/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/capture 通知をまとめて夜だけ配信するアプリ</span><button class="copy-btn" data-copy="/capture 通知をまとめて夜だけ配信するアプリ">コピー</button></div>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/capture Re:Nightのロック画面、横向きで崩れる</span><button class="copy-btn" data-copy="/capture Re:Nightのロック画面、横向きで崩れる">コピー</button></div>
+      </div>
+    </section>
+
+    <!-- ============ /to-html ============ -->
+    <section id="to-html">
+      <h2>🎨 /to-html — 資料をHTMLサイト化</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/to-html</span><span class="skill-tag">MD → 見やすいHTML資料</span></div>
+        <p class="skill-lead">Markdownやメモを、サイドバーナビ・カード・表・チェックリスト・コピーボタン付きのHTML資料サイトに変換する。<strong>このページもこれで生成</strong>。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>これHTMLにして</span><span>資料サイト化</span><span>md見づらいからhtmlで</span><span>to-html</span></dd>
+          <dt>デザイン</dt><dd>インディゴ <code>#4f46e5</code> / Noto Sans JP / ダークサイドバー。自己完結HTML(外部アセット不要)で単体で開ける。</dd>
+          <dt>テンプレ</dt><dd><code>~/.claude/skills/to-html/template.html</code>(様式は固定して一貫性を保つ)。</dd>
+          <dt>出力</dt><dd>単一ページ or 章ごとの複数ページサイト。make_idea配下なら総合目次への追加も確認。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/to-html/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/to-html 海外ビジネスアプリ_調査.md</span><button class="copy-btn" data-copy="/to-html 海外ビジネスアプリ_調査.md">コピー</button></div>
+      </div>
+    </section>
+
+    <!-- ============ /tackle ============ -->
+    <section id="tackle">
+      <h2>🧭 /tackle — 難タスクの作業規律</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/tackle</span><span class="skill-tag">分解→実行→検証→次決め</span></div>
+        <p class="skill-lead">難しい・曖昧・大きい多段タスクに規律をもって取り組む。勢いで一気にやらず、<strong>検証可能な小さい前進の連鎖</strong>に変える。Opus 4.8向け。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>これ難しいから整理して進めて</span><span>どう分解する?</span><span>大きめのタスク</span><span>設計から実装まで</span></dd>
+          <dt>流れ</dt><dd><strong>0.見極め</strong>(ゴール1文・完了の証拠・不可逆操作の確認)→ <strong>1.分解</strong>(各段に完了条件を1文で・未知を先に潰す)→ <strong>2.実行</strong>(一度に一段)→ <strong>3.検証</strong>(3レベル: 機械的/反証/独立レビュー・証拠つきで報告)→ <strong>4.次決め</strong>(状態→行動の表で判断・同じ所で2連敗したら手を変える)→ <strong>5.報告</strong>(やったこと/検証/残りを正直に)。</dd>
+          <dt>Opus 4.8</dt><dd>並列サブエージェントで枝を同時進行、大規模コンテキストで先に広く把握、超大規模はWorkflow検討。</dd>
+          <dt>使わない時</dt><dd>1〜2手の単純作業や会話のみ(オーバーヘッドの方が大きい)。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/tackle/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/tackle Re:Nightの課金導線を設計から実装まで通したい</span><button class="copy-btn" data-copy="/tackle Re:Nightの課金導線を設計から実装まで通したい">コピー</button></div>
+      </div>
+    </section>
+
+    <!-- ============ /tackle-retro ============ -->
+    <section id="tackle-retro">
+      <h2>🔁 /tackle-retro — tackleの自己監査・改善ループ</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/tackle-retro</span><span class="skill-tag">skillを育てる仕組み</span></div>
+        <p class="skill-lead"><code>/tackle</code> を使った作業の直後に自己監査し、<strong>破られた規律を記録 → 溜まったら SKILL.md をパッチ</strong>する改善ループの実行部。skillは書いて終わりではなく、破られた記録で育てる。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>ふりかえり</span><span>レトロ</span><span>tackleの監査</span><span>skillを改善したい</span></dd>
+          <dt>動作</dt><dd>①各段(0〜5)を証拠つきで監査(守れた/破った/該当なし)②<code>tackle/LOG.md</code> に1行記録 ③newが5件以上 or 同一原因2回でパッチ提案(足すだけでなく削る)→ 承認後に適用＋gitコミット。</dd>
+          <dt>記録先</dt><dd><code>~/.claude/skills/tackle/LOG.md</code>(日付/タスク/破った規律/原因/パッチ候補/状態)。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/tackle-retro/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/tackle-retro</span><button class="copy-btn" data-copy="/tackle-retro">コピー</button></div>
+        <div class="callout callout-info"><strong>運用:</strong> /tackle で作業 → 終わったら /tackle-retro → ログが溜まったらパッチ提案が自動で出る。skillの版管理は <code>~/.claude/skills</code> の git が担う(改悪したら戻せる)。</div>
+      </div>
+    </section>
+
+    <!-- ============ /fable ============ -->
+    <section id="fable">
+      <h2>🧠 /fable — Fable 5 流の調査と推論</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">/fable</span><span class="skill-tag">認知様式(Opus 4.8でFable 5風)</span></div>
+        <p class="skill-lead">最新世代モデルが既定で行う「調べ方 → 結論の出し方 → 伝え方」を指示追従で再現する。中心原則は1つ: <mark>証拠 → 確信度 → 結論。逆走(結論が先)は禁止</mark>。監査→3視点草案→3審査員→統合のworkflowで作成。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>深く考えて</span><span>Fable風に</span><span>じっくり調べて</span><span>ちゃんと裏取りして</span><span>本当に合ってる?</span></dd>
+          <dt>流れ</dt><dd><strong>仮説</strong>(反証可能な仮説1〜3個を先に宣言)→ <strong>観測</strong>(委譲・並列サーチ・部分読み・一次情報・記憶より現物)→ <strong>打ち切り</strong>(揃ったら即行動・同じ切り口2回空振りで変える)→ <strong>結論</strong>(複数解釈の保持・確度ラベル [事実]/[推論]/[推測]・反証を先に)→ <strong>伝達</strong>(結論ファースト・誇張なし・推奨は1つ)。</dd>
+          <dt>/tackleとの関係</dt><dd>/tackle が「次にどの段をやるか」(工程管理)、/fable が「その段の中でどう考え・調べ・結論するか」(認知様式)。<strong>併用可</strong>。軽い応答でも「確度ラベル+誇張なし」の2点だけは常時有効。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/skills/fable/SKILL.md</code></dd>
+        </dl>
+        <div class="cmd-line"><span class="prompt">&gt;</span><span>/fable このバグの原因をちゃんと裏取りして特定して</span><button class="copy-btn" data-copy="/fable このバグの原因をちゃんと裏取りして特定して">コピー</button></div>
+      </div>
+    </section>
+
+    <!-- ============ agents ============ -->
+    <section id="agents">
+      <h2>🤖 agent(サブエージェント)</h2>
+      <div class="skill">
+        <div class="skill-head"><span class="skill-cmd">investigator</span><span class="skill-tag">調査専用サブエージェント(読み取り専用)</span></div>
+        <p class="skill-lead">/fable の調査方針を体現する別働隊。横断検索・裏取り・切り分けを委譲すると、本体のコンテキストをファイル本文で汚さず<strong>「結論(確度ラベル付き)+証拠(ファイル:行番号)+未確認」</strong>の短い報告だけが返る。</p>
+        <dl class="kv">
+          <dt>いつ使う</dt><dd class="chips"><span>どこで使われてるか調べて</span><span>影響範囲を把握して</span><span>現行APIを現物確認して</span><span>原因候補を切り分けて</span></dd>
+          <dt>呼び方</dt><dd>調査タスクではClaudeが自動で委譲する。明示するなら「investigatorで調べて」。</dd>
+          <dt>ファイル</dt><dd><code>~/.claude/agents/investigator.md</code>(同期用の正本はリポジトリ内 <code>agents/</code>。新PCでは clone 後に <code>cp ~/.claude/skills/agents/*.md ~/.claude/agents/</code>)</dd>
+        </dl>
+      </div>
+      <h3>未作成の候補</h3>
+      <p>依頼があれば作れるもの:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>候補</th><th>何をする</th><th>形態</th></tr></thead>
+        <tbody>
+          <tr><td>release-notes agent</td><td>git差分から利用者向けリリースノート＋開発者向け技術メモを生成</td><td>agent</td></tr>
+          <tr><td>ネタ発掘 agent</td><td>開発ログ・資料をスキャンして発信ネタ候補を週次でストック</td><td>agent</td></tr>
+          <tr><td>週次ふりかえり</td><td>全プロジェクトのコミット＋今週shipしたもの＋発信実績を週報化</td><td>skill/routine</td></tr>
+          <tr><td>/ship-check</td><td>リリース前チェック(ストア文言・スクショ・プライバシーポリシー等の抜け)</td><td>skill</td></tr>
+          <tr><td>/deploy-archive</td><td>資料館(GitHub Pages)へdeploy＋目次カードの追加漏れチェック</td><td>skill</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ============ builtin ============ -->
+    <section id="builtin">
+      <h2>🧰 標準搭載skill(参考)</h2>
+      <p>自作分とは別に、Claude Code に最初から入っている便利な skill・agent もある(抜粋)。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>コマンド / agent</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td><code>/deep-research</code></td><td>複数ソースを横断し、事実検証した調査レポートを作る</td></tr>
+          <tr><td><code>/code-review</code></td><td>変更差分のバグ・改善レビュー(<code>ultra</code>でクラウド多エージェント)</td></tr>
+          <tr><td><code>/verify</code> / <code>/run</code></td><td>変更が実際に動くか、アプリを起動して確認</td></tr>
+          <tr><td><code>/schedule</code> / <code>/loop</code></td><td>定期実行(cronのクラウドagent / セッション内ループ)</td></tr>
+          <tr><td><code>/security-review</code> / <code>/init</code> / <code>/review</code></td><td>セキュリティレビュー / CLAUDE.md初期化 / PRレビュー</td></tr>
+          <tr><td>Explore / Plan agent</td><td>広範な検索 / 実装計画の設計を別働隊に任せる</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ============ maintain ============ -->
+    <section id="maintain">
+      <h2>🔧 追加・編集の仕方</h2>
+      <h3>新しい skill を足す</h3>
+      <p>フォルダを1つ作り、その中に <code>SKILL.md</code> を置くだけ。フォルダ名がコマンド名になる。</p>
+      <div class="cmd-line"><span class="prompt">$</span><span>~/.claude/skills/&lt;名前&gt;/SKILL.md</span><button class="copy-btn" data-copy="~/.claude/skills/">コピー</button></div>
+      <p><code>SKILL.md</code> の先頭はこの形(<code>description</code> に「いつ使うか」を書くほど呼び出しの精度が上がる):</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>フィールド</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><code>name</code></td><td>コマンド名(フォルダ名と一致)</td></tr>
+          <tr><td><code>description</code></td><td>何をする skill か＋<strong>どんな依頼の時に使うか</strong>のトリガー語</td></tr>
+        </tbody>
+      </table></div>
+      <h3>既存を直す</h3>
+      <p>該当の <code>SKILL.md</code> を編集するだけ。編集後は<strong>セッションを立ち上げ直すと反映</strong>。</p>
+      <h3>版管理・他PCでの利用</h3>
+      <p><code>~/.claude/skills</code> は <strong>gitリポジトリ</strong>(2026-07-07〜)。リモートは非公開の <code>github.com/hshinya/claude-skills</code>。変更したらコミット+pushしておくと、改悪した時に戻せる&他PCと同期できる。</p>
+      <p>他のPCで <strong>/tackle・/tackle-retro だけ</strong>使う場合(Claude Codeログイン済み前提):</p>
+      <div class="cmd-line"><span class="prompt">$</span><span>git clone --sparse https://github.com/hshinya/claude-skills.git ~/.claude/skills</span><button class="copy-btn" data-copy="git clone --sparse https://github.com/hshinya/claude-skills.git ~/.claude/skills">コピー</button></div>
+      <div class="cmd-line"><span class="prompt">$</span><span>git -C ~/.claude/skills sparse-checkout set tackle tackle-retro</span><button class="copy-btn" data-copy="git -C ~/.claude/skills sparse-checkout set tackle tackle-retro">コピー</button></div>
+      <p class="footnote">全部使うなら普通に <code>git clone</code> するだけ(フォールバック追加済みなのでどのPCでも壊れない)。以後の同期は このMacで push → 他PCで <code>git pull</code>。</p>
+      <div class="callout callout-success">「〇〇な skill 作って / この skill こう直して」と言えば、この様式に沿って作成・編集します。</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  document.querySelector('.nav-toggle')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));
+  // コピーボタン
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      navigator.clipboard.writeText(btn.dataset.copy||'').then(()=>{
+        const o=btn.textContent;btn.textContent='コピー済み';setTimeout(()=>btn.textContent=o,1200);
+      });
+    });
+  });
+  // スクロールでサイドバーのactive更新
+  const links=[...document.querySelectorAll('.nav-link')];
+  const map=new Map(links.map(l=>[l.getAttribute('href').slice(1),l]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));map.get(e.target.id)?.classList.add('active');}});
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想の人物像 — 実践ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEDE7;
+    --panel:#F4F4EF;
+    --panel-2:#E3E5DD;
+    --ink:#182233;
+    --ink-2:#3B4658;
+    --muted:#727982;
+    --line:#CBCFC5;
+    --line-strong:#AFB4A8;
+    --accent:#A9741F;
+    --accent-deep:#7E5514;
+    --accent-wash:#EADFC5;
+    --alert:#8C3B2E;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Zen Kaku Gothic New",system-ui,sans-serif;font-weight:400;
+    line-height:1.85;font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+
+  header.hero{max-width:1080px;margin:0 auto;padding:72px 32px 36px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--accent-deep);margin:0 0 20px;}
+  .hero h1{font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(2.1rem,5.2vw,3.3rem);line-height:1.26;margin:0 0 10px;letter-spacing:.02em;}
+  .hero .sub{font-family:"Shippori Mincho",serif;font-weight:500;color:var(--ink-2);
+    font-size:clamp(.98rem,2.1vw,1.15rem);margin:0 0 26px;max-width:62ch;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-family:"IBM Plex Mono",monospace;
+    font-size:.76rem;color:var(--muted);border-top:1px solid var(--line-strong);padding-top:18px;}
+  .meta b{color:var(--ink);font-weight:600;}
+
+  .container{max-width:1080px;margin:0 auto;padding:0 32px 110px;}
+
+  /* part divider */
+  .part{margin:56px 0 10px;display:flex;align-items:baseline;gap:16px;}
+  .part .pn{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.24em;
+    color:var(--accent);text-transform:uppercase;}
+  .part h2{font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(1.6rem,3.6vw,2.2rem);margin:0;}
+  .partlead{color:var(--ink-2);max-width:64ch;margin:8px 0 30px;}
+
+  section{padding:26px 0 18px;border-top:1px solid var(--line);}
+  section h3{font-family:"Shippori Mincho",serif;font-weight:700;
+    font-size:clamp(1.2rem,2.6vw,1.5rem);margin:0 0 4px;}
+  .snote{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);margin:0 0 16px;}
+
+  p{margin:0 0 14px;max-width:66ch;}
+  strong{font-weight:700;}
+  .key{color:var(--accent-deep);font-weight:700;}
+
+  ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:68ch;}
+  ul.clean li{position:relative;padding-left:20px;margin-bottom:8px;}
+  ul.clean li::before{content:"";position:absolute;left:2px;top:.74em;width:7px;height:1px;background:var(--accent);}
+
+  .callout{background:var(--panel);border-left:3px solid var(--accent);
+    padding:16px 20px;margin:16px 0 20px;border-radius:var(--radius);max-width:68ch;}
+  .callout .ct{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent-deep);margin-bottom:6px;}
+  .callout p{margin:0;}
+  .callout p + p{margin-top:8px;}
+  .callout.warn{border-left-color:var(--alert);}
+  .callout.warn .ct{color:var(--alert);}
+
+  .twrap{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--line);border-radius:var(--radius);}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:480px;}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.65;}
+  thead th{background:var(--panel-2);font-weight:700;font-size:.8rem;letter-spacing:.04em;
+    border-bottom:1px solid var(--line-strong);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.h{font-weight:700;white-space:nowrap;}
+  td.t{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--accent-deep);white-space:nowrap;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 18px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 18px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px 17px;}
+  .card h4{margin:0 0 6px;font-family:"Shippori Mincho",serif;font-size:1rem;font-weight:600;}
+  .card p{margin:0;font-size:.87rem;color:var(--ink-2);}
+  .card .cn{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.16em;color:var(--accent);display:block;margin-bottom:4px;}
+
+  /* phrase strip */
+  .phrases{border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+    padding:22px 0;margin:8px 0 6px;display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;}
+  .phrases .p{font-family:"Shippori Mincho",serif;font-weight:600;
+    font-size:clamp(1.15rem,3vw,1.6rem);color:var(--accent-deep);}
+  .phrases .p::before{content:"「";color:var(--line-strong);}
+  .phrases .p::after{content:"」";color:var(--line-strong);}
+  .phrases .u{font-size:.8rem;color:var(--muted);width:100%;margin-top:-6px;}
+
+  /* day timeline */
+  .day{margin:18px 0 8px;border-left:2px solid var(--line-strong);padding-left:0;list-style:none;max-width:70ch;}
+  .day li{position:relative;padding:10px 0 10px 26px;}
+  .day li::before{content:"";position:absolute;left:-6px;top:1.25em;width:10px;height:10px;
+    border-radius:50%;background:var(--paper);border:2px solid var(--accent);}
+  .day li.q::before{background:var(--accent);}
+  .day .tt{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--accent-deep);
+    display:block;letter-spacing:.06em;}
+  .day b{font-weight:700;}
+  .day .d{color:var(--ink-2);font-size:.92rem;display:block;}
+
+  footer{max-width:1080px;margin:0 auto;padding:28px 32px 70px;border-top:1px solid var(--line);
+    color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.74rem;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (max-width:760px){
+    .grid2,.grid3{grid-template-columns:1fr;}
+    header.hero{padding-top:50px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow">理想の人物像 / 実践ガイド — Field Manual</p>
+  <h1>その人として、今日を動かす</h1>
+  <p class="sub">第1部は人物像の要約（生活習慣・考え方・判断の仕方）。第2部は、それを現状の自分に取り入れるための具体的な手順と、日々意識すること。</p>
+  <div class="meta">
+    <span>版 <b>2026.07（Q70時点）</b></span>
+    <span>位置づけ <b>フェーズB先行版</b></span>
+    <span>正式なギャップ整理 <b>フェーズA完了後</b></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ================= PART 1 ================= -->
+  <div class="part"><span class="pn">Part 1</span><h2>人物像の要約</h2></div>
+  <p class="partlead">全領域を「考え方」「判断の仕方」「生活習慣」の3つのレンズで再編成した要約。詳細は確定版まとめ（別資料）を参照。</p>
+
+  <section>
+    <h3>すべての土台 — 目的と手段の順序</h3>
+    <p class="snote">最重要。他のすべてはここから導かれる</p>
+    <div class="callout">
+      <p class="ct">中心命題</p>
+      <p><strong>家族との時間と趣味が目的。積み上げ（仕事・蓄積）は手段。</strong>この人物は、家族と趣味の時間を全力で楽しむために、全力で積み上げている。「全力で楽しむために、全力で働く」——これが「メリハリ」の正体。</p>
+      <p>この順序が反転した状態（仕事が目的を侵食する）が、弱点「勝ちすぎ」の発動。人物像には、その検知と修正の機構が組み込まれている。</p>
+    </div>
+    <div class="phrases">
+      <span class="p">今日、何をする？</span>
+      <span class="p">誠実にいこう</span>
+      <span class="p">面白くしていこう</span>
+      <span class="u">3つの合言葉。名前やラベルではなく、日常の行動を直接駆動するトリガー。</span>
+    </div>
+  </section>
+
+  <section>
+    <h3>考え方 — 常時稼働する2つの装置</h3>
+    <div class="grid2">
+      <div class="card"><span class="cn">装置 01</span><h4>誠実フィルター</h4><p>すべての選択肢に「誠実にいこう」が自動で走り、不誠実な選択肢（楽な逃げ・嘘・誇張・自己中心・他責）を消す。感情の評価ではなく、行動を選ぶための自動装置。</p></div>
+      <div class="card"><span class="cn">装置 02</span><h4>行動リセット</h4><p>迷い・停滞で止まりかけた時、「今日、何をする？」で動ける最小の一歩に戻す。感情の整理を待たない。動きながら考える。</p></div>
+    </div>
+    <ul class="clean">
+      <li><strong>常に行動している。</strong>止まって考え込むより、仮説を立てながら動く（同時並行型）</li>
+      <li><strong>最も嫌う状態</strong>：自分の意志で判断していないこと（惰性・流される・感情に支配される）</li>
+      <li><strong>感情の扱い</strong>：意味づけの変更（内省）はしない。外部化（書き出し・シナリオ化・計算可能な対象への変換）はする</li>
+      <li><strong>過去の扱い</strong>：悔しさは消化する対象ではなく、力に変える素材。過去を使い切る</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>判断の仕方 — 場面別の最初の問い</h3>
+    <div class="twrap">
+    <table>
+      <thead><tr><th>場面</th><th>最初に浮かぶ問い</th><th>判断基準</th></tr></thead>
+      <tbody>
+        <tr><td class="h">事業の判断</td><td>これはユーザーのためになるか？</td><td>ユーザー価値 → 事業の勝ち筋 → 1年後の後悔</td></tr>
+        <tr><td class="h">倫理の判断</td><td>これは誠実か？</td><td>誠実さ最優先。誠実でも成果を出せる第三の道を探す</td></tr>
+        <tr><td class="h">感情の乱れ</td><td>今日、何をする？</td><td>感情を整理せず、動ける一手に戻す</td></tr>
+        <tr><td class="h">人間関係</td><td>プライドが邪魔してないか？</td><td>自我を外して目的に戻る</td></tr>
+        <tr><td class="h">迷った時の共通判定</td><td>これは意志で選んだか、流されたか？</td><td>惰性なら断つ。意図的に選んだなら全力で</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="key" style="margin-bottom:6px;">例外を許す時の型（健康・守る時間を削る場合）</p>
+    <ul class="clean">
+      <li><strong>計画モード</strong>：前夜に自分の意志で決めた時（事前決定そのものが歯止め）</li>
+      <li><strong>突発モード</strong>：明確な期限、または明確な利益見込みがある時だけ（「なんとなく忙しい」では発動しない）</li>
+      <li><strong>必ず戻す</strong>：振り返りで検知 → 守る時間を物理的に戻す。例外は例外に留める</li>
+    </ul>
+    <p class="key" style="margin-bottom:6px;">絶対にしないこと（倫理的境界線）</p>
+    <ul class="clean">
+      <li>人を踏み台にしない ／ 嘘をつかない・誇張しない ／ 人の時間を溶かす設計はしない ／ 短期の利益のために長期の信用を売らない</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>生活習慣 — 型は固定、配分は流動</h3>
+    <div class="twrap">
+    <table>
+      <thead><tr><th>領域</th><th>核となる習慣</th></tr></thead>
+      <tbody>
+        <tr><td class="h">リズム</td><td>4:30起床・21:30〜22:00就寝。平日も週末も固定。型を固定するからこそ配分を自由に動かせる</td></tr>
+        <tr><td class="h">朝</td><td>起床後の短い儀式（水・軽い運動）→ 朝の集中ブロック3時間以上。<strong>朝は判断ではなく実行</strong>（やることは前夜に決めてある）</td></tr>
+        <tr><td class="h">日中</td><td>会社では本業に全集中、事業は頭から切る（選んだ集中）。通勤は学習時間。昼食は完全に手を止めて食べる。午後の低下時は散歩・仮眠・作業種変更</td></tr>
+        <tr><td class="h">夜</td><td>家族との夕食は完全デジタル断ち。寝る前30分は電子機器を断ち、振り返りと読書。家族時間は絶対に削らない</td></tr>
+        <tr><td class="h">週末</td><td>リズム同じ・配分違い。どのパターンでも「起床後〜家族が目覚めるまでの集中時間」は必ず存在。家族時間では主役を譲る</td></tr>
+        <tr><td class="h">レビュー</td><td>金曜夜＝週次の本格レビュー（1人時間を長く）。日曜夜＝翌週の準備と助走。毎晩＝1日の振り返り</td></tr>
+        <tr><td class="h">健康</td><td>体＝資本。維持がベースライン（資本を取り崩さない規律としての「適度」）、投資は余力次第。予防・先回り型で壊れる前に手を打つ</td></tr>
+        <tr><td class="h">食事</td><td>ケ（日常）＝燃料として最適化。ハレ（意図的に選んだ食・人との食卓）＝全力で楽しむ。区切りが歯止め</td></tr>
+        <tr><td class="h">趣味</td><td>非交渉領域。意図的に時間を作る。複数持ち、固定しない。自己学習とは別物</td></tr>
+        <tr><td class="h">学習</td><td>投資（手段）。核は深く・周辺は広く浅く・必要と強い興味で深掘り。並行期は必要優先。「何事も学ぶ姿勢」（ただし惰性消費の正当化ではない）</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ================= PART 2 ================= -->
+  <div class="part"><span class="pn">Part 2</span><h2>取り入れ方 — 何をすればいいか</h2></div>
+  <p class="partlead">理想像を全部一度に真似ようとすると失敗する。この人物自身の流儀に従う——「動ける最小の一歩」から始め、型を先に固定し、中身は後から積む。</p>
+
+  <section>
+    <h3>導入の3原則</h3>
+    <div class="grid3">
+      <div class="card"><span class="cn">原則 1</span><h4>合言葉から始める</h4><p>習慣より先に、3つの合言葉を判断の入口に置く。道具はゼロで今日から使える。人物像の全装置は合言葉の上に載っている。</p></div>
+      <div class="card"><span class="cn">原則 2</span><h4>型を先に固定する</h4><p>起床・就寝・前夜の決定・寝る前の振り返り。中身（何をやるか）より、器（いつ・どこでやるか）を先に安定させる。配分は後から動かせる。</p></div>
+      <div class="card"><span class="cn">原則 3</span><h4>一度に1〜2個</h4><p>「前進ゼロの1日は時間の死」だが、変化ゼロの1日とは違う。小さく確実に積む方が、全部やって3日で崩れるより速い。</p></div>
+    </div>
+    <div class="callout warn">
+      <p class="ct">注意 — 順序を間違えない</p>
+      <p>4:30起床から入りたくなるが、それは結果であって入口ではない。この人物の早起きは「前夜に決めた最優先タスク」と「21:30就寝」に支えられている。<strong>入口は夜（前夜の決定＋就寝時刻）であり、朝ではない。</strong>睡眠を削って早起きするのは「資本の取り崩し」で、人物像の論理そのものに反する。起床時刻は段階的に早めれば良い。</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>段階的な導入プラン</h3>
+    <p class="snote">目安は各段2〜3週間。定着してから次へ。崩れたら1段戻る</p>
+    <div class="twrap">
+    <table>
+      <thead><tr><th>段階</th><th>取り入れること</th><th>定着の目安</th></tr></thead>
+      <tbody>
+        <tr><td class="t">第1段<br>合言葉と夜の儀式</td><td>①朝いちばんに「今日、何をする？」と自問する ②寝る前に「明日の最優先タスクを1つ」書いて決める ③寝る前30分の電子機器断ち＋3分の振り返り</td><td>前夜の決定が7割以上の日でできている</td></tr>
+        <tr><td class="t">第2段<br>リズムの固定</td><td>①就寝・起床時刻を固定する（現在の生活から30分ずつ前倒し）②起床後の短い儀式（水・軽い運動）を置く ③朝に集中ブロックを確保する（最初は30分〜1時間で良い。位置と質が先、長さは後）</td><td>平日・週末とも同じリズムで2週間</td></tr>
+        <tr><td class="t">第3段<br>フィルターの実装</td><td>①迷った時に「これは意志で選んだか、流されたか」を問う ②惰性の受動消費（SNS・ニュースのだらだら見）を1つ特定して断つ ③代わりに「意図的に楽しむ娯楽」を予定として置く</td><td>惰性か意図かの判定が、その場でできるようになる</td></tr>
+        <tr><td class="t">第4段<br>守る時間の宣言</td><td>①家族時間・趣味・睡眠を「非交渉」と明示的に決める ②夕食のデジタル断ち ③週の頭に「家族の日／事業の日」を決める ④趣味の時間を予定に入れる（空いたらやる、ではなく）</td><td>忙しい週でも守る時間が削られていない</td></tr>
+        <tr><td class="t">第5段<br>レビュー機構</td><td>①金曜夜の週次レビュー（1人時間）②日曜夜の翌週準備 ③振り返りの中に「勝ちすぎチェック」を組み込む（下記の警報サイン参照）</td><td>レビューが2週続き、そこから翌週の修正が1つ以上出ている</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h3>1日の中の意識ポイント</h3>
+    <p class="snote">理想像の平日を、チェックポイントの連なりとして読み替えたもの</p>
+    <ul class="day">
+      <li class="q"><span class="tt">起床直後</span><b>「今日、何をする？」</b><span class="d">答えは前夜に決めてある。朝は判断ではなく実行。迷いが出たら、それは前夜の決定が甘かったサイン（夜に直す）。</span></li>
+      <li><span class="tt">朝の集中ブロック</span><b>最優先タスクだけに触れる</b><span class="d">メール・SNS・ニュースを開かない。1日で最も価値のある時間を、最も価値のある仕事に使う。</span></li>
+      <li><span class="tt">家族の朝</span><b>領域を完全に切り替える</b><span class="d">事業の延長ではなく別領域。頭の中の作業を持ち込まない。</span></li>
+      <li><span class="tt">移動・隙間</span><b>学習時間として使う</b><span class="d">惰性のスクロールに流れそうになったら「これは意志で選んだか？」。</span></li>
+      <li><span class="tt">日中（本業）</span><b>選んだ集中</b><span class="d">本業に全集中し、事業は頭から切る。中途半端な並行が一番の浪費。</span></li>
+      <li><span class="tt">昼食</span><b>完全に手を止めて食べる</b><span class="d">ケの食事でも「ながら」はしない。</span></li>
+      <li><span class="tt">午後の低下時</span><b>無理に続けない</b><span class="d">散歩・仮眠・作業の種類変更。粘るのではなく切り替える。</span></li>
+      <li><span class="tt">夕食</span><b>デジタル断ち</b><span class="d">自分から仕事の話を持ち出さない。家族の話を引き出す側に回る。</span></li>
+      <li class="q"><span class="tt">寝る前30分</span><b>電子機器を断ち、振り返り → 明日の最優先を決める</b><span class="d">1日の学びを3分で抜き取り、明日の一手を1つ決めて終える。ここが翌朝の質を決める。</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>普段から意識する7つの問い</h3>
+    <p class="snote">場面が来たら自動で走らせたい問い。合言葉の展開形</p>
+    <div class="twrap">
+    <table>
+      <thead><tr><th>場面</th><th>問い</th></tr></thead>
+      <tbody>
+        <tr><td class="h">朝・停滞時</td><td>今日、何をする？（動ける最小の一歩は何か）</td></tr>
+        <tr><td class="h">選択の場面</td><td>これは誠実か？（楽な逃げ・誇張・他責が混ざっていないか）</td></tr>
+        <tr><td class="h">気分が重い時</td><td>面白くしていこう——この状況を面白くする一手はあるか</td></tr>
+        <tr><td class="h">時間の使い方</td><td>これは意志で選んだか、流されたか？</td></tr>
+        <tr><td class="h">忙しさの中で</td><td>手段が目的を侵食していないか？（家族・趣味・睡眠が削れていないか）</td></tr>
+        <tr><td class="h">対人の摩擦</td><td>プライドが邪魔していないか？</td></tr>
+        <tr><td class="h">失敗直後</td><td>感情の整理は後。まず打てる一手は何か（謝罪・修正・再発防止を一体で）</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h3>警報サイン — 崩れの早期検知</h3>
+    <p class="snote">人物像に組み込まれた「勝ちすぎ」検知を、日常のチェックリストに変換</p>
+    <ul class="clean">
+      <li><strong>第一警報：振り返り時間が取れていない。</strong>振り返りが消えること自体が最初のサイン。内容以前に「あるか・ないか」を見る</li>
+      <li><strong>趣味の時間が消えている</strong>——手段が目的を侵食している最も分かりやすい兆候</li>
+      <li><strong>家族時間を「今週だけ」と削り始めた</strong>——「明確な期限・明確な利益」の条件を満たしているか。満たさないなら惰性の侵食</li>
+      <li><strong>睡眠を削って作業している</strong>——資本の取り崩し。翌朝の集中ブロックの質で必ず回収される</li>
+      <li><strong>惰性の受動消費が戻ってきている</strong>——疲労のサインでもある。責めるより先に休養を疑う</li>
+    </ul>
+    <div class="callout">
+      <p class="ct">検知したら</p>
+      <p>頭を冷やす → <strong>守る時間を物理的に戻す</strong>（予定に再度入れる）→ 状況に応じた個別調整。自分で見えなくなっていると感じたら、家族・信頼できる人に率直に聞く。プライドを捨てて人に頼ることは、この人物像では弱さではなく安全装置。</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>この資料の限界</h3>
+    <p>これはQ70時点の確定内容に基づく先行版であり、正式なギャップ整理（フェーズB）ではない。フェーズBでは「現状の自分」を同じ解像度で観察し、理想像との差分から「変える価値が最も高い箇所」を選ぶ。このガイドの導入プランは一般的な優先順で組んであるが、あなた固有の現状によって順序は変わりうる。フェーズA完了後に、この資料を実測値で上書きすること。</p>
+  </section>
+
+</div>
+
+<footer>
+  <span>理想の人物像 — 実践ガイド（フェーズB先行版）</span>
+  <span>保留中の問い：Q71 学習の入力源</span>
+</footer>
+
+</body>
+</html>
